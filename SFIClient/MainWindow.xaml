@@ -9,5 +9,5 @@
         ShowsNavigationUI="False"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
-        MinWidth="700" Source="Views/ResponsiveExampleGUI.xaml"
+        MinWidth="700" Source="Views/ResponsiveExampleView.xaml"
         WindowState="Maximized"/>
