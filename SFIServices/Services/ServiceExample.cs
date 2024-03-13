@@ -1,4 +1,5 @@
-﻿using SFIDataAccess.Model;
+﻿using SFIDataAccess.DataAccessObjects;
+using SFIDataAccess.Model;
 using SFIServices.Contracts;
 
 namespace SFIServices
@@ -7,11 +8,7 @@ namespace SFIServices
     {
         public DataTypeExample GetDataUsingDataContract()
         {
-            DataTypeExample dataType = new DataTypeExample();
-            dataType.IsExample = true;
-            dataType.Name = "Example";
-
-            return dataType;
+            return ExampleDAO.getDataTypeExample();
         }
     }
 }

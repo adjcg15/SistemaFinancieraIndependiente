@@ -1,0 +1,1716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SFIDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="addresses">
+          <Key>
+            <PropertyRef Name="id_address" />
+          </Key>
+          <Property Name="id_address" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="post_code" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="neighborhod" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="municipality" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="outdoor_number" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="inteior_number" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bank_accounts">
+          <Key>
+            <PropertyRef Name="card_number" />
+          </Key>
+          <Property Name="card_number" Type="char" MaxLength="16" Nullable="false" />
+          <Property Name="bank" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="holder" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="rfc" />
+          </Key>
+          <Property Name="rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="60" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="curp" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="id_address" Type="int" Nullable="false" />
+          <Property Name="id_work_center" Type="int" Nullable="false" />
+          <Property Name="card_number" Type="char" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contact_method_types">
+          <Key>
+            <PropertyRef Name="id_contact_method_type" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_contact_method_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contact_methods">
+          <Key>
+            <PropertyRef Name="id_contact_method" />
+          </Key>
+          <Property Name="id_contact_method" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="value" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="id_contact_method_type" Type="int" Nullable="false" />
+          <Property Name="client_rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="ine_key" Type="char" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_applications">
+          <Key>
+            <PropertyRef Name="invoice" />
+          </Key>
+          <Property Name="invoice" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="expedition_date" Type="datetime" Nullable="false" />
+          <Property Name="minimun_amount_accepted" Type="money" Nullable="false" />
+          <Property Name="purpose" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="requested_amount" Type="money" Nullable="false" />
+          <Property Name="client_rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="credit_invoice" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="id_credit_application_state" Type="int" Nullable="false" />
+          <Property Name="id_dictum" Type="int" Nullable="false" />
+          <Property Name="employee_number" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="credit_condition_identifier" Type="int" Nullable="false" />
+          <Property Name="id_credit_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_applications_state">
+          <Key>
+            <PropertyRef Name="id_credit_application_state" />
+          </Key>
+          <Property Name="id_credit_application_state" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_conditions">
+          <Key>
+            <PropertyRef Name="identifier" />
+          </Key>
+          <Property Name="identifier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="interest_rate" Type="float" Nullable="false" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+          <Property Name="is_iva_applied" Type="bit" Nullable="false" />
+          <Property Name="interest_on_arrears" Type="float" Nullable="false" />
+          <Property Name="advance_payment_reduction" Type="float" Nullable="false" />
+          <Property Name="payment_months" Type="int" Nullable="false" />
+          <Property Name="id_credit_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_granting_polices">
+          <Key>
+            <PropertyRef Name="title" />
+          </Key>
+          <Property Name="title" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="effective_date" Type="date" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_types">
+          <Key>
+            <PropertyRef Name="id_credit_type" />
+          </Key>
+          <Property Name="id_credit_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credits">
+          <Key>
+            <PropertyRef Name="invoice" />
+          </Key>
+          <Property Name="invoice" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="approval_date" Type="datetime" Nullable="false" />
+          <Property Name="settlement_date" Type="datetime" Nullable="false" />
+          <Property Name="withdrawal_date" Type="datetime" Nullable="false" />
+          <Property Name="ammount_approved" Type="money" Nullable="false" />
+          <Property Name="client_rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="credit_type_identifier" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_credit_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dictums">
+          <Key>
+            <PropertyRef Name="id_dictum" />
+          </Key>
+          <Property Name="id_dictum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="credit_application_invoice" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="employee_number" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="digital_documents">
+          <Key>
+            <PropertyRef Name="id_digital_document" />
+          </Key>
+          <Property Name="id_digital_document" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="format" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="contect" Type="varbinary(max)" Nullable="false" />
+          <Property Name="credit_application_invoice" Type="char" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee_roles">
+          <Key>
+            <PropertyRef Name="id_employee_rol" />
+          </Key>
+          <Property Name="id_employee_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personal_references">
+          <Key>
+            <PropertyRef Name="ine_key" />
+          </Key>
+          <Property Name="ine_key" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="60" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="kinship" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="relationship_years" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="id_address" Type="int" Nullable="false" />
+          <Property Name="client_rfc" Type="varchar" MaxLength="13" />
+        </EntityType>
+        <EntityType Name="polices_apply_dictums">
+          <Key>
+            <PropertyRef Name="id_polices_apply_dictums" />
+          </Key>
+          <Property Name="id_polices_apply_dictums" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_dictum" Type="int" Nullable="false" />
+          <Property Name="credit_granting_police_title" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="is_applied" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="regimes">
+          <Key>
+            <PropertyRef Name="id_regime" />
+          </Key>
+          <Property Name="id_regime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="application_end_date" Type="date" Nullable="false" />
+          <Property Name="application_start_date" Type="date" Nullable="false" />
+          <Property Name="credit_conditions_identifier" Type="int" Nullable="false" />
+          <Property Name="credit_invoice" Type="char" MaxLength="18" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="system_accounts">
+          <Key>
+            <PropertyRef Name="employee_number" />
+          </Key>
+          <Property Name="employee_number" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="id_employee_rol" Type="int" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="work_centers">
+          <Key>
+            <PropertyRef Name="id_work_center" />
+          </Key>
+          <Property Name="id_work_center" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="employee_seniority" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="human_resources_phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="salary" Type="money" Nullable="false" />
+          <Property Name="employee_position" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="id_address" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_clients_addresses">
+          <End Role="addresses" Type="Self.addresses" Multiplicity="1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addresses">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clients_bank_accounts">
+          <End Role="bank_accounts" Type="Self.bank_accounts" Multiplicity="1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bank_accounts">
+              <PropertyRef Name="card_number" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="card_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clients_work_centers">
+          <End Role="work_centers" Type="Self.work_centers" Multiplicity="1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="work_centers">
+              <PropertyRef Name="id_work_center" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="id_work_center" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contact_methods_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="contact_methods">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contact_methods_contact_method_types">
+          <End Role="contact_method_types" Type="Self.contact_method_types" Multiplicity="1" />
+          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contact_method_types">
+              <PropertyRef Name="id_contact_method_type" />
+            </Principal>
+            <Dependent Role="contact_methods">
+              <PropertyRef Name="id_contact_method_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contact_methods_personal_references">
+          <End Role="personal_references" Type="Self.personal_references" Multiplicity="1" />
+          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_references">
+              <PropertyRef Name="ine_key" />
+            </Principal>
+            <Dependent Role="contact_methods">
+              <PropertyRef Name="ine_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credit_applications_state">
+          <End Role="credit_applications_state" Type="Self.credit_applications_state" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_applications_state">
+              <PropertyRef Name="id_credit_application_state" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="id_credit_application_state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credit_conditions">
+          <End Role="credit_conditions" Type="Self.credit_conditions" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_conditions">
+              <PropertyRef Name="identifier" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="credit_condition_identifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credit_types">
+          <End Role="credit_types" Type="Self.credit_types" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_types">
+              <PropertyRef Name="id_credit_type" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="id_credit_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credits">
+          <End Role="credits" Type="Self.credits" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credits">
+              <PropertyRef Name="invoice" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="credit_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_dictums">
+          <End Role="dictums" Type="Self.dictums" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dictums">
+              <PropertyRef Name="id_dictum" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="id_dictum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_system_accounts">
+          <End Role="system_accounts" Type="Self.system_accounts" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="system_accounts">
+              <PropertyRef Name="employee_number" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="employee_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_conditions_credit_types">
+          <End Role="credit_types" Type="Self.credit_types" Multiplicity="1" />
+          <End Role="credit_conditions" Type="Self.credit_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_types">
+              <PropertyRef Name="id_credit_type" />
+            </Principal>
+            <Dependent Role="credit_conditions">
+              <PropertyRef Name="id_credit_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credits_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="credits" Type="Self.credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="credits">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credits_credit_types">
+          <End Role="credit_types" Type="Self.credit_types" Multiplicity="1" />
+          <End Role="credits" Type="Self.credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_types">
+              <PropertyRef Name="id_credit_type" />
+            </Principal>
+            <Dependent Role="credits">
+              <PropertyRef Name="id_credit_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dictums_system_accounts">
+          <End Role="system_accounts" Type="Self.system_accounts" Multiplicity="1" />
+          <End Role="dictums" Type="Self.dictums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="system_accounts">
+              <PropertyRef Name="employee_number" />
+            </Principal>
+            <Dependent Role="dictums">
+              <PropertyRef Name="employee_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_digital_documents_credit_applications">
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="1" />
+          <End Role="digital_documents" Type="Self.digital_documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_applications">
+              <PropertyRef Name="invoice" />
+            </Principal>
+            <Dependent Role="digital_documents">
+              <PropertyRef Name="credit_application_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_references_addresses">
+          <End Role="addresses" Type="Self.addresses" Multiplicity="1" />
+          <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addresses">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="personal_references">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_references_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
+          <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="personal_references">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polices_apply_dictums_credit_granting_polices">
+          <End Role="credit_granting_polices" Type="Self.credit_granting_polices" Multiplicity="1" />
+          <End Role="polices_apply_dictums" Type="Self.polices_apply_dictums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_granting_polices">
+              <PropertyRef Name="title" />
+            </Principal>
+            <Dependent Role="polices_apply_dictums">
+              <PropertyRef Name="credit_granting_police_title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polices_apply_dictums_dictums">
+          <End Role="dictums" Type="Self.dictums" Multiplicity="1" />
+          <End Role="polices_apply_dictums" Type="Self.polices_apply_dictums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dictums">
+              <PropertyRef Name="id_dictum" />
+            </Principal>
+            <Dependent Role="polices_apply_dictums">
+              <PropertyRef Name="id_dictum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_regimes_credit_conditions">
+          <End Role="credit_conditions" Type="Self.credit_conditions" Multiplicity="1" />
+          <End Role="regimes" Type="Self.regimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_conditions">
+              <PropertyRef Name="identifier" />
+            </Principal>
+            <Dependent Role="regimes">
+              <PropertyRef Name="credit_conditions_identifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_regimes_credits">
+          <End Role="credits" Type="Self.credits" Multiplicity="1" />
+          <End Role="regimes" Type="Self.regimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credits">
+              <PropertyRef Name="invoice" />
+            </Principal>
+            <Dependent Role="regimes">
+              <PropertyRef Name="credit_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_system_accounts_employee_roles">
+          <End Role="employee_roles" Type="Self.employee_roles" Multiplicity="1" />
+          <End Role="system_accounts" Type="Self.system_accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee_roles">
+              <PropertyRef Name="id_employee_rol" />
+            </Principal>
+            <Dependent Role="system_accounts">
+              <PropertyRef Name="id_employee_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_work_centers_addresses">
+          <End Role="addresses" Type="Self.addresses" Multiplicity="1" />
+          <End Role="work_centers" Type="Self.work_centers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addresses">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="work_centers">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="SFIDatabaseModelStoreContainer">
+          <EntitySet Name="addresses" EntityType="Self.addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contact_method_types" EntityType="Self.contact_method_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contact_methods" EntityType="Self.contact_methods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit_applications" EntityType="Self.credit_applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit_applications_state" EntityType="Self.credit_applications_state" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit_conditions" EntityType="Self.credit_conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit_granting_polices" EntityType="Self.credit_granting_polices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credit_types" EntityType="Self.credit_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credits" EntityType="Self.credits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dictums" EntityType="Self.dictums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="digital_documents" EntityType="Self.digital_documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee_roles" EntityType="Self.employee_roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personal_references" EntityType="Self.personal_references" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="polices_apply_dictums" EntityType="Self.polices_apply_dictums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="regimes" EntityType="Self.regimes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="system_accounts" EntityType="Self.system_accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="work_centers" EntityType="Self.work_centers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_clients_addresses" Association="Self.FK_clients_addresses">
+            <End Role="addresses" EntitySet="addresses" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clients_bank_accounts" Association="Self.FK_clients_bank_accounts">
+            <End Role="bank_accounts" EntitySet="bank_accounts" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clients_work_centers" Association="Self.FK_clients_work_centers">
+            <End Role="work_centers" EntitySet="work_centers" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contact_methods_clients" Association="Self.FK_contact_methods_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="contact_methods" EntitySet="contact_methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contact_methods_contact_method_types" Association="Self.FK_contact_methods_contact_method_types">
+            <End Role="contact_method_types" EntitySet="contact_method_types" />
+            <End Role="contact_methods" EntitySet="contact_methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contact_methods_personal_references" Association="Self.FK_contact_methods_personal_references">
+            <End Role="personal_references" EntitySet="personal_references" />
+            <End Role="contact_methods" EntitySet="contact_methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_clients" Association="Self.FK_credit_applications_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credit_applications_state" Association="Self.FK_credit_applications_credit_applications_state">
+            <End Role="credit_applications_state" EntitySet="credit_applications_state" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credit_conditions" Association="Self.FK_credit_applications_credit_conditions">
+            <End Role="credit_conditions" EntitySet="credit_conditions" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credit_types" Association="Self.FK_credit_applications_credit_types">
+            <End Role="credit_types" EntitySet="credit_types" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credits" Association="Self.FK_credit_applications_credits">
+            <End Role="credits" EntitySet="credits" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_dictums" Association="Self.FK_credit_applications_dictums">
+            <End Role="dictums" EntitySet="dictums" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_system_accounts" Association="Self.FK_credit_applications_system_accounts">
+            <End Role="system_accounts" EntitySet="system_accounts" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_conditions_credit_types" Association="Self.FK_credit_conditions_credit_types">
+            <End Role="credit_types" EntitySet="credit_types" />
+            <End Role="credit_conditions" EntitySet="credit_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credits_clients" Association="Self.FK_credits_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="credits" EntitySet="credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credits_credit_types" Association="Self.FK_credits_credit_types">
+            <End Role="credit_types" EntitySet="credit_types" />
+            <End Role="credits" EntitySet="credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dictums_system_accounts" Association="Self.FK_dictums_system_accounts">
+            <End Role="system_accounts" EntitySet="system_accounts" />
+            <End Role="dictums" EntitySet="dictums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_digital_documents_credit_applications" Association="Self.FK_digital_documents_credit_applications">
+            <End Role="credit_applications" EntitySet="credit_applications" />
+            <End Role="digital_documents" EntitySet="digital_documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_references_addresses" Association="Self.FK_personal_references_addresses">
+            <End Role="addresses" EntitySet="addresses" />
+            <End Role="personal_references" EntitySet="personal_references" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_references_clients" Association="Self.FK_personal_references_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="personal_references" EntitySet="personal_references" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polices_apply_dictums_credit_granting_polices" Association="Self.FK_polices_apply_dictums_credit_granting_polices">
+            <End Role="credit_granting_polices" EntitySet="credit_granting_polices" />
+            <End Role="polices_apply_dictums" EntitySet="polices_apply_dictums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polices_apply_dictums_dictums" Association="Self.FK_polices_apply_dictums_dictums">
+            <End Role="dictums" EntitySet="dictums" />
+            <End Role="polices_apply_dictums" EntitySet="polices_apply_dictums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_regimes_credit_conditions" Association="Self.FK_regimes_credit_conditions">
+            <End Role="credit_conditions" EntitySet="credit_conditions" />
+            <End Role="regimes" EntitySet="regimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_regimes_credits" Association="Self.FK_regimes_credits">
+            <End Role="credits" EntitySet="credits" />
+            <End Role="regimes" EntitySet="regimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_system_accounts_employee_roles" Association="Self.FK_system_accounts_employee_roles">
+            <End Role="employee_roles" EntitySet="employee_roles" />
+            <End Role="system_accounts" EntitySet="system_accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_work_centers_addresses" Association="Self.FK_work_centers_addresses">
+            <End Role="addresses" EntitySet="addresses" />
+            <End Role="work_centers" EntitySet="work_centers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SFIDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="id_address" />
+          </Key>
+          <Property Name="id_address" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="street" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="post_code" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="neighborhod" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="municipality" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="outdoor_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inteior_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_clients_addresses" FromRole="addresses" ToRole="clients" />
+          <NavigationProperty Name="personal_references" Relationship="Self.FK_personal_references_addresses" FromRole="addresses" ToRole="personal_references" />
+          <NavigationProperty Name="work_centers" Relationship="Self.FK_work_centers_addresses" FromRole="addresses" ToRole="work_centers" />
+        </EntityType>
+        <EntityType Name="bank_accounts">
+          <Key>
+            <PropertyRef Name="card_number" />
+          </Key>
+          <Property Name="card_number" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="bank" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="holder" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_clients_bank_accounts" FromRole="bank_accounts" ToRole="clients" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="rfc" />
+          </Key>
+          <Property Name="rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="curp" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_address" Type="Int32" Nullable="false" />
+          <Property Name="id_work_center" Type="Int32" Nullable="false" />
+          <Property Name="card_number" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="address" Relationship="Self.FK_clients_addresses" FromRole="clients" ToRole="addresses" />
+          <NavigationProperty Name="bank_accounts" Relationship="Self.FK_clients_bank_accounts" FromRole="clients" ToRole="bank_accounts" />
+          <NavigationProperty Name="work_centers" Relationship="Self.FK_clients_work_centers" FromRole="clients" ToRole="work_centers" />
+          <NavigationProperty Name="contact_methods" Relationship="Self.FK_contact_methods_clients" FromRole="clients" ToRole="contact_methods" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_clients" FromRole="clients" ToRole="credit_applications" />
+          <NavigationProperty Name="credits" Relationship="Self.FK_credits_clients" FromRole="clients" ToRole="credits" />
+          <NavigationProperty Name="personal_references" Relationship="Self.FK_personal_references_clients" FromRole="clients" ToRole="personal_references" />
+        </EntityType>
+        <EntityType Name="contact_method_types">
+          <Key>
+            <PropertyRef Name="id_contact_method_type" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_contact_method_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="contact_methods" Relationship="Self.FK_contact_methods_contact_method_types" FromRole="contact_method_types" ToRole="contact_methods" />
+        </EntityType>
+        <EntityType Name="contact_methods">
+          <Key>
+            <PropertyRef Name="id_contact_method" />
+          </Key>
+          <Property Name="id_contact_method" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="value" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_contact_method_type" Type="Int32" Nullable="false" />
+          <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ine_key" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Self.FK_contact_methods_clients" FromRole="contact_methods" ToRole="clients" />
+          <NavigationProperty Name="contact_method_types" Relationship="Self.FK_contact_methods_contact_method_types" FromRole="contact_methods" ToRole="contact_method_types" />
+          <NavigationProperty Name="personal_references" Relationship="Self.FK_contact_methods_personal_references" FromRole="contact_methods" ToRole="personal_references" />
+        </EntityType>
+        <EntityType Name="credit_applications">
+          <Key>
+            <PropertyRef Name="invoice" />
+          </Key>
+          <Property Name="invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="expedition_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="minimun_amount_accepted" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="purpose" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="requested_amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="credit_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_credit_application_state" Type="Int32" Nullable="false" />
+          <Property Name="id_dictum" Type="Int32" Nullable="false" />
+          <Property Name="employee_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="credit_condition_identifier" Type="Int32" Nullable="false" />
+          <Property Name="id_credit_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Self.FK_credit_applications_clients" FromRole="credit_applications" ToRole="clients" />
+          <NavigationProperty Name="credit_applications_state" Relationship="Self.FK_credit_applications_credit_applications_state" FromRole="credit_applications" ToRole="credit_applications_state" />
+          <NavigationProperty Name="credit_conditions" Relationship="Self.FK_credit_applications_credit_conditions" FromRole="credit_applications" ToRole="credit_conditions" />
+          <NavigationProperty Name="credit_types" Relationship="Self.FK_credit_applications_credit_types" FromRole="credit_applications" ToRole="credit_types" />
+          <NavigationProperty Name="credit" Relationship="Self.FK_credit_applications_credits" FromRole="credit_applications" ToRole="credits" />
+          <NavigationProperty Name="dictum" Relationship="Self.FK_credit_applications_dictums" FromRole="credit_applications" ToRole="dictums" />
+          <NavigationProperty Name="system_accounts" Relationship="Self.FK_credit_applications_system_accounts" FromRole="credit_applications" ToRole="system_accounts" />
+          <NavigationProperty Name="digital_documents" Relationship="Self.FK_digital_documents_credit_applications" FromRole="credit_applications" ToRole="digital_documents" />
+        </EntityType>
+        <EntityType Name="credit_applications_state">
+          <Key>
+            <PropertyRef Name="id_credit_application_state" />
+          </Key>
+          <Property Name="id_credit_application_state" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_credit_applications_state" FromRole="credit_applications_state" ToRole="credit_applications" />
+        </EntityType>
+        <EntityType Name="credit_conditions">
+          <Key>
+            <PropertyRef Name="identifier" />
+          </Key>
+          <Property Name="identifier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="interest_rate" Type="Double" Nullable="false" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="is_iva_applied" Type="Boolean" Nullable="false" />
+          <Property Name="interest_on_arrears" Type="Double" Nullable="false" />
+          <Property Name="advance_payment_reduction" Type="Double" Nullable="false" />
+          <Property Name="payment_months" Type="Int32" Nullable="false" />
+          <Property Name="id_credit_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_credit_conditions" FromRole="credit_conditions" ToRole="credit_applications" />
+          <NavigationProperty Name="credit_types" Relationship="Self.FK_credit_conditions_credit_types" FromRole="credit_conditions" ToRole="credit_types" />
+          <NavigationProperty Name="regimes" Relationship="Self.FK_regimes_credit_conditions" FromRole="credit_conditions" ToRole="regimes" />
+        </EntityType>
+        <EntityType Name="credit_granting_polices">
+          <Key>
+            <PropertyRef Name="title" />
+          </Key>
+          <Property Name="title" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="effective_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="polices_apply_dictums" Relationship="Self.FK_polices_apply_dictums_credit_granting_polices" FromRole="credit_granting_polices" ToRole="polices_apply_dictums" />
+        </EntityType>
+        <EntityType Name="credit_types">
+          <Key>
+            <PropertyRef Name="id_credit_type" />
+          </Key>
+          <Property Name="id_credit_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_credit_types" FromRole="credit_types" ToRole="credit_applications" />
+          <NavigationProperty Name="credit_conditions" Relationship="Self.FK_credit_conditions_credit_types" FromRole="credit_types" ToRole="credit_conditions" />
+          <NavigationProperty Name="credits" Relationship="Self.FK_credits_credit_types" FromRole="credit_types" ToRole="credits" />
+        </EntityType>
+        <EntityType Name="credit">
+          <Key>
+            <PropertyRef Name="invoice" />
+          </Key>
+          <Property Name="invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="approval_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="settlement_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="withdrawal_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ammount_approved" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="credit_type_identifier" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_credit_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Self.FK_credits_clients" FromRole="credits" ToRole="clients" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_credits" FromRole="credits" ToRole="credit_applications" />
+          <NavigationProperty Name="credit_types" Relationship="Self.FK_credits_credit_types" FromRole="credits" ToRole="credit_types" />
+          <NavigationProperty Name="regimes" Relationship="Self.FK_regimes_credits" FromRole="credits" ToRole="regimes" />
+        </EntityType>
+        <EntityType Name="dictum">
+          <Key>
+            <PropertyRef Name="id_dictum" />
+          </Key>
+          <Property Name="id_dictum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="credit_application_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="employee_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_dictums" FromRole="dictums" ToRole="credit_applications" />
+          <NavigationProperty Name="system_accounts" Relationship="Self.FK_dictums_system_accounts" FromRole="dictums" ToRole="system_accounts" />
+          <NavigationProperty Name="polices_apply_dictums" Relationship="Self.FK_polices_apply_dictums_dictums" FromRole="dictums" ToRole="polices_apply_dictums" />
+        </EntityType>
+        <EntityType Name="digital_documents">
+          <Key>
+            <PropertyRef Name="id_digital_document" />
+          </Key>
+          <Property Name="id_digital_document" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="format" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contect" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="credit_application_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_digital_documents_credit_applications" FromRole="digital_documents" ToRole="credit_applications" />
+        </EntityType>
+        <EntityType Name="employee_roles">
+          <Key>
+            <PropertyRef Name="id_employee_rol" />
+          </Key>
+          <Property Name="id_employee_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="system_accounts" Relationship="Self.FK_system_accounts_employee_roles" FromRole="employee_roles" ToRole="system_accounts" />
+        </EntityType>
+        <EntityType Name="personal_references">
+          <Key>
+            <PropertyRef Name="ine_key" />
+          </Key>
+          <Property Name="ine_key" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kinship" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="relationship_years" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_address" Type="Int32" Nullable="false" />
+          <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="address" Relationship="Self.FK_personal_references_addresses" FromRole="personal_references" ToRole="addresses" />
+          <NavigationProperty Name="client" Relationship="Self.FK_personal_references_clients" FromRole="personal_references" ToRole="clients" />
+          <NavigationProperty Name="contact_methods" Relationship="Self.FK_contact_methods_personal_references" FromRole="personal_references" ToRole="contact_methods" />
+        </EntityType>
+        <EntityType Name="polices_apply_dictums">
+          <Key>
+            <PropertyRef Name="id_polices_apply_dictums" />
+          </Key>
+          <Property Name="id_polices_apply_dictums" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_dictum" Type="Int32" Nullable="false" />
+          <Property Name="credit_granting_police_title" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_applied" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="credit_granting_polices" Relationship="Self.FK_polices_apply_dictums_credit_granting_polices" FromRole="polices_apply_dictums" ToRole="credit_granting_polices" />
+          <NavigationProperty Name="dictum" Relationship="Self.FK_polices_apply_dictums_dictums" FromRole="polices_apply_dictums" ToRole="dictums" />
+        </EntityType>
+        <EntityType Name="regime">
+          <Key>
+            <PropertyRef Name="id_regime" />
+          </Key>
+          <Property Name="id_regime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="application_end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="application_start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="credit_conditions_identifier" Type="Int32" Nullable="false" />
+          <Property Name="credit_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="credit_conditions" Relationship="Self.FK_regimes_credit_conditions" FromRole="regimes" ToRole="credit_conditions" />
+          <NavigationProperty Name="credit" Relationship="Self.FK_regimes_credits" FromRole="regimes" ToRole="credits" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="system_accounts">
+          <Key>
+            <PropertyRef Name="employee_number" />
+          </Key>
+          <Property Name="employee_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_employee_rol" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="credit_applications" Relationship="Self.FK_credit_applications_system_accounts" FromRole="system_accounts" ToRole="credit_applications" />
+          <NavigationProperty Name="dictums" Relationship="Self.FK_dictums_system_accounts" FromRole="system_accounts" ToRole="dictums" />
+          <NavigationProperty Name="employee_roles" Relationship="Self.FK_system_accounts_employee_roles" FromRole="system_accounts" ToRole="employee_roles" />
+        </EntityType>
+        <EntityType Name="work_centers">
+          <Key>
+            <PropertyRef Name="id_work_center" />
+          </Key>
+          <Property Name="id_work_center" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="employee_seniority" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="human_resources_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="employee_position" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_address" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="address" Relationship="Self.FK_work_centers_addresses" FromRole="work_centers" ToRole="addresses" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_clients_work_centers" FromRole="work_centers" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK_clients_addresses">
+          <End Role="addresses" Type="Self.address" Multiplicity="1" />
+          <End Role="clients" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addresses">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_references_addresses">
+          <End Role="addresses" Type="Self.address" Multiplicity="1" />
+          <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addresses">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="personal_references">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_work_centers_addresses">
+          <End Role="addresses" Type="Self.address" Multiplicity="1" />
+          <End Role="work_centers" Type="Self.work_centers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="addresses">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="work_centers">
+              <PropertyRef Name="id_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clients_bank_accounts">
+          <End Role="bank_accounts" Type="Self.bank_accounts" Multiplicity="1" />
+          <End Role="clients" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bank_accounts">
+              <PropertyRef Name="card_number" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="card_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clients_work_centers">
+          <End Role="work_centers" Type="Self.work_centers" Multiplicity="1" />
+          <End Role="clients" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="work_centers">
+              <PropertyRef Name="id_work_center" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="id_work_center" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contact_methods_clients">
+          <End Role="clients" Type="Self.client" Multiplicity="1" />
+          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="contact_methods">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_clients">
+          <End Role="clients" Type="Self.client" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credits_clients">
+          <End Role="clients" Type="Self.client" Multiplicity="1" />
+          <End Role="credits" Type="Self.credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="credits">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personal_references_clients">
+          <End Role="clients" Type="Self.client" Multiplicity="0..1" />
+          <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="rfc" />
+            </Principal>
+            <Dependent Role="personal_references">
+              <PropertyRef Name="client_rfc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contact_methods_contact_method_types">
+          <End Role="contact_method_types" Type="Self.contact_method_types" Multiplicity="1" />
+          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contact_method_types">
+              <PropertyRef Name="id_contact_method_type" />
+            </Principal>
+            <Dependent Role="contact_methods">
+              <PropertyRef Name="id_contact_method_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_contact_methods_personal_references">
+          <End Role="personal_references" Type="Self.personal_references" Multiplicity="1" />
+          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_references">
+              <PropertyRef Name="ine_key" />
+            </Principal>
+            <Dependent Role="contact_methods">
+              <PropertyRef Name="ine_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credit_applications_state">
+          <End Role="credit_applications_state" Type="Self.credit_applications_state" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_applications_state">
+              <PropertyRef Name="id_credit_application_state" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="id_credit_application_state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credit_conditions">
+          <End Role="credit_conditions" Type="Self.credit_conditions" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_conditions">
+              <PropertyRef Name="identifier" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="credit_condition_identifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credit_types">
+          <End Role="credit_types" Type="Self.credit_types" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_types">
+              <PropertyRef Name="id_credit_type" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="id_credit_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_credits">
+          <End Role="credits" Type="Self.credit" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credits">
+              <PropertyRef Name="invoice" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="credit_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_dictums">
+          <End Role="dictums" Type="Self.dictum" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dictums">
+              <PropertyRef Name="id_dictum" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="id_dictum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_applications_system_accounts">
+          <End Role="system_accounts" Type="Self.system_accounts" Multiplicity="1" />
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="system_accounts">
+              <PropertyRef Name="employee_number" />
+            </Principal>
+            <Dependent Role="credit_applications">
+              <PropertyRef Name="employee_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_digital_documents_credit_applications">
+          <End Role="credit_applications" Type="Self.credit_applications" Multiplicity="1" />
+          <End Role="digital_documents" Type="Self.digital_documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_applications">
+              <PropertyRef Name="invoice" />
+            </Principal>
+            <Dependent Role="digital_documents">
+              <PropertyRef Name="credit_application_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credit_conditions_credit_types">
+          <End Role="credit_types" Type="Self.credit_types" Multiplicity="1" />
+          <End Role="credit_conditions" Type="Self.credit_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_types">
+              <PropertyRef Name="id_credit_type" />
+            </Principal>
+            <Dependent Role="credit_conditions">
+              <PropertyRef Name="id_credit_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_regimes_credit_conditions">
+          <End Role="credit_conditions" Type="Self.credit_conditions" Multiplicity="1" />
+          <End Role="regimes" Type="Self.regime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_conditions">
+              <PropertyRef Name="identifier" />
+            </Principal>
+            <Dependent Role="regimes">
+              <PropertyRef Name="credit_conditions_identifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polices_apply_dictums_credit_granting_polices">
+          <End Role="credit_granting_polices" Type="Self.credit_granting_polices" Multiplicity="1" />
+          <End Role="polices_apply_dictums" Type="Self.polices_apply_dictums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_granting_polices">
+              <PropertyRef Name="title" />
+            </Principal>
+            <Dependent Role="polices_apply_dictums">
+              <PropertyRef Name="credit_granting_police_title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_credits_credit_types">
+          <End Role="credit_types" Type="Self.credit_types" Multiplicity="1" />
+          <End Role="credits" Type="Self.credit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credit_types">
+              <PropertyRef Name="id_credit_type" />
+            </Principal>
+            <Dependent Role="credits">
+              <PropertyRef Name="id_credit_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_regimes_credits">
+          <End Role="credits" Type="Self.credit" Multiplicity="1" />
+          <End Role="regimes" Type="Self.regime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credits">
+              <PropertyRef Name="invoice" />
+            </Principal>
+            <Dependent Role="regimes">
+              <PropertyRef Name="credit_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dictums_system_accounts">
+          <End Role="system_accounts" Type="Self.system_accounts" Multiplicity="1" />
+          <End Role="dictums" Type="Self.dictum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="system_accounts">
+              <PropertyRef Name="employee_number" />
+            </Principal>
+            <Dependent Role="dictums">
+              <PropertyRef Name="employee_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_polices_apply_dictums_dictums">
+          <End Role="dictums" Type="Self.dictum" Multiplicity="1" />
+          <End Role="polices_apply_dictums" Type="Self.polices_apply_dictums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dictums">
+              <PropertyRef Name="id_dictum" />
+            </Principal>
+            <Dependent Role="polices_apply_dictums">
+              <PropertyRef Name="id_dictum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_system_accounts_employee_roles">
+          <End Role="employee_roles" Type="Self.employee_roles" Multiplicity="1" />
+          <End Role="system_accounts" Type="Self.system_accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee_roles">
+              <PropertyRef Name="id_employee_rol" />
+            </Principal>
+            <Dependent Role="system_accounts">
+              <PropertyRef Name="id_employee_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SFIDatabaseContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="addresses" EntityType="Self.address" />
+          <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" />
+          <EntitySet Name="clients" EntityType="Self.client" />
+          <EntitySet Name="contact_method_types" EntityType="Self.contact_method_types" />
+          <EntitySet Name="contact_methods" EntityType="Self.contact_methods" />
+          <EntitySet Name="credit_applications" EntityType="Self.credit_applications" />
+          <EntitySet Name="credit_applications_state" EntityType="Self.credit_applications_state" />
+          <EntitySet Name="credit_conditions" EntityType="Self.credit_conditions" />
+          <EntitySet Name="credit_granting_polices" EntityType="Self.credit_granting_polices" />
+          <EntitySet Name="credit_types" EntityType="Self.credit_types" />
+          <EntitySet Name="credits" EntityType="Self.credit" />
+          <EntitySet Name="dictums" EntityType="Self.dictum" />
+          <EntitySet Name="digital_documents" EntityType="Self.digital_documents" />
+          <EntitySet Name="employee_roles" EntityType="Self.employee_roles" />
+          <EntitySet Name="personal_references" EntityType="Self.personal_references" />
+          <EntitySet Name="polices_apply_dictums" EntityType="Self.polices_apply_dictums" />
+          <EntitySet Name="regimes" EntityType="Self.regime" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="system_accounts" EntityType="Self.system_accounts" />
+          <EntitySet Name="work_centers" EntityType="Self.work_centers" />
+          <AssociationSet Name="FK_clients_addresses" Association="Self.FK_clients_addresses">
+            <End Role="addresses" EntitySet="addresses" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_references_addresses" Association="Self.FK_personal_references_addresses">
+            <End Role="addresses" EntitySet="addresses" />
+            <End Role="personal_references" EntitySet="personal_references" />
+          </AssociationSet>
+          <AssociationSet Name="FK_work_centers_addresses" Association="Self.FK_work_centers_addresses">
+            <End Role="addresses" EntitySet="addresses" />
+            <End Role="work_centers" EntitySet="work_centers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clients_bank_accounts" Association="Self.FK_clients_bank_accounts">
+            <End Role="bank_accounts" EntitySet="bank_accounts" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clients_work_centers" Association="Self.FK_clients_work_centers">
+            <End Role="work_centers" EntitySet="work_centers" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contact_methods_clients" Association="Self.FK_contact_methods_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="contact_methods" EntitySet="contact_methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_clients" Association="Self.FK_credit_applications_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credits_clients" Association="Self.FK_credits_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="credits" EntitySet="credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personal_references_clients" Association="Self.FK_personal_references_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="personal_references" EntitySet="personal_references" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contact_methods_contact_method_types" Association="Self.FK_contact_methods_contact_method_types">
+            <End Role="contact_method_types" EntitySet="contact_method_types" />
+            <End Role="contact_methods" EntitySet="contact_methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_contact_methods_personal_references" Association="Self.FK_contact_methods_personal_references">
+            <End Role="personal_references" EntitySet="personal_references" />
+            <End Role="contact_methods" EntitySet="contact_methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credit_applications_state" Association="Self.FK_credit_applications_credit_applications_state">
+            <End Role="credit_applications_state" EntitySet="credit_applications_state" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credit_conditions" Association="Self.FK_credit_applications_credit_conditions">
+            <End Role="credit_conditions" EntitySet="credit_conditions" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credit_types" Association="Self.FK_credit_applications_credit_types">
+            <End Role="credit_types" EntitySet="credit_types" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_credits" Association="Self.FK_credit_applications_credits">
+            <End Role="credits" EntitySet="credits" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_dictums" Association="Self.FK_credit_applications_dictums">
+            <End Role="dictums" EntitySet="dictums" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_applications_system_accounts" Association="Self.FK_credit_applications_system_accounts">
+            <End Role="system_accounts" EntitySet="system_accounts" />
+            <End Role="credit_applications" EntitySet="credit_applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_digital_documents_credit_applications" Association="Self.FK_digital_documents_credit_applications">
+            <End Role="credit_applications" EntitySet="credit_applications" />
+            <End Role="digital_documents" EntitySet="digital_documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credit_conditions_credit_types" Association="Self.FK_credit_conditions_credit_types">
+            <End Role="credit_types" EntitySet="credit_types" />
+            <End Role="credit_conditions" EntitySet="credit_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_regimes_credit_conditions" Association="Self.FK_regimes_credit_conditions">
+            <End Role="credit_conditions" EntitySet="credit_conditions" />
+            <End Role="regimes" EntitySet="regimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polices_apply_dictums_credit_granting_polices" Association="Self.FK_polices_apply_dictums_credit_granting_polices">
+            <End Role="credit_granting_polices" EntitySet="credit_granting_polices" />
+            <End Role="polices_apply_dictums" EntitySet="polices_apply_dictums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_credits_credit_types" Association="Self.FK_credits_credit_types">
+            <End Role="credit_types" EntitySet="credit_types" />
+            <End Role="credits" EntitySet="credits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_regimes_credits" Association="Self.FK_regimes_credits">
+            <End Role="credits" EntitySet="credits" />
+            <End Role="regimes" EntitySet="regimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dictums_system_accounts" Association="Self.FK_dictums_system_accounts">
+            <End Role="system_accounts" EntitySet="system_accounts" />
+            <End Role="dictums" EntitySet="dictums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_polices_apply_dictums_dictums" Association="Self.FK_polices_apply_dictums_dictums">
+            <End Role="dictums" EntitySet="dictums" />
+            <End Role="polices_apply_dictums" EntitySet="polices_apply_dictums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_system_accounts_employee_roles" Association="Self.FK_system_accounts_employee_roles">
+            <End Role="employee_roles" EntitySet="employee_roles" />
+            <End Role="system_accounts" EntitySet="system_accounts" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SFIDatabaseModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SFIDatabaseModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SFIDatabaseModelStoreContainer" CdmEntityContainer="SFIDatabaseContext">
+          <EntitySetMapping Name="addresses">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.address">
+              <MappingFragment StoreEntitySet="addresses">
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="post_code" ColumnName="post_code" />
+                <ScalarProperty Name="neighborhod" ColumnName="neighborhod" />
+                <ScalarProperty Name="municipality" ColumnName="municipality" />
+                <ScalarProperty Name="outdoor_number" ColumnName="outdoor_number" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="inteior_number" ColumnName="inteior_number" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bank_accounts">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.bank_accounts">
+              <MappingFragment StoreEntitySet="bank_accounts">
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="bank" ColumnName="bank" />
+                <ScalarProperty Name="holder" ColumnName="holder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.client">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="rfc" ColumnName="rfc" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="curp" ColumnName="curp" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="id_work_center" ColumnName="id_work_center" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contact_method_types">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.contact_method_types">
+              <MappingFragment StoreEntitySet="contact_method_types">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_contact_method_type" ColumnName="id_contact_method_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contact_methods">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.contact_methods">
+              <MappingFragment StoreEntitySet="contact_methods">
+                <ScalarProperty Name="id_contact_method" ColumnName="id_contact_method" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="id_contact_method_type" ColumnName="id_contact_method_type" />
+                <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
+                <ScalarProperty Name="ine_key" ColumnName="ine_key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit_applications">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.credit_applications">
+              <MappingFragment StoreEntitySet="credit_applications">
+                <ScalarProperty Name="invoice" ColumnName="invoice" />
+                <ScalarProperty Name="expedition_date" ColumnName="expedition_date" />
+                <ScalarProperty Name="minimun_amount_accepted" ColumnName="minimun_amount_accepted" />
+                <ScalarProperty Name="purpose" ColumnName="purpose" />
+                <ScalarProperty Name="requested_amount" ColumnName="requested_amount" />
+                <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
+                <ScalarProperty Name="credit_invoice" ColumnName="credit_invoice" />
+                <ScalarProperty Name="id_credit_application_state" ColumnName="id_credit_application_state" />
+                <ScalarProperty Name="id_dictum" ColumnName="id_dictum" />
+                <ScalarProperty Name="employee_number" ColumnName="employee_number" />
+                <ScalarProperty Name="credit_condition_identifier" ColumnName="credit_condition_identifier" />
+                <ScalarProperty Name="id_credit_type" ColumnName="id_credit_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit_applications_state">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.credit_applications_state">
+              <MappingFragment StoreEntitySet="credit_applications_state">
+                <ScalarProperty Name="id_credit_application_state" ColumnName="id_credit_application_state" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit_conditions">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.credit_conditions">
+              <MappingFragment StoreEntitySet="credit_conditions">
+                <ScalarProperty Name="identifier" ColumnName="identifier" />
+                <ScalarProperty Name="interest_rate" ColumnName="interest_rate" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_iva_applied" ColumnName="is_iva_applied" />
+                <ScalarProperty Name="interest_on_arrears" ColumnName="interest_on_arrears" />
+                <ScalarProperty Name="advance_payment_reduction" ColumnName="advance_payment_reduction" />
+                <ScalarProperty Name="payment_months" ColumnName="payment_months" />
+                <ScalarProperty Name="id_credit_type" ColumnName="id_credit_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit_granting_polices">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.credit_granting_polices">
+              <MappingFragment StoreEntitySet="credit_granting_polices">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="effective_date" ColumnName="effective_date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit_types">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.credit_types">
+              <MappingFragment StoreEntitySet="credit_types">
+                <ScalarProperty Name="id_credit_type" ColumnName="id_credit_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credits">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.credit">
+              <MappingFragment StoreEntitySet="credits">
+                <ScalarProperty Name="invoice" ColumnName="invoice" />
+                <ScalarProperty Name="approval_date" ColumnName="approval_date" />
+                <ScalarProperty Name="settlement_date" ColumnName="settlement_date" />
+                <ScalarProperty Name="withdrawal_date" ColumnName="withdrawal_date" />
+                <ScalarProperty Name="ammount_approved" ColumnName="ammount_approved" />
+                <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
+                <ScalarProperty Name="credit_type_identifier" ColumnName="credit_type_identifier" />
+                <ScalarProperty Name="id_credit_type" ColumnName="id_credit_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dictums">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.dictum">
+              <MappingFragment StoreEntitySet="dictums">
+                <ScalarProperty Name="id_dictum" ColumnName="id_dictum" />
+                <ScalarProperty Name="credit_application_invoice" ColumnName="credit_application_invoice" />
+                <ScalarProperty Name="employee_number" ColumnName="employee_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="digital_documents">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.digital_documents">
+              <MappingFragment StoreEntitySet="digital_documents">
+                <ScalarProperty Name="id_digital_document" ColumnName="id_digital_document" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="format" ColumnName="format" />
+                <ScalarProperty Name="contect" ColumnName="contect" />
+                <ScalarProperty Name="credit_application_invoice" ColumnName="credit_application_invoice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee_roles">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.employee_roles">
+              <MappingFragment StoreEntitySet="employee_roles">
+                <ScalarProperty Name="id_employee_rol" ColumnName="id_employee_rol" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personal_references">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.personal_references">
+              <MappingFragment StoreEntitySet="personal_references">
+                <ScalarProperty Name="ine_key" ColumnName="ine_key" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="kinship" ColumnName="kinship" />
+                <ScalarProperty Name="relationship_years" ColumnName="relationship_years" />
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="polices_apply_dictums">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.polices_apply_dictums">
+              <MappingFragment StoreEntitySet="polices_apply_dictums">
+                <ScalarProperty Name="id_polices_apply_dictums" ColumnName="id_polices_apply_dictums" />
+                <ScalarProperty Name="id_dictum" ColumnName="id_dictum" />
+                <ScalarProperty Name="credit_granting_police_title" ColumnName="credit_granting_police_title" />
+                <ScalarProperty Name="is_applied" ColumnName="is_applied" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regimes">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.regime">
+              <MappingFragment StoreEntitySet="regimes">
+                <ScalarProperty Name="id_regime" ColumnName="id_regime" />
+                <ScalarProperty Name="application_end_date" ColumnName="application_end_date" />
+                <ScalarProperty Name="application_start_date" ColumnName="application_start_date" />
+                <ScalarProperty Name="credit_conditions_identifier" ColumnName="credit_conditions_identifier" />
+                <ScalarProperty Name="credit_invoice" ColumnName="credit_invoice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="system_accounts">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.system_accounts">
+              <MappingFragment StoreEntitySet="system_accounts">
+                <ScalarProperty Name="employee_number" ColumnName="employee_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="id_employee_rol" ColumnName="id_employee_rol" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="work_centers">
+            <EntityTypeMapping TypeName="SFIDatabaseModel.work_centers">
+              <MappingFragment StoreEntitySet="work_centers">
+                <ScalarProperty Name="id_work_center" ColumnName="id_work_center" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="employee_seniority" ColumnName="employee_seniority" />
+                <ScalarProperty Name="human_resources_phone" ColumnName="human_resources_phone" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="employee_position" ColumnName="employee_position" />
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SFIDatabaseModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SFIDatabaseModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SFIDatabaseModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SFIDatabaseModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SFIDatabaseModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SFIDatabaseModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SFIDatabaseModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SFIDatabaseModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SFIDatabaseModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
