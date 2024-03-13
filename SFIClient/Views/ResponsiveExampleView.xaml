@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:Width="1280" d:Height="720"
       Title="ResponsiveExampleGUI">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <Rectangle Height="100">
                 <Rectangle.Fill>

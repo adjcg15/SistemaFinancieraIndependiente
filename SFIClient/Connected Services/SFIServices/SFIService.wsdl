@@ -42,9 +42,9 @@
   </wsdl:binding>
   <wsdl:service name="SFIService">
     <wsdl:port name="NetTcpBinding_IServiceExample" binding="tns:NetTcpBinding_IServiceExample">
-      <soap12:address location="net.tcp://localhost:8081/GuessWhoService" />
+      <soap12:address location="net.tcp://localhost:8081/SFIService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/GuessWhoService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
