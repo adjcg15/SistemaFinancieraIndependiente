@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace SFIClient.Views
         public ResponsiveExampleController()
         {
             InitializeComponent();
+
+            ServiceExampleClient exampleClient = new ServiceExampleClient();
+            DataTypeExample example = exampleClient.GetDataUsingDataContract();
+            Console.WriteLine(example.Name + (example.IsExample ? "" : " NO") + " es un ejemplo");
         }
     }
 }
