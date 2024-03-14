@@ -9,5 +9,5 @@
         ShowsNavigationUI="False"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
-        MinWidth="700" Source="Views/ResponsiveExampleView.xaml"
+        MinWidth="700" Source="Views/CredditApplicationView.xaml"
         WindowState="Maximized"/>
