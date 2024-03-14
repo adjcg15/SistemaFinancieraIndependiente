@@ -1,0 +1,175 @@
+﻿<Page x:Class="SFIClient.Views.CredditApplicationController"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SFIClient.Views"
+      mc:Ignorable="d" 
+      d:Width="1280" d:Height="3000"
+      Title="Solicitud de crédito para cliente">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Trámite de solicitud de crédito" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <!--Client data-->
+            <StackPanel Margin="40, 56">
+                <TextBlock 
+                    Style="{StaticResource Subtitle}" Margin="0, 0, 0, 8"
+                    Text="Solicitante"/>
+                <TextBlock 
+                    Style="{StaticResource Title}" Foreground="{StaticResource DarkPrimaryColor}"
+                    Text="Andrés Manuel López Obrador"/>
+                <TextBlock 
+                    Style="{StaticResource Emphasis}" FontWeight="Bold" Margin="0, 8"
+                    Text="Con CURP registrado LOOB531113HVZRRNA2"/>
+                <TextBlock Style="{StaticResource Paragraph}">
+                    Salario neto registrado de <Bold>125,000MXN</Bold> mensuales en "<Span>Gobierno de México</Span>".
+                </TextBlock>
+            </StackPanel>
+
+            <!--Form-->
+            <StackPanel Margin="40, 0">
+                <Border 
+                    Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    <TextBlock Style="{StaticResource Title}" Text="Solicitud"/>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="Información del crédito" 
+                        Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 0, 0, 0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Tipo de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TxtCreditType}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TxtCreditType" Style="{StaticResource TextInput}"/>
+                        </Grid>
+                        
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Monto solicitado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <TextBlock Margin="5,2" Text="Cantidad aspirada en pesos mexicanos">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=TxtRequestedAmount}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox Name="TxtRequestedAmount" Style="{StaticResource TextInput}"/>
+                            </Grid>
+                            <TextBlock 
+                                Grid.Column="1" Grid.Row="0" 
+                                Style="{StaticResource Subtitle}" 
+                                Text="MXN" 
+                                VerticalAlignment="Center" Margin="24px, 0, 0, 0"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Monto mínimo aceptado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <TextBlock Margin="5,2" Text="Cantidad mínima aceptada en pesos mexicanos">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=TxtMinimumAcceptedAmount}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox Name="TxtMinimumAcceptedAmount" Style="{StaticResource TextInput}"/>
+                            </Grid>
+                            <TextBlock 
+                                Grid.Column="1" Grid.Row="0" 
+                                Style="{StaticResource Subtitle}" 
+                                Text="MXN" 
+                                VerticalAlignment="Center" Margin="24px, 0, 0, 0"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Propósito del crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2" Text="Descripción detallada del motivo de la solicitud." TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TxtCreditPurpose}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox 
+                                Name="TxtCreditPurpose" 
+                                Style="{StaticResource TextInput}"
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                VerticalScrollBarVisibility="Auto"
+                                Height="160"
+                            />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -62,8 +62,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Views\CredditApplicationView.xaml.cs">
-      <DependentUpon>CredditApplicationView.xaml</DependentUpon>
+    <Compile Include="Views\CreditApplicationView.xaml.cs">
+      <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
@@ -80,7 +80,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CredditApplicationView.xaml">
+    <Page Include="Views\CreditApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
