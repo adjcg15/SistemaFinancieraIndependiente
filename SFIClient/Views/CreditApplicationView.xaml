@@ -53,14 +53,19 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
+                    <!--First row-->
                     <TextBlock 
+                        TextWrapping="Wrap"
                         Grid.Column="0"
                         Grid.Row="0"
                         Text="Información del crédito" 
                         Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
-                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 0, 0, 0">
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 12, 0, 0">
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Tipo de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
@@ -191,12 +196,77 @@
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Copia de comprobante de ingresos(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 24">
+                        <Grid>
                             <Button Content="Adjuntar comprobante de ingresos" Style="{StaticResource FileUploader}"/>
                             <Button Visibility="Hidden" Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
                         </Grid>
                     </StackPanel>
+
+                    <!--Second row-->
+                    <Border
+                        Margin="0, 40"
+						Grid.Column="0"
+						Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    </Border>
+
+                    <!--Third row-->
+                    <TextBlock 
+                        TextWrapping="Wrap"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Text="Condiciones aplicables" 
+                        Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                    <Grid Grid.Column="1" Grid.Row="2" Margin="16, 12, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock FontSize="16" FontWeight="bold">
+                            Condiciones de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+
+                        <!--Empty list message-->
+                        <Grid Grid.Row="1" Margin="0, 40">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image 
+                                Margin="0, 0, 24, 0"
+                                Width="80" Height="80"
+                                Source="/Assets/GrayInfoIcon.png"/>
+                            <TextBlock 
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource Subtitle}" FontWeight="Normal" TextWrapping="Wrap"
+                                Foreground="{StaticResource DarkGray}"
+                                Text="Seleccione un tipo de crédito para cargar las condiciones de crédito aplicables"/>
+                        </Grid>
+                        <!--Policies list-->
+                        <StackPanel Grid.Row="1">
+                            
+                        </StackPanel>
+                    </Grid>
+
+                    <!--Fourth row-->
+                    <Border
+                        Margin="0, 0, 0, 40"
+				        Grid.Column="0"
+				        Grid.Row="3"
+                        Grid.ColumnSpan="3"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    </Border>
                 </Grid>
+            </StackPanel>
+
+            <!--Buttons section-->
+            <StackPanel Margin="40, 0, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
+                <Button Style="{StaticResource PrimaryBtn}" Content="Generar solicitud"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

@@ -158,5 +158,11 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controlls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\GrayInfoIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
