@@ -21,7 +21,7 @@
                         VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
-            
+
             <!--Client data-->
             <StackPanel Margin="40, 56">
                 <TextBlock 
@@ -65,7 +65,11 @@
                             Tipo de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="29*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="5,2,5,2" Text="Seleccione un tipo de crédito" Grid.ColumnSpan="2">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -76,9 +80,9 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TxtCreditType" Style="{StaticResource TextInput}"/>
+                            <TextBox Name="TxtCreditType" Style="{StaticResource TextInput}" Grid.ColumnSpan="2"/>
                         </Grid>
-                        
+
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Monto solicitado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
@@ -166,6 +170,30 @@
                                 VerticalScrollBarVisibility="Auto"
                                 Height="160"
                             />
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Copia de INE(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Button Visibility="Hidden" Content="Adjuntar INE" Style="{StaticResource FileUploader}"/>
+                            <Button Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Copia de comprobante de domicilio(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Button Content="Adjuntar comprobante de domicilio" Style="{StaticResource FileUploader}"/>
+                            <Button Visibility="Hidden" Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Copia de comprobante de ingresos(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Button Content="Adjuntar comprobante de ingresos" Style="{StaticResource FileUploader}"/>
+                            <Button Visibility="Hidden" Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

@@ -84,6 +84,101 @@
             <Setter Property="Visibility" Value="Collapsed"/>
         </Style>
 
+        <!--Combobox inputs-->
+
+        <!--File uploader input-->
+        <Style x:Key="FileUploader" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="4"
+                            Background="White"
+                            Cursor="Hand">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                                    Grid.Column="0"
+                                    Source="/Assets/PlusIcon.png" 
+                                    Width="20" Height="20" VerticalAlignment="Center"/>
+                                <ContentPresenter
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--File presenter input-->
+        <Style x:Key="FilePresenter" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="4"
+                            Background="White"
+                            Cursor="Hand">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                            Grid.Column="0"
+                            Source="/Assets/DiscardFileIcon.png" 
+                            Width="20" Height="20" VerticalAlignment="Center" />
+                                <ContentPresenter
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!--===============STYLES FOR BUTTONS===============-->
         <!--Primary button-->
         <Style x:Key="PrimaryBtn" TargetType="Button">
