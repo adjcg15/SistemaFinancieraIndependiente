@@ -68,6 +68,9 @@
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchClientByRFCView.xaml.cs">
+      <DependentUpon>SearchClientByRFCView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ResponsiveExampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchClientByRFCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Plus2Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -59,6 +59,7 @@
                             </TextBlock.Style>
                         </TextBlock>
                         <TextBox Name="TxtExampleInput" Style="{StaticResource TextInput}"/>
+                        <StackPanel/>
                     </Grid>
                     <TextBlock Style="{StaticResource TinyText}" Text="Tamaño de fuente para mensajes tipo small (errores formularios, avisos en formularios, anotaciones, etc.)"/>
                 </StackPanel>

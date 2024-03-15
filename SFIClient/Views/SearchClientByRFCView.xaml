@@ -1,0 +1,60 @@
+﻿<Page x:Class="SFIClient.Views.SearchClientByRFCView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SFIClient.Views"
+      mc:Ignorable="d" 
+      d:Width="1280" d:Height="1000"
+      Title="SearchClientByRFCView">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Búsqueda de clientes" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
+                <Button Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>
+            </StackPanel>
+
+            <!--Search client-->
+            <StackPanel Margin="40, 36">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <TextBlock Margin="5,2,5,2" Text="Buscar cliente por RFC">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TxtRFCClient}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox Margin ="0, 0, 10,0" Name="TxtRFCClient" Style="{StaticResource TextInput}"/>
+                    </Grid>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48"/>
+                </Grid>
+
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
