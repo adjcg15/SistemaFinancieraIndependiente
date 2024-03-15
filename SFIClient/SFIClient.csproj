@@ -62,6 +62,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\ClientControll.xaml.cs">
+      <DependentUpon>ClientControll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
@@ -71,6 +74,10 @@
     <Compile Include="Views\SearchClientByRFCView.xaml.cs">
       <DependentUpon>SearchClientByRFCView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\ClientControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -165,9 +172,7 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controlls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
   </ItemGroup>

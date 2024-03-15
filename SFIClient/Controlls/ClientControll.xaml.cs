@@ -1,5 +1,4 @@
-﻿using SFIClient.Controlls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SFIClient.Views
+namespace SFIClient.Controlls
 {
     /// <summary>
-    /// Lógica de interacción para SearchClientByRFCView.xaml
+    /// Lógica de interacción para ClientControll.xaml
     /// </summary>
-    public partial class SearchClientByRFCView : Page
+    public partial class ClientControll : UserControl
     {
-        public SearchClientByRFCView()
+        public ClientControll()
         {
             InitializeComponent();
-            for (int i = 0; i < 15; i++)
-            {
-                ClientControll clienteControl = new ClientControll();
-                icClients.Items.Add(clienteControl);
-            }
         }
     }
 }

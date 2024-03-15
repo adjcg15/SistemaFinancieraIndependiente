@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
+      xmlns:Controlls="clr-namespace:SFIClient.Controlls"
       mc:Ignorable="d" 
       d:Width="1280" d:Height="1000"
       Title="SearchClientByRFCView">
@@ -27,7 +28,7 @@
             </StackPanel>
 
             <!--Search client-->
-            <StackPanel Margin="40, 36">
+            <StackPanel Margin="40, 36, 40, 36">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -54,6 +55,18 @@
                 </Grid>
 
             </StackPanel>
+
+            <!--Search client-->
+            <Grid Margin="0, 0, 0, 0">
+                <ItemsControl Name="icClients" HorizontalAlignment="Center">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
+
 
         </StackPanel>
     </ScrollViewer>
