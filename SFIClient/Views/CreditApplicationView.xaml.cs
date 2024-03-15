@@ -15,14 +15,61 @@ using System.Windows.Shapes;
 
 namespace SFIClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para CredditApplicationView.xaml
-    /// </summary>
     public partial class CredditApplicationController : Page
     {
+        string lastRequestedAmount = string.Empty;
+        string lastMinimumAcceptedAmount = string.Empty;
+
         public CredditApplicationController()
         {
             InitializeComponent();
+        }
+
+        private void TbRequestedAmountTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string newAmount = TbRequestedAmount.Text;
+            bool isWritingNewAmmount = newAmount != lastRequestedAmount;
+
+            if (isWritingNewAmmount)
+            {
+                if (newAmount != string.Empty && !IsValidMoneyAmount(newAmount))
+                {
+                    TbRequestedAmount.Text = lastRequestedAmount;
+                    TbRequestedAmount.CaretIndex = TbRequestedAmount.Text.Length;
+                }
+                else
+                {
+                    lastRequestedAmount = newAmount;
+                }
+            }
+        }
+
+        private void TbMinimumAcceptedAmountTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string newAmount = TbMinimumAcceptedAmount.Text;
+            bool isWritingNewAmmount = newAmount != lastMinimumAcceptedAmount;
+
+            if (isWritingNewAmmount)
+            {
+                if (newAmount != string.Empty && !IsValidMoneyAmount(newAmount))
+                {
+                    TbMinimumAcceptedAmount.Text = lastMinimumAcceptedAmount;
+                    TbMinimumAcceptedAmount.CaretIndex = TbMinimumAcceptedAmount.Text.Length;
+                }
+                else
+                {
+                    lastMinimumAcceptedAmount = newAmount;
+                }
+            }
+        }
+
+        //TODO: ver si se puede crear un helper
+        private bool IsValidMoneyAmount(string amount)
+        {
+            return amount.Length <= 7 
+                && double.TryParse(amount, out double result) 
+                && result >= 0 
+                && result <= 1000000;
         }
     }
 }

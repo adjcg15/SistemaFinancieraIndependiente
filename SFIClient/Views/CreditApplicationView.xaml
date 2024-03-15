@@ -105,14 +105,17 @@
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=TxtRequestedAmount}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbRequestedAmount}" Value="">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBox Name="TxtRequestedAmount" Style="{StaticResource TextInput}"/>
+                                <TextBox 
+                                    Name="TbRequestedAmount" 
+                                    Style="{StaticResource TextInput}"
+                                    TextChanged="TbRequestedAmountTextChanged"/>
                             </Grid>
                             <TextBlock 
                                 Grid.Column="1" Grid.Row="0" 
@@ -137,14 +140,17 @@
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=TxtMinimumAcceptedAmount}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbMinimumAcceptedAmount}" Value="">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                                <TextBox Name="TxtMinimumAcceptedAmount" Style="{StaticResource TextInput}"/>
+                                <TextBox 
+                                    Name="TbMinimumAcceptedAmount" 
+                                    Style="{StaticResource TextInput}"
+                                    TextChanged="TbMinimumAcceptedAmountTextChanged"/>
                             </Grid>
                             <TextBlock 
                                 Grid.Column="1" Grid.Row="0" 
