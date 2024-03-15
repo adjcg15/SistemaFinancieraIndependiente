@@ -74,6 +74,35 @@ namespace SFIClient.SFIServices {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreditType", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class CreditType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIServices.IServiceExample")]
     public interface IServiceExample {
@@ -118,6 +147,53 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.DataTypeExample> GetDataUsingDataContractAsync() {
             return base.Channel.GetDataUsingDataContractAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIServices.ICreditsService")]
+    public interface ICreditsService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllCreditTypes", ReplyAction="http://tempuri.org/ICreditsService/GetAllCreditTypesResponse")]
+        SFIClient.SFIServices.CreditType[] GetAllCreditTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllCreditTypes", ReplyAction="http://tempuri.org/ICreditsService/GetAllCreditTypesResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditType[]> GetAllCreditTypesAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICreditsServiceChannel : SFIClient.SFIServices.ICreditsService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CreditsServiceClient : System.ServiceModel.ClientBase<SFIClient.SFIServices.ICreditsService>, SFIClient.SFIServices.ICreditsService {
+        
+        public CreditsServiceClient() {
+        }
+        
+        public CreditsServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CreditsServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CreditsServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CreditsServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public SFIClient.SFIServices.CreditType[] GetAllCreditTypes() {
+            return base.Channel.GetAllCreditTypes();
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditType[]> GetAllCreditTypesAsync() {
+            return base.Channel.GetAllCreditTypesAsync();
         }
     }
 }

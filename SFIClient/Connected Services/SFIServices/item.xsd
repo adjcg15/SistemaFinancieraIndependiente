@@ -7,4 +7,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DataTypeExample" nillable="true" type="tns:DataTypeExample" />
+  <xs:complexType name="ArrayOfCreditType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditType" nillable="true" type="tns:CreditType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditType" nillable="true" type="tns:ArrayOfCreditType" />
+  <xs:complexType name="CreditType">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="CreditType" nillable="true" type="tns:CreditType" />
 </xs:schema>

@@ -86,6 +86,7 @@
     <Compile Include="credit_types.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessObjects\CreditsDAO.cs" />
     <Compile Include="DataAccessObjects\ExampleDAO.cs" />
     <Compile Include="dictum.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
@@ -96,6 +97,7 @@
     <Compile Include="employee_roles.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CreditType.cs" />
     <Compile Include="Model\DataTypeExample.cs" />
     <Compile Include="personal_references.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>

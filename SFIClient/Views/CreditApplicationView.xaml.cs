@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,29 @@ namespace SFIClient.Views
         public CredditApplicationController()
         {
             InitializeComponent();
+
+            LoadCreditTypes();
+        }
+
+        private void LoadCreditTypes()
+        {
+            CreditsServiceClient creditsService = new CreditsServiceClient();
+            
+            try
+            {
+                List<CreditType> creditTypesRecovered = creditsService.GetAllCreditTypes().ToList();
+                ShowCreditTypesInCombobox(creditTypesRecovered);
+            }
+            catch(Exception ex)
+            {
+                //TODO: cambiar manejo de excepción
+                
+            }
+        }
+
+        private void ShowCreditTypesInCombobox(List<CreditType> creditTypes)
+        {
+
         }
 
         private void TbRequestedAmountTextChanged(object sender, TextChangedEventArgs e)
