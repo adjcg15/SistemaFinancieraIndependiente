@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
+      xmlns:usercontrols="clr-namespace:SFIClient.Controlls"
       mc:Ignorable="d" 
-      d:Width="1280" d:Height="3000"
+      d:Width="1280" d:Height="2000"
       Title="Solicitud de crédito para cliente">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -247,8 +248,9 @@
                                 Text="Seleccione un tipo de crédito para cargar las condiciones de crédito aplicables"/>
                         </Grid>
                         <!--Policies list-->
-                        <StackPanel Grid.Row="1">
-                            
+                        <StackPanel Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                            <!--<usercontrols:CreditApplicationCreditConditionControl/>
+                            <usercontrols:CreditApplicationCreditConditionControl/>-->
                         </StackPanel>
                     </Grid>
 

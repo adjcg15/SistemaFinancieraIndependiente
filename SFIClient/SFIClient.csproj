@@ -37,8 +37,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,12 +64,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
+      <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -158,9 +167,7 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controlls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
   </ItemGroup>
