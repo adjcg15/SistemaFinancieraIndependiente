@@ -293,6 +293,98 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!--ComboboxDonaji -->
+
+        <Style x:Key="CustomComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="12, 12, 16, 12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="ComboBoxBorder"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Background="{TemplateBinding Background}"
+            CornerRadius="4">
+                                <ToggleButton x:Name="ToggleButton"
+                      Background="Transparent"
+                      BorderBrush="Transparent"
+                      BorderThickness="0"
+                      Padding="{TemplateBinding Padding}"
+                      IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Center">
+                                    <ToggleButton.Content>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="32" />
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0" />
+                                            <Path x:Name="Arrow" Grid.Column="1" Fill="{StaticResource MediumGray}" HorizontalAlignment="Right" VerticalAlignment="Center" Data="M0,0 L4,4 L8,0 Z"/>
+                                        </Grid>
+                                    </ToggleButton.Content>
+                                </ToggleButton>
+                            </Border>
+                            <ContentPresenter x:Name="ContentSite"
+                      HorizontalAlignment="Left"
+                      Margin="{TemplateBinding Padding}"
+                      VerticalAlignment="Center"
+                      Content="{TemplateBinding SelectionBoxItem}"
+                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                      IsHitTestVisible="False" />
+                            <Popup x:Name="Popup"
+           Width="{Binding ActualWidth, ElementName=ToggleButton}"
+           Placement="Bottom"
+           IsOpen="{TemplateBinding IsDropDownOpen}"
+           AllowsTransparency="True"
+           Focusable="False"
+           PopupAnimation="Slide">
+                                <Border x:Name="DropDownBorder"
+                BorderThickness="1"
+                Background="White"
+                BorderBrush="{StaticResource MediumGray}">
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                            <TextBlock x:Name="PlaceholderText"
+               Style="{StaticResource TxtInputPlaceHolder}"
+               Text="   Ejemplo de placeholder"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Margin="8,0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ToggleButton" Property="Background" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding SelectedItem, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="PlaceholderText" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
 
     </Application.Resources>
 </Application>
