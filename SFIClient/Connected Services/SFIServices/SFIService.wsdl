@@ -11,6 +11,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" />
     </xsd:schema>
@@ -21,10 +22,14 @@
   <wsdl:message name="IServiceExample_GetDataUsingDataContract_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceExample_GetDataUsingDataContract_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContractResponse" message="tns:IServiceExample_GetDataUsingDataContract_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContractServiceFaultFault" name="ServiceFaultFault" message="tns:IServiceExample_GetDataUsingDataContract_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -38,6 +43,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SFIService">
