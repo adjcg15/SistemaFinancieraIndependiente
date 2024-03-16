@@ -86,6 +86,7 @@
     <Compile Include="credit_types.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessObjects\ClientsDAO.cs" />
     <Compile Include="DataAccessObjects\ExampleDAO.cs" />
     <Compile Include="dictum.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
