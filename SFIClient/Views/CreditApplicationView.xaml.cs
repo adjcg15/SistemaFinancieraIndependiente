@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace SFIClient.Views
 {
@@ -84,6 +86,70 @@ namespace SFIClient.Views
         {
             //TODO: redireccionar cuando exista el menú principal
             Console.WriteLine("Redireccionando al menú principal...");
+        }
+
+        private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(CbCreditTypes.SelectedIndex != -1)
+            {
+                CreditType selectedCreditType = (CreditType)CbCreditTypes.SelectedItem;
+                //TODO: settear tipo de crédito en nueva solicitud
+                LoadCreditConditionsByCreditType(selectedCreditType.Identifier);
+            }
+        }
+
+        private void LoadCreditConditionsByCreditType(int creditConditionId)
+        {
+            CreditConditionsServiceClient creditConditionsService = new CreditConditionsServiceClient();
+
+            try
+            {
+                List<CreditCondition> creditConditionsRecovered = 
+                    creditConditionsService.RecoverCreditConditionsByCreditType(creditConditionId).ToList();
+                ShowApplicableCreditConditions(creditConditionsRecovered);
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorRecoveringCreditConditionsDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditConditionsDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringCreditConditionsDialog(errorMessage);
+            }
+        }
+
+        private void ShowApplicableCreditConditions(List<CreditCondition> applicableCreditConditions)
+        {
+            GrdEmptyConditionsMessage.Visibility = Visibility.Collapsed;
+            SkpApplicableCreditConditions.Visibility = Visibility.Visible;
+            SkpApplicableCreditConditions.Children.Clear();
+
+            applicableCreditConditions.ForEach(conditon =>
+            {
+                var creditConditionCard = new CreditApplicationCreditConditionControl(conditon);
+                SkpApplicableCreditConditions.Children.Add(creditConditionCard);
+            });
+        }
+
+        private void ShowErrorRecoveringCreditConditionsDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Condiciones de crédito no disponibles",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToMainMenu();
+            }
         }
 
         private void TbRequestedAmountTextChanged(object sender, TextChangedEventArgs e)

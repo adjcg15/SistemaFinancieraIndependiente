@@ -180,6 +180,147 @@ namespace SFIClient.SFIServices {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreditCondition", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class CreditCondition : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double AdvancePaymentReductionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdentifierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double InterestOnArrearsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double InterestRateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsActiveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsIvaAppliedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PaymentMonthsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double AdvancePaymentReduction {
+            get {
+                return this.AdvancePaymentReductionField;
+            }
+            set {
+                if ((this.AdvancePaymentReductionField.Equals(value) != true)) {
+                    this.AdvancePaymentReductionField = value;
+                    this.RaisePropertyChanged("AdvancePaymentReduction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Identifier {
+            get {
+                return this.IdentifierField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdentifierField, value) != true)) {
+                    this.IdentifierField = value;
+                    this.RaisePropertyChanged("Identifier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double InterestOnArrears {
+            get {
+                return this.InterestOnArrearsField;
+            }
+            set {
+                if ((this.InterestOnArrearsField.Equals(value) != true)) {
+                    this.InterestOnArrearsField = value;
+                    this.RaisePropertyChanged("InterestOnArrears");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double InterestRate {
+            get {
+                return this.InterestRateField;
+            }
+            set {
+                if ((this.InterestRateField.Equals(value) != true)) {
+                    this.InterestRateField = value;
+                    this.RaisePropertyChanged("InterestRate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsActive {
+            get {
+                return this.IsActiveField;
+            }
+            set {
+                if ((this.IsActiveField.Equals(value) != true)) {
+                    this.IsActiveField = value;
+                    this.RaisePropertyChanged("IsActive");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsIvaApplied {
+            get {
+                return this.IsIvaAppliedField;
+            }
+            set {
+                if ((this.IsIvaAppliedField.Equals(value) != true)) {
+                    this.IsIvaAppliedField = value;
+                    this.RaisePropertyChanged("IsIvaApplied");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PaymentMonths {
+            get {
+                return this.PaymentMonthsField;
+            }
+            set {
+                if ((this.PaymentMonthsField.Equals(value) != true)) {
+                    this.PaymentMonthsField = value;
+                    this.RaisePropertyChanged("PaymentMonths");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIServices.IServiceExample")]
     public interface IServiceExample {
@@ -273,6 +414,57 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditType[]> GetAllCreditTypesAsync() {
             return base.Channel.GetAllCreditTypesAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIServices.ICreditConditionsService")]
+    public interface ICreditConditionsService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditType", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeRe" +
+            "sponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeSe" +
+            "rviceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditCondition[] RecoverCreditConditionsByCreditType(int creditTypeIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditType", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeRe" +
+            "sponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverCreditConditionsByCreditTypeAsync(int creditTypeIdentifier);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICreditConditionsServiceChannel : SFIClient.SFIServices.ICreditConditionsService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CreditConditionsServiceClient : System.ServiceModel.ClientBase<SFIClient.SFIServices.ICreditConditionsService>, SFIClient.SFIServices.ICreditConditionsService {
+        
+        public CreditConditionsServiceClient() {
+        }
+        
+        public CreditConditionsServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CreditConditionsServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CreditConditionsServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CreditConditionsServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public SFIClient.SFIServices.CreditCondition[] RecoverCreditConditionsByCreditType(int creditTypeIdentifier) {
+            return base.Channel.RecoverCreditConditionsByCreditType(creditTypeIdentifier);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverCreditConditionsByCreditTypeAsync(int creditTypeIdentifier) {
+            return base.Channel.RecoverCreditConditionsByCreditTypeAsync(creditTypeIdentifier);
         }
     }
 }

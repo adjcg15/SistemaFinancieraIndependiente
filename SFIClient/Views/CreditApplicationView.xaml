@@ -75,7 +75,11 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="29*"/>
                             </Grid.ColumnDefinitions>
-                            <ComboBox Name="CbCreditTypes" Grid.ColumnSpan="2"/>
+                            <ComboBox 
+                                SelectionChanged="CbCreditTypesSelectionChanged" 
+                                Name="CbCreditTypes" 
+                                DisplayMemberPath="Name"
+                                Grid.ColumnSpan="2"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -225,7 +229,7 @@
                         </TextBlock>
 
                         <!--Empty list message-->
-                        <Grid Grid.Row="1" Margin="0, 40">
+                        <Grid x:Name="GrdEmptyConditionsMessage" Grid.Row="1" Margin="0, 40">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="8*"/>
@@ -243,7 +247,9 @@
                                 Text="Seleccione un tipo de crédito para cargar las condiciones de crédito aplicables"/>
                         </Grid>
                         <!--Policies list-->
-                        <StackPanel Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                        <StackPanel 
+                            x:Name="SkpApplicableCreditConditions" 
+                            Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
                             <!--<usercontrols:CreditApplicationCreditConditionControl/>
                             <usercontrols:CreditApplicationCreditConditionControl/>-->
                         </StackPanel>

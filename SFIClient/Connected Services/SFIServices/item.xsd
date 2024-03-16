@@ -20,4 +20,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditType" nillable="true" type="tns:CreditType" />
+  <xs:complexType name="ArrayOfCreditCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditCondition" nillable="true" type="tns:ArrayOfCreditCondition" />
+  <xs:complexType name="CreditCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AdvancePaymentReduction" type="xs:double" />
+      <xs:element minOccurs="0" name="Identifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InterestOnArrears" type="xs:double" />
+      <xs:element minOccurs="0" name="InterestRate" type="xs:double" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsIvaApplied" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentMonths" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditCondition" nillable="true" type="tns:CreditCondition" />
 </xs:schema>

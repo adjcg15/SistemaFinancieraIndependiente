@@ -16,6 +16,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ICreditConditionsService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -42,6 +50,15 @@
   <wsdl:message name="ICreditsService_GetAllCreditTypes_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverCreditConditionsByCreditType" />
+  </wsdl:message>
+  <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverCreditConditionsByCreditTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
@@ -54,6 +71,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditTypes" message="tns:ICreditsService_GetAllCreditTypes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditTypesResponse" message="tns:ICreditsService_GetAllCreditTypes_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditTypesServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_GetAllCreditTypes_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ICreditConditionsService">
+    <wsdl:operation name="RecoverCreditConditionsByCreditType">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditType" message="tns:ICreditConditionsService_RecoverCreditConditionsByCreditType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeResponse" message="tns:ICreditConditionsService_RecoverCreditConditionsByCreditType_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditConditionsService_RecoverCreditConditionsByCreditType_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -88,6 +112,22 @@
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ICreditConditionsService" type="tns:ICreditConditionsService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICreditConditionsService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RecoverCreditConditionsByCreditType">
+      <soap12:operation soapAction="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="SFIService">
     <wsdl:port name="NetTcpBinding_IServiceExample" binding="tns:NetTcpBinding_IServiceExample">
       <soap12:address location="net.tcp://localhost:8081/SFIService" />
@@ -96,6 +136,12 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ICreditsService" binding="tns:NetTcpBinding_ICreditsService">
+      <soap12:address location="net.tcp://localhost:8081/SFIService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ICreditConditionsService" binding="tns:NetTcpBinding_ICreditConditionsService">
       <soap12:address location="net.tcp://localhost:8081/SFIService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>

@@ -28,11 +28,13 @@
                 <TextBlock 
                     Grid.Column="0"
                     Style="{StaticResource Emphasis}" FontWeight="Bold"
-                    Text="CCP01"/>
+                    Text="CCP01"
+                    x:Name="TbkIdentifier"/>
                 <TextBlock 
                     Grid.Column="1"
                     Style="{StaticResource Emphasis}" FontWeight="Bold"
-                    Text="Aplica IVA"/>
+                    Text="Aplica IVA"
+                    x:Name="TbkIva"/>
             </Grid>
 
             <!--Card dontent-->
@@ -44,12 +46,14 @@
 
                 <TextBlock 
                     Grid.Column="0" Margin="0, 0, 24, 0" Foreground="{StaticResource PrimaryColor}"
-                    Style="{StaticResource Title}" FontWeight="Bold"
-                    Text="9 meses"/>
+                    Style="{StaticResource Title}" FontWeight="Bold">
+                    <Span x:Name="SpnPaymentMonths">9</Span> meses
+                </TextBlock>
                 <TextBlock 
                     Grid.Column="1" Foreground="{StaticResource DarkPrimaryColor}"
-                    Style="{StaticResource Title}" FontWeight="Bold"
-                    Text="8% de interés"/>
+                    Style="{StaticResource Title}" FontWeight="Bold">
+                    <Span x:Name="SpnInterestRate">8</Span>% de interés
+                </TextBlock>
             </Grid>
 
             <!--Card footer-->
@@ -62,13 +66,13 @@
                 <TextBlock 
                     Grid.Column="0" Margin="0, 0, 24, 0"
                     Style="{StaticResource TinyText}">
-                    <Bold>4%</Bold> de interés moratorio
+                    <Bold x:Name="BldInterestOnArrears">4</Bold>% de interés moratorio
                 </TextBlock>
                 <TextBlock 
                     Grid.Column="1" Margin="0, 0, 24, 0"
                     Style="{StaticResource TinyText}"
                     TextWrapping="Wrap">
-                    <Bold>5%</Bold> de descuento por pago adelantado
+                    <Bold x:Name="BldAdvancePaymentReduction">5%</Bold> de descuento por pago adelantado
                 </TextBlock>
             </Grid>
         </Grid>
