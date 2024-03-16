@@ -1,8 +1,10 @@
-﻿using SFIDataAccess.Model;
+﻿using SFIDataAccess.CustomExceptions;
+using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,9 +29,11 @@ namespace SFIDataAccess.DataAccessObjects
                     });
                 }
             }
-            catch (EntityException ex)
+            catch (EntityException)
             {
-                //TODO: ver cómo manejar las excepciones y enviarlas al cliente
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde")
+                );
             }
 
             return creditTypes;

@@ -1,4 +1,5 @@
-﻿using SFIDataAccess.Model;
+﻿using SFIDataAccess.CustomExceptions;
+using SFIDataAccess.Model;
 using System.ServiceModel;
 
 namespace SFIServices.Contracts
@@ -7,6 +8,7 @@ namespace SFIServices.Contracts
     public interface IServiceExample
     {
         [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
         DataTypeExample GetDataUsingDataContract();
     }
 }

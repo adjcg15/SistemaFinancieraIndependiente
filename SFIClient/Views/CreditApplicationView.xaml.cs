@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,16 +39,46 @@ namespace SFIClient.Views
                 List<CreditType> creditTypesRecovered = creditsService.GetAllCreditTypes().ToList();
                 ShowCreditTypesInCombobox(creditTypesRecovered);
             }
-            catch(Exception ex)
+            catch (FaultException<ServiceFault> fault)
             {
-                //TODO: cambiar manejo de excepción
-                
+                ShowErrorRecoveringCreditTypesDialog(fault.Detail.Message);
             }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditTypesDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringCreditTypesDialog(errorMessage);
+            }
+        }
+
+        private void ShowErrorRecoveringCreditTypesDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Tipos de créditos no disponibles",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+
+            if(buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToMainMenu();
+            }
+        }
+
+        private void RedirectToMainMenu()
+        {
+            //TODO: redireccionar cuando exista el menú principal
+            Console.WriteLine("Redireccionando al menú principal...");
         }
 
         private void ShowCreditTypesInCombobox(List<CreditType> creditTypes)
         {
-
+            
         }
 
         private void TbRequestedAmountTextChanged(object sender, TextChangedEventArgs e)

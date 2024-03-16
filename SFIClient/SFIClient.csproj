@@ -125,6 +125,9 @@
     <None Include="Connected Services\SFIServices\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\SFIServices\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,8 +24,16 @@ namespace SFIClient.Views
             InitializeComponent();
 
             ServiceExampleClient exampleClient = new ServiceExampleClient();
-            DataTypeExample example = exampleClient.GetDataUsingDataContract();
-            Console.WriteLine(example.Name + (example.IsExample ? "" : " NO") + " es un ejemplo");
+
+            try
+            {
+                DataTypeExample example = exampleClient.GetDataUsingDataContract();
+                Console.WriteLine(example.Name + (example.IsExample ? "" : " NO") + " es un ejemplo");
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                Console.WriteLine(fault.Detail.Message);
+            }
         }
     }
 }
