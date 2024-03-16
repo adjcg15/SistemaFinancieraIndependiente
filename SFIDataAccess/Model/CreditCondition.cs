@@ -11,6 +11,9 @@ namespace SFIDataAccess.Model
     public class CreditCondition
     {
         [DataMember]
+        public CreditType CreditType { get; set; }
+
+        [DataMember]
         public double AdvancePaymentReduction { get; set; }
 
         [DataMember]

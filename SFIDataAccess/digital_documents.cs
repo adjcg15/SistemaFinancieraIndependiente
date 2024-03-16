@@ -17,7 +17,7 @@ namespace SFIDataAccess
         public int id_digital_document { get; set; }
         public string name { get; set; }
         public string format { get; set; }
-        public byte[] contect { get; set; }
+        public byte[] content { get; set; }
         public string credit_application_invoice { get; set; }
     
         public virtual credit_applications credit_applications { get; set; }

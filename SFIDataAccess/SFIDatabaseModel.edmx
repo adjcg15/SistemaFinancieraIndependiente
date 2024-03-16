@@ -1027,7 +1027,7 @@
           <Property Name="id_digital_document" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="format" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="contect" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="content" Type="Binary" Nullable="false" FixedLength="false" MaxLength="Max" />
           <Property Name="credit_application_invoice" Type="String" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="credit_applications" Relationship="SFIDatabaseModel.FK_digital_documents_credit_applications" FromRole="digital_documents" ToRole="credit_applications" />
         </EntityType>
@@ -1602,7 +1602,7 @@
             <EntityTypeMapping TypeName="SFIDatabaseModel.digital_documents">
               <MappingFragment StoreEntitySet="digital_documents">
                 <ScalarProperty Name="credit_application_invoice" ColumnName="credit_application_invoice" />
-                <ScalarProperty Name="contect" ColumnName="contect" />
+                <ScalarProperty Name="content" ColumnName="contect" />
                 <ScalarProperty Name="format" ColumnName="format" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id_digital_document" ColumnName="id_digital_document" />

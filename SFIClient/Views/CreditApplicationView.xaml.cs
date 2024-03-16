@@ -123,13 +123,13 @@ namespace SFIClient.Views
             applicableCreditConditions.ForEach(conditon =>
             {
                 var creditConditionCard = new CreditApplicationCreditConditionControl(conditon);
-                creditConditionCard.CardClick += ApplicableCreditConditionClick;
+                creditConditionCard.CardClick += HighlightCreditConditionCard;
 
                 SkpApplicableCreditConditions.Children.Add(creditConditionCard);
             });
         }
 
-        private void ApplicableCreditConditionClick(object sender, CreditCondition selectedCondition)
+        private void HighlightCreditConditionCard(object sender, CreditCondition selectedCondition)
         {
             foreach (var child in SkpApplicableCreditConditions.Children)
             {
@@ -218,6 +218,42 @@ namespace SFIClient.Views
                 && double.TryParse(amount, out double result) 
                 && result >= 0 
                 && result <= 1000000;
+        }
+
+        private void BtnGenerateCreditApplicationClick(object sender, RoutedEventArgs e)
+        {
+            bool isValidApplication = VerifyCreditApplicationInformation();
+
+            if(isValidApplication)
+            {
+                ShowApplicationGenerationConfirmationDialog();
+            }
+        }
+
+        private bool VerifyCreditApplicationInformation()
+        {
+            return true;
+        }
+
+        private void ShowApplicationGenerationConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                $"“¿Desea generar la solicitud de crédito por cantidad aspiradaMXN, " +
+                $"bajo las condiciones de crédito identificador de condición de crédito, " +
+                $"para el cliente nombre del cliente?",
+                "Confirme el registro de la solicitud",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                
+            }
+            else if (buttonClicked == MessageBoxResult.No)
+            {
+
+            }
         }
     }
 }

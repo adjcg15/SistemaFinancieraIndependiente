@@ -20,7 +20,8 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    context.credit_types.ToList().ForEach(storedCreditType => {
+                    context.credit_types.ToList().ForEach(storedCreditType =>
+                    {
                         CreditType creditType = new CreditType();
                         creditType.Identifier = storedCreditType.id_credit_type;
                         creditType.Name = storedCreditType.name;
@@ -37,6 +38,11 @@ namespace SFIDataAccess.DataAccessObjects
             }
 
             return creditTypes;
+        }
+
+        public static void RegisterCreditApplication(CreditApplication newApplication)
+        {
+
         }
     }
 }

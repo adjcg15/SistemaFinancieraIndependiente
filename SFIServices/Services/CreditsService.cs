@@ -15,5 +15,10 @@ namespace SFIServices
         {
             return CreditsDAO.GetAllCreditTypes();
         }
+
+        public void RegisterCreditApplication(CreditApplication newApplication)
+        {
+            CreditsDAO.RegisterCreditApplication(newApplication);
+        }
     }
 }
