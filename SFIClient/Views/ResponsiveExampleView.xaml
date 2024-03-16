@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
-      d:Width="1280" d:Height="720"
+      d:Width="1280" d:Height="820"
       Title="ResponsiveExampleGUI">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -61,6 +61,17 @@
                         <TextBox Name="TxtExampleInput" Style="{StaticResource TextInput}"/>
                     </Grid>
                     <TextBlock Style="{StaticResource TinyText}" Text="Tamaño de fuente para mensajes tipo small (errores formularios, avisos en formularios, anotaciones, etc.)"/>
+                    <Grid>
+                        <ComboBox Name="cbExample" Style="{StaticResource comboBox}" IsEditable="False">
+                            <!-- Agrega un item de placeholder -->
+                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Hola"/>
+                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Comor"/>
+                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Ejemplo de texto placeholder"/>
+                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Ejemplo de texto placeholder"/>
+                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Ejemplo de texto placeholder"/>
+                            
+                        </ComboBox>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </StackPanel>
