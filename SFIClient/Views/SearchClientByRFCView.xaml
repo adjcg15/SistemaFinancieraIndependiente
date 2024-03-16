@@ -51,13 +51,13 @@
                         </TextBlock>
                         <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}"/>
                     </Grid>
-                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48"/>
+                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48" Click="BtnSearchClient_Click"/>
                 </Grid>
             </StackPanel>
 
             <!--Clients-->
-            <Grid Name="GrdClients"  Margin="27, 0, 27, 0">
-                <ItemsControl Name="ItcClients" HorizontalAlignment="Center">
+            <Grid Name="GrdClients"  Margin="25, 0, 25, 0">
+                <ItemsControl Name="ItcClients" HorizontalAlignment="Left">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel IsItemsHost="True" />

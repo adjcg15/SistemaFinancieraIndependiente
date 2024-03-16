@@ -21,6 +21,11 @@ namespace SFIClient.Views
     /// </summary>
     public partial class SearchClientByRFCView : Page
     {
+
+        int clientes = 5;
+        bool credit;
+
+        string[] rfcs = { "RFC1", "RFC2", "RFC3", "RFC4", "RFC5" };
         public SearchClientByRFCView()
         {
             InitializeComponent();
@@ -29,8 +34,6 @@ namespace SFIClient.Views
 
         private void AddClientsToClientsList()
         {
-            int clientes = 0;
-            bool credit;
 
             if (clientes > 0)
             {
@@ -40,6 +43,7 @@ namespace SFIClient.Views
                 for (int i = 0; i < clientes; i++)
                 {
                     ClientControll clienteControl = new ClientControll();
+                    clienteControl.LblClientRFC.Content = rfcs[i];
                     ItcClients.Items.Add(clienteControl);
                     if (i == 3)
                     {
@@ -64,6 +68,23 @@ namespace SFIClient.Views
                 SkpRegisterClient.Visibility = Visibility.Collapsed;
                 SkpSearchClient.Visibility = Visibility.Collapsed;
                 SkpRegisterClientNow.Children.Add(BtnRegisterClient);
+            }
+        }
+
+        private void BtnSearchClient_Click(object sender, RoutedEventArgs e)
+        {
+
+            string rfcWanted = TbRFCClient.Text.ToUpper().Trim();
+
+            ItcClients.Items.Clear();
+            for (int i = 0; i < 5; i++)
+            {
+                if (rfcs[i].Contains(rfcWanted))
+                {
+                    ClientControll clientControll = new ClientControll();
+                    clientControll.LblClientRFC.Content = rfcs[i];
+                    ItcClients.Items.Add(clientControll);
+                }
             }
         }
     }

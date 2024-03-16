@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SFIClient.Controlls"
              mc:Ignorable="d">
-    <Border Background="#FAFAFA" BorderBrush="#BFB8B8" BorderThickness="1" CornerRadius="10" Height="229" Width="428" Margin="13, 13, 13, 13">
+    <Border Background="#FAFAFA" BorderBrush="#BFB8B8" BorderThickness="1" CornerRadius="10" Height="234" Width="433" Margin="15, 15, 15, 15">
         <Grid>
             <Label Name="LblClientRFC" HorizontalAlignment="Left" Margin="15,10,0,0" Content="AULR031119CH5" VerticalAlignment="Top" Width="246" Height="40" FontSize="26" FontWeight="Bold"/>
             <Label Name="LblClientName" HorizontalAlignment="Left" Margin="15,43,0,0" Content="Aguilar López Rodrigo" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
