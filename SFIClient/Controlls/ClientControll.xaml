@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SFIClient.Controlls"
              mc:Ignorable="d">
-    <Border Background="#FAFAFA" BorderBrush="#BFB8B8" BorderThickness="1" CornerRadius="10" Height="209" Width="389" Margin="10, 10, 10, 10">
+    <Border Background="#FAFAFA" BorderBrush="#BFB8B8" BorderThickness="1" CornerRadius="10" Height="229" Width="428.5" Margin="13, 13, 13, 13">
         <Grid>
             <Label Name="lblClientRFC" HorizontalAlignment="Left" Margin="10,10,0,0" Content="AULR031119CH5" VerticalAlignment="Top" Width="246" Height="40" FontSize="26" FontWeight="Bold"/>
             <Label Name="lblClientName" HorizontalAlignment="Left" Margin="10,43,0,0" Content="Aguilar López Rodrigo" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
-            <Button Style="{StaticResource SeeMoreBtn}" Margin="291,10,10,164" Content="Ver más" Width="86" Height="33"/>
+            <Button Style="{StaticResource SeeMoreBtn}" Margin="330,10,10,184" Content="Ver más" Width="86" Height="33"/>
             <Label x:Name="lblClientCreditStatus" HorizontalAlignment="Left" Margin="10,68,0,0" Content="Cliente con crédito en curso" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
             <Label x:Name="lblClientCreditStatus_Copiar" HorizontalAlignment="Left" Margin="10,139,0,0" Content="Otras opciones" VerticalAlignment="Top" Width="99" Height="29" FontSize="13" Foreground="{StaticResource DarkPrimaryColor}"/>
         </Grid>
