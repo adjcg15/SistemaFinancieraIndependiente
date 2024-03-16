@@ -14,7 +14,10 @@
   </xs:complexType>
   <xs:element name="ArrayOfCreditType" nillable="true" type="tns:ArrayOfCreditType" />
   <xs:complexType name="CreditType">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Identifier" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditType" nillable="true" type="tns:CreditType" />
 </xs:schema>

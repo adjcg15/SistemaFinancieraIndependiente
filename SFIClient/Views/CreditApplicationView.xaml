@@ -75,18 +75,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="29*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Margin="5,2,5,2" Text="Seleccione un tipo de crédito" Grid.ColumnSpan="2">
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TxtCreditType}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                            <TextBox Name="TxtCreditType" Style="{StaticResource TextInput}" Grid.ColumnSpan="2"/>
+                            <ComboBox Name="CbCreditTypes" Grid.ColumnSpan="2"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">

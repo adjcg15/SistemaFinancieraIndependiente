@@ -1,6 +1,7 @@
 ﻿using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.ServiceModel;
@@ -20,8 +21,9 @@ namespace SFIClient.Views
 {
     public partial class CredditApplicationController : Page
     {
-        string lastRequestedAmount = string.Empty;
-        string lastMinimumAcceptedAmount = string.Empty;
+        private string lastRequestedAmount = string.Empty;
+        private string lastMinimumAcceptedAmount = string.Empty;
+        private ObservableCollection<CreditType> LoadedCreditTypes { get; set; }
 
         public CredditApplicationController()
         {
@@ -37,7 +39,7 @@ namespace SFIClient.Views
             try
             {
                 List<CreditType> creditTypesRecovered = creditsService.GetAllCreditTypes().ToList();
-                ShowCreditTypesInCombobox(creditTypesRecovered);
+                FillCreditTypesCombobox(creditTypesRecovered);
             }
             catch (FaultException<ServiceFault> fault)
             {
@@ -53,6 +55,14 @@ namespace SFIClient.Views
                 string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
                 ShowErrorRecoveringCreditTypesDialog(errorMessage);
             }
+        }
+
+        private void FillCreditTypesCombobox(List<CreditType> creditTypes)
+        {
+            ObservableCollection<CreditType> creditTypesPresented = new ObservableCollection<CreditType>();
+            creditTypes.ForEach(creditType => creditTypesPresented.Add(creditType));
+
+            CbCreditTypes.ItemsSource = creditTypesPresented;
         }
 
         private void ShowErrorRecoveringCreditTypesDialog(string message)
@@ -74,11 +84,6 @@ namespace SFIClient.Views
         {
             //TODO: redireccionar cuando exista el menú principal
             Console.WriteLine("Redireccionando al menú principal...");
-        }
-
-        private void ShowCreditTypesInCombobox(List<CreditType> creditTypes)
-        {
-            
         }
 
         private void TbRequestedAmountTextChanged(object sender, TextChangedEventArgs e)

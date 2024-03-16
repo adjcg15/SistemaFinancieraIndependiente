@@ -10,7 +10,10 @@ namespace SFIDataAccess.Model
     [DataContract]
     public class CreditType
     {
+        [DataMember]
         public int Identifier {get; set;}
+
+        [DataMember]
         public string Name { get; set;}
     }
 }
