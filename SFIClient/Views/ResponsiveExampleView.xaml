@@ -61,15 +61,12 @@
                         <TextBox Name="TxtExampleInput" Style="{StaticResource TextInput}"/>
                     </Grid>
                     <TextBlock Style="{StaticResource TinyText}" Text="Tamaño de fuente para mensajes tipo small (errores formularios, avisos en formularios, anotaciones, etc.)"/>
+                    <TextBlock Text="Input" FontSize="16" FontWeight="bold"/>
                     <Grid>
-                        <ComboBox Name="cbExample" Style="{StaticResource comboBox}" IsEditable="False">
-                            <!-- Agrega un item de placeholder -->
-                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Hola"/>
-                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Comor"/>
-                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Ejemplo de texto placeholder"/>
-                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Ejemplo de texto placeholder"/>
-                            <ComboBoxItem IsEnabled="True" FontStyle="Italic" Content="Ejemplo de texto placeholder"/>
-                            
+                        <ComboBox Style="{StaticResource comboBox}">
+                            <ComboBoxItem>Elemento 1</ComboBoxItem>
+                            <ComboBoxItem>Elemento 2</ComboBoxItem>
+                            <ComboBoxItem>Elemento 3</ComboBoxItem>
                         </ComboBox>
                     </Grid>
                 </StackPanel>
