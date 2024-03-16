@@ -18,34 +18,55 @@ namespace SFIClient.Controlls
 {
     public partial class CreditApplicationCreditConditionControl : UserControl
     {
-        private CreditCondition applicableCondition;
+        public CreditCondition BindedCondition { get; }
+        public event EventHandler<CreditCondition> CardClick;
 
         public CreditApplicationCreditConditionControl(CreditCondition applicableCondition)
         {
             InitializeComponent();
-            this.applicableCondition = applicableCondition;
+            BindedCondition = applicableCondition;
 
             ShowCreditConditionInformation();
+            if(!applicableCondition.IsActive)
+            {
+                DisableCreditCondition();
+            }
         }
 
         private void ShowCreditConditionInformation()
         {
-            TbkIdentifier.Text = applicableCondition.Identifier;
-            TbkIva.Text = applicableCondition.IsIvaApplied ? "Aplica IVA" : "";
+            TbkIdentifier.Text = BindedCondition.Identifier;
+            TbkIva.Text = BindedCondition.IsIvaApplied ? "Aplica IVA" : "";
 
             SpnPaymentMonths.Inlines.Clear();
-            SpnPaymentMonths.Inlines.Add(new Run(applicableCondition.PaymentMonths.ToString()));
+            SpnPaymentMonths.Inlines.Add(new Run(BindedCondition.PaymentMonths.ToString()));
 
             SpnInterestRate.Inlines.Clear();
-            SpnInterestRate.Inlines.Add(new Run((applicableCondition.InterestRate * 100).ToString("0.0")));
+            SpnInterestRate.Inlines.Add(new Run((BindedCondition.InterestRate * 100).ToString("0.0")));
 
-            double interestOnArrears = applicableCondition.InterestOnArrears * 100;
+            double interestOnArrears = BindedCondition.InterestOnArrears * 100;
             BldInterestOnArrears.Inlines.Clear();
             BldInterestOnArrears.Inlines.Add(new Run(interestOnArrears.ToString("0.0")));
 
-            double advancedPaymentReduction = applicableCondition.AdvancePaymentReduction * 100;
+            double advancedPaymentReduction = BindedCondition.AdvancePaymentReduction * 100;
             BldAdvancePaymentReduction.Inlines.Clear();
             BldAdvancePaymentReduction.Inlines.Add(new Run(advancedPaymentReduction.ToString("0.0")));
+        }
+
+        private void DisableCreditCondition()
+        {
+            BdrCreditConditionCard.Cursor = null;
+            BdrCreditConditionCard.Opacity = 0.5;
+            TbkInterestRate.Foreground = Brushes.Black;
+            TbkPaymentMonths.Foreground = Brushes.Black;
+        }
+
+        private void BdrCreditConditionCardMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if(BindedCondition.IsActive)
+            {
+                CardClick?.Invoke(this, BindedCondition);
+            }
         }
     }
 }

@@ -4,20 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 
 namespace SFIClient.Views
 {
@@ -133,8 +123,39 @@ namespace SFIClient.Views
             applicableCreditConditions.ForEach(conditon =>
             {
                 var creditConditionCard = new CreditApplicationCreditConditionControl(conditon);
+                creditConditionCard.CardClick += ApplicableCreditConditionClick;
+
                 SkpApplicableCreditConditions.Children.Add(creditConditionCard);
             });
+        }
+
+        private void ApplicableCreditConditionClick(object sender, CreditCondition selectedCondition)
+        {
+            foreach (var child in SkpApplicableCreditConditions.Children)
+            {
+                if (child is CreditApplicationCreditConditionControl creditConditionCard)
+                {
+
+                    if(creditConditionCard.BindedCondition.Identifier == selectedCondition.Identifier)
+                    {
+                        SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+                        SolidColorBrush lightGray = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ECECEC"));
+
+                        creditConditionCard.BdrCreditConditionCard.BorderBrush = primaryColor;
+                        creditConditionCard.BdrCreditConditionCard.Background = lightGray;
+
+                        //TODO: asignar condición seleccionada a crédito
+                    }
+                    else
+                    {
+                        SolidColorBrush defaultBorderColor = (SolidColorBrush)Application.Current.Resources["LightGray"];
+                        SolidColorBrush defaultBgColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FAFAFA"));
+
+                        creditConditionCard.BdrCreditConditionCard.BorderBrush = defaultBorderColor;
+                        creditConditionCard.BdrCreditConditionCard.Background = defaultBgColor;
+                    }
+                }
+            }
         }
 
         private void ShowErrorRecoveringCreditConditionsDialog(string message)

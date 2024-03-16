@@ -7,10 +7,13 @@
     mc:Ignorable="d" 
     d:DesignHeight="140" d:DesignWidth="700">
     <Border 
+        x:Name="BdrCreditConditionCard"
         Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
         BorderBrush="{StaticResource LightGray}"
         Padding="16"
-        Margin="0, 0, 0, 8">
+        Margin="0, 0, 0, 8"
+        Cursor="Hand" 
+        MouseLeftButtonUp="BdrCreditConditionCardMouseLeftButtonUp">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -45,11 +48,13 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock 
+                    x:Name="TbkPaymentMonths"
                     Grid.Column="0" Margin="0, 0, 24, 0" Foreground="{StaticResource PrimaryColor}"
                     Style="{StaticResource Title}" FontWeight="Bold">
                     <Span x:Name="SpnPaymentMonths">9</Span> meses
                 </TextBlock>
                 <TextBlock 
+                    x:Name="TbkInterestRate"
                     Grid.Column="1" Foreground="{StaticResource DarkPrimaryColor}"
                     Style="{StaticResource Title}" FontWeight="Bold">
                     <Span x:Name="SpnInterestRate">8</Span>% de interés
