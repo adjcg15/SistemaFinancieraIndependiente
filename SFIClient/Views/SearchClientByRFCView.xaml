@@ -13,7 +13,7 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                    <Button Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -23,12 +23,12 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
-                <Button Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>
+            <StackPanel Name="SkpRegisterClient" Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
+                <Button Name="BtnRegisterClient" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>
             </StackPanel>
 
             <!--Search client-->
-            <StackPanel Margin="40, 36, 40, 36">
+            <StackPanel Name="SkpSearchClient" Margin="40, 36, 40, 36">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -42,32 +42,50 @@
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=TxtRFCClient}" Value="">
+                                        <DataTrigger Binding="{Binding Text, ElementName=TbRFCClient}" Value="">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBox Margin ="0, 0, 10,0" Name="TxtRFCClient" Style="{StaticResource TextInput}"/>
+                        <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}"/>
                     </Grid>
-                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48"/>
+                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48"/>
                 </Grid>
-
             </StackPanel>
 
-            <!--Search client-->
-            <Grid Margin="27, 0, 27, 0">
-                <ItemsControl Name="icClients" HorizontalAlignment="Center">
+            <!--Clients-->
+            <Grid Name="GrdClients"  Margin="27, 0, 27, 0">
+                <ItemsControl Name="ItcClients" HorizontalAlignment="Center">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel IsItemsHost="True" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
+                <StackPanel Name="SkpNoRegisteredClients" Margin="0, 220, 0, 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/Assets/StackImage.png"/>
+                        <TextBlock Grid.Row="1"
+                            Foreground="{StaticResource DarkGray}" FontSize="24"
+                            Text="Aún no hay clientes registrados" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                        />
+                    </Grid>
+                </StackPanel>
             </Grid>
-
-
+            <StackPanel Name="SkpRegisterClientNow" Orientation="Horizontal" Margin="0, 10, 0, 0" HorizontalAlignment="Center">
+                <!--<Button Name="btnRegisterClientNow" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>-->
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

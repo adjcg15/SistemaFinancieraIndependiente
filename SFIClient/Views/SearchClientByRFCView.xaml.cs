@@ -24,10 +24,46 @@ namespace SFIClient.Views
         public SearchClientByRFCView()
         {
             InitializeComponent();
-            for (int i = 0; i < 15; i++)
+            AddClientsToClientsList();
+        }
+
+        private void AddClientsToClientsList()
+        {
+            int clientes = 0;
+            bool credit;
+
+            if (clientes > 0)
             {
-                ClientControll clienteControl = new ClientControll();
-                icClients.Items.Add(clienteControl);
+                credit = false;
+                SkpNoRegisteredClients.Visibility = Visibility.Collapsed;
+                SkpRegisterClientNow.Visibility = Visibility.Collapsed;
+                for (int i = 0; i < clientes; i++)
+                {
+                    ClientControll clienteControl = new ClientControll();
+                    ItcClients.Items.Add(clienteControl);
+                    if (i == 3)
+                    {
+                        credit = true;
+                    }
+                    if (credit)
+                    {
+                        BitmapImage bitmap = new BitmapImage(new Uri("pack://application:,,,/Assets/ApplyForCreditDisabledIcon.png"));
+                        Image image = new Image
+                        {
+                            Source = bitmap,
+                            Height = 25,
+                            Width = 34,
+                        };
+                        clienteControl.BtnApplyForCredit.Content = image;
+                    }
+                }
+            }
+            else
+            {
+                SkpRegisterClient.Children.Clear();
+                SkpRegisterClient.Visibility = Visibility.Collapsed;
+                SkpSearchClient.Visibility = Visibility.Collapsed;
+                SkpRegisterClientNow.Children.Add(BtnRegisterClient);
             }
         }
     }

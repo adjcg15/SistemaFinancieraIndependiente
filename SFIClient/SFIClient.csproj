@@ -172,7 +172,9 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\StackImage.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
   </ItemGroup>
@@ -181,6 +183,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Plus2Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\NoApplyForCreditIcon.png" />
+    <Resource Include="Assets\PersonalInformationIcon.png" />
+    <Resource Include="Assets\PersonalReferencesIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ApplyForCreditIcon.png" />
+    <Resource Include="Assets\BankAccountIcon.png" />
+    <Resource Include="Assets\WorkCenterIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ApplyForCreditDisabledIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
