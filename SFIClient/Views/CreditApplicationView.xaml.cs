@@ -11,6 +11,7 @@ using System.Reflection;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -18,11 +19,19 @@ namespace SFIClient.Views
 {
     public partial class CredditApplicationController : Page
     {
-        private readonly Client requestingClient;
+        private Client requestingClient;
         private string lastRequestedAmount = string.Empty;
         private string lastMinimumAcceptedAmount = string.Empty;
         private readonly CreditApplication newApplication = new CreditApplication();
-        private List<DigitalDocument> attachedDocuments = new List<DigitalDocument>();
+        private readonly List<DigitalDocument> attachedDocuments = new List<DigitalDocument>();
+
+        public CredditApplicationController()
+        {
+            InitializeComponent();
+
+            LoadCreditTypes();
+            ShowClientInformation();
+        }
 
         public CredditApplicationController(Client requestingClient)
         {
@@ -90,13 +99,26 @@ namespace SFIClient.Views
 
         private void ShowClientInformation()
         {
+            //TODO: remover asignación del ciente
+            requestingClient = new Client();
+            requestingClient.Name = "Ángel";
+            requestingClient.Surname = "De la cruz";
+            requestingClient.LastName = "García";
+            requestingClient.Curp = "CUGA010415HVZRRNA2";
+            requestingClient.Rfc = "MALJ800515K1A";
 
+            TbkClientName.Text = $"{requestingClient.Name} {requestingClient.Surname} {requestingClient.LastName}";
+            SpnClientCurp.Inlines.Add(new Run(requestingClient.Curp));
+            //BldClientSalary.Inlines.Add(new Run(requestingClient.WorkCenter.Salary));
+            //SpnClientWorkCenterName.Inlines.Add(new Run(requestingClient.WorkCenter.companyName));
         }
 
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(CbCreditTypes.SelectedIndex != -1)
             {
+                newApplication.CreditCondition = null;
+
                 CreditType selectedCreditType = (CreditType)CbCreditTypes.SelectedItem;
                 newApplication.CreditType = selectedCreditType;
                 LoadCreditConditionsByCreditType(selectedCreditType.Identifier);
@@ -239,6 +261,7 @@ namespace SFIClient.Views
         {
             bool isValidApplication = VerifyCreditApplicationInformation();
 
+            Console.WriteLine($"Hay {attachedDocuments.Count} documentos adjuntos");
             if(isValidApplication)
             {
                 ShowApplicationGenerationConfirmationDialog();
@@ -294,6 +317,9 @@ namespace SFIClient.Views
                     ineFile.Name = FileToolkit.GenerateDefaultIneName(requestingClient);
                     ineFile.Format = FileToolkit.INE;
 
+                    BtnAttachIne.Visibility = Visibility.Hidden;
+                    BtnDetachIne.Content = ineFile.Name;
+                    BtnDetachIne.Visibility = Visibility.Visible;
                     attachedDocuments.Add(ineFile);
                 }
             }
@@ -301,7 +327,12 @@ namespace SFIClient.Views
 
         private void BtnDetachIneClick(object sender, RoutedEventArgs e)
         {
+            attachedDocuments.RemoveAll(
+                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultIneName(requestingClient)
+            );
 
+            BtnAttachIne.Visibility = Visibility.Visible;
+            BtnDetachIne.Visibility = Visibility.Hidden;
         }
 
         private void BtnAttachProofOfAddressClick(object sender, RoutedEventArgs e)
@@ -327,9 +358,22 @@ namespace SFIClient.Views
                     proofOfAddressFile.Name = FileToolkit.GenerateDefaultAddressDocumentName(requestingClient);
                     proofOfAddressFile.Format = FileToolkit.PROOF_ADDRESS;
 
+                    BtnAttachProofOfAddress.Visibility = Visibility.Hidden;
+                    BtnDetachProofOfAddress.Content = proofOfAddressFile.Name;
+                    BtnDetachProofOfAddress.Visibility = Visibility.Visible;
                     attachedDocuments.Add(proofOfAddressFile);
                 }
             }
+        }
+
+        private void BtnDetachProofOfAddressClick(object sender, RoutedEventArgs e)
+        {
+            attachedDocuments.RemoveAll(
+                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultAddressDocumentName(requestingClient)
+            );
+
+            BtnAttachProofOfAddress.Visibility = Visibility.Visible;
+            BtnDetachProofOfAddress.Visibility = Visibility.Hidden;
         }
 
         private void BtnAttachProofOfIncomeClick(object sender, RoutedEventArgs e)
@@ -355,9 +399,22 @@ namespace SFIClient.Views
                     proofOfIncomeFile.Name = FileToolkit.GenerateDefaultIncomeDocumentName(requestingClient);
                     proofOfIncomeFile.Format = FileToolkit.PROOF_INCOME;
 
+                    BtnAttachProofOfIncome.Visibility = Visibility.Hidden;
+                    BtnDetachProofOfIncome.Content = proofOfIncomeFile.Name;
+                    BtnDetachProofOfIncome.Visibility = Visibility.Visible;
                     attachedDocuments.Add(proofOfIncomeFile);
                 }
             }
+        }
+
+        private void BtnDetachProofOfIncomeClick(object sender, RoutedEventArgs e)
+        {
+            attachedDocuments.RemoveAll(
+                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultIncomeDocumentName(requestingClient)
+            );
+
+            BtnAttachProofOfIncome.Visibility = Visibility.Visible;
+            BtnDetachProofOfIncome.Visibility = Visibility.Hidden;
         }
 
         private void ShowFileOutsizedWarningDialog()
