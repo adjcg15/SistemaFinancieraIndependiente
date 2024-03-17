@@ -51,6 +51,15 @@
   <wsdl:message name="IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IClientsService_UpdateBankAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBankAccount" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_UpdateBankAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBankAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_UpdateBankAccount_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q4:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
@@ -68,6 +77,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetails" message="tns:IClientsService_RecoverBankDetails_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetailsResponse" message="tns:IClientsService_RecoverBankDetails_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetailsServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBankAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/UpdateBankAccount" message="tns:IClientsService_UpdateBankAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/UpdateBankAccountResponse" message="tns:IClientsService_UpdateBankAccount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/UpdateBankAccountServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_UpdateBankAccount_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -103,6 +117,18 @@
     </wsdl:operation>
     <wsdl:operation name="RecoverBankDetails">
       <soap12:operation soapAction="http://tempuri.org/IClientsService/RecoverBankDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBankAccount">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/UpdateBankAccount" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

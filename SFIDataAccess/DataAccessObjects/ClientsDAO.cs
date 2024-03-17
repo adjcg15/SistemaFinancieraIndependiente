@@ -2,8 +2,10 @@
 using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -104,6 +106,44 @@ namespace SFIDataAccess.DataAccessObjects
             }
 
             return bankAccount;
+        }
+
+        public static bool UpdateBankAccount(BankAccount bankAccount, string cardNumber)
+        {
+            bool success;
+            try
+            {
+                using (var dbContext = new SFIDatabaseContext())
+                {
+                    var currentCardNumberParam = new SqlParameter("@CurrentCardNumber", cardNumber);
+                    var newBankParam = new SqlParameter("@NewBank", bankAccount.Bank);
+                    var newHolderParam = new SqlParameter("@NewHolder", bankAccount.Holder);
+                    var newCardNumberParam = new SqlParameter("@NewCardNumber", bankAccount.Card_number);
+
+                    var successParam = new SqlParameter("@Success", SqlDbType.Bit);
+                    successParam.Direction = ParameterDirection.Output;
+
+                    dbContext.Database.ExecuteSqlCommand(
+                        "EXEC UpdateBankAccount @CurrentCardNumber, @NewBank, @NewHolder, @NewCardNumber, @Success OUTPUT",
+                        currentCardNumberParam, newBankParam, newHolderParam, newCardNumberParam, successParam);
+
+                    success = (bool)successParam.Value;
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+
+            return success;
         }
     }
 }

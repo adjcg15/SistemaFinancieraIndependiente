@@ -22,8 +22,9 @@ namespace SFIClient.Views
     /// </summary>
     public partial class ModifyBankAccountView : Page
     {
-        ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
-        private string carNumber;
+        readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
+        BankAccount bankAccount = new BankAccount();
+        private readonly string carNumber;
         public ModifyBankAccountView(Client client)
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace SFIClient.Views
         {
             try
             {
-                BankAccount bankAccount = clientsServiceClient.RecoverBankDetails(carNumber);
+                bankAccount = clientsServiceClient.RecoverBankDetails(carNumber);
                 TbCardNumber.Text = bankAccount.Card_number;
                 TbHolder.Text = bankAccount.Holder;
                 TbBank.Text = bankAccount.Bank;
@@ -90,7 +91,49 @@ namespace SFIClient.Views
 
         private void BtnUpdateDataClick(object sender, RoutedEventArgs e)
         {
+            bool updateData;
+            BankAccount newBankAccount = new BankAccount();
+            newBankAccount.Card_number = TbCardNumber.Text.Trim();
+            newBankAccount.Bank = TbBank.Text.Trim();
+            newBankAccount.Holder = TbHolder.Text.Trim();
+           
+            updateData = UpdateBankAccount(newBankAccount);
+            if (updateData)
+            {
+                MessageBox.Show("Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente");
+                SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                this.NavigationService.Navigate(searchClientByRFCView);
+            }
+            else
+            {
+                MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información");
+            }
+        }
 
+        private bool UpdateBankAccount(BankAccount bankAccount)
+        {
+            bool updateBankAccount = false;
+            try
+            {
+                updateBankAccount = clientsServiceClient.UpdateBankAccount(bankAccount, carNumber);
+                
+            }
+            catch (FaultException fe)
+            {
+                MessageBox.Show(fe.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                //TODO Redirect To Main Menu
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                //TODO Redirect To Main Menu
+            }
+
+            return updateBankAccount;
         }
     }
 }

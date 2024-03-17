@@ -466,6 +466,13 @@ namespace SFIClient.SFIService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverBankDetails", ReplyAction="http://tempuri.org/IClientsService/RecoverBankDetailsResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIService.BankAccount> RecoverBankDetailsAsync(string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateBankAccount", ReplyAction="http://tempuri.org/IClientsService/UpdateBankAccountResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIService.ServiceFault), Action="http://tempuri.org/IClientsService/UpdateBankAccountServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool UpdateBankAccount(SFIClient.SFIService.BankAccount bankAccount, string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateBankAccount", ReplyAction="http://tempuri.org/IClientsService/UpdateBankAccountResponse")]
+        System.Threading.Tasks.Task<bool> UpdateBankAccountAsync(SFIClient.SFIService.BankAccount bankAccount, string cardNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -509,6 +516,14 @@ namespace SFIClient.SFIService {
         
         public System.Threading.Tasks.Task<SFIClient.SFIService.BankAccount> RecoverBankDetailsAsync(string cardNumber) {
             return base.Channel.RecoverBankDetailsAsync(cardNumber);
+        }
+        
+        public bool UpdateBankAccount(SFIClient.SFIService.BankAccount bankAccount, string cardNumber) {
+            return base.Channel.UpdateBankAccount(bankAccount, cardNumber);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateBankAccountAsync(SFIClient.SFIService.BankAccount bankAccount, string cardNumber) {
+            return base.Channel.UpdateBankAccountAsync(bankAccount, cardNumber);
         }
     }
 }

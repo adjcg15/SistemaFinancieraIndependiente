@@ -19,5 +19,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         BankAccount RecoverBankDetails(string cardNumber);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool UpdateBankAccount(BankAccount bankAccount, string cardNumber);
     }
 }

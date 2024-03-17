@@ -150,5 +150,26 @@ namespace SFIDataAccess
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual int UpdateBankAccount(string currentCardNumber, string newBank, string newHolder, string newCardNumber, ObjectParameter success)
+        {
+            var currentCardNumberParameter = currentCardNumber != null ?
+                new ObjectParameter("CurrentCardNumber", currentCardNumber) :
+                new ObjectParameter("CurrentCardNumber", typeof(string));
+    
+            var newBankParameter = newBank != null ?
+                new ObjectParameter("NewBank", newBank) :
+                new ObjectParameter("NewBank", typeof(string));
+    
+            var newHolderParameter = newHolder != null ?
+                new ObjectParameter("NewHolder", newHolder) :
+                new ObjectParameter("NewHolder", typeof(string));
+    
+            var newCardNumberParameter = newCardNumber != null ?
+                new ObjectParameter("NewCardNumber", newCardNumber) :
+                new ObjectParameter("NewCardNumber", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateBankAccount", currentCardNumberParameter, newBankParameter, newHolderParameter, newCardNumberParameter, success);
+        }
     }
 }

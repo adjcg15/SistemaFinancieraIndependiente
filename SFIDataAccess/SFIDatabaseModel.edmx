@@ -558,6 +558,13 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateBankAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CurrentCardNumber" Type="varchar" Mode="In" />
+          <Parameter Name="NewBank" Type="varchar" Mode="In" />
+          <Parameter Name="NewHolder" Type="varchar" Mode="In" />
+          <Parameter Name="NewCardNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+        </Function>
         <EntityContainer Name="SFIDatabaseModelStoreContainer">
           <EntitySet Name="addresses" EntityType="Self.addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" Schema="dbo" store:Type="Tables" />
@@ -1417,6 +1424,13 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateBankAccount">
+            <Parameter Name="CurrentCardNumber" Mode="In" Type="String" />
+            <Parameter Name="NewBank" Mode="In" Type="String" />
+            <Parameter Name="NewHolder" Mode="In" Type="String" />
+            <Parameter Name="NewCardNumber" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1689,6 +1703,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SFIDatabaseModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SFIDatabaseModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateBankAccount" FunctionName="SFIDatabaseModel.Store.UpdateBankAccount" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
