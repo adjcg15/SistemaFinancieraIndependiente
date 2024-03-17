@@ -158,5 +158,11 @@
   <ItemGroup>
     <Folder Include="Controlls\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFIServices\SFIServices.csproj">
+      <Project>{37cc850a-16b5-488e-9c64-bd7a65db1e7b}</Project>
+      <Name>SFIServices</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
