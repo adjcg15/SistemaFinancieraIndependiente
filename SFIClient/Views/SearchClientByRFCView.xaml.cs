@@ -133,6 +133,20 @@ namespace SFIClient.Views
         private void BtnModifyBankAccountClick(object sender, EventArgs e)
         {
             ClientControll clientControll = (ClientControll)sender;
+            Client client = new Client();
+            for (int i = 0; i < clientsList.Count; i++)
+            {
+                if (clientsList[i].Rfc == clientControll.LblClientRFC.Content.ToString())
+                {
+                    client = clientsList[i];
+                    break;
+                }
+            }
+            if (client != null)
+            {
+                ModifyBankAccountView modifyBankAccountView = new ModifyBankAccountView(client);
+                this.NavigationService.Navigate(modifyBankAccountView);
+            }
         }
 
         private void BtnModifyPersonalInformationClick(object sender, EventArgs e)
@@ -169,6 +183,11 @@ namespace SFIClient.Views
                     ItcClients.Items.Add(clientControll);
                 }
             }
+        }
+
+        private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

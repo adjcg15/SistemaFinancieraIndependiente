@@ -140,6 +140,9 @@
     <None Include="Connected Services\SFIService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\SFIService\SFIClient.SFIService.BankAccount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\SFIService\SFIClient.SFIService.Client.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

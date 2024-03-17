@@ -324,6 +324,83 @@ namespace SFIClient.SFIService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BankAccount", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class BankAccount : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BankField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Card_numberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HolderField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Bank {
+            get {
+                return this.BankField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BankField, value) != true)) {
+                    this.BankField = value;
+                    this.RaisePropertyChanged("Bank");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Card_number {
+            get {
+                return this.Card_numberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Card_numberField, value) != true)) {
+                    this.Card_numberField = value;
+                    this.RaisePropertyChanged("Card_number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Holder {
+            get {
+                return this.HolderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HolderField, value) != true)) {
+                    this.HolderField = value;
+                    this.RaisePropertyChanged("Holder");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIService.IServiceExample")]
     public interface IServiceExample {
@@ -383,11 +460,12 @@ namespace SFIClient.SFIService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverClients", ReplyAction="http://tempuri.org/IClientsService/RecoverClientsResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIService.Client[]> RecoverClientsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/NoHagoNada", ReplyAction="http://tempuri.org/IClientsService/NoHagoNadaResponse")]
-        void NoHagoNada();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverBankDetails", ReplyAction="http://tempuri.org/IClientsService/RecoverBankDetailsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIService.ServiceFault), Action="http://tempuri.org/IClientsService/RecoverBankDetailsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIService.BankAccount RecoverBankDetails(string cardNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/NoHagoNada", ReplyAction="http://tempuri.org/IClientsService/NoHagoNadaResponse")]
-        System.Threading.Tasks.Task NoHagoNadaAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverBankDetails", ReplyAction="http://tempuri.org/IClientsService/RecoverBankDetailsResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIService.BankAccount> RecoverBankDetailsAsync(string cardNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -425,12 +503,12 @@ namespace SFIClient.SFIService {
             return base.Channel.RecoverClientsAsync();
         }
         
-        public void NoHagoNada() {
-            base.Channel.NoHagoNada();
+        public SFIClient.SFIService.BankAccount RecoverBankDetails(string cardNumber) {
+            return base.Channel.RecoverBankDetails(cardNumber);
         }
         
-        public System.Threading.Tasks.Task NoHagoNadaAsync() {
-            return base.Channel.NoHagoNadaAsync();
+        public System.Threading.Tasks.Task<SFIClient.SFIService.BankAccount> RecoverBankDetailsAsync(string cardNumber) {
+            return base.Channel.RecoverBankDetailsAsync(cardNumber);
         }
     }
 }

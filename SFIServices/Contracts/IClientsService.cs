@@ -17,6 +17,7 @@ namespace SFIServices.Contracts
         List<Client> RecoverClients();
 
         [OperationContract]
-        void NoHagoNada();
+        [FaultContract(typeof(ServiceFault))]
+        BankAccount RecoverBankDetails(string cardNumber);
     }
 }

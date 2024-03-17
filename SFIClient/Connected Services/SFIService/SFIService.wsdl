@@ -42,11 +42,14 @@
   <wsdl:message name="IClientsService_RecoverClients_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
-  <wsdl:message name="IClientsService_NoHagoNada_InputMessage">
-    <wsdl:part name="parameters" element="tns:NoHagoNada" />
+  <wsdl:message name="IClientsService_RecoverBankDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverBankDetails" />
   </wsdl:message>
-  <wsdl:message name="IClientsService_NoHagoNada_OutputMessage">
-    <wsdl:part name="parameters" element="tns:NoHagoNadaResponse" />
+  <wsdl:message name="IClientsService_RecoverBankDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverBankDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
@@ -61,9 +64,10 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverClientsResponse" message="tns:IClientsService_RecoverClients_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverClientsServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverClients_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NoHagoNada">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/NoHagoNada" message="tns:IClientsService_NoHagoNada_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/NoHagoNadaResponse" message="tns:IClientsService_NoHagoNada_OutputMessage" />
+    <wsdl:operation name="RecoverBankDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetails" message="tns:IClientsService_RecoverBankDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetailsResponse" message="tns:IClientsService_RecoverBankDetails_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetailsServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -97,14 +101,17 @@
         <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="NoHagoNada">
-      <soap12:operation soapAction="http://tempuri.org/IClientsService/NoHagoNada" style="document" />
+    <wsdl:operation name="RecoverBankDetails">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/RecoverBankDetails" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SFIService">

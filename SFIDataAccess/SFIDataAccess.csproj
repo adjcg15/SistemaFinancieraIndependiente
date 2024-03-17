@@ -99,6 +99,7 @@
     <Compile Include="employee_roles.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\DataTypeExample.cs" />
     <Compile Include="personal_references.cs">

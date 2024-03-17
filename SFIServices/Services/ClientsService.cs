@@ -22,5 +22,10 @@ namespace SFIServices
         { 
             return ClientsDAO.RecoverClients();
         }
+
+        public BankAccount RecoverBankDetails(string cardNumber)
+        {
+            return ClientsDAO.RecoverBankDetails(cardNumber);
+        }
     }
 }

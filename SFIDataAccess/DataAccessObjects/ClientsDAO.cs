@@ -70,5 +70,40 @@ namespace SFIDataAccess.DataAccessObjects
 
             return clientsList;
         }
+
+        public static BankAccount RecoverBankDetails(string cardNumber)
+        {
+            BankAccount bankAccount = new BankAccount();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var account = (from bankaccount in context.bank_accounts
+                                       where bankaccount.card_number == cardNumber
+                                       select bankaccount).FirstOrDefault();
+                    if (account != null)
+                    {
+                        bankAccount.Card_number = account.card_number;
+                        bankAccount.Bank = account.bank;
+                        bankAccount.Holder = account.holder;
+                    }
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+
+            return bankAccount;
+        }
     }
 }
