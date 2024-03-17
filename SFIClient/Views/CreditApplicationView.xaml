@@ -75,10 +75,17 @@
                             Tipo de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="29*"/>
-                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito" TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedItem, ElementName=CbCreditTypes}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                             <ComboBox 
                                 SelectionChanged="CbCreditTypesSelectionChanged" 
                                 Name="CbCreditTypes" 
@@ -257,7 +264,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock FontSize="16" FontWeight="bold">
-                            Condiciones de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            <Span x:Name="SpnCreditConditionLabel">Condiciones de crédito</Span> 
+                            <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
 
                         <!--Empty list message-->

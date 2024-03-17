@@ -23,6 +23,7 @@ namespace SFIClient.Views
         private string lastMinimumAcceptedAmount = string.Empty;
         private readonly CreditApplication newApplication = new CreditApplication();
         private readonly List<DigitalDocument> attachedDocuments = new List<DigitalDocument>();
+        private CreditsServiceClient creditsService;
 
         public CredditApplicationController()
         {
@@ -44,8 +45,8 @@ namespace SFIClient.Views
 
         private void LoadCreditTypes()
         {
-            CreditsServiceClient creditsService = new CreditsServiceClient();
-            
+            creditsService = new CreditsServiceClient();
+
             try
             {
                 List<CreditType> creditTypesRecovered = creditsService.GetAllCreditTypes().ToList();
@@ -216,7 +217,7 @@ namespace SFIClient.Views
 
             if (isWritingNewAmmount)
             {
-                if (newAmount != string.Empty && !IsValidMoneyAmount(newAmount))
+                if (newAmount != string.Empty && !DataValidator.IsValidMoneyAmount(newAmount))
                 {
                     TbRequestedAmount.Text = lastRequestedAmount;
                     TbRequestedAmount.CaretIndex = TbRequestedAmount.Text.Length;
@@ -235,7 +236,7 @@ namespace SFIClient.Views
 
             if (isWritingNewAmmount)
             {
-                if (newAmount != string.Empty && !IsValidMoneyAmount(newAmount))
+                if (newAmount != string.Empty && !DataValidator.IsValidMoneyAmount(newAmount))
                 {
                     TbMinimumAcceptedAmount.Text = lastMinimumAcceptedAmount;
                     TbMinimumAcceptedAmount.CaretIndex = TbMinimumAcceptedAmount.Text.Length;
@@ -247,25 +248,16 @@ namespace SFIClient.Views
             }
         }
 
-        //TODO: ver si se puede crear un helper
-        private bool IsValidMoneyAmount(string amount)
-        {
-            return amount.Length <= 7 
-                && double.TryParse(amount, out double result) 
-                && result >= 0 
-                && result <= 1000000;
-        }
-
         private void BtnGenerateCreditApplicationClick(object sender, RoutedEventArgs e)
         {
-            newApplication.DigitalDocuments = this.attachedDocuments.ToArray();
-            newApplication.RequestedAmount = decimal.Parse(TbRequestedAmount.Text);
-            newApplication.MinimumAmountAccepted = decimal.Parse(TbMinimumAcceptedAmount.Text);
-            newApplication.Purpose = TbCreditPurpose.Text;
-
             bool isValidApplication = VerifyCreditApplicationInformation();
             if(isValidApplication)
             {
+                newApplication.DigitalDocuments = attachedDocuments.ToArray();
+                newApplication.RequestedAmount = decimal.Parse(TbRequestedAmount.Text);
+                newApplication.MinimumAmountAccepted = decimal.Parse(TbMinimumAcceptedAmount.Text);
+                newApplication.Purpose = TbCreditPurpose.Text.Trim();
+
                 ShowApplicationGenerationConfirmationDialog();
             }
             else
@@ -286,7 +278,27 @@ namespace SFIClient.Views
 
             if (isValidApplication)
             {
-                isValidApplication = newApplication.CreditType != null;
+                isValidApplication = TbRequestedAmount.Text != "";
+            }
+
+            if (isValidApplication)
+            {
+                isValidApplication = TbMinimumAcceptedAmount.Text != "";
+            }
+
+            if (isValidApplication)
+            {
+                isValidApplication = TbCreditPurpose.Text.Trim() != "";
+            }
+
+            if (isValidApplication)
+            {
+                isValidApplication = attachedDocuments.Count == 3;
+            }
+
+            if (isValidApplication)
+            {
+                isValidApplication = newApplication.CreditCondition != null;
             }
 
             return isValidApplication;
@@ -294,20 +306,80 @@ namespace SFIClient.Views
 
         private void HighlightInvalidFields()
         {
+            Style comboBoxDefaultStyle = (Style)FindResource("ComboBox");
+            Style textInputDefaultStyle = (Style)FindResource("TextInput");
+            Style fileUploaderDefaultStyle = (Style)FindResource("FileUploader");
 
+            Style comboBoxErrorStyle = (Style)FindResource("ComboBoxError");
+            Style textInputErrorStyle = (Style)FindResource("TextInputError");
+            Style fileUploadertErrorStyle = (Style)FindResource("FileUploaderError");
+
+            CbCreditTypes.Style = comboBoxDefaultStyle;
+            TbRequestedAmount.Style = textInputDefaultStyle;
+            TbMinimumAcceptedAmount.Style = textInputDefaultStyle;
+            TbCreditPurpose.Style = textInputDefaultStyle;
+            BtnAttachIne.Style = fileUploaderDefaultStyle;
+            BtnAttachProofOfAddress.Style = fileUploaderDefaultStyle;
+            BtnAttachProofOfIncome.Style = fileUploaderDefaultStyle;
+            SpnCreditConditionLabel.Foreground = Brushes.Black;
+
+            if (newApplication.CreditType == null)
+            {
+                CbCreditTypes.Style = comboBoxErrorStyle;
+            }
+
+            if (TbRequestedAmount.Text == "")
+            {
+                TbRequestedAmount.Style = textInputErrorStyle;
+            }
+
+            if (TbMinimumAcceptedAmount.Text == "")
+            {
+                TbMinimumAcceptedAmount.Style = textInputErrorStyle;
+            }
+
+            if (TbCreditPurpose.Text.Trim() == "")
+            {
+                TbCreditPurpose.Style = textInputErrorStyle;
+            }
+
+            if (!attachedDocuments.Any(document => document.Name == FileToolkit.GenerateDefaultIneName(newApplication.Client)))
+            {
+                BtnAttachIne.Style = fileUploadertErrorStyle;
+            }
+
+            if (!attachedDocuments.Any(document => document.Name == FileToolkit.GenerateDefaultAddressDocumentName(newApplication.Client)))
+            {
+                BtnAttachProofOfAddress.Style = fileUploadertErrorStyle;
+            }
+
+            if (!attachedDocuments.Any(document => document.Name == FileToolkit.GenerateDefaultIncomeDocumentName(newApplication.Client)))
+            {
+                BtnAttachProofOfIncome.Style = fileUploadertErrorStyle;
+            }
+
+            if (newApplication.CreditCondition == null)
+            {
+                SpnCreditConditionLabel.Foreground = (SolidColorBrush)FindResource("Red");
+            }
         }
 
         private void ShowInvalidFieldsAlertDialog()
         {
-
+            MessageBox.Show(
+                "Por favor ingrese información en los campos marcados con rojo",
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
 
         private void ShowApplicationGenerationConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                $"“¿Desea generar la solicitud de crédito por cantidad aspiradaMXN, " +
-                $"bajo las condiciones de crédito identificador de condición de crédito, " +
-                $"para el cliente nombre del cliente?",
+                $"¿Desea generar la solicitud de crédito por {newApplication.RequestedAmount}MXN, " +
+                $"bajo las condiciones de crédito {newApplication.CreditCondition.Identifier}, " +
+                $"para el cliente {newApplication.Client.Name} {newApplication.Client.Surname} {newApplication.Client.LastName}?",
                 "Confirme el registro de la solicitud",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
@@ -315,12 +387,13 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                
+                RegisterCreditApplication();
             }
-            else if (buttonClicked == MessageBoxResult.No)
-            {
+        }
 
-            }
+        private void RegisterCreditApplication()
+        {
+
         }
 
         private void BtnAttachIneClick(object sender, RoutedEventArgs e)
