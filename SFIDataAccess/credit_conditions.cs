@@ -21,7 +21,7 @@ namespace SFIDataAccess
             this.regimes = new HashSet<regime>();
         }
     
-        public int identifier { get; set; }
+        public string identifier { get; set; }
         public double interest_rate { get; set; }
         public bool is_active { get; set; }
         public bool is_iva_applied { get; set; }

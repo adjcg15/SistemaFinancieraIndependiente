@@ -1,4 +1,4 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.SFIService;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DataTypeExample">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsExample" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataTypeExample" nillable="true" type="tns:DataTypeExample" />
+  <xs:complexType name="ArrayOfClient">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Client" nillable="true" type="tns:Client" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClient" nillable="true" type="tns:ArrayOfClient" />
+  <xs:complexType name="Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Birthdate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Card_number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Curp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Has_active_credit" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Has_credit_application" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id_address" type="xs:int" />
+      <xs:element minOccurs="0" name="Id_work_center" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rfc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Client" nillable="true" type="tns:Client" />
+</xs:schema>

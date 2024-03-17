@@ -1,4 +1,5 @@
-﻿using SFIDataAccess.Model;
+﻿using SFIDataAccess.CustomExceptions;
+using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace SFIServices.Contracts
     public interface IClientsService
     {
         [OperationContract]
-        Client RecoverClients();
+        [FaultContract(typeof(ServiceFault))]
+        List<Client> RecoverClients();
+
+        [OperationContract]
+        void NoHagoNada();
     }
 }

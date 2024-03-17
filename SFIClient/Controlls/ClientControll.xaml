@@ -11,7 +11,7 @@
             <Label Name="LblClientName" HorizontalAlignment="Left" Margin="15,43,0,0" Content="Aguilar López Rodrigo" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
             <Button Style="{StaticResource SeeMoreBtn}" Margin="330,10,10,184" Content="Ver más" Width="86" Height="33"/>
             <Label Name="LblClientCreditStatus" HorizontalAlignment="Left" Margin="15,68,0,0" Content="Cliente con crédito en curso" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
-            <Label Name="LblClientCreditStatus_Copiar" HorizontalAlignment="Left" Margin="15,139,0,0" Content="Otras opciones" VerticalAlignment="Top" Width="99" Height="29" FontSize="13" Foreground="{StaticResource DarkPrimaryColor}"/>
+            <Label HorizontalAlignment="Left" Margin="15,139,0,0" Content="Otras opciones" VerticalAlignment="Top" Width="99" Height="29" FontSize="13" Foreground="{StaticResource DarkPrimaryColor}"/>
             <Button Name="BtnModifyBankAccount" Style="{StaticResource NoHoverStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="20,180,372,22">
                 <Button.ToolTip>
                     <ToolTip>

@@ -1,18 +1,26 @@
-﻿using SFIDataAccess.Model;
+﻿using SFIDataAccess.CustomExceptions;
+using SFIDataAccess.DataAccessObjects;
+using SFIDataAccess.Model;
 using SFIServices.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SFIServices.Services
+namespace SFIServices
 {
     public partial class SFIService : IClientsService
     {
-        public Client RecoverClients()
+        public void NoHagoNada()
         {
             
+        }
+
+        public List<Client> RecoverClients()
+        { 
+            return ClientsDAO.RecoverClients();
         }
     }
 }

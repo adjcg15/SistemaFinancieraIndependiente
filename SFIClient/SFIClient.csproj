@@ -57,7 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\SFIServices\Reference.cs">
+    <Compile Include="Connected Services\SFIService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -121,19 +121,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\SFIServices\item.xsd">
+    <None Include="Connected Services\SFIService\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SFIServices\item1.xsd">
+    <None Include="Connected Services\SFIService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SFIServices\item2.xsd">
+    <None Include="Connected Services\SFIService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.DataTypeExample.datasource">
+    <None Include="Connected Services\SFIService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SFIService\SFIClient.SFIService.Client.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\SFIServices\SFIService.wsdl" />
+    <None Include="Connected Services\SFIService\SFIClient.SFIService.DataTypeExample.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SFIService\SFIService.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,24 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\SFIServices\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\PlusIcon.png" />
@@ -196,6 +184,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\ApplyForCreditDisabledIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SFIService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIService\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

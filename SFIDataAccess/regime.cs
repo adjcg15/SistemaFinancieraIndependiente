@@ -17,7 +17,7 @@ namespace SFIDataAccess
         public int id_regime { get; set; }
         public System.DateTime application_end_date { get; set; }
         public System.DateTime application_start_date { get; set; }
-        public int credit_conditions_identifier { get; set; }
+        public string credit_conditions_identifier { get; set; }
         public string credit_invoice { get; set; }
     
         public virtual credit_conditions credit_conditions { get; set; }

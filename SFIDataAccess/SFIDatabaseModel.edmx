@@ -72,7 +72,7 @@
           <Property Name="id_credit_application_state" Type="int" Nullable="false" />
           <Property Name="id_dictum" Type="int" Nullable="false" />
           <Property Name="employee_number" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="credit_condition_identifier" Type="int" Nullable="false" />
+          <Property Name="credit_condition_identifier" Type="char" MaxLength="18" Nullable="false" />
           <Property Name="id_credit_type" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="credit_applications_state">
@@ -86,7 +86,7 @@
           <Key>
             <PropertyRef Name="identifier" />
           </Key>
-          <Property Name="identifier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="identifier" Type="char" MaxLength="18" Nullable="false" />
           <Property Name="interest_rate" Type="float" Nullable="false" />
           <Property Name="is_active" Type="bit" Nullable="false" />
           <Property Name="is_iva_applied" Type="bit" Nullable="false" />
@@ -178,7 +178,7 @@
           <Property Name="id_regime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="application_end_date" Type="date" Nullable="false" />
           <Property Name="application_start_date" Type="date" Nullable="false" />
-          <Property Name="credit_conditions_identifier" Type="int" Nullable="false" />
+          <Property Name="credit_conditions_identifier" Type="char" MaxLength="18" Nullable="false" />
           <Property Name="credit_invoice" Type="char" MaxLength="18" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -771,7 +771,7 @@
           <Property Name="id_credit_application_state" Type="Int32" Nullable="false" />
           <Property Name="id_dictum" Type="Int32" Nullable="false" />
           <Property Name="employee_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="credit_condition_identifier" Type="Int32" Nullable="false" />
+          <Property Name="credit_condition_identifier" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="id_credit_type" Type="Int32" Nullable="false" />
           <NavigationProperty Name="client" Relationship="Self.FK_credit_applications_clients" FromRole="credit_applications" ToRole="clients" />
           <NavigationProperty Name="credit_applications_state" Relationship="Self.FK_credit_applications_credit_applications_state" FromRole="credit_applications" ToRole="credit_applications_state" />
@@ -794,7 +794,7 @@
           <Key>
             <PropertyRef Name="identifier" />
           </Key>
-          <Property Name="identifier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="identifier" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="interest_rate" Type="Double" Nullable="false" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
           <Property Name="is_iva_applied" Type="Boolean" Nullable="false" />
@@ -907,7 +907,7 @@
           <Property Name="id_regime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="application_end_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="application_start_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="credit_conditions_identifier" Type="Int32" Nullable="false" />
+          <Property Name="credit_conditions_identifier" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="credit_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="credit_conditions" Relationship="Self.FK_regimes_credit_conditions" FromRole="regimes" ToRole="credit_conditions" />
           <NavigationProperty Name="credit" Relationship="Self.FK_regimes_credits" FromRole="regimes" ToRole="credits" />

@@ -36,5 +36,11 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public string Card_number { get; set; }
+
+        [DataMember]
+        public bool Has_credit_application { get; set; }
+
+        [DataMember]
+        public bool Has_active_credit {  get; set; }
     }
 }
