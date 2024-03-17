@@ -13,7 +13,7 @@ namespace SFIServices
     {
         public void RegisterPolicyGranting(PolicyGranting NewPolicy)
         {
-            PolicysDAO.RegisterPolicyGranting(NewPolicy);
+            PolicyGrantingDAO.RegisterPolicyGranting(NewPolicy);
         }
     }
 }
