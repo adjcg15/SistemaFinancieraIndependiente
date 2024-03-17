@@ -19,7 +19,6 @@ namespace SFIClient.Views
 {
     public partial class CredditApplicationController : Page
     {
-        private Client requestingClient;
         private string lastRequestedAmount = string.Empty;
         private string lastMinimumAcceptedAmount = string.Empty;
         private readonly CreditApplication newApplication = new CreditApplication();
@@ -37,7 +36,7 @@ namespace SFIClient.Views
         {
             InitializeComponent();
 
-            this.requestingClient = requestingClient;
+            newApplication.Client = requestingClient;
 
             LoadCreditTypes();
             ShowClientInformation();
@@ -99,18 +98,18 @@ namespace SFIClient.Views
 
         private void ShowClientInformation()
         {
-            //TODO: remover asignación del ciente
-            requestingClient = new Client();
-            requestingClient.Name = "Ángel";
-            requestingClient.Surname = "De la cruz";
-            requestingClient.LastName = "García";
-            requestingClient.Curp = "CUGA010415HVZRRNA2";
-            requestingClient.Rfc = "MALJ800515K1A";
+            //TODO: remover asignación estática del ciente
+            newApplication.Client = new Client();
+            newApplication.Client.Name = "Ángel";
+            newApplication.Client.Surname = "De la cruz";
+            newApplication.Client.LastName = "García";
+            newApplication.Client.Curp = "CUGA010415HVZRRNA2";
+            newApplication.Client.Rfc = "MALJ800515K1A";
 
-            TbkClientName.Text = $"{requestingClient.Name} {requestingClient.Surname} {requestingClient.LastName}";
-            SpnClientCurp.Inlines.Add(new Run(requestingClient.Curp));
-            //BldClientSalary.Inlines.Add(new Run(requestingClient.WorkCenter.Salary));
-            //SpnClientWorkCenterName.Inlines.Add(new Run(requestingClient.WorkCenter.companyName));
+            TbkClientName.Text = $"{newApplication.Client.Name} {newApplication.Client.Surname} {newApplication.Client.LastName}";
+            SpnClientCurp.Inlines.Add(new Run(newApplication.Client.Curp));
+            //BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary));
+            //SpnClientWorkCenterName.Inlines.Add(new Run(newApplication.Client.WorkCenter.companyName));
         }
 
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -259,18 +258,48 @@ namespace SFIClient.Views
 
         private void BtnGenerateCreditApplicationClick(object sender, RoutedEventArgs e)
         {
-            bool isValidApplication = VerifyCreditApplicationInformation();
+            newApplication.DigitalDocuments = this.attachedDocuments.ToArray();
+            newApplication.RequestedAmount = decimal.Parse(TbRequestedAmount.Text);
+            newApplication.MinimumAmountAccepted = decimal.Parse(TbMinimumAcceptedAmount.Text);
+            newApplication.Purpose = TbCreditPurpose.Text;
 
-            Console.WriteLine($"Hay {attachedDocuments.Count} documentos adjuntos");
+            bool isValidApplication = VerifyCreditApplicationInformation();
             if(isValidApplication)
             {
                 ShowApplicationGenerationConfirmationDialog();
+            }
+            else
+            {
+                HighlightInvalidFields();
+                ShowInvalidFieldsAlertDialog();
             }
         }
 
         private bool VerifyCreditApplicationInformation()
         {
-            return true;
+            bool isValidApplication = true;
+
+            if(isValidApplication)
+            {
+                isValidApplication = newApplication.CreditType != null;
+            }
+
+            if (isValidApplication)
+            {
+                isValidApplication = newApplication.CreditType != null;
+            }
+
+            return isValidApplication;
+        }
+
+        private void HighlightInvalidFields()
+        {
+
+        }
+
+        private void ShowInvalidFieldsAlertDialog()
+        {
+
         }
 
         private void ShowApplicationGenerationConfirmationDialog()
@@ -314,7 +343,7 @@ namespace SFIClient.Views
                 {
                     DigitalDocument ineFile = new DigitalDocument();
                     ineFile.Content = ineContent;
-                    ineFile.Name = FileToolkit.GenerateDefaultIneName(requestingClient);
+                    ineFile.Name = FileToolkit.GenerateDefaultIneName(newApplication.Client);
                     ineFile.Format = FileToolkit.INE;
 
                     BtnAttachIne.Visibility = Visibility.Hidden;
@@ -328,7 +357,7 @@ namespace SFIClient.Views
         private void BtnDetachIneClick(object sender, RoutedEventArgs e)
         {
             attachedDocuments.RemoveAll(
-                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultIneName(requestingClient)
+                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultIneName(newApplication.Client)
             );
 
             BtnAttachIne.Visibility = Visibility.Visible;
@@ -355,7 +384,7 @@ namespace SFIClient.Views
                 {
                     DigitalDocument proofOfAddressFile = new DigitalDocument();
                     proofOfAddressFile.Content = proofOfAddressContent;
-                    proofOfAddressFile.Name = FileToolkit.GenerateDefaultAddressDocumentName(requestingClient);
+                    proofOfAddressFile.Name = FileToolkit.GenerateDefaultAddressDocumentName(newApplication.Client);
                     proofOfAddressFile.Format = FileToolkit.PROOF_ADDRESS;
 
                     BtnAttachProofOfAddress.Visibility = Visibility.Hidden;
@@ -369,7 +398,7 @@ namespace SFIClient.Views
         private void BtnDetachProofOfAddressClick(object sender, RoutedEventArgs e)
         {
             attachedDocuments.RemoveAll(
-                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultAddressDocumentName(requestingClient)
+                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultAddressDocumentName(newApplication.Client)
             );
 
             BtnAttachProofOfAddress.Visibility = Visibility.Visible;
@@ -396,7 +425,7 @@ namespace SFIClient.Views
                 {
                     DigitalDocument proofOfIncomeFile = new DigitalDocument();
                     proofOfIncomeFile.Content = proofOfIncomeContent;
-                    proofOfIncomeFile.Name = FileToolkit.GenerateDefaultIncomeDocumentName(requestingClient);
+                    proofOfIncomeFile.Name = FileToolkit.GenerateDefaultIncomeDocumentName(newApplication.Client);
                     proofOfIncomeFile.Format = FileToolkit.PROOF_INCOME;
 
                     BtnAttachProofOfIncome.Visibility = Visibility.Hidden;
@@ -410,7 +439,7 @@ namespace SFIClient.Views
         private void BtnDetachProofOfIncomeClick(object sender, RoutedEventArgs e)
         {
             attachedDocuments.RemoveAll(
-                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultIncomeDocumentName(requestingClient)
+                digitalDocument => digitalDocument.Name == FileToolkit.GenerateDefaultIncomeDocumentName(newApplication.Client)
             );
 
             BtnAttachProofOfIncome.Visibility = Visibility.Visible;
