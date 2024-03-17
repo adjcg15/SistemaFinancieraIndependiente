@@ -198,7 +198,11 @@
                             Copia de comprobante de domicilio(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <Button Content="Adjuntar comprobante de domicilio" Style="{StaticResource FileUploader}"/>
+                            <Button 
+                                x:Name="BtnAttachProofOfAddress"
+                                Click="BtnAttachProofOfAddressClick"
+                                Content="Adjuntar comprobante de domicilio" 
+                                Style="{StaticResource FileUploader}"/>
                             <Button Visibility="Hidden" Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
                         </Grid>
 
@@ -206,7 +210,11 @@
                             Copia de comprobante de ingresos(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid>
-                            <Button Content="Adjuntar comprobante de ingresos" Style="{StaticResource FileUploader}"/>
+                            <Button 
+                                x:Name="BtnAttachProofOfIncome"
+                                Click="BtnAttachProofOfIncomeClick"
+                                Content="Adjuntar comprobante de ingresos" 
+                                Style="{StaticResource FileUploader}"/>
                             <Button Visibility="Hidden" Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
                         </Grid>
                     </StackPanel>

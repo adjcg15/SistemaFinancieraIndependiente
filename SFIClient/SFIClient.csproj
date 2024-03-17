@@ -70,6 +70,8 @@
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\FileToolkit.cs" />
+    <Compile Include="Utilities\DataValidator.cs" />
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>

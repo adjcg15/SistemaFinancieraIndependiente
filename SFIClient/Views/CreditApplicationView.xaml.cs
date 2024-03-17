@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using SFIClient.Controlls;
 using SFIClient.SFIServices;
+using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -280,12 +281,21 @@ namespace SFIClient.Views
             if (fileDialog.ShowDialog() == true)
             {
                 string inePath = fileDialog.FileName;
-                byte[] ineContent = GetFileContent(inePath);
+                byte[] ineContent = FileToolkit.GetFileContent(inePath);
 
-                DigitalDocument ineFile = new DigitalDocument();
-                ineFile.Content = ineContent;
-                ineFile.Name = "";
-                ineFile.Format = "";
+                if(ineContent == null)
+                {
+                    ShowFileOutsizedWarningDialog();
+                }
+                else
+                {
+                    DigitalDocument ineFile = new DigitalDocument();
+                    ineFile.Content = ineContent;
+                    ineFile.Name = FileToolkit.GenerateDefaultIneName(requestingClient);
+                    ineFile.Format = FileToolkit.INE;
+
+                    attachedDocuments.Add(ineFile);
+                }
             }
         }
 
@@ -294,27 +304,60 @@ namespace SFIClient.Views
 
         }
 
-        private byte[] GetFileContent(string fileName)
+        private void BtnAttachProofOfAddressClick(object sender, RoutedEventArgs e)
         {
-            FileInfo file = new FileInfo(fileName);
-            byte[] fileContent = null;
-
-            if (file.Exists)
+            OpenFileDialog fileDialog = new OpenFileDialog
             {
-                long fileSizeInBytes = file.Length;
-                long fileSizeInKilobytes = fileSizeInBytes / 1024;
+                Filter = "Documentos pdf|*.pdf;"
+            };
 
-                if(fileSizeInKilobytes <= 150)
-                {
-                    fileContent = File.ReadAllBytes(file.FullName);
-                } 
-                else
+            if (fileDialog.ShowDialog() == true)
+            {
+                string proofOfAddressPath = fileDialog.FileName;
+                byte[] proofOfAddressContent = FileToolkit.GetFileContent(proofOfAddressPath);
+
+                if (proofOfAddressContent == null)
                 {
                     ShowFileOutsizedWarningDialog();
                 }
-            }
+                else
+                {
+                    DigitalDocument proofOfAddressFile = new DigitalDocument();
+                    proofOfAddressFile.Content = proofOfAddressContent;
+                    proofOfAddressFile.Name = FileToolkit.GenerateDefaultAddressDocumentName(requestingClient);
+                    proofOfAddressFile.Format = FileToolkit.PROOF_ADDRESS;
 
-            return fileContent;
+                    attachedDocuments.Add(proofOfAddressFile);
+                }
+            }
+        }
+
+        private void BtnAttachProofOfIncomeClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Filter = "Documentos pdf|*.pdf;"
+            };
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                string proofOfIncomePath = fileDialog.FileName;
+                byte[] proofOfIncomeContent = FileToolkit.GetFileContent(proofOfIncomePath);
+
+                if (proofOfIncomeContent == null)
+                {
+                    ShowFileOutsizedWarningDialog();
+                }
+                else
+                {
+                    DigitalDocument proofOfIncomeFile = new DigitalDocument();
+                    proofOfIncomeFile.Content = proofOfIncomeContent;
+                    proofOfIncomeFile.Name = FileToolkit.GenerateDefaultIncomeDocumentName(requestingClient);
+                    proofOfIncomeFile.Format = FileToolkit.PROOF_INCOME;
+
+                    attachedDocuments.Add(proofOfIncomeFile);
+                }
+            }
         }
 
         private void ShowFileOutsizedWarningDialog()
