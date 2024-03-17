@@ -25,9 +25,49 @@ namespace SFIClient.Views
             InitializeComponent();
         }
 
-        private void TxtMinimumAcceptedAmount_TextChanged(object sender, TextChangedEventArgs e)
+        private bool ValidateFields()
         {
+            List<string> emptyFields = new List<string>();
 
+            if (string.IsNullOrEmpty(TxtCreditType.Text))
+            {
+                emptyFields.Add("Nombre");
+            }
+
+            if (!RbActivePolicy.IsChecked.HasValue || !RbInactivePolicy.IsChecked.HasValue ||
+                (!RbActivePolicy.IsChecked.Value && !RbInactivePolicy.IsChecked.Value))
+            {
+                emptyFields.Add("Estado");
+            }
+
+            if (!DpkEffectiveDate.SelectedDate.HasValue)
+            {
+                emptyFields.Add("Fecha de vigencia");
+            }
+
+            if (string.IsNullOrEmpty(TbPolicyDescription.Text))
+            {
+                emptyFields.Add("Descripción");
+            }
+
+            if (emptyFields.Any())
+            {
+                string emptyFieldsMessage = "Por favor, verifique que los siguientes campos requeridos cuenten con una respuesta:\n";
+                emptyFieldsMessage += string.Join("\n", emptyFields);
+                MessageBox.Show(emptyFieldsMessage, "Campos requeridos", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+
+        private void ClickBtnAcceptRegister(object sender, RoutedEventArgs e)
+        {
+            if (ValidateFields())
+            {
+                MessageBox.Show("Guardado exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
