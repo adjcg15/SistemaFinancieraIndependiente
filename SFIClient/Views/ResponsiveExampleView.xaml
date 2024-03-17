@@ -35,6 +35,11 @@
                 <!--Second row-->
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Subtitle" Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
                 <StackPanel Grid.Column="1" Grid.Row="1">
+                    <Grid>
+                        <Border Style="{StaticResource RoundedBorder}">
+                            <DatePicker Style="{StaticResource DatePicker}"/>
+                        </Border>
+                    </Grid>
                     <TextBlock Text="Input" FontSize="16" FontWeight="bold"/>
                     <TextBox Style="{StaticResource TextInput}"/>
                     <TextBlock Text="Input" FontSize="16" FontWeight="bold"/>
