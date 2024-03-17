@@ -341,5 +341,48 @@
             <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
         </Style>
 
+        <!-- RadioButton -->
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <!-- Margen entre los RadioButton -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="PART_Bullet"
+                                 Grid.Column="0"
+                                 Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="{TemplateBinding BorderThickness}"
+                                 Width="24" Height="24"/>
+                            <!-- Tamaño de la bolita -->
+                            <ContentPresenter Grid.Column="1"
+                                          Margin="8,0,0,0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="{StaticResource MediumGray}"/>
+                                <!-- Color de la bolita seleccionada -->
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource MediumGray}"/>
+                                <!-- Color del borde de la bolita seleccionada -->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="LightGray"/>
+                                <!-- Color de la bolita deshabilitada -->
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="Gray"/>
+                                <!-- Color del borde de la bolita deshabilitada -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
