@@ -30,7 +30,7 @@ namespace SFIDataAccess
         public int id_credit_application_state { get; set; }
         public int id_dictum { get; set; }
         public string employee_number { get; set; }
-        public int credit_condition_identifier { get; set; }
+        public string credit_condition_identifier { get; set; }
         public int id_credit_type { get; set; }
     
         public virtual client client { get; set; }

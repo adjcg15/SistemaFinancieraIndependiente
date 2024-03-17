@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
-      d:Width="1280" d:Height="900"
+      d:Width="1280" d:Height="850"
       Title="Registro de política de otorgamiento de crédito">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -23,7 +23,7 @@
             </StackPanel>
 
             <!--Note required fields-->
-            <StackPanel Margin="20,28">
+            <StackPanel Margin="40, 30">
                 <TextBlock Style="{StaticResource Paragraph}"><Bold><Run Text="Nota:"/></Bold><Run Text=" los campos marcados con un asterisco ("/><Bold ><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></Bold><Run Text=") son obligatorios para el registro de la política de crédito en el sistema."/></TextBlock>
             </StackPanel>
 
@@ -45,7 +45,7 @@
                     </Grid.RowDefinitions>
 
                     <!--First row-->
-                    <TextBlock 
+                    <TextBlock  Margin="0,20,0,8"
                         TextWrapping="Wrap"
                         Grid.Column="0"
                         Grid.Row="0"
@@ -53,7 +53,7 @@
                         Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
 
                     <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 12, 0, 0">
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"><Run Text="Nombre "/><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></TextBlock>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 20, 0, 8"><Run Text="Nombre "/><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></TextBlock>
                         <Grid Margin="0, 0, 0, 24">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -84,8 +84,8 @@
                             </Grid.RowDefinitions>
                             <Grid Grid.Column="0" Grid.Row="0">
                                 <StackPanel Orientation="Horizontal">
-                                    <RadioButton Style="{StaticResource RadioButtonStyle}" Content="Activa"/>
-                                    <RadioButton Style="{StaticResource RadioButtonStyle}" Content="Inactiva"/>
+                                    <RadioButton x:Name="RbActivePolicy" Style="{StaticResource RadioButtonStyle}" Content="Activa"/>
+                                    <RadioButton x:Name="RbInactivePolicy" Style="{StaticResource RadioButtonStyle}" Content="Inactiva"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -102,7 +102,7 @@
                             <Grid Grid.Column="0" Grid.Row="0">
                                 <Grid>
                                     <Border Style="{StaticResource RoundedBorder}">
-                                        <DatePicker Style="{StaticResource DatePicker}"/>
+                                        <DatePicker x:Name="DpkEffectiveDate" Style="{StaticResource DatePicker}"/>
                                     </Border>
                                 </Grid>
                             </Grid>
@@ -122,7 +122,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                             <TextBox 
-                                x:Name="TxtCreditPurpose" 
+                                x:Name="TbPolicyDescription" 
                                 Style="{StaticResource TextInput}"
                                 TextWrapping="Wrap"
                                 AcceptsReturn="True"
@@ -135,9 +135,9 @@
             </StackPanel>
  
             <!--Buttons section-->
-            <StackPanel Margin="40, 0, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
-                <Button Style="{StaticResource PrimaryBtn}" Content="Generar solicitud"/>
+            <StackPanel Margin="40, 15, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="BtnCancelRegister" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
+                <Button x:Name="BtnAcceptRegister" Style="{StaticResource PrimaryBtn}" Content="Generar solicitud"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
