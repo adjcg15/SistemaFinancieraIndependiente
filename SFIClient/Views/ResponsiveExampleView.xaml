@@ -68,7 +68,7 @@
                     <TextBlock Style="{StaticResource TinyText}" Text="Tamaño de fuente para mensajes tipo small (errores formularios, avisos en formularios, anotaciones, etc.)"/>
                     <TextBlock Text="Input" FontSize="16" FontWeight="bold"/>
                     <Grid>
-                        <ComboBox Style="{StaticResource comboBox}">
+                        <ComboBox Style="{StaticResource ComboBox}">
                             <ComboBoxItem>Elemento 1</ComboBoxItem>
                             <ComboBoxItem>Elemento 2</ComboBoxItem>
                             <ComboBoxItem>Elemento 3</ComboBoxItem>
