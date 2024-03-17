@@ -52,6 +52,16 @@ namespace SFIClient.Views
             {
                 MessageBox.Show(fe.Message);
             }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                //TODO Redirect To Main Menu
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                //TODO Redirect To Main Menu
+            }
         }
 
         private void AddClientsToClientsList(List<Client> clientsList)
