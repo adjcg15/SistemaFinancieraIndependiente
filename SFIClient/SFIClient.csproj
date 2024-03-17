@@ -68,6 +68,9 @@
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyBankAccountView.xaml.cs">
+      <DependentUpon>ModifyBankAccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CreditApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyBankAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
