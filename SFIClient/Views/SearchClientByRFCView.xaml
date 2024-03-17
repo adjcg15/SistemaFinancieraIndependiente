@@ -24,7 +24,7 @@
             </StackPanel>
 
             <StackPanel Name="SkpRegisterClient" Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
-                <Button Name="BtnRegisterClient" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>
+                <Button Name="BtnRegisterClient" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente" Click="BtnRegisterClientClick"/>
             </StackPanel>
 
             <!--Search client-->
@@ -51,7 +51,7 @@
                         </TextBlock>
                         <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}"/>
                     </Grid>
-                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48" Click="BtnSearchClient_Click"/>
+                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48" Click="BtnSearchClientClick"/>
                 </Grid>
             </StackPanel>
 

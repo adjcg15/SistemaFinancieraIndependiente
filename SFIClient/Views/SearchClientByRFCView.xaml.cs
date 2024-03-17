@@ -85,6 +85,12 @@ namespace SFIClient.Views
         private void ShowClientWithAllOptions(Client client)
         {
             ClientControll clientControll = new ClientControll();
+            clientControll.ButtonSeePersonalInformation += BtnSeePersonalInformationClick;
+            clientControll.ButtonModifyPersonalInformation += BtnModifyPersonalInformationClick;
+            clientControll.ButtonModifyBankAccount += BtnModifyBankAccountClick;
+            clientControll.ButtonModifyWorkCenter += BtnModifyWorkCenterClick;
+            clientControll.ButtonModifyPersonalReferences += BtnModifyPersonalReferencesClick;
+            clientControll.ButtonApplyForCredit += BtnApplyForCreditClick;
             clientControll.LblClientRFC.Content = client.Rfc;
             clientControll.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
             clientControll.LblClientCreditStatus.Content = "Cliente sin crédito y sin solicitud activa";
@@ -94,6 +100,11 @@ namespace SFIClient.Views
         private void ShowClientWithAllOptionsWithoutCreditApplication(Client client)
         {
             ClientControll clientControll = new ClientControll();
+            clientControll.ButtonSeePersonalInformation += BtnSeePersonalInformationClick;
+            clientControll.ButtonModifyPersonalInformation += BtnModifyPersonalInformationClick;
+            clientControll.ButtonModifyBankAccount += BtnModifyBankAccountClick;
+            clientControll.ButtonModifyWorkCenter += BtnModifyWorkCenterClick;
+            clientControll.ButtonModifyPersonalReferences += BtnModifyPersonalReferencesClick;
             BitmapImage bitmap = new BitmapImage(new Uri("pack://application:,,,/Assets/ApplyForCreditDisabledIcon.png"));
             Image image = new Image
             {
@@ -114,7 +125,37 @@ namespace SFIClient.Views
             }
         }
 
-        private void BtnSearchClient_Click(object sender, RoutedEventArgs e)
+        private void BtnSeePersonalInformationClick(object sender, EventArgs e)
+        {
+            ClientControll clientControll = (ClientControll)sender;
+        }
+
+        private void BtnModifyBankAccountClick(object sender, EventArgs e)
+        {
+            ClientControll clientControll = (ClientControll)sender;
+        }
+
+        private void BtnModifyPersonalInformationClick(object sender, EventArgs e)
+        {
+            ClientControll clientControll = (ClientControll)sender;
+        }
+
+        private void BtnModifyWorkCenterClick(object sender, EventArgs e)
+        {
+            ClientControll clientControll = (ClientControll)sender;
+        }
+
+        private void BtnModifyPersonalReferencesClick(object sender, EventArgs e)
+        {
+            ClientControll clientControll = (ClientControll)sender;
+        }
+
+        private void BtnApplyForCreditClick(object sender, EventArgs e)
+        {
+            ClientControll clientControll = (ClientControll)sender;
+        }
+
+        private void BtnSearchClientClick(object sender, RoutedEventArgs e)
         {
             string rfcWanted = TbRFCClient.Text.ToUpper().Trim();
 
