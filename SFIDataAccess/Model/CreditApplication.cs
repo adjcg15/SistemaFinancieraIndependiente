@@ -19,7 +19,8 @@ namespace SFIDataAccess.Model
         [DataMember]
         public CreditCondition CreditCondition { get; set; }
 
-        //TODO: agregar asociación con cliente
+        [DataMember]
+        public Client Client { get; set; }
 
         [DataMember]
         public DateTime ExpeditionDate { get; set; }

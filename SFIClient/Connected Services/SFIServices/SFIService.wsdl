@@ -50,6 +50,15 @@
   <wsdl:message name="ICreditsService_GetAllCreditTypes_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ICreditsService_RegisterCreditApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCreditApplication" />
+  </wsdl:message>
+  <wsdl:message name="ICreditsService_RegisterCreditApplication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCreditApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICreditsService_RegisterCreditApplication_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverCreditConditionsByCreditType" />
   </wsdl:message>
@@ -57,7 +66,7 @@
     <wsdl:part name="parameters" element="tns:RecoverCreditConditionsByCreditTypeResponse" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q3:ServiceFault" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q4:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
@@ -71,6 +80,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditTypes" message="tns:ICreditsService_GetAllCreditTypes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditTypesResponse" message="tns:ICreditsService_GetAllCreditTypes_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditTypesServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_GetAllCreditTypes_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCreditApplication">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/RegisterCreditApplication" message="tns:ICreditsService_RegisterCreditApplication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/RegisterCreditApplicationResponse" message="tns:ICreditsService_RegisterCreditApplication_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/RegisterCreditApplicationServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_RegisterCreditApplication_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICreditConditionsService">
@@ -101,6 +115,18 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetAllCreditTypes">
       <soap12:operation soapAction="http://tempuri.org/ICreditsService/GetAllCreditTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCreditApplication">
+      <soap12:operation soapAction="http://tempuri.org/ICreditsService/RegisterCreditApplication" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

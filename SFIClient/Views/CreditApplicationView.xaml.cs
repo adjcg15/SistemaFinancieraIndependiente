@@ -1,27 +1,36 @@
-﻿using SFIClient.Controlls;
+﻿using Microsoft.Win32;
+using SFIClient.Controlls;
 using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SFIClient.Views
 {
     public partial class CredditApplicationController : Page
     {
+        private readonly Client requestingClient;
         private string lastRequestedAmount = string.Empty;
         private string lastMinimumAcceptedAmount = string.Empty;
-        private ObservableCollection<CreditType> LoadedCreditTypes { get; set; }
+        private readonly CreditApplication newApplication = new CreditApplication();
+        private List<DigitalDocument> attachedDocuments = new List<DigitalDocument>();
 
-        public CredditApplicationController()
+        public CredditApplicationController(Client requestingClient)
         {
             InitializeComponent();
 
+            this.requestingClient = requestingClient;
+
             LoadCreditTypes();
+            ShowClientInformation();
         }
 
         private void LoadCreditTypes()
@@ -78,12 +87,17 @@ namespace SFIClient.Views
             Console.WriteLine("Redireccionando al menú principal...");
         }
 
+        private void ShowClientInformation()
+        {
+
+        }
+
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(CbCreditTypes.SelectedIndex != -1)
             {
                 CreditType selectedCreditType = (CreditType)CbCreditTypes.SelectedItem;
-                //TODO: settear tipo de crédito en nueva solicitud
+                newApplication.CreditType = selectedCreditType;
                 LoadCreditConditionsByCreditType(selectedCreditType.Identifier);
             }
         }
@@ -144,7 +158,7 @@ namespace SFIClient.Views
                         creditConditionCard.BdrCreditConditionCard.BorderBrush = primaryColor;
                         creditConditionCard.BdrCreditConditionCard.Background = lightGray;
 
-                        //TODO: asignar condición seleccionada a crédito
+                        newApplication.CreditCondition = selectedCondition;
                     }
                     else
                     {
@@ -254,6 +268,64 @@ namespace SFIClient.Views
             {
 
             }
+        }
+
+        private void BtnAttachIneClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Filter = "Documentos pdf|*.pdf;"
+            };
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                string inePath = fileDialog.FileName;
+                byte[] ineContent = GetFileContent(inePath);
+
+                DigitalDocument ineFile = new DigitalDocument();
+                ineFile.Content = ineContent;
+                ineFile.Name = "";
+                ineFile.Format = "";
+            }
+        }
+
+        private void BtnDetachIneClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private byte[] GetFileContent(string fileName)
+        {
+            FileInfo file = new FileInfo(fileName);
+            byte[] fileContent = null;
+
+            if (file.Exists)
+            {
+                long fileSizeInBytes = file.Length;
+                long fileSizeInKilobytes = fileSizeInBytes / 1024;
+
+                if(fileSizeInKilobytes <= 150)
+                {
+                    fileContent = File.ReadAllBytes(file.FullName);
+                } 
+                else
+                {
+                    ShowFileOutsizedWarningDialog();
+                }
+            }
+
+            return fileContent;
+        }
+
+        private void ShowFileOutsizedWarningDialog()
+        {
+            MessageBox.Show(
+                "El archivo que intenta adjuntar es demasiado pesado, por favor " +
+                "opte por una versión más ligera (150kb o menos).",
+                "Archivo muy grande",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
     }
 }

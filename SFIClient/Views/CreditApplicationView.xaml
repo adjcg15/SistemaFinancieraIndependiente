@@ -181,8 +181,17 @@
                             Copia de INE(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <Button Visibility="Hidden" Content="Adjuntar INE" Style="{StaticResource FileUploader}"/>
-                            <Button Content="archivo_ine.pdf" Style="{StaticResource FilePresenter}"/>
+                            <Button 
+                                x:Name="BtnAttachIne"
+                                Click="BtnAttachIneClick"
+                                Content="Adjuntar INE" 
+                                Style="{StaticResource FileUploader}"/>
+                            <Button 
+                                Visibility="Hidden" 
+                                Content="archivo_ine.pdf" 
+                                Style="{StaticResource FilePresenter}"
+                                x:Name="BtnDetachIne"
+                                Click="BtnDetachIneClick"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">

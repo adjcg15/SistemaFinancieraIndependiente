@@ -103,6 +103,7 @@
     <Compile Include="Model\CreditApplication.cs" />
     <Compile Include="Model\CreditCondition.cs" />
     <Compile Include="Model\CreditType.cs" />
+    <Compile Include="Model\Client.cs" />
     <Compile Include="Model\DataTypeExample.cs" />
     <Compile Include="Model\DigitalDocument.cs" />
     <Compile Include="personal_references.cs">

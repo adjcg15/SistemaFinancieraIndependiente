@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
-      d:Width="1280" d:Height="720"
+      d:Width="1280" d:Height="820"
       Title="ResponsiveExampleGUI">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -61,6 +61,14 @@
                         <TextBox Name="TxtExampleInput" Style="{StaticResource TextInput}"/>
                     </Grid>
                     <TextBlock Style="{StaticResource TinyText}" Text="Tamaño de fuente para mensajes tipo small (errores formularios, avisos en formularios, anotaciones, etc.)"/>
+                    <TextBlock Text="Input" FontSize="16" FontWeight="bold"/>
+                    <Grid>
+                        <ComboBox Style="{StaticResource comboBox}">
+                            <ComboBoxItem>Elemento 1</ComboBoxItem>
+                            <ComboBoxItem>Elemento 2</ComboBoxItem>
+                            <ComboBoxItem>Elemento 3</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </StackPanel>
