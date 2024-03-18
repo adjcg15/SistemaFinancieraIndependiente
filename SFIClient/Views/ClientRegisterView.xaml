@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
-      d:Height="5450" d:Width="1280"
+      d:Height="8450" d:Width="1280"
       Title="ClientRegisterView">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -102,7 +102,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientName" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbClientName" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -120,7 +120,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSurnmae" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbClientSurnmae" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -138,7 +138,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientLastName" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientLastName" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -165,7 +165,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbCurp" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbCurp" Style="{StaticResource TextInput}" MaxLength="18"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -183,7 +183,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbRfc" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbRfc" Style="{StaticResource TextInput}" MaxLength="13"/>
                         </Grid>
                     </StackPanel>
 
@@ -219,7 +219,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientStreet" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbClientStreet" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -237,7 +237,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientNeighborhood" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbClientNeighborhood" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -255,7 +255,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientInteriorNumber" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientInteriorNumber" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -266,14 +266,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientExteriorNumber}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientOutdoorNumber}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientExteriorNumber" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientOutdoorNumber" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -291,7 +291,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientPostCode" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientPostCode" Style="{StaticResource TextInput}" MaxLength="5"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -309,7 +309,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientCity" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbClientCity" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -327,7 +327,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientMunicipality" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbClientMunicipality" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -345,7 +345,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSatate" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientSatate" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
                     </StackPanel>
 
@@ -443,7 +443,7 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="6" Margin="0, 12, 0, 0">
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            Nombre de la empresar <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            Nombre de la empresa <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa el nombre de la empresa">
@@ -457,7 +457,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbCompanyName" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbCompanyName" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -475,7 +475,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterPhoneNumber" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbWorkCenterPhoneNumber" Style="{StaticResource TextInput}" MaxLength="15"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -493,11 +493,11 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbEmployeePosition" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbEmployeePosition" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            Salario neto en pesos MXN <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            Salario neto mensual en pesos MXN <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa el salario neto">
@@ -511,7 +511,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbSalary" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbSalary" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -529,7 +529,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbEmployeeSeniority" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbEmployeeSeniority" Style="{StaticResource TextInput}" MaxLength="2"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -547,7 +547,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbHumanResourcesPhone" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbHumanResourcesPhone" Style="{StaticResource TextInput}" MaxLength="15"/>
                         </Grid>
                         
                         <Border
@@ -570,7 +570,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterStreet" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbWorkCenterStreet" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -588,7 +588,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterNeighborhood" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbWorkCenterNeighborhood" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -606,7 +606,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterInteriorNumber" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbWorkCenterInteriorNumber" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -617,14 +617,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbWorkCenterExteriorNumber}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbWorkCenterOutdoorNumber}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterExteriorNumber" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbWorkCenterOutdoorNumber" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -642,7 +642,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterPostCode" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbWorkCenterPostCode" Style="{StaticResource TextInput}" MaxLength="5"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -660,7 +660,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterCity" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbWorkCenterCity" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -678,7 +678,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterMunicipality" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbWorkCenterMunicipality" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -696,7 +696,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterSatate" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbWorkCenterSatate" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
                     </StackPanel>
 
@@ -732,7 +732,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientPhoneNumberFirst" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbClientPhoneNumberFirst" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -750,7 +750,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientPhoneNumberSecond" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbClientPhoneNumberSecond" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock Name="TbkClientPhoneNumberThird" FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -768,7 +768,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientPhoneNumberThird" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientPhoneNumberThird" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
 
                         <TextBlock Name="TbkClientPhoneNumberFourth" FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -786,7 +786,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientPhoneNumberFourth" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientPhoneNumberFourth" Style="{StaticResource TextInput}" MaxLength="10"/>
                         </Grid>
                         <StackPanel Name="SkpNewPhoneNumber" Orientation="Horizontal" Margin="0, 0, 0, 24">
                             <Button Name="BtnNewPhoneNumber" Style="{StaticResource PlusSecondaryBtn}" Content="Ingresar otro número de teléfono" Click="BtnNewPhoneNumberClick"/>
@@ -807,7 +807,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientEmailFirst" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientEmailFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -825,7 +825,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientEmailSecond" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientEmailSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -843,7 +843,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientEmailThird" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbClientEmailThird" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 24">
@@ -855,15 +855,601 @@
                     <Border
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
-                        Grid.Row="9"
+                        Grid.Row="10"
                         Margin="0, 25" Padding="0, 0, 0, 8"
                         BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
                     </Border>
 
                     <!--Twelfth Row-->
-                    
-                    
+                    <StackPanel Grid.Column="0" Grid.Row="11">
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Referencia personal 1" 
+                            Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}" Margin="0, 0, 10, 0"/>
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Dirección de la referencia 1" 
+                            Style="{StaticResource Emphasis}" Foreground="{StaticResource DarkGray}" Margin="0, 685, 10, 0" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="11" Margin="0, 12, 0, 0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Nombre <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el nombre">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceNameFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceNameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Primer apellido <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el primer apellido">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceSurnameFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceSurnameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Segundo apellido <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el segundo apellido">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceLastNameFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceLastNameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Número de teléfono <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número de teléfono">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferencePhoneNumberFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferencePhoneNumberFirst" Style="{StaticResource TextInput}" MaxLength="0"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Parentesco <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el parentesco">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceKinshipFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceKinshipFirst" Style="{StaticResource TextInput}" MaxLength="180"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Tiempo de conocimiento en años <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 10">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa los años de relación">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceRelationshipFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceRelationshipFirst" Style="{StaticResource TextInput}" MaxLength="2"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Clave de elector <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 10">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la clave de elector a 18 dígitos">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceIneKeyFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceIneKeyFirst" Style="{StaticResource TextInput}" MaxLength="18"/>
+                        </Grid>
+
+                        <Border
+                            Margin="0, 0, 0, 12" Padding="0, 0, 0, 8"
+                            BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                        </Border>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Calle <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 12">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la calle">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceStreetFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceStreetFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Colonia <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la colonia">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceNeighborhoodFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceNeighborhoodFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Número interior <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número interior">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceInteriorNumberFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceInteriorNumberFirst" Style="{StaticResource TextInput}" MaxLength="10"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Número exterior <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número exterior">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceOutdoorNumberFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceOutdoorNumberFirst" Style="{StaticResource TextInput}" MaxLength="10"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Código postal <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el código postal">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferencePostCodeFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferencePostCodeFirst" Style="{StaticResource TextInput}" MaxLength="5"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Ciudad <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la ciudad">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceCityFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceCityFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Municipio <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el municipio">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceMunicipalityFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceMunicipalityFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Estado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el estado">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceSatateFirst}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceSatateFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!--Eleventh Row-->
+                    <Border
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="12"
+                        Margin="0, 25" Padding="0, 0, 0, 8"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    </Border>
+
+                    <!--Twelfth Row-->
+                    <StackPanel Grid.Column="0" Grid.Row="13">
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Referencia personal 2" 
+                            Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}" Margin="0, 0, 10, 0"/>
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Dirección de la referencia 2" 
+                            Style="{StaticResource Emphasis}" Foreground="{StaticResource DarkGray}" Margin="0, 685, 10, 0" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="13" Margin="0, 12, 0, 0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Nombre <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el nombre">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceNameSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceNameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Primer apellido <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el primer apellido">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceSurnameSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceSurnameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Segundo apellido <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el segundo apellido">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceLastNameSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceLastNameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Número de teléfono <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número de teléfono">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferencePhoneNumberSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferencePhoneNumberSecond" Style="{StaticResource TextInput}" MaxLength="10"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Parentesco <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el parentesco">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceKinshipSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceKinshipSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Tiempo de conocimiento en años <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 10">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa los años de relación">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceRelationshipSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceRelationshipSecond" Style="{StaticResource TextInput}" MaxLength="2"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Clave de elector <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 10">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la clave de elector a 18 dígitos">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceIneKeySecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceIneKeySecond" Style="{StaticResource TextInput}" MaxLength="18"/>
+                        </Grid>
+
+                        <Border
+                            Margin="0, 0, 0, 12" Padding="0, 0, 0, 8"
+                            BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                        </Border>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Calle <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 12">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la calle">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceStreetSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceStreetSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Colonia <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la colonia">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceNeighborhoodSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceNeighborhoodSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Número interior <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número interior">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceInteriorNumberSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceInteriorNumberSecond" Style="{StaticResource TextInput}" MaxLength="10"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Número exterior <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número exterior">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceOutdoorNumberSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceOutdoorNumberSecond" Style="{StaticResource TextInput}" MaxLength="10"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Código postal <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el código postal">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferencePostCodeSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferencePostCodeSecond" Style="{StaticResource TextInput}" MaxLength="5"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Ciudad <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la ciudad">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceCitySecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceCitySecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Municipio <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el municipio">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceMunicipalitySecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceMunicipalitySecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Estado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el estado">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceSatateSecond}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Name="TbReferenceSatateSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
+            </StackPanel>
+            <!--Buttons section-->
+            <StackPanel Margin="40, 100, 40, 100" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="BtnCancel" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelClick"/>
+                <Button Name="BtnRegisterClient" Style="{StaticResource PrimaryBtn}" Content="Registrar cliente" Click="BtnRegisterClientClick"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
