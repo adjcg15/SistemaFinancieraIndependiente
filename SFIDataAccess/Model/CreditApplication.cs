@@ -39,5 +39,8 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public string State { get; set; }
+
+        [DataMember]
+        public string EmployeeNumber { get; set; }
     }
 }

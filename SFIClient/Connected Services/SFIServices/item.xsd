@@ -26,6 +26,7 @@
       <xs:element minOccurs="0" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
       <xs:element minOccurs="0" name="CreditType" nillable="true" type="tns:CreditType" />
       <xs:element minOccurs="0" name="DigitalDocuments" nillable="true" type="tns:ArrayOfDigitalDocument" />
+      <xs:element minOccurs="0" name="EmployeeNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExpeditionDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Invoice" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MinimumAmountAccepted" type="xs:decimal" />

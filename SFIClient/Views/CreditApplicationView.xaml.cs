@@ -23,11 +23,13 @@ namespace SFIClient.Views
         private string lastMinimumAcceptedAmount = string.Empty;
         private readonly CreditApplication newApplication = new CreditApplication();
         private readonly List<DigitalDocument> attachedDocuments = new List<DigitalDocument>();
-        private CreditsServiceClient creditsService;
 
         public CredditApplicationController()
         {
             InitializeComponent();
+
+            //TODO: acceder al número de empleado (algún singleton)
+            newApplication.EmployeeNumber = "1234567890";
 
             LoadCreditTypes();
             ShowClientInformation();
@@ -38,6 +40,8 @@ namespace SFIClient.Views
             InitializeComponent();
 
             newApplication.Client = requestingClient;
+            //TODO: acceder al número de empleado (algún singleton)
+            newApplication.EmployeeNumber = "1234567890";
 
             LoadCreditTypes();
             ShowClientInformation();
@@ -45,7 +49,7 @@ namespace SFIClient.Views
 
         private void LoadCreditTypes()
         {
-            creditsService = new CreditsServiceClient();
+            CreditsServiceClient creditsService = new CreditsServiceClient();
 
             try
             {
@@ -393,7 +397,58 @@ namespace SFIClient.Views
 
         private void RegisterCreditApplication()
         {
+            CreditsServiceClient creditsService = new CreditsServiceClient();
 
+            try
+            {
+                creditsService.RegisterCreditApplication(newApplication);
+                ShowSuccessApplicationRegistrationDialog();
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorRegisteringCreditApplicationDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRegisteringCreditApplicationDialog(errorMessage);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex.Message);
+                string errorMessage = "No fue posible guardar la información debido a un error de conexión";
+                ShowErrorRegisteringCreditApplicationDialog(errorMessage);
+            }
+        }
+
+        private void ShowErrorRegisteringCreditApplicationDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Error al registrar la solicitud",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToMainMenu();
+            }
+        }
+
+        private void ShowSuccessApplicationRegistrationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "La información de la solicitud de crédito ha sido guardada correctamente",
+                "Solicitud de crédito registrada",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToMainMenu();
+            }
         }
 
         private void BtnAttachIneClick(object sender, RoutedEventArgs e)

@@ -186,6 +186,7 @@
                                 AcceptsReturn="True"
                                 VerticalScrollBarVisibility="Auto"
                                 Height="160"
+                                MaxLength="300"
                             />
                         </Grid>
 

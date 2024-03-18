@@ -17,7 +17,6 @@ namespace SFIDataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public dictum()
         {
-            this.credit_applications = new HashSet<credit_applications>();
             this.polices_apply_dictums = new HashSet<polices_apply_dictums>();
         }
     
@@ -25,8 +24,7 @@ namespace SFIDataAccess
         public string credit_application_invoice { get; set; }
         public string employee_number { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<credit_applications> credit_applications { get; set; }
+        public virtual credit_applications credit_applications { get; set; }
         public virtual system_accounts system_accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<polices_apply_dictums> polices_apply_dictums { get; set; }

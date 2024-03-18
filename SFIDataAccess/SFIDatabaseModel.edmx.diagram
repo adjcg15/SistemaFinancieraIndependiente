@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a5cd0c3fb08149f5b07386d1eca503d8" Name="Diagram1" ZoomLevel="81">
-        <EntityTypeShape EntityType="SFIDatabaseModel.address" Width="1.5" PointX="0.75" PointY="10.125" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.bank_accounts" Width="1.5" PointX="3" PointY="12.125" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.client" Width="1.5" PointX="5.25" PointY="12" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.contact_method_types" Width="1.5" PointX="8.25" PointY="4.25" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.contact_methods" Width="1.5" PointX="10.5" PointY="8.75" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.credit_applications" Width="1.5" PointX="7.5" PointY="11.625" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.credit_applications_state" Width="1.5" PointX="5.25" PointY="17.125" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.credit_conditions" Width="1.5" PointX="5.25" PointY="19.375" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.credit_granting_polices" Width="1.5" PointX="8.25" PointY="1" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.credit_types" Width="1.5" PointX="3" PointY="20" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.credit" Width="1.5" PointX="10.5" PointY="12.375" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.dictum" Width="1.5" PointX="5.25" PointY="6.875" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.digital_documents" Width="1.5" PointX="9.75" PointY="17" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.employee_roles" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.personal_references" Width="1.5" PointX="7.5" PointY="7.5" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.polices_apply_dictums" Width="1.5" PointX="10.5" PointY="5.875" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.regime" Width="1.5" PointX="12.75" PointY="12.875" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.system_accounts" Width="1.5" PointX="3" PointY="6.625" />
-        <EntityTypeShape EntityType="SFIDatabaseModel.work_centers" Width="1.5" PointX="3" PointY="15.125" />
+      <Diagram DiagramId="a5cd0c3fb08149f5b07386d1eca503d8" Name="Diagram1" ZoomLevel="50">
+        <EntityTypeShape EntityType="SFIDatabaseModel.address" Width="1.875" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.bank_accounts" Width="1.875" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.client" Width="1.875" PointX="5.25" PointY="12.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.contact_method_types" Width="1.875" PointX="7.5" PointY="9.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.contact_methods" Width="1.875" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.credit_applications" Width="1.875" PointX="7.5" PointY="16" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.credit_applications_state" Width="1.875" PointX="5.25" PointY="23.125" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.credit_conditions" Width="1.875" PointX="5.25" PointY="19.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.credit_granting_polices" Width="1.875" PointX="9.75" PointY="20.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.credit_types" Width="1.875" PointX="3" PointY="19.875" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.credit" Width="1.875" PointX="12.75" PointY="14.625" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.dictum" Width="1.875" PointX="9.75" PointY="17.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.digital_documents" Width="1.875" PointX="9.75" PointY="24.375" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.employee_roles" Width="1.875" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.personal_references" Width="1.875" PointX="7.5" PointY="11.75" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.polices_apply_dictums" Width="1.875" PointX="12" PointY="19.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.regime" Width="1.875" PointX="15" PointY="15.25" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.sysdiagram" Width="1.875" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.system_accounts" Width="1.875" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="SFIDatabaseModel.work_centers" Width="1.875" PointX="3" PointY="15.375" />
         <AssociationConnector Association="SFIDatabaseModel.FK_clients_addresses" />
         <AssociationConnector Association="SFIDatabaseModel.FK_personal_references_addresses" />
         <AssociationConnector Association="SFIDatabaseModel.FK_work_centers_addresses" />
@@ -39,9 +39,9 @@
         <AssociationConnector Association="SFIDatabaseModel.FK_credit_applications_credit_applications_state" />
         <AssociationConnector Association="SFIDatabaseModel.FK_credit_applications_credit_conditions" />
         <AssociationConnector Association="SFIDatabaseModel.FK_credit_applications_credit_types" />
-        <AssociationConnector Association="SFIDatabaseModel.FK_credit_applications_credits" />
-        <AssociationConnector Association="SFIDatabaseModel.FK_credit_applications_dictums" />
         <AssociationConnector Association="SFIDatabaseModel.FK_credit_applications_system_accounts" />
+        <AssociationConnector Association="SFIDatabaseModel.FK_credits_credit_applications" />
+        <AssociationConnector Association="SFIDatabaseModel.FK_dictums_credit_applications" />
         <AssociationConnector Association="SFIDatabaseModel.FK_digital_documents_credit_applications" />
         <AssociationConnector Association="SFIDatabaseModel.FK_credit_conditions_credit_types" />
         <AssociationConnector Association="SFIDatabaseModel.FK_regimes_credit_conditions" />

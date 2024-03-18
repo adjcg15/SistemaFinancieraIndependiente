@@ -202,6 +202,9 @@ namespace SFIClient.SFIServices {
         private SFIClient.SFIServices.DigitalDocument[] DigitalDocumentsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeeNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime ExpeditionDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -277,6 +280,19 @@ namespace SFIClient.SFIServices {
                 if ((object.ReferenceEquals(this.DigitalDocumentsField, value) != true)) {
                     this.DigitalDocumentsField = value;
                     this.RaisePropertyChanged("DigitalDocuments");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeeNumber {
+            get {
+                return this.EmployeeNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeNumberField, value) != true)) {
+                    this.EmployeeNumberField = value;
+                    this.RaisePropertyChanged("EmployeeNumber");
                 }
             }
         }
