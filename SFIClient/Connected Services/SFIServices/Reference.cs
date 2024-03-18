@@ -266,10 +266,10 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPolicyService/RegisterPolicyGranting", ReplyAction="http://tempuri.org/IPolicyService/RegisterPolicyGrantingResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IPolicyService/RegisterPolicyGrantingServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        void RegisterPolicyGranting(SFIClient.SFIServices.PolicyGranting NewPolicy);
+        bool RegisterPolicyGranting(SFIClient.SFIServices.PolicyGranting NewPolicy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPolicyService/RegisterPolicyGranting", ReplyAction="http://tempuri.org/IPolicyService/RegisterPolicyGrantingResponse")]
-        System.Threading.Tasks.Task RegisterPolicyGrantingAsync(SFIClient.SFIServices.PolicyGranting NewPolicy);
+        System.Threading.Tasks.Task<bool> RegisterPolicyGrantingAsync(SFIClient.SFIServices.PolicyGranting NewPolicy);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -299,11 +299,11 @@ namespace SFIClient.SFIServices {
                 base(binding, remoteAddress) {
         }
         
-        public void RegisterPolicyGranting(SFIClient.SFIServices.PolicyGranting NewPolicy) {
-            base.Channel.RegisterPolicyGranting(NewPolicy);
+        public bool RegisterPolicyGranting(SFIClient.SFIServices.PolicyGranting NewPolicy) {
+            return base.Channel.RegisterPolicyGranting(NewPolicy);
         }
         
-        public System.Threading.Tasks.Task RegisterPolicyGrantingAsync(SFIClient.SFIServices.PolicyGranting NewPolicy) {
+        public System.Threading.Tasks.Task<bool> RegisterPolicyGrantingAsync(SFIClient.SFIServices.PolicyGranting NewPolicy) {
             return base.Channel.RegisterPolicyGrantingAsync(NewPolicy);
         }
     }

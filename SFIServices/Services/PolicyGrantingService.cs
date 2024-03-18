@@ -11,9 +11,9 @@ namespace SFIServices
 {
     public partial class SFIService : IPolicyService
     {
-        public void RegisterPolicyGranting(PolicyGranting NewPolicy)
+        public bool RegisterPolicyGranting(PolicyGranting NewPolicy)
         {
-            PolicyGrantingDAO.RegisterPolicyGranting(NewPolicy);
+            return PolicyGrantingDAO.RegisterPolicyGranting(NewPolicy);
         }
     }
 }

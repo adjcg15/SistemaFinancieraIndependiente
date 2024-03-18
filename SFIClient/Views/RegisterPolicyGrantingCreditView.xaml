@@ -63,14 +63,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TxtCreditType}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbPolicyName}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox x:Name="TxtCreditType" Style="{StaticResource TextInput}" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="TbPolicyName" Style="{StaticResource TextInput}" Grid.ColumnSpan="2" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"><Run Text="Estatus "/><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></TextBlock>
@@ -126,6 +126,7 @@
                                 Style="{StaticResource TextInput}"
                                 TextWrapping="Wrap"
                                 AcceptsReturn="True"
+                                MaxLength="200"
                                 VerticalScrollBarVisibility="Auto"
                                 Height="160"
                             />
@@ -137,7 +138,7 @@
             <!--Buttons section-->
             <StackPanel Margin="40, 5, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="BtnCancelRegister" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
-                <Button x:Name="BtnAcceptRegister" Style="{StaticResource PrimaryBtn}" Content="Guardar" Click="ClickBtnAcceptRegister"/>
+                <Button x:Name="BtnAcceptRegister" Style="{StaticResource PrimaryBtn}" Content="Guardar" Click="BtnSavePolicyGrantingCreditClick"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

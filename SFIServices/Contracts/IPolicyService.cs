@@ -14,6 +14,6 @@ namespace SFIServices.Contracts
     {
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
-        void RegisterPolicyGranting(PolicyGranting NewPolicy);
+        bool RegisterPolicyGranting(PolicyGranting NewPolicy);
     }
 }

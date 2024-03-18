@@ -2,36 +2,42 @@
 using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SFIDataAccess.DataAccessObjects
 {
     public class PolicyGrantingDAO
     {
-        public static void RegisterPolicyGranting(PolicyGranting newPolicy)
+        public static bool RegisterPolicyGranting(PolicyGranting newPolicy)
         {
             try
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var policy = new PolicyGranting
-                    {
-                        Title = newPolicy.Title,
-                        Description = newPolicy.Description,
-                        EffectiveDate = newPolicy.EffectiveDate,
-                        IsActive = newPolicy.IsActive
-                    };
+                    var titleParam = new SqlParameter("@Title", newPolicy.Title);
+                    var descriptionParam = new SqlParameter("@Description", newPolicy.Description);
+                    var effectiveDateParam = new SqlParameter("@EffectiveDate", newPolicy.EffectiveDate.Date);
+                    var isActiveParam = new SqlParameter("@Active", newPolicy.IsActive);
+                    var resultParam = new SqlParameter("@Result", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
-                    PolicyGrantingDAO.RegisterPolicyGranting(policy);
+                    context.Database.ExecuteSqlCommand("InsertCreditPolicyProcedure @Title, @Description, @EffectiveDate, @Active, @Result OUTPUT",
+                                                       titleParam, descriptionParam, effectiveDateParam, isActiveParam, resultParam);
+
+                    int result = (int)resultParam.Value;
+                    return result == 0;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al registrar la política de concesión de crédito en la base de datos", ex);
-                //throw new FaultException<ServiceFault>(new ServiceFault("Error al registrar la política de concesión de crédito"));
+                Debug.WriteLine($"Error registering the credit granting policy: {ex.Message}");
+                return false;
             }
         }
     }
