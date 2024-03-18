@@ -14,9 +14,9 @@ namespace SFIServices
     public partial class SFIService : IClientsService
     {
         public List<Client> RecoverClients()
-        { 
+        {
             return ClientsDAO.RecoverClients();
-        }
+            }
 
         public BankAccount RecoverBankDetails(string cardNumber)
         {

@@ -50,9 +50,9 @@ namespace SFIClient.Views
                     SkpRegisterClientNow.Children.Add(BtnRegisterClient);
                 }
             }
-            catch (FaultException fe)
+            catch (FaultException<ServiceFault> fe)
             {
-                MessageBox.Show(fe.Message, "Error en la base de datos");
+                MessageBox.Show(fe.Detail.Message, "Error en la base de datos");
             }
             catch (EndpointNotFoundException)
             {

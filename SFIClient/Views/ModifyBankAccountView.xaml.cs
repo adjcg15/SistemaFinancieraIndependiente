@@ -42,7 +42,7 @@ namespace SFIClient.Views
                 TbHolder.Text = bankAccount.Holder.Trim();
                 TbBank.Text = bankAccount.Bank.Trim();
             }
-            catch (FaultException fe)
+            catch (FaultException<ServiceFault> fe)
             {
                 MessageBox.Show(fe.Message, "Error en la base de datos");
             }
@@ -116,7 +116,7 @@ namespace SFIClient.Views
                         MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información", "Error de actualización");
                     }
                 }
-                catch (FaultException fe)
+                catch (FaultException<ServiceFault> fe)
                 {
                     MessageBox.Show(fe.Message, "Error en la base de datos");
                 }
@@ -193,7 +193,7 @@ namespace SFIClient.Views
                 updateBankAccount = clientsServiceClient.UpdateBankAccount(bankAccount, cardNumber);
                 
             }
-            catch (FaultException fe)
+            catch (FaultException<ServiceFault> fe)
             {
                 MessageBox.Show(fe.Message, "Error en la base de datos");
             }
