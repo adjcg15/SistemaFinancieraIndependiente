@@ -13,8 +13,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Forms;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace SFIClient.Views
 {
@@ -38,7 +40,7 @@ namespace SFIClient.Views
                 clientsList = clientsServiceClient.RecoverClients().ToList();
                 if (clientsList.Count != 0)
                 {
-                    AddClientsToClientsList(clientsList);
+                    AddClientsToClientsList();
                 }
                 else
                 {
@@ -50,27 +52,26 @@ namespace SFIClient.Views
             }
             catch (FaultException fe)
             {
-                MessageBox.Show(fe.Message);
+                MessageBox.Show(fe.Message, "Error en la base de datos");
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
                 //TODO Redirect To Main Menu
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
                 //TODO Redirect To Main Menu
             }
         }
 
-        private void AddClientsToClientsList(List<Client> clientsList)
+        private void AddClientsToClientsList()
         {
             SkpNoRegisteredClients.Visibility = Visibility.Collapsed;
             SkpRegisterClientNow.Visibility = Visibility.Collapsed;
             for (int i = 0; i < clientsList.Count; i++)
             {
-
                 if (clientsList[i].Has_active_credit || clientsList[i].Has_credit_application)
                 {
                     ShowClientWithAllOptionsWithoutCreditApplication(clientsList[i]);
@@ -123,6 +124,7 @@ namespace SFIClient.Views
 
                 clientControll.LblClientCreditStatus.Content = "Cliente con solicitud de crédito activa";
             }
+            ItcClients.Items.Add(clientControll);
         }
 
         private void BtnSeePersonalInformationClick(object sender, EventArgs e)
@@ -171,6 +173,7 @@ namespace SFIClient.Views
 
         private void BtnSearchClientClick(object sender, RoutedEventArgs e)
         {
+            bool clientExists = false;
             string rfcWanted = TbRFCClient.Text.ToUpper().Trim();
 
             ItcClients.Items.Clear();
@@ -178,16 +181,39 @@ namespace SFIClient.Views
             {
                 if (clientsList[i].Rfc.Contains(rfcWanted))
                 {
-                    ClientControll clientControll = new ClientControll();
-                    clientControll.LblClientRFC.Content = clientsList[i].Rfc;
-                    ItcClients.Items.Add(clientControll);
+                    clientExists = true;
+                    AddClientsToClientsList();
                 }
+                else
+                {
+                    clientExists = false;
+                }
+            }
+
+            if (!clientExists)
+            {
+                ShowGoToRegisterClientConfirmationMessage();
+            }
+        }
+
+        private void ShowGoToRegisterClientConfirmationMessage()
+        {
+            DialogResult resultado = MessageBox.Show("¿Deseas registrar al cliente?", "El cliente no existe", MessageBoxButtons.OKCancel);
+
+            if (resultado == DialogResult.OK)
+            {
+                MessageBox.Show("Redirigiendo a registrar");
+                //TODO Redirect to Register Client
+            }
+            else if (resultado == DialogResult.Cancel)
+            {
+                AddClientsToClientsList();
             }
         }
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
         {
-
+            //TODO Redirect to Register Client
         }
     }
 }

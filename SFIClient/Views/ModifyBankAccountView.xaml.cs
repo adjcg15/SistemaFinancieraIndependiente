@@ -24,12 +24,12 @@ namespace SFIClient.Views
     {
         readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
         BankAccount bankAccount = new BankAccount();
-        private readonly string carNumber;
+        private readonly string cardNumber;
         public ModifyBankAccountView(Client client)
         {
             InitializeComponent();
             TbkClientName.Text = client.Name + " " + client.Surname + " " +client.LastName;
-            carNumber = client.Card_number;
+            cardNumber = client.Card_number;
             LoadBankDetails();
         }
 
@@ -37,28 +37,28 @@ namespace SFIClient.Views
         {
             try
             {
-                bankAccount = clientsServiceClient.RecoverBankDetails(carNumber);
-                TbCardNumber.Text = bankAccount.Card_number;
-                TbHolder.Text = bankAccount.Holder;
-                TbBank.Text = bankAccount.Bank;
+                bankAccount = clientsServiceClient.RecoverBankDetails(cardNumber);
+                TbCardNumber.Text = bankAccount.Card_number.Trim();
+                TbHolder.Text = bankAccount.Holder.Trim();
+                TbBank.Text = bankAccount.Bank.Trim();
             }
             catch (FaultException fe)
             {
-                MessageBox.Show(fe.Message);
+                MessageBox.Show(fe.Message, "Error en la base de datos");
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
                 //TODO Redirect To Main Menu
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
                 //TODO Redirect To Main Menu
             }
         }
 
-        private void TbCardNumber_TextChanged(object sender, TextChangedEventArgs e)
+        private void TbCardNumberTextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox tbCardNumber = sender as TextBox;
 
@@ -67,7 +67,7 @@ namespace SFIClient.Views
 
             string cardNumber = tbCardNumber.Text.Trim();
 
-            if (cardNumber.Length != 16)
+            if (!VerifyCarNumberFormat(cardNumber))
             {
                 tbCardNumber.Style = textInputErrorStyle;
             }
@@ -92,22 +92,97 @@ namespace SFIClient.Views
         private void BtnUpdateDataClick(object sender, RoutedEventArgs e)
         {
             bool updateData;
-            BankAccount newBankAccount = new BankAccount();
-            newBankAccount.Card_number = TbCardNumber.Text.Trim();
-            newBankAccount.Bank = TbBank.Text.Trim();
-            newBankAccount.Holder = TbHolder.Text.Trim();
-           
-            updateData = UpdateBankAccount(newBankAccount);
-            if (updateData)
+            
+            ReloadStylesToTextInputs();
+
+            if (VerifyTextFields())
             {
-                MessageBox.Show("Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente");
-                SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
-                this.NavigationService.Navigate(searchClientByRFCView);
+
+                BankAccount newBankAccount = new BankAccount();
+                newBankAccount.Card_number = TbCardNumber.Text.Trim();
+                newBankAccount.Bank = TbBank.Text.Trim();
+                newBankAccount.Holder = TbHolder.Text.Trim();
+                try
+                {
+                    updateData = UpdateBankAccount(newBankAccount);
+                    if (updateData)
+                    {
+                        MessageBox.Show("Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente", "Actualización exitosa");
+                        SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                        this.NavigationService.Navigate(searchClientByRFCView);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información", "Error de actualización");
+                    }
+                }
+                catch (FaultException fe)
+                {
+                    MessageBox.Show(fe.Message, "Error en la base de datos");
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                    //TODO Redirect To Main Menu
+                }
+                catch (CommunicationException)
+                {
+                    MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                    //TODO Redirect To Main Menu
+                }
             }
             else
             {
-                MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información");
+                MessageBox.Show("Verifique que la información ingresada no esté vacía", "Campos inválidos");
             }
+        }
+
+        private bool VerifyTextFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            bool correctFields = true;
+            if (!VerifyCarNumberFormat(TbCardNumber.Text.Trim()))
+            {
+                correctFields = false;
+                TbCardNumber.Style = textInputErrorStyle;
+            }
+            if (TbBank.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbBank.Style = textInputErrorStyle;
+            }
+            if (TbHolder.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbHolder.Style = textInputErrorStyle;
+            }
+
+            return correctFields;
+        }
+
+        private void ReloadStylesToTextInputs()
+        {
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+
+            TbCardNumber.Style = textInputStyle;
+            TbHolder.Style = textInputStyle;
+            TbBank.Style = textInputStyle;
+        }
+
+        private bool VerifyCarNumberFormat(string cardNumber)
+        {
+            bool cardNumberIsCorrect;
+            long number;
+            if (long.TryParse(cardNumber, out number) && cardNumber.Length == 16)
+            {
+                cardNumberIsCorrect = true;
+            }
+            else
+            {
+                cardNumberIsCorrect = false;
+            }
+
+            return cardNumberIsCorrect;
         }
 
         private bool UpdateBankAccount(BankAccount bankAccount)
@@ -115,21 +190,21 @@ namespace SFIClient.Views
             bool updateBankAccount = false;
             try
             {
-                updateBankAccount = clientsServiceClient.UpdateBankAccount(bankAccount, carNumber);
+                updateBankAccount = clientsServiceClient.UpdateBankAccount(bankAccount, cardNumber);
                 
             }
             catch (FaultException fe)
             {
-                MessageBox.Show(fe.Message);
+                MessageBox.Show(fe.Message, "Error en la base de datos");
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
                 //TODO Redirect To Main Menu
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
                 //TODO Redirect To Main Menu
             }
 

@@ -24,8 +24,8 @@
             <PropertyRef Name="card_number" />
           </Key>
           <Property Name="card_number" Type="char" MaxLength="16" Nullable="false" />
-          <Property Name="bank" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="holder" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="bank" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="holder" Type="nvarchar" MaxLength="180" Nullable="false" />
         </EntityType>
         <EntityType Name="clients">
           <Key>
@@ -717,8 +717,8 @@
             <PropertyRef Name="card_number" />
           </Key>
           <Property Name="card_number" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="bank" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="holder" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bank" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="holder" Type="String" MaxLength="180" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="clients" Relationship="Self.FK_clients_bank_accounts" FromRole="bank_accounts" ToRole="clients" />
         </EntityType>
         <EntityType Name="client">

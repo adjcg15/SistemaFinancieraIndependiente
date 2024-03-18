@@ -13,11 +13,6 @@ namespace SFIServices
 {
     public partial class SFIService : IClientsService
     {
-        public void NoHagoNada()
-        {
-            
-        }
-
         public List<Client> RecoverClients()
         { 
             return ClientsDAO.RecoverClients();

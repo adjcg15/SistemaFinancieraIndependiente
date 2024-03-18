@@ -38,7 +38,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Column="0" Grid.Row="0">
-                        <TextBlock Margin="5,2,5,2" Text="Buscar cliente por RFC">
+                        <TextBlock Margin="5,2,5,2" Text="Buscar cliente por RFC (no ingrese espacios)">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                     <Style.Triggers>
@@ -49,7 +49,7 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}"/>
+                        <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}" MaxLength="13"/>
                     </Grid>
                     <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48" Click="BtnSearchClientClick"/>
                 </Grid>
