@@ -85,7 +85,7 @@
                         Nombre <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ej. CCP001">
+                            <TextBlock Margin="5,2,5,2" Text="Ej. CCP000">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -96,7 +96,9 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbCreditConditionName" Style="{StaticResource TextInput}" MaxLength="16"/>
+                            <TextBox Name="TbCreditConditionName" Style="{StaticResource TextInput}" 
+                                     LostFocus="TbCreditConditionNameLostFocus" 
+                                     TextChanged="TbCreditConditionNameTextChanged" MaxLength="16"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"><Run Text="Estatus "/><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></TextBlock>
@@ -182,17 +184,14 @@
                                 <TextBox 
                                     Name="TbPaymentMonths" 
                                     Style="{StaticResource TextInput}"
-                                    TextChanged="TbPaymentMonthsTextChanged" HorizontalAlignment="Left" Width="195"/>
+                                    HorizontalAlignment="Left" Width="195"/>
                             </Grid>
                             <TextBlock 
                                     Style="{StaticResource Subtitle}" 
                                     Text="Meses" 
                                     VerticalAlignment="Center" Margin="208,0,47,0" Grid.ColumnSpan="2"/>
                         </Grid>
-
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            IVA <Span Foreground="{StaticResource PrimaryColor}">*</Span>
-                        </TextBlock>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"><Run Text="IVA "/><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></TextBlock>
                         <Grid Margin="0, 0, 0, 24">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -202,26 +201,11 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Column="0" Grid.Row="0">
-                                <TextBlock Margin="5,2" Text="Ej. 16">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=TbApplyIva}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <TextBox 
-                                    Name="TbApplyIva" 
-                                    Style="{StaticResource TextInput}"
-                                    TextChanged="TbApplyIvaTextChanged" HorizontalAlignment="Left" Width="195"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton x:Name="RbApplyIVa" Style="{StaticResource RadioButtonStyle}" Content="Aplica IVA"/>
+                                    <RadioButton x:Name="RbDontApplyIVA" Style="{StaticResource RadioButtonStyle}" Content="No aplica IVA"/>
+                                </StackPanel>
                             </Grid>
-                            <TextBlock 
-                                    Style="{StaticResource Subtitle}" 
-                                    Text="%" 
-                                    VerticalAlignment="Center" Margin="208,0,47,0" Grid.ColumnSpan="2"/>
                         </Grid>
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Tasa de interés <Span Foreground="{StaticResource PrimaryColor}">*</Span>
@@ -235,7 +219,7 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Column="0" Grid.Row="0">
-                                <TextBlock Margin="5,2" Text="Ej. 8.9">
+                                <TextBlock Margin="5,2" Text="Ej. 9">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                             <Style.Triggers>
@@ -249,7 +233,7 @@
                                 <TextBox 
                                     Name="TbInterestRate" 
                                     Style="{StaticResource TextInput}"
-                                    TextChanged="TbInterestRateTextChanged" HorizontalAlignment="Left" Width="195"/>
+                                    HorizontalAlignment="Left" Width="195"/>
                             </Grid>
                             <TextBlock 
                                 Style="{StaticResource Subtitle}" 
@@ -301,7 +285,7 @@
                                 <TextBox 
                                     Name="TbInterestOnArrears" 
                                     Style="{StaticResource TextInput}"
-                                    TextChanged="TbInterestOnArrearsTextChanged" HorizontalAlignment="Left" Width="195"/>
+                                    HorizontalAlignment="Left" Width="195"/>
                             </Grid>
                             <TextBlock 
                                     Style="{StaticResource Subtitle}" 
@@ -334,7 +318,7 @@
                                 <TextBox 
                                 Name="TbAdvancePaymentReduction" 
                                 Style="{StaticResource TextInput}"
-                                TextChanged="TbAdvancePaymentReductionTextChanged" HorizontalAlignment="Left" Width="195"/>
+                                HorizontalAlignment="Left" Width="195"/>
                             </Grid>
                             <TextBlock 
                             Style="{StaticResource Subtitle}" 
