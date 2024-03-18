@@ -98,7 +98,7 @@
                             </TextBlock>
                             <TextBox Name="TbCreditConditionName" Style="{StaticResource TextInput}" 
                                      LostFocus="TbCreditConditionNameLostFocus" 
-                                     TextChanged="TbCreditConditionNameTextChanged" MaxLength="16"/>
+                                     TextChanged="TbCreditConditionNameTextChanged" MaxLength="6"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"><Run Text="Estatus "/><Span Foreground="{StaticResource PrimaryColor}"><Run Text="*"/></Span></TextBlock>
@@ -184,7 +184,8 @@
                                 <TextBox 
                                     Name="TbPaymentMonths" 
                                     Style="{StaticResource TextInput}"
-                                    HorizontalAlignment="Left" Width="195"/>
+                                    HorizontalAlignment="Left" Width="195"
+                                    MaxLength="3"/>
                             </Grid>
                             <TextBlock 
                                     Style="{StaticResource Subtitle}" 
@@ -233,7 +234,8 @@
                                 <TextBox 
                                     Name="TbInterestRate" 
                                     Style="{StaticResource TextInput}"
-                                    HorizontalAlignment="Left" Width="195"/>
+                                    HorizontalAlignment="Left" Width="195"
+                                    MaxLength="3"/>
                             </Grid>
                             <TextBlock 
                                 Style="{StaticResource Subtitle}" 
@@ -285,7 +287,8 @@
                                 <TextBox 
                                     Name="TbInterestOnArrears" 
                                     Style="{StaticResource TextInput}"
-                                    HorizontalAlignment="Left" Width="195"/>
+                                    HorizontalAlignment="Left" Width="195"
+                                    MaxLength="3"/>
                             </Grid>
                             <TextBlock 
                                     Style="{StaticResource Subtitle}" 
@@ -304,7 +307,7 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Column="0" Grid.Row="0">
-                                <TextBlock Margin="5,2" Text="Ej. 8.9">
+                                <TextBlock Margin="5,2" Text="Ej. 8">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                             <Style.Triggers>
@@ -318,7 +321,8 @@
                                 <TextBox 
                                 Name="TbAdvancePaymentReduction" 
                                 Style="{StaticResource TextInput}"
-                                HorizontalAlignment="Left" Width="195"/>
+                                HorizontalAlignment="Left" Width="195"
+                                    MaxLength="3"/>
                             </Grid>
                             <TextBlock 
                             Style="{StaticResource Subtitle}" 

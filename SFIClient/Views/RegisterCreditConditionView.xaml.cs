@@ -33,7 +33,6 @@ namespace SFIClient.Views
             LoadCreditTypes();
             ApplyNumericRestrictions();
         }
-
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CbCreditTypes.SelectedIndex != -1)
@@ -41,7 +40,6 @@ namespace SFIClient.Views
                 CreditType selectedCreditType = (CreditType)CbCreditTypes.SelectedItem;
                 newCondition.CreditType = selectedCreditType;
             }
-
         }
         private void InitializeEventHandlers()
         {
@@ -51,7 +49,7 @@ namespace SFIClient.Views
         {
             bool isValidCreditCondition = true;
 
-            if (string.IsNullOrEmpty(TbCreditConditionName.Text))
+            if (string.IsNullOrEmpty(TbCreditConditionName.Text) || !IsValidCreditConditionNameFormat(TbCreditConditionName.Text))
             {
                 HighlightInvalidFields(TbCreditConditionName);
                 isValidCreditCondition = false;
@@ -60,7 +58,6 @@ namespace SFIClient.Views
             {
                 ClearFieldHighlight(TbCreditConditionName);
             }
-
             if (!RbActivePolicy.IsChecked.HasValue || !RbInactivePolicy.IsChecked.HasValue ||
                 (!RbActivePolicy.IsChecked.Value && !RbInactivePolicy.IsChecked.Value))
             {
@@ -73,7 +70,6 @@ namespace SFIClient.Views
                 ClearFieldHighlight(RbActivePolicy);
                 ClearFieldHighlight(RbInactivePolicy);
             }
-
             if (!RbApplyIVa.IsChecked.HasValue || !RbDontApplyIVA.IsChecked.HasValue ||
                 (!RbApplyIVa.IsChecked.Value && !RbDontApplyIVA.IsChecked.Value))
             {
@@ -83,10 +79,9 @@ namespace SFIClient.Views
             }
             else
             {
-                ClearFieldHighlight(RbActivePolicy);
-                ClearFieldHighlight(RbInactivePolicy);
+                ClearFieldHighlight(RbApplyIVa);
+                ClearFieldHighlight(RbDontApplyIVA);
             }
-
             if (CbCreditTypes.SelectedItem == null)
             {
                 HighlightInvalidFields(CbCreditTypes);
@@ -96,7 +91,6 @@ namespace SFIClient.Views
             {
                 ClearFieldHighlight(CbCreditTypes);
             }
-
             if (string.IsNullOrEmpty(TbPaymentMonths.Text))
             {
                 HighlightInvalidFields(TbPaymentMonths);
@@ -106,7 +100,6 @@ namespace SFIClient.Views
             {
                 ClearFieldHighlight(TbPaymentMonths);
             }
-
             if (string.IsNullOrEmpty(TbInterestRate.Text))
             {
                 HighlightInvalidFields(TbInterestRate);
@@ -116,7 +109,6 @@ namespace SFIClient.Views
             {
                 ClearFieldHighlight(TbInterestRate);
             }
-
             if (string.IsNullOrEmpty(TbInterestOnArrears.Text))
             {
                 HighlightInvalidFields(TbInterestOnArrears);
@@ -126,7 +118,6 @@ namespace SFIClient.Views
             {
                 ClearFieldHighlight(TbInterestOnArrears);
             }
-
             if (string.IsNullOrEmpty(TbAdvancePaymentReduction.Text))
             {
                 HighlightInvalidFields(TbAdvancePaymentReduction);
@@ -136,10 +127,8 @@ namespace SFIClient.Views
             {
                 ClearFieldHighlight(TbAdvancePaymentReduction);
             }
-
             return isValidCreditCondition;
         }
-
         private void ApplyNumericRestrictions()
         {
             var textBoxes = new[]
@@ -149,17 +138,14 @@ namespace SFIClient.Views
                 TbInterestOnArrears,
                 TbAdvancePaymentReduction
             };
-
             foreach (var textBox in textBoxes)
             {
                 RestrictToNumericInput(textBox);
             }
         }
-
         private void HighlightInvalidFields(Control control)
         {
             Style errorStyle = null;
-
             if (control is TextBox)
             {
                 errorStyle = (Style)FindResource("TextInputError");
@@ -173,17 +159,14 @@ namespace SFIClient.Views
                 errorStyle = (Style)FindResource("RadioButtonError");
                 control.Style = errorStyle;
             }
-
             if (errorStyle != null)
             {
                 control.Style = errorStyle;
             }
         }
-
         private void ClearFieldHighlight(Control control)
         {
             Style defaultStyle = null;
-
             if (control is TextBox)
             {
                 defaultStyle = (Style)FindResource("TextInput");
@@ -197,13 +180,11 @@ namespace SFIClient.Views
                 defaultStyle = (Style)FindResource("RadioButtonStyle");
                 control.Style = defaultStyle;
             }
-
             if (defaultStyle != null)
             {
                 control.Style = defaultStyle;
             }
         }
-
         private void RestrictToNumericInput(TextBox textBox)
         {
             textBox.PreviewTextInput += (sender, e) =>
@@ -213,7 +194,6 @@ namespace SFIClient.Views
                     e.Handled = true; 
                 }
             };
-
             textBox.PreviewKeyDown += (sender, e) =>
             {
                 if (e.Key == Key.Space)
@@ -222,14 +202,11 @@ namespace SFIClient.Views
                 }
             };
         }
-
-
         private void BtnSaveCreditConditionClick(object sender, RoutedEventArgs e)
         {
             bool isValidCreditCondition = VerifyCreditConditionInformationFields();
             if (isValidCreditCondition)
             {
-                CreditCondition newCondition = new CreditCondition();
                 newCondition.Identifier = TbCreditConditionName.Text.Trim();
                 newCondition.IsActive = RbActivePolicy.IsChecked ?? false;
                 newCondition.IsIvaApplied = RbApplyIVa.IsChecked ?? false;
@@ -246,9 +223,7 @@ namespace SFIClient.Views
             {
                 ShowInvalidFieldsDialog();
             }
-
         }
-
         private void ShowCreateCreditConditionConfirmDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
@@ -264,13 +239,12 @@ namespace SFIClient.Views
             }
 
         }
-
         private void RegisterCreditCondition()
         {
             CreditConditionsServiceClient creditConditiionClient = new CreditConditionsServiceClient();
             try
             {
-                bool isRegistered = creditConditiionClient.RegisterPolicyGranting(newPolicy);
+                bool isRegistered = creditConditiionClient.RegisterCreditCondition(newCondition);
                 if (isRegistered)
                 {
                     MessageBox.Show($"La política de otorgamiento de crédito " +
@@ -313,13 +287,11 @@ namespace SFIClient.Views
             TbInterestOnArrears.Text = string.Empty;
             TbAdvancePaymentReduction.Text = string.Empty;
         }
-
     private void ShowInvalidFieldsDialog()
         {
-            MessageBox.Show("Por favor, verifique que los campos marcados en rojo cuenten con una respuesta.",
+            MessageBox.Show("Por favor, verifique que los campos marcados en rojo cuenten con una respuesta o que esté dada en un formato válido.",
                                 "Campos requeridos", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-
         private void BtnCancelRegisterOfCreditConditionClick(object sender, RoutedEventArgs e)
         {
 
@@ -328,7 +300,6 @@ namespace SFIClient.Views
         {
 
         }
-
         private void LoadCreditTypes()
         {
             CreditsServiceClient creditsService = new CreditsServiceClient();
@@ -353,7 +324,6 @@ namespace SFIClient.Views
                 ShowErrorRecoveringCreditTypesDialog(errorMessage);
             }
         }
-
         private void FillCreditTypesCombobox(List<CreditType> creditTypes)
         {
             ObservableCollection<CreditType> creditTypesPresented = new ObservableCollection<CreditType>();
@@ -369,7 +339,6 @@ namespace SFIClient.Views
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );
-
             if (buttonClicked == MessageBoxResult.OK)
             {
                 RedirectToMainMenu();
@@ -380,51 +349,47 @@ namespace SFIClient.Views
             //TODO: redireccionar cuando exista el menú principal
             Console.WriteLine("Redireccionando al menú principal...");
         }
-
         private void TbCreditConditionNameLostFocus(object sender, RoutedEventArgs e)
         {
             if (isLostFocusHandled)
             {
                 return;
             }
-
             isLostFocusHandled = true;
-
             TextBox textBox = sender as TextBox;
             string input = textBox.Text;
-
-            Regex regex = new Regex(@"^CPP\d{3}$");
-
+            Regex regex = new Regex(@"^CCP\d{3}$");
             if (!regex.IsMatch(input))
             {
-                MessageBox.Show("El nombre debe tener el formato CPP000 donde '000' puede ser cualquier número entre 0 y 9.",
+                MessageBox.Show("El nombre debe tener el formato CCP000 donde '000' puede ser cualquier número entre 0 y 9.",
                                 "Formato inválido", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 textBox.Style = (Style)FindResource("TextInputError");
                 return;
             }
-
             textBox.Style = (Style)FindResource("TextInput");
         }
-
         private void TbCreditConditionNameTextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
             string input = textBox.Text;
 
-            Regex regex = new Regex(@"^CPP\d{3}$");
+            Regex regex = new Regex(@"^CCP\d{3}$");
 
             if (!regex.IsMatch(input))
             {
                 textBox.Style = (Style)FindResource("TextInputError");
+                isLostFocusHandled = false;
             }
             else
             {
                 textBox.Style = (Style)FindResource("TextInput");
             }
-
-
         }
-
+        private bool IsValidCreditConditionNameFormat(string name)
+        {
+            Regex regex = new Regex(@"^CCP\d{3}$");
+            return regex.IsMatch(name);
+        }
     }
 }
