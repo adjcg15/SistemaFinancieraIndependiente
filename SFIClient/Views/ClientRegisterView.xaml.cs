@@ -23,12 +23,40 @@ namespace SFIClient.Views
         public ClientRegisterView()
         {
             InitializeComponent();
+            TbkClientPhoneNumberThird.Visibility = Visibility.Collapsed;
+            GrdClientPhoneNumberThird.Visibility = Visibility.Collapsed;
+            TbkClientPhoneNumberFourth.Visibility = Visibility.Collapsed;
+            GrdClientPhoneNumberFourth.Visibility = Visibility.Collapsed;
         }
 
         private void BtnGoBackClick(object sender, RoutedEventArgs e)
         {
             SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
             this.NavigationService.Navigate(searchClientByRFCView);
+        }
+
+        private void BtnNewPhoneNumberClick(object sender, RoutedEventArgs e)
+        {
+            if (TbkClientPhoneNumberThird.Visibility == Visibility.Collapsed)
+            {
+                TbkClientPhoneNumberThird.Visibility = Visibility.Visible;
+                GrdClientPhoneNumberThird.Visibility = Visibility.Visible;
+                return;
+            }
+            if (TbkClientPhoneNumberFourth.Visibility == Visibility.Collapsed && TbkClientPhoneNumberThird.Visibility == Visibility.Visible)
+            {
+                TbkClientPhoneNumberFourth.Visibility = Visibility.Visible;
+                GrdClientPhoneNumberFourth.Visibility = Visibility.Visible;
+            }
+            if (TbkClientPhoneNumberFourth.Visibility == Visibility.Visible)
+            {
+                SkpNewPhoneNumber.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void BtnNewEmailClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

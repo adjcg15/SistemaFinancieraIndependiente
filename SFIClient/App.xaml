@@ -298,6 +298,50 @@
             </Setter>
         </Style>
 
+        <!--Plus Secondary button-->
+        <Style x:Key="PlusSecondaryBtn" TargetType="Button">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Padding" Value="0, 16, 24, 16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="White"
+                            BorderThickness="2"
+                            BorderBrush="{StaticResource PrimaryColor}"
+                            CornerRadius="4"
+                            x:Name="border"
+                            Cursor="Hand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Width="20" Height="20" Source="/Assets/Plus3Icon.png" Margin="20, 0, 10, 0"/>
+                                <ContentPresenter
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="{TemplateBinding Padding}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MiddlePrimaryColor}"/>
+                                <Setter Property="Foreground" Value="{StaticResource MiddlePrimaryColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!--Search button-->
         <Style x:Key="SearchBtn" TargetType="Button">
             <Setter Property="FontSize" Value="17"/>
