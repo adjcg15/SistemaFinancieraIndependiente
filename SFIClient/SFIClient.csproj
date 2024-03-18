@@ -66,6 +66,9 @@
     <Compile Include="Controlls\ClientControll.xaml.cs">
       <DependentUpon>ClientControll.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ClientRegisterView.xaml.cs">
+      <DependentUpon>ClientRegisterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ClientRegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreditApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

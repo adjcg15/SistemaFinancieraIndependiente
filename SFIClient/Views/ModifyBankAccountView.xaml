@@ -18,7 +18,7 @@
                     </Button>
                     <TextBlock 
                      Foreground="White" Style="{StaticResource Title}"
-                     Text="Datos bancarios" 
+                     Text="Datos bancarios del cliente" 
                      VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>

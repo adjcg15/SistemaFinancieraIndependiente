@@ -202,8 +202,8 @@ namespace SFIClient.Views
 
             if (resultado == DialogResult.OK)
             {
-                MessageBox.Show("Redirigiendo a registrar");
-                //TODO Redirect to Register Client
+                ClientRegisterView clientRegisterView = new ClientRegisterView();
+                this.NavigationService.Navigate(clientRegisterView);
             }
             else if (resultado == DialogResult.Cancel)
             {
@@ -213,7 +213,8 @@ namespace SFIClient.Views
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
         {
-            //TODO Redirect to Register Client
+            ClientRegisterView clientRegisterView = new ClientRegisterView();
+            this.NavigationService.Navigate(clientRegisterView);
         }
     }
 }
