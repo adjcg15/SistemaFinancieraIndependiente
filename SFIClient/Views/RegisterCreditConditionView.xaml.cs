@@ -277,6 +277,7 @@ namespace SFIClient.Views
         private void ClearCreditConditionFields()
         {
             TbCreditConditionName.Text = string.Empty;
+            ClearFieldHighlight(TbCreditConditionName);
             RbActivePolicy.IsChecked = false;
             RbInactivePolicy.IsChecked = false;
             CbCreditTypes.SelectedIndex = -1;
