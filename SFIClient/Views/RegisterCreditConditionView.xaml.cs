@@ -34,5 +34,40 @@ namespace SFIClient.Views
         {
 
         }
+
+        private void BtnCancelRegisterOfCreditConditionClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TbPaymentMonthsTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbApplyIvaTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbInterestRateTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbInterestOnArrearsTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbAdvancePaymentReductionTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void BtnGoBackClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

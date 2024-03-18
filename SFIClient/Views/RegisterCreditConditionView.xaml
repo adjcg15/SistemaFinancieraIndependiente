@@ -16,9 +16,9 @@
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
-         Foreground="White" Style="{StaticResource Title}"
-         Text="Registro de nuevo cliente" 
-         VerticalAlignment="Center"/>
+                     Foreground="White" Style="{StaticResource Title}"
+                     Text="Registro condición de crédito" 
+                     VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="40, 40, 40, 0">
@@ -38,7 +38,7 @@
                     Grid.Column="0" 
                     Grid.Row="0"
                     Style="{StaticResource Title}" 
-                    Text="Registro"/>
+                    Text=""/>
                     <TextBlock 
                     Grid.Column="1"
                     Grid.Row="0"
