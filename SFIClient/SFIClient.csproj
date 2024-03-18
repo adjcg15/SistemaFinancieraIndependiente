@@ -72,6 +72,9 @@
     </Compile>
     <Compile Include="Utilities\FileToolkit.cs" />
     <Compile Include="Utilities\DataValidator.cs" />
+    <Compile Include="Views\CreditsListView.xaml.cs">
+      <DependentUpon>CreditsListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CreditApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreditsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,9 +185,14 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\CheckBoxIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
