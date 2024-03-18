@@ -17,6 +17,8 @@ namespace SFIDataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public credit_applications()
         {
+            this.credits = new HashSet<credit>();
+            this.dictums = new HashSet<dictum>();
             this.digital_documents = new HashSet<digital_documents>();
         }
     
@@ -26,20 +28,20 @@ namespace SFIDataAccess
         public string purpose { get; set; }
         public decimal requested_amount { get; set; }
         public string client_rfc { get; set; }
-        public string credit_invoice { get; set; }
         public int id_credit_application_state { get; set; }
-        public int id_dictum { get; set; }
         public string employee_number { get; set; }
-        public int credit_condition_identifier { get; set; }
+        public string credit_condition_identifier { get; set; }
         public int id_credit_type { get; set; }
     
         public virtual client client { get; set; }
         public virtual credit_applications_state credit_applications_state { get; set; }
         public virtual credit_conditions credit_conditions { get; set; }
         public virtual credit_types credit_types { get; set; }
-        public virtual credit credit { get; set; }
-        public virtual dictum dictum { get; set; }
         public virtual system_accounts system_accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<credit> credits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dictum> dictums { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<digital_documents> digital_documents { get; set; }
     }

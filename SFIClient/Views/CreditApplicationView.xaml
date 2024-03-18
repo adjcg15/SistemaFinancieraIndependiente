@@ -1,0 +1,327 @@
+﻿<Page x:Class="SFIClient.Views.CredditApplicationController"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SFIClient.Views"
+      xmlns:usercontrols="clr-namespace:SFIClient.Controlls"
+      mc:Ignorable="d" 
+      d:Width="1280" d:Height="2000"
+      Title="Solicitud de crédito para cliente">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button 
+                        Click="BtnDiscardApplicationClick" 
+                        Style="{StaticResource NoHoverStyle}" 
+                        Width="40" Height="40" Margin="0, 0, 16, 0" 
+                        Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Trámite de solicitud de crédito" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!--Client data-->
+            <StackPanel Margin="40, 56">
+                <TextBlock 
+                    x:Name="TbkClientName"
+                    Style="{StaticResource Subtitle}" Margin="0, 0, 0, 8"
+                    Text="Solicitante"/>
+                <TextBlock 
+                    Style="{StaticResource Title}" Foreground="{StaticResource DarkPrimaryColor}"
+                    Text="Andrés Manuel López Obrador"/>
+                <TextBlock 
+                    Style="{StaticResource Emphasis}" FontWeight="Bold" Margin="0, 8">
+                    Con CURP registrado <Span x:Name="SpnClientCurp">LOOB531113HVZRRNA2</Span>
+                </TextBlock>
+                <TextBlock Style="{StaticResource Paragraph}">
+                    Salario neto registrado de 
+                    <Bold x:Name="BldClientSalary">125,000</Bold><Bold>MXN</Bold> 
+                    mensuales en "<Span x:Name="SpnClientWorkCenterName">Gobierno de México</Span>".
+                </TextBlock>
+            </StackPanel>
+
+            <!--Form-->
+            <StackPanel Margin="40, 0">
+                <Border 
+                    Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    <TextBlock Style="{StaticResource Title}" Text="Solicitud"/>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--First row-->
+                    <TextBlock 
+                        TextWrapping="Wrap"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="Información del crédito" 
+                        Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 12, 0, 0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Tipo de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito" TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedItem, ElementName=CbCreditTypes}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ComboBox 
+                                SelectionChanged="CbCreditTypesSelectionChanged" 
+                                Name="CbCreditTypes" 
+                                DisplayMemberPath="Name"
+                                Grid.ColumnSpan="2"
+                                Style="{StaticResource ComboBox}"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Monto solicitado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <TextBlock Margin="5,2" Text="Cantidad aspirada en pesos mexicanos">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbRequestedAmount}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox 
+                                    Name="TbRequestedAmount" 
+                                    Style="{StaticResource TextInput}"
+                                    TextChanged="TbRequestedAmountTextChanged"/>
+                            </Grid>
+                            <TextBlock 
+                                Grid.Column="1" Grid.Row="0" 
+                                Style="{StaticResource Subtitle}" 
+                                Text="MXN" 
+                                VerticalAlignment="Center" Margin="24px, 0, 0, 0"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Monto mínimo aceptado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <TextBlock Margin="5,2" Text="Cantidad mínima aceptada en pesos mexicanos">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbMinimumAcceptedAmount}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox 
+                                    Name="TbMinimumAcceptedAmount" 
+                                    Style="{StaticResource TextInput}"
+                                    TextChanged="TbMinimumAcceptedAmountTextChanged"/>
+                            </Grid>
+                            <TextBlock 
+                                Grid.Column="1" Grid.Row="0" 
+                                Style="{StaticResource Subtitle}" 
+                                Text="MXN" 
+                                VerticalAlignment="Center" Margin="24px, 0, 0, 0"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Propósito del crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2" Text="Descripción detallada del motivo de la solicitud." TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbCreditPurpose}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox 
+                                Name="TbCreditPurpose" 
+                                Style="{StaticResource TextInput}"
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                VerticalScrollBarVisibility="Auto"
+                                Height="160"
+                                MaxLength="300"
+                            />
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Copia de INE(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Button 
+                                x:Name="BtnAttachIne"
+                                Click="BtnAttachIneClick"
+                                Content="Adjuntar INE" 
+                                Style="{StaticResource FileUploader}"/>
+                            <Button 
+                                Visibility="Hidden" 
+                                Content="archivo_ine.pdf" 
+                                Style="{StaticResource FilePresenter}"
+                                x:Name="BtnDetachIne"
+                                Click="BtnDetachIneClick"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Copia de comprobante de domicilio(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <Button 
+                                x:Name="BtnAttachProofOfAddress"
+                                Click="BtnAttachProofOfAddressClick"
+                                Content="Adjuntar comprobante de domicilio" 
+                                Style="{StaticResource FileUploader}"/>
+                            <Button 
+                                x:Name="BtnDetachProofOfAddress"
+                                Click="BtnDetachProofOfAddressClick"
+                                Visibility="Hidden" 
+                                Content="archivo_ine.pdf" 
+                                Style="{StaticResource FilePresenter}"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Copia de comprobante de ingresos(PDF) <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid>
+                            <Button 
+                                x:Name="BtnAttachProofOfIncome"
+                                Click="BtnAttachProofOfIncomeClick"
+                                Content="Adjuntar comprobante de ingresos" 
+                                Style="{StaticResource FileUploader}"/>
+                            <Button 
+                                x:Name="BtnDetachProofOfIncome"
+                                Click="BtnDetachProofOfIncomeClick"
+                                Visibility="Hidden" 
+                                Content="archivo_ine.pdf" 
+                                Style="{StaticResource FilePresenter}"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!--Second row-->
+                    <Border
+                        Margin="0, 40"
+						Grid.Column="0"
+						Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    </Border>
+
+                    <!--Third row-->
+                    <TextBlock 
+                        TextWrapping="Wrap"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Text="Condiciones aplicables" 
+                        Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                    <Grid Grid.Column="1" Grid.Row="2" Margin="16, 12, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock FontSize="16" FontWeight="bold">
+                            <Span x:Name="SpnCreditConditionLabel">Condiciones de crédito</Span> 
+                            <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+
+                        <!--Empty list message-->
+                        <Grid x:Name="GrdEmptyConditionsMessage" Grid.Row="1" Margin="0, 40">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image 
+                                Margin="0, 0, 24, 0"
+                                Width="80" Height="80"
+                                Source="/Assets/GrayInfoIcon.png"/>
+                            <TextBlock 
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource Subtitle}" FontWeight="Normal" TextWrapping="Wrap"
+                                Foreground="{StaticResource DarkGray}"
+                                Text="Seleccione un tipo de crédito para cargar las condiciones de crédito aplicables"/>
+                        </Grid>
+                        <!--Policies list-->
+                        <StackPanel 
+                            x:Name="SkpApplicableCreditConditions" 
+                            Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                            <!--<usercontrols:CreditApplicationCreditConditionControl/>
+                            <usercontrols:CreditApplicationCreditConditionControl/>-->
+                        </StackPanel>
+                    </Grid>
+
+                    <!--Fourth row-->
+                    <Border
+                        Margin="0, 0, 0, 40"
+				        Grid.Column="0"
+				        Grid.Row="3"
+                        Grid.ColumnSpan="3"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    </Border>
+                </Grid>
+            </StackPanel>
+
+            <!--Buttons section-->
+            <StackPanel Margin="40, 0, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button 
+                    Click="BtnDiscardApplicationClick" 
+                    Style="{StaticResource SecondaryBtn}" 
+                    Margin="0, 0, 24, 0" Content="Cancelar"/>
+                <Button 
+                    Click="BtnGenerateCreditApplicationClick" 
+                    Style="{StaticResource PrimaryBtn}" 
+                    Content="Generar solicitud"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

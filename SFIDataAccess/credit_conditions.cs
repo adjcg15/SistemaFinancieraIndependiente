@@ -21,7 +21,6 @@ namespace SFIDataAccess
             this.regimes = new HashSet<regime>();
         }
     
-        public int identifier { get; set; }
         public double interest_rate { get; set; }
         public bool is_active { get; set; }
         public bool is_iva_applied { get; set; }
@@ -29,6 +28,7 @@ namespace SFIDataAccess
         public double advance_payment_reduction { get; set; }
         public int payment_months { get; set; }
         public int id_credit_type { get; set; }
+        public string identifier { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<credit_applications> credit_applications { get; set; }

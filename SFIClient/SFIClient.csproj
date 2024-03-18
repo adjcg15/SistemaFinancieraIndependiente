@@ -37,8 +37,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,11 +64,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
+      <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreditApplicationView.xaml.cs">
+      <DependentUpon>CreditApplicationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\FileToolkit.cs" />
     <Compile Include="Utilities\DataValidator.cs" />
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +91,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CreditApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ResponsiveExampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +129,12 @@
     </None>
     <None Include="Connected Services\SFIServices\item3.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditCondition.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.DataTypeExample.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -151,7 +173,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controlls\" />
+    <Resource Include="Assets\PlusIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\DiscardFileIcon.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\GrayInfoIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

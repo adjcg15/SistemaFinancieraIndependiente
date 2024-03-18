@@ -7,4 +7,77 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DataTypeExample" nillable="true" type="tns:DataTypeExample" />
+  <xs:complexType name="ArrayOfCreditType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditType" nillable="true" type="tns:CreditType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditType" nillable="true" type="tns:ArrayOfCreditType" />
+  <xs:complexType name="CreditType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Identifier" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditType" nillable="true" type="tns:CreditType" />
+  <xs:complexType name="CreditApplication">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Client" nillable="true" type="tns:Client" />
+      <xs:element minOccurs="0" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+      <xs:element minOccurs="0" name="CreditType" nillable="true" type="tns:CreditType" />
+      <xs:element minOccurs="0" name="DigitalDocuments" nillable="true" type="tns:ArrayOfDigitalDocument" />
+      <xs:element minOccurs="0" name="EmployeeNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpeditionDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinimumAmountAccepted" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Purpose" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestedAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditApplication" nillable="true" type="tns:CreditApplication" />
+  <xs:complexType name="Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Birthdate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Curp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rfc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Client" nillable="true" type="tns:Client" />
+  <xs:complexType name="CreditCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AdvancePaymentReduction" type="xs:double" />
+      <xs:element minOccurs="0" name="CreditType" nillable="true" type="tns:CreditType" />
+      <xs:element minOccurs="0" name="Identifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InterestOnArrears" type="xs:double" />
+      <xs:element minOccurs="0" name="InterestRate" type="xs:double" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsIvaApplied" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PaymentMonths" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+  <xs:complexType name="ArrayOfDigitalDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DigitalDocument" nillable="true" type="tns:DigitalDocument" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDigitalDocument" nillable="true" type="tns:ArrayOfDigitalDocument" />
+  <xs:complexType name="DigitalDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Format" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DigitalDocument" nillable="true" type="tns:DigitalDocument" />
+  <xs:complexType name="ArrayOfCreditCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditCondition" nillable="true" type="tns:ArrayOfCreditCondition" />
 </xs:schema>

@@ -13,4 +13,42 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllCreditTypes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllCreditTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="GetAllCreditTypesResult" nillable="true" type="q2:ArrayOfCreditType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterCreditApplication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="newApplication" nillable="true" type="q3:CreditApplication" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterCreditApplicationResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverCreditConditionsByCreditType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="creditTypeIdentifier" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverCreditConditionsByCreditTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverCreditConditionsByCreditTypeResult" nillable="true" type="q4:ArrayOfCreditCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

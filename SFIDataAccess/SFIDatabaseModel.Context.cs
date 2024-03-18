@@ -150,5 +150,46 @@ namespace SFIDataAccess
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual int RegisterCreditApplication(string invoice, Nullable<System.DateTime> expedition_date, Nullable<decimal> minimun_amount_accepted, string purpose, Nullable<decimal> requested_amount, string client_rfc, string employee_number, string credit_condition_identifier, Nullable<int> id_credit_type)
+        {
+            var invoiceParameter = invoice != null ?
+                new ObjectParameter("invoice", invoice) :
+                new ObjectParameter("invoice", typeof(string));
+    
+            var expedition_dateParameter = expedition_date.HasValue ?
+                new ObjectParameter("expedition_date", expedition_date) :
+                new ObjectParameter("expedition_date", typeof(System.DateTime));
+    
+            var minimun_amount_acceptedParameter = minimun_amount_accepted.HasValue ?
+                new ObjectParameter("minimun_amount_accepted", minimun_amount_accepted) :
+                new ObjectParameter("minimun_amount_accepted", typeof(decimal));
+    
+            var purposeParameter = purpose != null ?
+                new ObjectParameter("purpose", purpose) :
+                new ObjectParameter("purpose", typeof(string));
+    
+            var requested_amountParameter = requested_amount.HasValue ?
+                new ObjectParameter("requested_amount", requested_amount) :
+                new ObjectParameter("requested_amount", typeof(decimal));
+    
+            var client_rfcParameter = client_rfc != null ?
+                new ObjectParameter("client_rfc", client_rfc) :
+                new ObjectParameter("client_rfc", typeof(string));
+    
+            var employee_numberParameter = employee_number != null ?
+                new ObjectParameter("employee_number", employee_number) :
+                new ObjectParameter("employee_number", typeof(string));
+    
+            var credit_condition_identifierParameter = credit_condition_identifier != null ?
+                new ObjectParameter("credit_condition_identifier", credit_condition_identifier) :
+                new ObjectParameter("credit_condition_identifier", typeof(string));
+    
+            var id_credit_typeParameter = id_credit_type.HasValue ?
+                new ObjectParameter("id_credit_type", id_credit_type) :
+                new ObjectParameter("id_credit_type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegisterCreditApplication", invoiceParameter, expedition_dateParameter, minimun_amount_acceptedParameter, purposeParameter, requested_amountParameter, client_rfcParameter, employee_numberParameter, credit_condition_identifierParameter, id_credit_typeParameter);
+        }
     }
 }

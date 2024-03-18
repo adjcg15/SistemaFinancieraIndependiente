@@ -75,10 +75,19 @@
             </Setter>
         </Style>
 
+        <!--Text input placeholder-->
+        <Style x:Key="TxtInputPlaceHolder" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="16, 12, 16, 12"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource Gray}"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+
         <!--Basic text inputs with error-->
         <Style x:Key="TextInputError" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Red}"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="16, 12, 16, 12"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -92,26 +101,141 @@
                             CornerRadius="4">
                             <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="PART_ContentHost"/>
                         </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--File uploader input-->
+        <Style x:Key="FileUploader" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="4"
+                            Background="White"
+                            Cursor="Hand">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                                    Grid.Column="0"
+                                    Source="/Assets/PlusIcon.png" 
+                                    Width="20" Height="20" VerticalAlignment="Center"/>
+                                <ContentPresenter
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
                                 <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
                             </Trigger>
                             <Trigger Property="IsFocused" Value="False">
-                                <Setter TargetName="border" Property="BorderBrush" Value="Red"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MediumGray}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!--File uploader input with errors-->
+        <Style x:Key="FileUploaderError" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Red}"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="4"
+                            Background="White"
+                            Cursor="Hand">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                                    Grid.Column="0"
+                                    Source="/Assets/PlusIcon.png" 
+                                    Width="20" Height="20" VerticalAlignment="Center"/>
+                                <ContentPresenter
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-        <!--Text input placeholder-->
-        <Style x:Key="TxtInputPlaceHolder" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="16, 12, 16, 12"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource Gray}"/>
-            <Setter Property="Visibility" Value="Collapsed"/>
+        <!--File presenter input-->
+        <Style x:Key="FilePresenter" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGray}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="4"
+                            Background="White"
+                            Cursor="Hand">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                            Grid.Column="0"
+                            Source="/Assets/DiscardFileIcon.png" 
+                            Width="20" Height="20" VerticalAlignment="Center" />
+                                <ContentPresenter
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!--ComboBox arrow-->
@@ -168,7 +292,7 @@
                                 BorderBrush="{StaticResource MediumGray}"
                                 BorderThickness="2"
                                 CornerRadius="4"
-                                Cursor="Hand" Background="White">
+                                Cursor="Hand">
                                 <Grid>
                                     <ToggleButton 
                                         x:Name="ToggleButton"
@@ -217,6 +341,73 @@
                             <Trigger Property="IsFocused" Value="False">
                                 <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource MediumGray}"/>
                             </Trigger>
+                            <DataTrigger Binding="{Binding SelectedItem, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--ComboBox with errors-->
+        <Style x:Key="ComboBoxError" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="MinWidth" Value="200"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid Height="50" Cursor="Hand">
+                            <Border
+                                BorderBrush="{StaticResource Red}"
+                                BorderThickness="2"
+                                CornerRadius="4"
+                                Cursor="Hand">
+                                <Grid>
+                                    <ToggleButton 
+                                        x:Name="ToggleButton"
+                                        Grid.Column="2"
+                                        ClickMode="Press"
+                                        Focusable="false"
+                                        IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Style="{StaticResource ComboBoxToggleButton}"/>
+                                    <Border Padding="16, 0, 0, 0">
+                                        <ContentPresenter 
+                                            x:Name="ContentSite"
+                                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                            Content="{TemplateBinding SelectionBoxItem}"
+                                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                            HorizontalAlignment="Left"
+                                            IsHitTestVisible="False"
+                                            VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <Popup x:Name="Popup"
+                                AllowsTransparency="True"
+                                IsOpen="{TemplateBinding IsDropDownOpen}"
+                                Placement="Bottom"
+                                PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                    SnapsToDevicePixels="True"
+                                    MinWidth="{TemplateBinding ActualWidth}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                        Background="White"
+                                        BorderThickness="2"
+                                        BorderBrush="Black"/>
+                                    <ScrollViewer Margin="4" SnapsToDevicePixels="True">
+                                        <ItemsPresenter 
+                                            KeyboardNavigation.DirectionalNavigation="Contained"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
                             <DataTrigger Binding="{Binding SelectedItem, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
                                 <Setter TargetName="ContentSite" Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
@@ -350,6 +541,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
+                        <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
 
