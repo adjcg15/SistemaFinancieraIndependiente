@@ -584,5 +584,25 @@ namespace SFIClient.Views
                 MessageBoxImage.Warning
             );
         }
+
+        private void BtnDiscardApplicationClick(object sender, RoutedEventArgs e)
+        {
+            ShowDiscardApplicationQuestionDialog();
+        }
+
+        private void ShowDiscardApplicationQuestionDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "Se perderá toda la información ingresada, ¿esta seguro que desea descartar la solicitud de crédito?",
+                "Confirmar descartado de solicitid",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }

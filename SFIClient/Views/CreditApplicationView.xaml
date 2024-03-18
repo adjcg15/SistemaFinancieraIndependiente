@@ -13,7 +13,11 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                    <Button 
+                        Click="BtnDiscardApplicationClick" 
+                        Style="{StaticResource NoHoverStyle}" 
+                        Width="40" Height="40" Margin="0, 0, 16, 0" 
+                        Background="Transparent" Cursor="Hand">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -309,7 +313,10 @@
 
             <!--Buttons section-->
             <StackPanel Margin="40, 0, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
+                <Button 
+                    Click="BtnDiscardApplicationClick" 
+                    Style="{StaticResource SecondaryBtn}" 
+                    Margin="0, 0, 24, 0" Content="Cancelar"/>
                 <Button 
                     Click="BtnGenerateCreditApplicationClick" 
                     Style="{StaticResource PrimaryBtn}" 
