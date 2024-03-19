@@ -67,6 +67,12 @@
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditConditionControl.xaml.cs">
+      <DependentUpon>CreditConditionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
+      <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
@@ -85,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controlls\CreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +107,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ConsultConditionsCreditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreditApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
