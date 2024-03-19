@@ -124,7 +124,7 @@ namespace SFIClient.Views
             List<Credit> filteredCreditsList = FilterCreditsList();
             showedCreditsList = filteredCreditsList;
 
-            if(filteredCreditsList.Count == 0)
+            if(showedCreditsList.Count == 0)
             {
                 ShowEmptyCreditsListMessage();
             }
@@ -170,6 +170,36 @@ namespace SFIClient.Views
                     return matchFilter;
                 })
                 .ToList();
+        }
+
+        private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)
+        {
+            string searchQuery = TbSearchbar.Text.Trim();
+            List<Credit> creditsFilteredJustBySearch = allCreditsList.Where(credit => {
+                string clientFullName = credit.Client.LastName;
+                clientFullName += credit.Client.Surname != "" ? " {credit.Client.Surname} " : " ";
+                clientFullName += credit.Client.LastName;
+
+                return credit.Invoice.Contains(searchQuery)
+                    || clientFullName.Contains(searchQuery);
+            })
+            .ToList();
+
+            showedCreditsList = creditsFilteredJustBySearch;
+
+            if (showedCreditsList.Count == 0)
+            {
+                ShowEmptyCreditsListMessage();
+            }
+            else
+            {
+                ShowCreditsList();
+            }
+
+            DpkFromDate.SelectedDate = null;
+            DpkToDate.SelectedDate = null;
+            CkbCreditsInProgress.IsChecked = false;
+            CkbPaidCredits.IsChecked = false;
         }
 
         private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
