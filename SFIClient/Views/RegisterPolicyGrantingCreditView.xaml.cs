@@ -142,7 +142,7 @@ namespace SFIClient.Views
         }
         private void ShowInvalidFieldsDialog()
         {
-            MessageBox.Show("Por favor, verifique que los campos marcados en rojo cuenten con una respuesta.",
+            MessageBox.Show("Por favor, verifique que los campos marcados en rojo cuenten con una respuesta y que haya seleccionado una fecha de vigencia.",
                                 "Campos requeridos", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         private void ShowCreateNewPolicyConfirmDialog()
