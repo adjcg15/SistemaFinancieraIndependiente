@@ -89,7 +89,6 @@ namespace SFIClient.Views
         private void DisableFilterOptions()
         {
             BtnSearchCredits.IsEnabled = false;
-            BtnApplyFilters.IsEnabled = false;
             BtnRestartFilters.IsEnabled = false;
             DpkFromDate.IsEnabled = false;
             DpkToDate.IsEnabled = false;
@@ -106,6 +105,9 @@ namespace SFIClient.Views
 
         private void ShowCreditsList()
         {
+            SkpEmptyCreditsListMessage.Visibility = Visibility.Collapsed;
+            SkpCreditsList.Visibility = Visibility.Visible;
+
             SkpCreditsList.Children.Clear();
 
             showedCreditsList.ForEach(credit =>
@@ -115,6 +117,59 @@ namespace SFIClient.Views
 
                 SkpCreditsList.Children.Add(creditCard);
             });
+        }
+
+        private void BtnSearchCreditsClick(object sender, RoutedEventArgs e)
+        {
+            List<Credit> filteredCreditsList = FilterCreditsList();
+            showedCreditsList = filteredCreditsList;
+
+            if(filteredCreditsList.Count == 0)
+            {
+                ShowEmptyCreditsListMessage();
+            }
+            else
+            {
+                ShowCreditsList();
+            }
+        }
+
+        private List<Credit> FilterCreditsList()
+        {
+            string searchQuery = TbSearchbar.Text.Trim();
+            DateTime fromDate = DpkFromDate.SelectedDate ?? DateTime.MinValue;
+            DateTime toDate = DpkToDate.SelectedDate ?? DateTime.MaxValue;
+            bool includeCreditsInProgress = (bool)CkbCreditsInProgress.IsChecked;
+            bool includePaidCredits = (bool)CkbPaidCredits.IsChecked;
+
+            return allCreditsList
+                .Where(credit =>
+                {
+                    string clientFullName = credit.Client.LastName;
+                    clientFullName += credit.Client.Surname != "" ? " {credit.Client.Surname} " : " ";
+                    clientFullName += credit.Client.LastName;
+
+                    return credit.Invoice.Contains(searchQuery)
+                        || clientFullName.Contains(searchQuery);
+                })
+                .Where(credit => fromDate <= credit.ApprovalDate)
+                .Where(credit => credit.ApprovalDate <= toDate)
+                .Where(credit =>
+                {
+                    bool matchFilter = true;
+
+                    if(includeCreditsInProgress && !includePaidCredits)
+                    {
+                        matchFilter = !credit.SettlementDate.HasValue;
+                    }
+                    else if(includePaidCredits && !includeCreditsInProgress)
+                    {
+                        matchFilter = credit.SettlementDate.HasValue;
+                    }
+                    
+                    return matchFilter;
+                })
+                .ToList();
         }
 
         private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)

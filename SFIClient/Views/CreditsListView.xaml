@@ -72,8 +72,7 @@
                         Style="{StaticResource CheckBox}">Créditos liquidados</CheckBox>
 
                     <StackPanel Orientation="Horizontal" Margin="0, 32, 0, 0">
-                        <Button x:Name="BtnRestartFilters" Margin="0, 0, 16, 0" Style="{StaticResource TernaryBtn}">Limpiar</Button>
-                        <Button x:Name="BtnApplyFilters" Style="{StaticResource PrimaryBtn}">Aplicar</Button>
+                        <Button x:Name="BtnRestartFilters" Style="{StaticResource TernaryBtn}">Limpiar</Button>
                     </StackPanel>
                 </StackPanel>
 
@@ -112,6 +111,7 @@
 
                         <Button 
                             x:Name="BtnSearchCredits"
+                            Click="BtnSearchCreditsClick"
                             Width="48" Height="48" Grid.Column="1" 
                             Style="{StaticResource SearchBtn}"/>
                     </Grid>
@@ -121,7 +121,7 @@
                         <StackPanel x:Name="SkpEmptyCreditsListMessage" Visibility="Collapsed" Margin="0 64">
                             <Image Width="120" Height="120" Source="/Assets/EmptyItemsListicon.png"/>
                             <TextBlock 
-                                Text="Aún no hay créditos registrados"
+                                Text="No hay créditos para mostrar"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource Subtitle}"
                                 FontWeight="Normal"
