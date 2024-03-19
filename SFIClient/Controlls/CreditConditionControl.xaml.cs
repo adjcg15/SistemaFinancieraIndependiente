@@ -18,7 +18,7 @@ namespace SFIClient.Controlls
     /// <summary>
     /// Lógica de interacción para CreditConditionControl.xaml
     /// </summary>
-    public partial class CreditConditionControl : Page
+    public partial class CreditConditionControl : UserControl
     {
         public CreditConditionControl()
         {

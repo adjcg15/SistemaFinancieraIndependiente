@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,19 @@ namespace SFIClient.Views
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
                 // TODO: Redirigir al menú principal
             }
+        }
+        private void ShowClientWithAllOptions(Client client)
+        {
+            ClientControll clientControll = new ClientControll();
+            clientControll.LblClientRFC.Content = client.Rfc;
+            clientControll.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
+            clientControll.LblClientCreditStatus.Content = "Cliente sin crédito y sin solicitud activa";
+            ItcClients.Items.Add(clientControll);
+        }
+        private void ShowCreditCondition(CreditCondition creditCondition)
+        {
+            CreditConditionControl creditConditionControl = new CreditConditionControl();
+            creditConditionControl.LblApplyIVA
         }
 
         private void AddCreditConditionsToUI(List<CreditCondition> creditConditions)

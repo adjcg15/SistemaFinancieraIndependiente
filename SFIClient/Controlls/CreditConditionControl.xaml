@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             d:DesignHeight="240" d:DesignWidth="320">
+             d:DesignHeight="260" d:DesignWidth="320">
 
     <Border x:Name="BdrCreditConditionCard"
             Background="#FAFAFA"
@@ -32,70 +32,46 @@
            HorizontalAlignment="Left"
            RadiusX="4"
            RadiusY="4"/>
-
-
             <!-- Card header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
+                <Label Name="LblClientCreditStatus" HorizontalAlignment="Left" Margin="22,41,0,0" Content="CCP01" 
+                       VerticalAlignment="Top" Width="69" Height="36" FontSize="19" Foreground="{StaticResource DarkPrimaryColor} " FontWeight="Bold"/>
+                <Label Name="LblIsActive" HorizontalAlignment="Left" Margin="15,0,0,0" Content="Activa" 
+                        VerticalAlignment="Top" Width="61" Height="36" FontSize="12" Foreground="{StaticResource LightGray} " FontWeight="Bold"/>
+                <Label Name="LblApplyIVA" HorizontalAlignment="Left" Margin="217,0,0,0" Content="Aplica IVA" 
+                         VerticalAlignment="Top" Width="75" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} " FontWeight="Bold" Grid.ColumnSpan="2"/>
+                <Label Name="LblMesesPlazo" HorizontalAlignment="Left" Margin="23,77,0,0" Content="6" 
+                            VerticalAlignment="Top" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} " FontWeight="Bold"/>
+                <Label  HorizontalAlignment="Left" Margin="36,77,0,0" Content="Meses de plazo para pago" 
+                            VerticalAlignment="Top" Width="176" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} "/>
+                <Label Name="LblInteres" HorizontalAlignment="Left" Margin="23,102,0,0" Content="6" 
+                            VerticalAlignment="Top" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} " FontWeight="Bold"/>
+                <Label  HorizontalAlignment="Left" Margin="36,102,0,0" Content="% de interés" 
+                            VerticalAlignment="Top" Width="76" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} "/>
+                <Label Name="LblInteresMoratorio" HorizontalAlignment="Left" Margin="22,127,0,0" Content="6" 
+                            VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} " FontWeight="Bold"/>
+                <Label  HorizontalAlignment="Left" Margin="36,127,0,0" Content="% de interés moratorio" 
+                            VerticalAlignment="Top" Width="154" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} "/>
+                <Label Name="LblInteresDescuento" HorizontalAlignment="Left" Margin="22,152,0,0" Content="6" 
+                            VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} " FontWeight="Bold"/>
+                <Label  HorizontalAlignment="Left" Margin="36,152,0,0" Content="% de descuento por pago anticipado" 
+                            VerticalAlignment="Top" Width="210" Height="25" FontSize="12" Foreground="{StaticResource DarkGray} "/>
 
-                <TextBlock Grid.Column="0"
-                           Foreground="{StaticResource DarkPrimaryColor}"
-                           Style="{StaticResource Title}"
-                           Text="CCP01"
-                           FontSize="20"
-                           x:Name="TbkIdentifier"
-                           Grid.ColumnSpan="2"
-                           Margin="21,35,61,-30"/>
-                <TextBlock Grid.Column="1"
-                           Style="{StaticResource Emphasis}"
-                           Foreground="{StaticResource DarkPrimaryColor}"
-                           FontWeight="Bold"
-                           Text="Aplica IVA"
-                           x:Name="TbkIva"
-                           FontSize="10" Margin="166,0,0,0"/>
-                <TextBlock
-                           Style="{StaticResource Emphasis}"
-                           FontWeight="Bold"
-                    Foreground="{StaticResource Gray}"
-                           Text="Activa"
-                           x:Name="TbkIsActive"
-                           FontSize="11"
-                           Margin="21,0,152,0" Grid.ColumnSpan="2"/>
             </Grid>
 
             <!-- Card content -->
-            <Grid Grid.Row="1">
-                <TextBlock x:Name="TbkPaymentMonths"
-                           Style="{StaticResource TinyText}"
-                           Margin="26,36,-26,-36">
-                    <Bold x:Name="SpnPaymentMonths">5</Bold> meses de plazo para pago
-                </TextBlock>
-                <TextBlock x:Name="TbkInterestRate"
-                           Style="{StaticResource TinyText}"
-                           Margin="26,57,-26,-47">
-                    <Bold x:Name="SpnInterestRate">5</Bold>% de tasa de interés
-                </TextBlock>
-            </Grid>
 
             <!-- Card footer -->
             <Grid Grid.Row="3" Margin="10,58,-10,31">
-                <TextBlock Margin="17,-8,-17,19"
-                           Style="{StaticResource TinyText}">
-                    <Bold x:Name="BldInterestOnArrears">4</Bold>% de interés moratorio
-                </TextBlock>
-                <TextBlock Margin="17,15,-17,-6"
-                           TextWrapping="Wrap"
-                           Style="{StaticResource TinyText}">
-                    <Bold x:Name="BldAdvancePaymentReduction">5</Bold>% de descuento por pago adelantado
-                </TextBlock>
                 <Button Style="{StaticResource TernaryBtn}"
                             Content="Editar"
                             FontSize="13"
                             Height="50"
-                            Width="96" Margin="190,39,0,-30"/>
+                            Width="96" Margin="179,-60,11,10"/>
             </Grid>
         </Grid>
     </Border>
