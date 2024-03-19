@@ -113,14 +113,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientSurnmae}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientSurname}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSurnmae" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientSurname" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -145,7 +145,7 @@
                             Fecha de nacimiento <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <Border Style="{StaticResource RoundedBorder}">
+                            <Border Name="BdrClientBirthdate" Style="{StaticResource RoundedBorder}">
                                 <DatePicker Name="DpkClientBirthdate" Style="{StaticResource DatePicker}"/>
                             </Border>
                         </Grid>
@@ -158,14 +158,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbCurp}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientCurp}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbCurp" Style="{StaticResource TextInput}" MaxLength="18"/>
+                            <TextBox Name="TbClientCurp" Style="{StaticResource TextInput}" MaxLength="18"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -176,14 +176,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbRfc}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientRfc}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbRfc" Style="{StaticResource TextInput}" MaxLength="13"/>
+                            <TextBox Name="TbClientRfc" Style="{StaticResource TextInput}" MaxLength="13"/>
                         </Grid>
                     </StackPanel>
 
@@ -713,7 +713,7 @@
                     <StackPanel Grid.Column="0" Grid.Row="8">
                         <TextBlock 
                             TextWrapping="Wrap"
-                            Text="Datos bancarios" 
+                            Text="Datos de contacto" 
                             Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}" Margin="0, 0, 10, 0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="8" Margin="0, 12, 0, 0">
@@ -810,10 +810,10 @@
                             <TextBox Name="TbClientEmailFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            Correo electrónico 2 <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        <TextBlock Name="TbkClientEmailSecond" FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Correo electrónico 2 <Span Foreground="{StaticResource PrimaryColor}">(opcional)</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 24">
+                        <Grid Name="GrdClientEmailSecond" Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa el correo electrónico">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -828,10 +828,10 @@
                             <TextBox Name="TbClientEmailSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            Correo electrónico 3 <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        <TextBlock Name="TbkClientEmailThird" FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Correo electrónico 3 <Span Foreground="{StaticResource PrimaryColor}">(opcional)</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 24">
+                        <Grid Name="GrdClientEmailThird" Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa el correo electrónico">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -846,7 +846,7 @@
                             <TextBox Name="TbClientEmailThird" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
-                        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 24">
+                        <StackPanel Name="SkpNewEmail" Orientation="Horizontal" Margin="0, 0, 0, 24">
                             <Button Name="BtnNewEmail" Style="{StaticResource PlusSecondaryBtn}" Content="Ingresar otro correo electrónico" Click="BtnNewEmailClick"/>
                         </StackPanel>
                     </StackPanel>

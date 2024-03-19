@@ -97,43 +97,26 @@ namespace SFIClient.Views
 
             if (VerifyTextFields())
             {
-
                 BankAccount newBankAccount = new BankAccount();
                 newBankAccount.Card_number = TbCardNumber.Text.Trim();
                 newBankAccount.Bank = TbBank.Text.Trim();
                 newBankAccount.Holder = TbHolder.Text.Trim();
-                try
+                
+                updateData = UpdateBankAccount(newBankAccount);
+                if (updateData)
                 {
-                    updateData = UpdateBankAccount(newBankAccount);
-                    if (updateData)
-                    {
-                        MessageBox.Show("Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente", "Actualización exitosa");
-                        SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
-                        this.NavigationService.Navigate(searchClientByRFCView);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información", "Error de actualización");
-                    }
+                    MessageBox.Show("Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente", "Actualización exitosa");
+                    SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                    this.NavigationService.Navigate(searchClientByRFCView);
                 }
-                catch (FaultException<ServiceFault> fe)
+                else
                 {
-                    MessageBox.Show(fe.Message, "Error en la base de datos");
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                    //TODO Redirect To Main Menu
-                }
-                catch (CommunicationException)
-                {
-                    MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                    //TODO Redirect To Main Menu
+                    MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información", "Error de actualización");
                 }
             }
             else
             {
-                MessageBox.Show("Verifique que la información ingresada no esté vacía", "Campos inválidos");
+                MessageBox.Show("Verifique que la información ingresada sea correcta", "Campos inválidos");
             }
         }
 
