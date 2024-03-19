@@ -40,7 +40,8 @@ namespace SFIDataAccess.DataAccessObjects
             catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
+                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde"),
+                    new FaultReason("Error")
                 );
             }
 

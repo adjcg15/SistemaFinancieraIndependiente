@@ -100,6 +100,7 @@
     <Compile Include="employee_roles.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Credit.cs" />
     <Compile Include="Model\CreditApplication.cs" />
     <Compile Include="Model\CreditCondition.cs" />
     <Compile Include="Model\CreditType.cs" />

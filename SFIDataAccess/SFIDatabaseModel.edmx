@@ -115,11 +115,10 @@
           </Key>
           <Property Name="invoice" Type="char" MaxLength="18" Nullable="false" />
           <Property Name="approval_date" Type="datetime" Nullable="false" />
-          <Property Name="settlement_date" Type="datetime" Nullable="false" />
+          <Property Name="settlement_date" Type="datetime" />
           <Property Name="withdrawal_date" Type="datetime" Nullable="false" />
           <Property Name="ammount_approved" Type="money" Nullable="false" />
           <Property Name="client_rfc" Type="varchar" MaxLength="13" Nullable="false" />
-          <Property Name="credit_type_identifier" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="id_credit_type" Type="int" Nullable="false" />
           <Property Name="credit_application_invoice" Type="char" MaxLength="18" Nullable="false" />
         </EntityType>
@@ -175,7 +174,7 @@
             <PropertyRef Name="id_regime" />
           </Key>
           <Property Name="id_regime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="application_end_date" Type="date" Nullable="false" />
+          <Property Name="application_end_date" Type="date" />
           <Property Name="application_start_date" Type="date" Nullable="false" />
           <Property Name="credit_condition_identifier" Type="char" MaxLength="6" Nullable="false" />
           <Property Name="credit_invoice" Type="char" MaxLength="18" Nullable="false" />
@@ -729,6 +728,17 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="RegisterCreditApplication">
+            <Parameter Name="invoice" Mode="In" Type="String" />
+            <Parameter Name="expedition_date" Mode="In" Type="DateTime" />
+            <Parameter Name="minimun_amount_accepted" Mode="In" Type="Decimal" />
+            <Parameter Name="purpose" Mode="In" Type="String" />
+            <Parameter Name="requested_amount" Mode="In" Type="Decimal" />
+            <Parameter Name="client_rfc" Mode="In" Type="String" />
+            <Parameter Name="employee_number" Mode="In" Type="String" />
+            <Parameter Name="credit_condition_identifier" Mode="In" Type="String" />
+            <Parameter Name="id_credit_type" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="addresses" EntityType="SFIDatabaseModel.address" />
           <EntitySet Name="bank_accounts" EntityType="SFIDatabaseModel.bank_accounts" />
           <EntitySet Name="clients" EntityType="SFIDatabaseModel.client" />
@@ -853,17 +863,6 @@
             <End Role="employee_roles" EntitySet="employee_roles" />
             <End Role="system_accounts" EntitySet="system_accounts" />
           </AssociationSet>
-          <FunctionImport Name="RegisterCreditApplication">
-            <Parameter Name="invoice" Mode="In" Type="String" />
-            <Parameter Name="expedition_date" Mode="In" Type="DateTime" />
-            <Parameter Name="minimun_amount_accepted" Mode="In" Type="Decimal" />
-            <Parameter Name="purpose" Mode="In" Type="String" />
-            <Parameter Name="requested_amount" Mode="In" Type="Decimal" />
-            <Parameter Name="client_rfc" Mode="In" Type="String" />
-            <Parameter Name="employee_number" Mode="In" Type="String" />
-            <Parameter Name="credit_condition_identifier" Mode="In" Type="String" />
-            <Parameter Name="id_credit_type" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1017,11 +1016,10 @@
           </Key>
           <Property Name="invoice" Type="String" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
           <Property Name="approval_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="settlement_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="settlement_date" Type="DateTime" Precision="3" />
           <Property Name="withdrawal_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ammount_approved" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="client_rfc" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="credit_type_identifier" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="id_credit_type" Type="Int32" Nullable="false" />
           <Property Name="credit_application_invoice" Type="String" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="client" Relationship="SFIDatabaseModel.FK_credits_clients" FromRole="credit" ToRole="client" />
@@ -1091,7 +1089,7 @@
             <PropertyRef Name="id_regime" />
           </Key>
           <Property Name="id_regime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="application_end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="application_end_date" Type="DateTime" Precision="0" />
           <Property Name="application_start_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="credit_condition_identifier" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
           <Property Name="credit_invoice" Type="String" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
@@ -1479,6 +1477,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SFIDatabaseModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SFIDatabaseModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="RegisterCreditApplication" FunctionName="SFIDatabaseModel.Store.RegisterCreditApplication" />
           <EntitySetMapping Name="addresses">
             <EntityTypeMapping TypeName="SFIDatabaseModel.address">
               <MappingFragment StoreEntitySet="addresses">
@@ -1598,7 +1597,6 @@
               <MappingFragment StoreEntitySet="credits">
                 <ScalarProperty Name="credit_application_invoice" ColumnName="credit_application_invoice" />
                 <ScalarProperty Name="id_credit_type" ColumnName="id_credit_type" />
-                <ScalarProperty Name="credit_type_identifier" ColumnName="credit_type_identifier" />
                 <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
                 <ScalarProperty Name="ammount_approved" ColumnName="ammount_approved" />
                 <ScalarProperty Name="withdrawal_date" ColumnName="withdrawal_date" />
@@ -1708,7 +1706,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="RegisterCreditApplication" FunctionName="SFIDatabaseModel.Store.RegisterCreditApplication" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

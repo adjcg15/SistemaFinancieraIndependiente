@@ -36,11 +36,73 @@ namespace SFIDataAccess.DataAccessObjects
             catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde")
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new FaultReason("Error")
                 );
             }
 
             return creditTypes;
+        }
+
+        public static List<Credit> GetAllCredits()
+        {
+            List<Credit> allCredits = new List<Credit>();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    context.credits.ToList().ForEach(storedCredit =>
+                    {
+                        Client creditOwner = new Client
+                        {
+                            Birthdate = storedCredit.client.birthdate,
+                            Curp = storedCredit.client.curp,
+                            Name = storedCredit.client.name,
+                            LastName = storedCredit.client.last_name,
+                            Surname = storedCredit.client.surname,
+                            Rfc = storedCredit.client.rfc
+                        };
+
+                        credit_conditions storedApplicableCondition = storedCredit.regimes
+                            .Where(regime => regime.application_end_date == null)
+                            .FirstOrDefault()
+                            .credit_conditions;
+                        CreditCondition appliedCreditCondition = new CreditCondition
+                        {
+                            Identifier = storedApplicableCondition.identifier,
+                            AdvancePaymentReduction = storedApplicableCondition.advance_payment_reduction,
+                            InterestOnArrears = storedApplicableCondition.interest_on_arrears,
+                            InterestRate = storedApplicableCondition.interest_rate,
+                            IsActive = storedApplicableCondition.is_active,
+                            IsIvaApplied = storedApplicableCondition.is_iva_applied,
+                            PaymentMonths = storedApplicableCondition.payment_months
+                        };
+
+                        Credit credit = new Credit
+                        {
+                            AmountApproved = storedCredit.ammount_approved,
+                            ApprovalDate = storedCredit.approval_date,
+                            Invoice = storedCredit.invoice,
+                            SettlementDate = storedCredit.settlement_date,
+                            WithdrawalDate = storedCredit.withdrawal_date,
+                            Client = creditOwner,
+                            CreditCondition = appliedCreditCondition
+                        };
+
+                        allCredits.Add(credit);
+                    });
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return allCredits;
         }
 
         public static void RegisterCreditApplication(CreditApplication applicationInformation)
@@ -94,7 +156,8 @@ namespace SFIDataAccess.DataAccessObjects
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.ToString());
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue guardar la información de la solicitud, intente más tarde")
+                    new ServiceFault("No fue guardar la información de la solicitud, intente más tarde"),
+                    new FaultReason("Error")
                 );
             }
         }

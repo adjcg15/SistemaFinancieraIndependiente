@@ -18,6 +18,10 @@ namespace SFIServices.Contracts
 
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
+        List<Credit> GetAllCredits();
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
         void RegisterCreditApplication(CreditApplication newApplication);
     }
 }

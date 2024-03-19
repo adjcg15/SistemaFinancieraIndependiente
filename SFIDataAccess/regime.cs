@@ -15,7 +15,7 @@ namespace SFIDataAccess
     public partial class regime
     {
         public int id_regime { get; set; }
-        public System.DateTime application_end_date { get; set; }
+        public Nullable<System.DateTime> application_end_date { get; set; }
         public System.DateTime application_start_date { get; set; }
         public string credit_condition_identifier { get; set; }
         public string credit_invoice { get; set; }
