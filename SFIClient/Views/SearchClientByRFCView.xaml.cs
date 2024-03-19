@@ -208,6 +208,7 @@ namespace SFIClient.Views
             else if (resultado == DialogResult.Cancel)
             {
                 AddClientsToClientsList();
+                TbRFCClient.Text = string.Empty;
             }
         }
 

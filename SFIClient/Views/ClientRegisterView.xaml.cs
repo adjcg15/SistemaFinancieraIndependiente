@@ -8,11 +8,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace SFIClient.Views
 {
@@ -86,7 +89,11 @@ namespace SFIClient.Views
                 & VerifyBankAccountTextFields() 
                 & VerifyWorkCenterTextFields()
                 & VerifyWorkCenterAddressTextFields()
-                & VerifyClientContactMethodsTextFields();
+                & VerifyClientContactMethodsTextFields()
+                & VerifyFirstReferenceInformationTextFields()
+                & VerifyFirstReferenceAddressTextFields()
+                & VerifySecondReferenceInformationTextFields()
+                & VerifySecondReferenceAddressTextFields();
         }
 
         private bool VerifyPersonalInformationTextFields()
@@ -182,7 +189,7 @@ namespace SFIClient.Views
         {
             Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
             bool correctFields = true;
-            if (!VerifyCarNumberFormat(TbCardNumber.Text.Trim()))
+            if (!VerifyNumberFormat(TbCardNumber.Text.Trim()) && TbCardNumber.Text.Trim().Length < 16)
             {
                 correctFields = false;
                 TbCardNumber.Style = textInputErrorStyle;
@@ -294,22 +301,26 @@ namespace SFIClient.Views
             Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
             bool correctFields = true;
 
-            if (!VerifyPhoneNumberFormat(TbClientPhoneNumberFirst.Text.Trim()))
+            if (!VerifyNumberFormat(TbClientPhoneNumberFirst.Text.Trim()) && TbClientPhoneNumberFirst.Text.Trim().Length < 10)
             {
                 correctFields = false;
                 TbClientPhoneNumberFirst.Style = textInputErrorStyle;
             }
-            if (!VerifyPhoneNumberFormat(TbClientPhoneNumberSecond.Text.Trim()))
+            if (!VerifyNumberFormat(TbClientPhoneNumberSecond.Text.Trim()) && TbClientPhoneNumberSecond.Text.Trim().Length < 10)
             {
                 correctFields = false;
                 TbClientPhoneNumberSecond.Style = textInputErrorStyle;
             }
-            if (TbClientPhoneNumberThird.Text.Trim().Length > 0 && !VerifyPhoneNumberFormat(TbClientPhoneNumberThird.Text.Trim()))
+            if (TbClientPhoneNumberThird.Text.Trim().Length > 0 
+                && !VerifyNumberFormat(TbClientPhoneNumberThird.Text.Trim()) 
+                && TbClientPhoneNumberThird.Text.Trim().Length < 10)
             {
                 correctFields = false;
                 TbClientPhoneNumberThird.Style = textInputErrorStyle;
             }
-            if (TbClientPhoneNumberFourth.Text.Trim().Length > 0 && !VerifyPhoneNumberFormat(TbClientPhoneNumberFourth.Text.Trim()))
+            if (TbClientPhoneNumberFourth.Text.Trim().Length > 0 
+                && !VerifyNumberFormat(TbClientPhoneNumberFourth.Text.Trim()) 
+                && TbClientPhoneNumberFourth.Text.Trim().Length < 10)
             {
                 correctFields = false;
                 TbClientPhoneNumberFourth.Style = textInputErrorStyle;
@@ -334,21 +345,190 @@ namespace SFIClient.Views
             return correctFields;
         }
 
-        private bool VerifyPhoneNumberFormat(string phoneNumber)
+        private bool VerifyFirstReferenceInformationTextFields()
         {
-            bool phoneNumberFormat;
-            long number;
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            bool correctFields = true;
 
-            if (long.TryParse(phoneNumber, out number) && phoneNumber.Length == 10)
+            if (TbReferenceNameFirst.Text.Trim().Length == 0)
             {
-                phoneNumberFormat = true;
+                correctFields = false;
+                TbReferenceNameFirst.Style = textInputErrorStyle;
             }
-            else
+            if (TbReferenceSurnameFirst.Text.Trim().Length == 0)
             {
-                phoneNumberFormat = false;
+                correctFields = false;
+                TbReferenceSurnameFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceLastNameFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceLastNameFirst.Style = textInputErrorStyle;
+            }
+            if (!VerifyNumberFormat(TbReferencePhoneNumberFirst.Text.Trim()) && TbReferencePhoneNumberFirst.Text.Trim().Length < 10)
+            {
+                correctFields = false;
+                TbReferencePhoneNumberFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceKinshipFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceKinshipFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceRelationshipFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceRelationshipFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceIneKeyFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceIneKeyFirst.Style = textInputErrorStyle;
             }
 
-            return phoneNumberFormat;
+            return correctFields;
+        }
+
+        private bool VerifyFirstReferenceAddressTextFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            bool correctFields = true;
+
+            if (TbReferenceStreetFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceStreetFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceNeighborhoodFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceNeighborhoodFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceInteriorNumberFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceInteriorNumberFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceOutdoorNumberFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceOutdoorNumberFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferencePostCodeFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferencePostCodeFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceCityFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceCityFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceMunicipalityFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceMunicipalityFirst.Style = textInputErrorStyle;
+            }
+            if (TbReferenceSatateFirst.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceSatateFirst.Style = textInputErrorStyle;
+            }
+
+            return correctFields;
+        }
+
+        private bool VerifySecondReferenceInformationTextFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            bool correctFields = true;
+
+            if (TbReferenceNameSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceNameSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceSurnameSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceSurnameSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceLastNameSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceLastNameSecond.Style = textInputErrorStyle;
+            }
+            if (!VerifyNumberFormat(TbReferencePhoneNumberSecond.Text.Trim()) && TbReferencePhoneNumberSecond.Text.Trim().Length < 10)
+            {
+                correctFields = false;
+                TbReferencePhoneNumberSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceKinshipSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceKinshipSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceRelationshipSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceRelationshipSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceIneKeySecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceIneKeySecond.Style = textInputErrorStyle;
+            }
+
+            return correctFields;
+        }
+
+        private bool VerifySecondReferenceAddressTextFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            bool correctFields = true;
+
+            if (TbReferenceStreetSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceStreetSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceNeighborhoodSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceNeighborhoodSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceInteriorNumberSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceInteriorNumberSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceOutdoorNumberSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceOutdoorNumberSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferencePostCodeSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferencePostCodeSecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceCitySecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceCitySecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceMunicipalitySecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceMunicipalitySecond.Style = textInputErrorStyle;
+            }
+            if (TbReferenceSatateSecond.Text.Trim().Length == 0)
+            {
+                correctFields = false;
+                TbReferenceSatateSecond.Style = textInputErrorStyle;
+            }
+
+            return correctFields;
         }
 
         private bool VerifyEmailFormat(string email)
@@ -367,21 +547,19 @@ namespace SFIClient.Views
             return emailFormat;
         }
 
-        private bool VerifyCarNumberFormat(string cardNumber)
+        private bool VerifyNumberFormat(string number)
         {
-            bool cardNumberIsCorrect;
-            long number;
-            if (long.TryParse(cardNumber, out number) && cardNumber.Length == 16)
+            if (long.TryParse(number, out long num))
             {
-                cardNumberIsCorrect = true;
+                return num > 0;
             }
             else
             {
-                cardNumberIsCorrect = false;
+                return false;
             }
-
-            return cardNumberIsCorrect;
         }
+
+
 
         private void ReloadStylesForPersonalInformation()
         {
@@ -495,8 +673,16 @@ namespace SFIClient.Views
         }
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
-            SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
-            this.NavigationService.Navigate(searchClientByRFCView);
+            DialogResult resultado = MessageBox.Show(
+                "¿Deseas cancelar el registro del cliente?", 
+                "Confirmación de cancelación", 
+                MessageBoxButtons.OKCancel);
+
+            if (resultado == DialogResult.OK)
+            {
+                SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                this.NavigationService.Navigate(searchClientByRFCView);
+            }
         }
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
@@ -513,17 +699,31 @@ namespace SFIClient.Views
 
             if (VerifyTextFields())
             {
-                registerClient = RegisterClient();
-                if (registerClient)
+                DialogResult resultado = MessageBox.Show("¿Deseas registrar al cliente?", 
+                    "Confirmación de registro", 
+                    MessageBoxButtons.OKCancel);
+
+                if (resultado == DialogResult.OK)
                 {
-                    MessageBox.Show("Se registró el cliente " + TbClientName.Text + " " + TbClientSurname.Text + " " + TbClientLastName.Text 
-                        + " correctamente", "Actualización exitosa");
-                    SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
-                    this.NavigationService.Navigate(searchClientByRFCView);
-                }
-                else
-                {
-                    MessageBox.Show("No fue posible registrar al cliente " + TbClientName.Text + " " + TbClientSurname.Text + " " + TbClientLastName.Text + ", ya se encuentra registrado", "Error de actualización");
+                    registerClient = RegisterClient();
+                    if (registerClient)
+                    {
+                        MessageBox.Show("Se registró el cliente " 
+                            + TbClientName.Text + " " 
+                            + TbClientSurname.Text + " " 
+                            + TbClientLastName.Text + " correctamente", 
+                            "Actualización exitosa");
+                        SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                        this.NavigationService.Navigate(searchClientByRFCView);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No fue posible registrar al cliente " 
+                            + TbClientName.Text + " " 
+                            + TbClientSurname.Text + " " 
+                            + TbClientLastName.Text + ", ya se encuentra registrado", 
+                            "Error de actualización");
+                    }
                 }
             }
             else
@@ -537,6 +737,227 @@ namespace SFIClient.Views
             bool registerClient = true;
             //TODO
             return registerClient;
+        }
+
+        private void ListenAndValidateNumberFields(object sender)
+        {
+            TextBox tbNumber = sender as TextBox;
+
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+
+            string number = tbNumber.Text.Trim();
+
+            if (!VerifyNumberFormat(number))
+            {
+                tbNumber.Style = textInputErrorStyle;
+            }
+            else
+            {
+                tbNumber.Style = textInputStyle;
+            }
+        }
+
+        private void TbClientCurpTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tbClientCurp = sender as TextBox;
+
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+
+            string clientCurp = tbClientCurp.Text.Trim();
+
+            if (clientCurp.Length > 18)
+            {
+                tbClientCurp.Style = textInputErrorStyle;
+            }
+            else
+            {
+                tbClientCurp.Style = textInputStyle;
+            }
+        }
+
+        private void TbClientRfcTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tbClientRfc = sender as TextBox;
+
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+
+            string clientRfc = tbClientRfc.Text.Trim();
+
+            if (clientRfc.Length > 12)
+            {
+                tbClientRfc.Style = textInputErrorStyle;
+            }
+            else
+            {
+                tbClientRfc.Style = textInputStyle;
+            }
+        }
+
+        private void TbClientInteriorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbClientOutdoorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbClientPostCodeTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbCardNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tbCardNumber = sender as TextBox;
+
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+
+            string cardNumber = tbCardNumber.Text.Trim();
+
+            if (!VerifyNumberFormat(cardNumber) || cardNumber.Length < 16)
+            {
+                tbCardNumber.Style = textInputErrorStyle;
+            }
+            else
+            {
+                tbCardNumber.Style = textInputStyle;
+            }
+        }
+
+        private void TbWorkCenterPhoneNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbSalaryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbEmployeeSeniorityTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbHumanResourcesPhoneTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbWorkCenterInteriorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbWorkCenterOutdoorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbWorkCenterPostCodeTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientPhoneNumberFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientPhoneNumberSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientPhoneNumberThirdTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientPhoneNumberFourthTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientEmailFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientEmailSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbClientEmailThirdTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbReferencePhoneNumberFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbReferenceRelationshipFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbReferenceIneKeyFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbReferenceInteriorNumberFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbReferenceOutdoorNumberFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbReferencePostCodeFirstTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbReferencePhoneNumberSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbReferenceRelationshipSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbReferenceIneKeySecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbReferenceInteriorNumberSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbReferenceOutdoorNumberSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndValidateNumberFields(sender);
+        }
+
+        private void TbReferencePostCodeSecondTextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -9,11 +9,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace SFIClient.Views
 {
@@ -85,11 +88,19 @@ namespace SFIClient.Views
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
-            SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
-            this.NavigationService.Navigate(searchClientByRFCView);
+            DialogResult resultado = MessageBox.Show(
+                "¿Deseas cancelar la actualización de la cuenta bancaria del cliente?", 
+                "Confirmación de cancelación", 
+                MessageBoxButtons.OKCancel);
+
+            if (resultado == DialogResult.OK)
+            {
+                SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                this.NavigationService.Navigate(searchClientByRFCView);
+            }
         }
 
-        private void BtnUpdateDataClick(object sender, RoutedEventArgs e)
+        private void BtnUpdateBankAccountClick(object sender, RoutedEventArgs e)
         {
             bool updateData;
             
@@ -97,21 +108,33 @@ namespace SFIClient.Views
 
             if (VerifyTextFields())
             {
-                BankAccount newBankAccount = new BankAccount();
-                newBankAccount.Card_number = TbCardNumber.Text.Trim();
-                newBankAccount.Bank = TbBank.Text.Trim();
-                newBankAccount.Holder = TbHolder.Text.Trim();
-                
-                updateData = UpdateBankAccount(newBankAccount);
-                if (updateData)
+                DialogResult resultado = MessageBox.Show(
+                    "¿Deseas actualizar la cuenta bancaria del cliente?", 
+                    "Confirmación de actualización", 
+                    MessageBoxButtons.OKCancel);
+
+                if (resultado == DialogResult.OK)
                 {
-                    MessageBox.Show("Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente", "Actualización exitosa");
-                    SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
-                    this.NavigationService.Navigate(searchClientByRFCView);
-                }
-                else
-                {
-                    MessageBox.Show("No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información", "Error de actualización");
+                    BankAccount newBankAccount = new BankAccount();
+                    newBankAccount.Card_number = TbCardNumber.Text.Trim();
+                    newBankAccount.Bank = TbBank.Text.Trim();
+                    newBankAccount.Holder = TbHolder.Text.Trim();
+
+                    updateData = UpdateBankAccount(newBankAccount);
+                    if (updateData)
+                    {
+                        MessageBox.Show(
+                            "Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente", 
+                            "Actualización exitosa");
+                        SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                        this.NavigationService.Navigate(searchClientByRFCView);
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información", 
+                            "Error de actualización");
+                    }
                 }
             }
             else

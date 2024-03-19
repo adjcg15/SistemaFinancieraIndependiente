@@ -143,7 +143,7 @@
             <!--Buttons section-->
             <StackPanel Margin="40, 120, 40, 0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Name="BtnCancel" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelClick"/>
-                <Button Name="BtnUpdateData" Style="{StaticResource PrimaryBtn}" Content="Actualizar datos" Click="BtnUpdateDataClick"/>
+                <Button Name="BtnUpdateData" Style="{StaticResource PrimaryBtn}" Content="Actualizar datos" Click="BtnUpdateBankAccountClick"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
