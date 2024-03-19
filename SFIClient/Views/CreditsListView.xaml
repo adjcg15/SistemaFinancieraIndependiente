@@ -45,7 +45,9 @@
                         FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"/>
                     <Grid Margin="0, 0, 0, 16">
                         <Border Style="{StaticResource RoundedBorder}">
-                            <DatePicker Style="{StaticResource DatePicker}"/>
+                            <DatePicker 
+                                x:Name="DpkFromDate"
+                                Style="{StaticResource DatePicker}"/>
                         </Border>
                     </Grid>
 
@@ -54,7 +56,7 @@
                         FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"/>
                     <Grid Margin="0, 0, 0, 32">
                         <Border Style="{StaticResource RoundedBorder}">
-                            <DatePicker Style="{StaticResource DatePicker}"/>
+                            <DatePicker x:Name="DpkToDate" Style="{StaticResource DatePicker}"/>
                         </Border>
                     </Grid>
 
@@ -62,14 +64,16 @@
                         Text="Estado del crédito"
                         FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8"/>
                     <CheckBox 
+                        x:Name="CkbCreditsInProgress"
                         Style="{StaticResource CheckBox}"
                         Margin="0, 0, 0, 8">Créditos en curso</CheckBox>
                     <CheckBox 
+                        x:Name="CkbPaidCredits"
                         Style="{StaticResource CheckBox}">Créditos liquidados</CheckBox>
 
                     <StackPanel Orientation="Horizontal" Margin="0, 32, 0, 0">
-                        <Button Style="{StaticResource TernaryBtn}">Limpiar</Button>
-                        <Button Style="{StaticResource PrimaryBtn}">Aplicar</Button>
+                        <Button x:Name="BtnRestartFilters" Margin="0, 0, 16, 0" Style="{StaticResource TernaryBtn}">Limpiar</Button>
+                        <Button x:Name="BtnApplyFilters" Style="{StaticResource PrimaryBtn}">Aplicar</Button>
                     </StackPanel>
                 </StackPanel>
 
@@ -107,13 +111,28 @@
                         </Grid>
 
                         <Button 
+                            x:Name="BtnSearchCredits"
                             Width="48" Height="48" Grid.Column="1" 
                             Style="{StaticResource SearchBtn}"/>
                     </Grid>
 
                     <!--Credits list-->
-                    <StackPanel x:Name="SkpCreditsList">
-                    </StackPanel>
+                    <Grid>
+                        <StackPanel x:Name="SkpEmptyCreditsListMessage" Visibility="Hidden" Margin="0 64">
+                            <Image Width="120" Height="120" Source="/Assets/EmptyItemsListicon.png"/>
+                            <TextBlock 
+                                Text="Aún no hay créditos registrados"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource Subtitle}"
+                                FontWeight="Normal"
+                                TextWrapping="Wrap"
+                                TextAlignment="Center"
+                                Margin="0, 16, 0, 0"
+                                MaxWidth="300"/>
+                        </StackPanel> 
+                        <StackPanel x:Name="SkpCreditsList">
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </StackPanel>

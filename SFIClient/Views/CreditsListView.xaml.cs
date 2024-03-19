@@ -33,7 +33,16 @@ namespace SFIClient.Views
             try
             {
                 List<Credit> creditsList = creditsService.GetAllCredits().ToList();
-                Console.WriteLine("TOTAL DE CRÉDITOS RECUPERADOS: " + creditsList.Count);
+                
+                if(creditsList.Count == 0)
+                {
+                    DisableFilterOptions();
+                    ShowEmptyCreditsListMessage();
+                }
+                else
+                {
+
+                }
             }
             catch (FaultException<ServiceFault> fault)
             {
@@ -44,7 +53,7 @@ namespace SFIClient.Views
                 string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
                 ShowErrorRecoveringCreditsDialog(errorMessage);
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
                 ShowErrorRecoveringCreditsDialog(errorMessage);
@@ -71,9 +80,27 @@ namespace SFIClient.Views
             //TODO: implementar redirección a menú principal
         }
 
+        private void DisableFilterOptions()
+        {
+            BtnSearchCredits.IsEnabled = false;
+            BtnApplyFilters.IsEnabled = false;
+            BtnRestartFilters.IsEnabled = false;
+            DpkFromDate.IsEnabled = false;
+            DpkToDate.IsEnabled = false;
+            TbSearchbar.IsEnabled = false;
+            CkbCreditsInProgress.IsEnabled = false;
+            CkbPaidCredits.IsEnabled = false;
+        }
+
+        private void ShowEmptyCreditsListMessage()
+        {
+            SkpEmptyCreditsListMessage.Visibility = Visibility.Visible;
+            SkpCreditsList.Visibility = Visibility.Hidden;
+        }
+
         private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
         {
-
+            //TODO: implementar redirección a pantalla previa
         }
     }
 }
