@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="SFIClient.Controlls.CreditsListCreditControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:SFIClient.Controlls"
+    mc:Ignorable="d" 
+    d:DesignHeight="510" d:DesignWidth="795">
+    <Border
+        Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+        BorderBrush="{StaticResource LightGray}"
+        Padding="32" Margin="0, 0, 0, 24">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Card decorator-->
+            <Border 
+                Width="12" Margin="0, 0, 24, 0"
+                BorderThickness="3" BorderBrush="{StaticResource PrimaryColor}"
+                CornerRadius="4"
+                Background="{StaticResource PrimaryColor}"/>
+            
+            <!--Card information-->
+            <StackPanel Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        x:Name="TbkCreditStatus"
+                        Grid.Column="0"
+                        Style="{StaticResource Paragraph}"
+                        Foreground="{StaticResource Gray}"
+                        FontWeight="Bold"
+                        Text="Crédito en curso"
+                        TextWrapping="Wrap"
+                        Margin="0, 0, 16, 0"/>
+                    <TextBlock
+                        Grid.Column="1"
+                        Style="{StaticResource Paragraph}"
+                        Foreground="{StaticResource DarkGray}"
+                        TextWrapping="Wrap">
+                        Aprobado el <Span x:Name="SpnCreditApprovalDate">24/03/2024</Span>
+                    </TextBlock>
+                </Grid>
+
+                <StackPanel Margin="0, 8, 0, 24">
+                    <TextBlock
+                        x:Name="TbkCreditInvoice"
+                        Foreground="{StaticResource DarkPrimaryColor}"
+                        Style="{StaticResource Title}"
+                        Text="A2B3C4D5E6"/>
+                    <TextBlock
+                        x:Name="TbkCreditClient"
+                        Style="{StaticResource Subtitle}"
+                        Text="Andrés Manuel López Obrador"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock
+                        Style="{StaticResource Subtitle}"
+                        FontWeight="Normal"
+                        Foreground="{StaticResource DarkGray}">
+                        Efectivo por <Span x:Name="SpnCredirAmountApproved">14,000</Span>MXN
+                    </TextBlock>
+                    <TextBlock
+                        Style="{StaticResource TinyText}"
+                        FontWeight="Normal"
+                        Foreground="{StaticResource DarkGray}"
+                        Margin="0, 0, 0, 12">
+                        El pago se liberó el día <Span x:Name="SpnCreditWithdrawalDate">28 de febrero de 2024</Span>
+                    </TextBlock>
+                    <TextBlock
+                        Style="{StaticResource Paragraph}"
+                        Foreground="{StaticResource DarkGray}">
+                        Próxima fecha de pago: <Span x:Name="SpnNextPaymentDate">2 de marzo de 2024</Span>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 28">
+                    <Button 
+                        Style="{StaticResource PrimaryBtn}" 
+                        Margin="0, 0, 16, 0">
+                        Tabla de pagos
+                    </Button>
+                    <Button 
+                        Style="{StaticResource SecondaryBtn}">
+                        Eficiencia de cobros
+                    </Button>
+                </StackPanel>
+
+                <Border 
+                    BorderThickness="0, 0, 0, 2" 
+                    BorderBrush="{StaticResource Gray}" 
+                    Margin="0, 0, 0, 24"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock 
+                            Style="{StaticResource TinyText}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Bold" Margin="0, 0, 0, 4"
+                            Text="Condiciones de crédito"
+                            TextWrapping="Wrap"/>
+
+                        <TextBlock 
+                            Style="{StaticResource TinyText}"
+                            Foreground="{StaticResource DarkGray}"
+                            TextWrapping="Wrap">
+                            Crédito a <Span x:Name="TbkPaymentMonths">6</Span> meses, 
+                            con <Span x:Name="TbkInterestRate">5</Span>% de interés
+                            <Span x:Name="TbkIsIvaApplied"> y aplicando IVA</Span>. 
+                            Interés moratorio de <Span x:Name="TbkInterestOnArrears">4</Span>% 
+                            y descuento de pago por adelantado de <Span x:Name="TbkAdvancePaymentReduction">5</Span>%.
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Button Style="{StaticResource TernaryBtn}" Grid.Column="1">
+                        Cambiar condiciones
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

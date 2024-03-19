@@ -110,6 +110,10 @@
                             Width="48" Height="48" Grid.Column="1" 
                             Style="{StaticResource SearchBtn}"/>
                     </Grid>
+
+                    <!--Credits list-->
+                    <StackPanel x:Name="SkpCreditsList">
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </StackPanel>
