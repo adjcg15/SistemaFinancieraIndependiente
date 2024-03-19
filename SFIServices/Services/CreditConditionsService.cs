@@ -20,5 +20,9 @@ namespace SFIServices
         {
             return CreditConditionsDAO.RegisterCreditCondition(NewCondition);
         }
+        public List<CreditCondition> RecoverAllCreditConditions()
+        {
+            return CreditConditionsDAO.RecoverAllCreditConditions();
+        }
     }
 }
