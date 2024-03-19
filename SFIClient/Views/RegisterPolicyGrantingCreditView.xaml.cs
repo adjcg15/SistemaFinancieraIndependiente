@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,7 @@ namespace SFIClient.Views
         public RegisterPolicyGrantingCreditView()
         {
             InitializeComponent();
+            DpkEffectiveDate.DisplayDateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
         }
         private bool VerifyPolicyInformation()
         {
@@ -176,11 +178,38 @@ namespace SFIClient.Views
                                     "Error de registro", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception ex)
+            catch (System.ServiceModel.FaultException<ServiceFault> fault)
             {
-                MessageBox.Show($"Error al registrar la política de otorgamiento de crédito: {ex.Message}",
-                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorRecoveringCreditTypesDialog(fault.Detail.Message);
             }
+            catch (System.ServiceModel.EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditTypesDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringCreditTypesDialog(errorMessage);
+            }
+        }
+        private void ShowErrorRecoveringCreditTypesDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "No fue posible recuperar los tipos de crédito existentes, por favor intenta más tarde",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToMainMenu();
+            }
+        }
+        private void RedirectToMainMenu()
+        {
+            //TODO: redireccionar cuando exista el menú principal
+            Console.WriteLine("Redireccionando al menú principal...");
         }
         private void ClearPolicyFields()
         {

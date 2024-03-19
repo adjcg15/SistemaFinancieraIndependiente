@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFIDataAccess.Model;
+using System.Data.Entity.Core;
+using System.ServiceModel;
+using SFIDataAccess.CustomExceptions;
 
 namespace SFIDataAccess.DataAccessObjects
 {
@@ -31,10 +34,11 @@ namespace SFIDataAccess.DataAccessObjects
                     return result == 0;
                 }
             }
-            catch (Exception ex)
+            catch (EntityException)
             {
-                Debug.WriteLine($"Error registering the credit granting policy: {ex.Message}");
-                return false;
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
+                );
             }
         }
     }
