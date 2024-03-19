@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using SFIClient.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +19,95 @@ namespace SFIClient.Controlls
 {
     public partial class CreditsListCreditControl : UserControl
     {
-        public CreditsListCreditControl()
+        public Credit BindedCredit { get; }
+
+        public CreditsListCreditControl(Credit credit)
         {
             InitializeComponent();
+            BindedCredit = credit;
+
+            ShowCreditInformation();
+        }
+
+        private void ShowCreditInformation()
+        {
+            ShowCreditStatus();
+            ShowCreditExtraInformation();
+
+            SpnCreditApprovalDate.Inlines.Clear();
+            SpnCreditApprovalDate.Inlines.Add(new Run(DateToolkit.FormatAsDDMMYYY(BindedCredit.ApprovalDate)));
+
+            TbkCreditInvoice.Text = BindedCredit.Invoice;
+            TbkCreditClient.Text = $"{BindedCredit.Client.Name} {BindedCredit.Client.Surname} {BindedCredit.Client.LastName}";
+
+            SpnCredirAmountApproved.Inlines.Clear();
+            SpnCredirAmountApproved.Inlines.Add(new Run(BindedCredit.AmountApproved.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
+
+            SpnPaymentMonths.Inlines.Clear();
+            SpnPaymentMonths.Inlines.Add(new Run(BindedCredit.CreditCondition.PaymentMonths.ToString()));
+
+            SpnInterestRate.Inlines.Clear();
+            SpnInterestRate.Inlines.Add(new Run((BindedCredit.CreditCondition.InterestRate * 100).ToString()));
+
+            SpnIsIvaApplied.Inlines.Clear();
+            SpnIsIvaApplied.Inlines.Add(new Run(BindedCredit.CreditCondition.IsIvaApplied ? " y aplicando IVA" : ""));
+
+            SpnInterestOnArrears.Inlines.Clear();
+            SpnInterestOnArrears.Inlines.Add(new Run((BindedCredit.CreditCondition.InterestOnArrears * 100).ToString()));
+
+            SpnAdvancePaymentReduction.Inlines.Clear();
+            SpnAdvancePaymentReduction.Inlines.Add(new Run((BindedCredit.CreditCondition.AdvancePaymentReduction * 100).ToString()));
+        }
+
+        private void ShowCreditStatus()
+        {
+            SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+            SolidColorBrush gray = (SolidColorBrush)Application.Current.Resources["Gray"];
+
+            if (!BindedCredit.SettlementDate.HasValue)
+            {
+                BdrDecorator.BorderBrush = primaryColor;
+
+                if (DateTime.Now >= BindedCredit.WithdrawalDate)
+                {
+                    BdrDecorator.Background = primaryColor;
+                    TbkCreditStatus.Text = "Crédito en curso";
+                }
+                else
+                {
+                    BdrDecorator.Background = Brushes.White;
+                    TbkCreditStatus.Text = "Pendiente por liberar";
+                }
+            }
+            else
+            {
+                BdrDecorator.BorderBrush = gray;
+                BdrDecorator.Background = Brushes.White;
+                TbkCreditStatus.Text = "Liquidado";
+            }
+        }
+
+        private void ShowCreditExtraInformation()
+        {
+            string message;
+
+            if (!BindedCredit.SettlementDate.HasValue)
+            {
+                if (DateTime.Now >= BindedCredit.WithdrawalDate)
+                {
+                    message = "El pago se liberó el día " + DateToolkit.FormatAsText(BindedCredit.WithdrawalDate);
+                }
+                else
+                {
+                    message = "El pago se liberará el día " + DateToolkit.FormatAsText(BindedCredit.WithdrawalDate);
+                }
+            }
+            else
+            {
+                message = "El crédito se finalizó de pagar el día " + DateToolkit.FormatAsText(BindedCredit.SettlementDate.Value);
+            }
+
+            TbkCreditExtraInfo.Text = message;
         }
     }
 }

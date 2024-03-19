@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:SFIClient.Controlls"
     mc:Ignorable="d" 
-    d:DesignHeight="510" d:DesignWidth="795">
+    d:DesignHeight="490" d:DesignWidth="795">
     <Border
         Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
         BorderBrush="{StaticResource LightGray}"
@@ -18,6 +18,7 @@
 
             <!--Card decorator-->
             <Border 
+                x:Name="BdrDecorator"
                 Width="12" Margin="0, 0, 24, 0"
                 BorderThickness="3" BorderBrush="{StaticResource PrimaryColor}"
                 CornerRadius="4"
@@ -71,13 +72,9 @@
                         Style="{StaticResource TinyText}"
                         FontWeight="Normal"
                         Foreground="{StaticResource DarkGray}"
-                        Margin="0, 0, 0, 12">
-                        El pago se liberó el día <Span x:Name="SpnCreditWithdrawalDate">28 de febrero de 2024</Span>
-                    </TextBlock>
-                    <TextBlock
-                        Style="{StaticResource Paragraph}"
-                        Foreground="{StaticResource DarkGray}">
-                        Próxima fecha de pago: <Span x:Name="SpnNextPaymentDate">2 de marzo de 2024</Span>
+                        Margin="0, 0, 0, 12"
+                        x:Name="TbkCreditExtraInfo">
+                        El pago se liberó el día 28 de febrero de 2024
                     </TextBlock>
                 </StackPanel>
 
@@ -116,11 +113,11 @@
                             Style="{StaticResource TinyText}"
                             Foreground="{StaticResource DarkGray}"
                             TextWrapping="Wrap">
-                            Crédito a <Span x:Name="TbkPaymentMonths">6</Span> meses, 
-                            con <Span x:Name="TbkInterestRate">5</Span>% de interés
-                            <Span x:Name="TbkIsIvaApplied"> y aplicando IVA</Span>. 
-                            Interés moratorio de <Span x:Name="TbkInterestOnArrears">4</Span>% 
-                            y descuento de pago por adelantado de <Span x:Name="TbkAdvancePaymentReduction">5</Span>%.
+                            Crédito a <Span x:Name="SpnPaymentMonths">6</Span> meses, 
+                            con <Span x:Name="SpnInterestRate">5</Span>% de interés
+                            <Span x:Name="SpnIsIvaApplied"> y aplicando IVA</Span>. 
+                            Interés moratorio de <Span x:Name="SpnInterestOnArrears">4</Span>% 
+                            y descuento de pago por adelantado de <Span x:Name="SpnAdvancePaymentReduction">5</Span>%.
                         </TextBlock>
                     </StackPanel>
 

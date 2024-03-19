@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace SFIClient.Views
 {
     public partial class CreditsListController : Page
     {
+        private List<Credit> allCreditsList;
+        private List<Credit> showedCreditsList;
+
         public CreditsListController()
         {
             InitializeComponent();
@@ -41,7 +45,9 @@ namespace SFIClient.Views
                 }
                 else
                 {
-
+                    allCreditsList = creditsList;
+                    showedCreditsList = creditsList;
+                    ShowCreditsList();
                 }
             }
             catch (FaultException<ServiceFault> fault)
@@ -96,6 +102,19 @@ namespace SFIClient.Views
         {
             SkpEmptyCreditsListMessage.Visibility = Visibility.Visible;
             SkpCreditsList.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowCreditsList()
+        {
+            SkpCreditsList.Children.Clear();
+
+            showedCreditsList.ForEach(credit =>
+            {
+                var creditCard = new CreditsListCreditControl(credit);
+                //creditConditionCard.CardClick += HighlightCreditConditionCard;
+
+                SkpCreditsList.Children.Add(creditCard);
+            });
         }
 
         private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)

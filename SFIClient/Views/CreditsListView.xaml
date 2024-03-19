@@ -118,7 +118,7 @@
 
                     <!--Credits list-->
                     <Grid>
-                        <StackPanel x:Name="SkpEmptyCreditsListMessage" Visibility="Hidden" Margin="0 64">
+                        <StackPanel x:Name="SkpEmptyCreditsListMessage" Visibility="Collapsed" Margin="0 64">
                             <Image Width="120" Height="120" Source="/Assets/EmptyItemsListicon.png"/>
                             <TextBlock 
                                 Text="Aún no hay créditos registrados"

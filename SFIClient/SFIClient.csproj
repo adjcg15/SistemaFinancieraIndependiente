@@ -70,6 +70,7 @@
     <Compile Include="Controlls\CreditsListCreditControl.xaml.cs">
       <DependentUpon>CreditsListCreditControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
