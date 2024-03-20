@@ -39,7 +39,7 @@ namespace SFIClient.Views
                 creditConditions = creditServiceClient.RecoverAllCreditConditions().ToList();
                 if (creditConditions.Count != 0)
                 {
-                    ShowCreditCondition(creditConditions);
+                    AddCreditConditions(creditConditions);
                 }
                 else
                 {
@@ -60,6 +60,15 @@ namespace SFIClient.Views
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
                 // TODO: Redirigir al menú principal
+            }
+        }
+        private void AddCreditConditions(List<CreditCondition> clientsList)
+        {
+            SkpNoRegisteredCreditConditions.Visibility = Visibility.Collapsed;
+            SkpRegisterCreditCondition.Visibility = Visibility.Collapsed;
+            for (int i = 0; i < clientsList.Count; i++)
+            {
+                    ShowCreditCondition(clientsList[i]);
             }
         }
         private void ShowCreditCondition(CreditCondition creditCondition)

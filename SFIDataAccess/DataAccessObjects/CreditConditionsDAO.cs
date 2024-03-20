@@ -85,11 +85,25 @@ namespace SFIDataAccess.DataAccessObjects
         public static List<CreditCondition> RecoverAllCreditConditions()
         {
             List<CreditCondition> conditionsList = new List<CreditCondition>();
+
             try
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var conditions = context.Database.SqlQuery<CreditCondition>("GetAllCreditConditions").ToList();
+                    var conditions = (from condition in context.Database.SqlQuery<CreditCondition>("GetAllCreditConditions")
+                                      select new CreditCondition
+                                      {
+                                          InterestRate = condition.InterestRate,
+                                          IsActive = condition.IsActive,
+                                          IsIvaApplied = condition.IsIvaApplied,
+                                          InterestOnArrears = condition.InterestOnArrears,
+                                          AdvancePaymentReduction = condition.AdvancePaymentReduction,
+                                          PaymentMonths = condition.PaymentMonths,
+                                          CreditType = condition.CreditType,
+                                          Identifier = condition.Identifier
+                                      }).ToList();
+
+                    conditionsList.AddRange(conditions);
                 }
             }
             catch (EntityException)
@@ -98,8 +112,10 @@ namespace SFIDataAccess.DataAccessObjects
                   new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
                 );
             }
+
             return conditionsList;
         }
+
 
     }
 }
