@@ -1,0 +1,100 @@
+﻿<Page 
+    x:Class="SFIClient.Views.MainMenuController"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:SFIClient.Views"
+    mc:Ignorable="d" 
+    d:Width="1280" d:Height="800"
+    Title="Menú principal">
+    <Grid  Background="White">
+        <Grid Margin="40 56">
+            <StackPanel>
+                <TextBlock
+                    Style="{StaticResource Title}"
+                    Foreground="{StaticResource DarkPrimaryColor}"
+                    Margin="0, 0, 0, 8"
+                    FontWeight="DemiBold"
+                    Text="Bienvenido de vuelta, Rodrigo Aguilar"/>
+                <TextBlock
+                    Style="{StaticResource Emphasis}"
+                    Foreground="{StaticResource MediumGray}"
+                    Margin="0, 0, 0, 40"
+                    FontWeight="DemiBold"
+                    Text="¿Qué quieres hacer hoy?"/>
+
+                <Grid>
+                    <StackPanel x:Name="SkpDebtCollectorOptions">
+                        <Border
+                            Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                            BorderBrush="{StaticResource LightGray}"
+                            Padding="32"
+                            Margin="0, 0, 0, 32"
+                            Cursor="Hand">
+                            <StackPanel>
+                                <TextBlock
+                                    Style="{StaticResource Subtitle}"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    Margin="0, 0, 0, 8"
+                                    Text="Eficiencia de cobro general"/>
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    Foreground="{StaticResource Gray}"
+                                    TextWrapping="Wrap">
+                                    Obten un resumen general del estado de los créditos para el mes en curso o para los meses
+                                    pasados, enfocado en los cobros para todos los créditos registrados hasta el momento.
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+
+                        <Border
+                            Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                            BorderBrush="{StaticResource LightGray}"
+                            Padding="32"
+                            Margin="0, 0, 0, 24"
+                            Cursor="Hand">
+                            <StackPanel>
+                                <TextBlock
+                                    Style="{StaticResource Subtitle}"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    Margin="0, 0, 0, 8"
+                                    Text="Créditos de clientes"/>
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    Foreground="{StaticResource Gray}"
+                                    TextWrapping="Wrap">
+                                    Obten una lista completa de todos los créditos registrados. Con esto, da un seguimiento a los
+                                    créditos de tus clientes o consulta el estado en el que se encuentran dichos créditos. A partir 
+                                    de ellos, podrás consultar los detalles relacionados a pagos, condiciones de aplicables y 
+                                    generar las eficiencias de cobro para cada crédito en particular.
+                                </TextBlock>
+
+                                <Border Margin="0, 16" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource LightGray}"/>
+
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    FontWeight="Bold"
+                                    TextWrapping="Wrap"
+                                    Margin="0, 0, 0, 8"
+                                    Foreground="{StaticResource DarkGray}"
+                                    Text="Opciones relacionadas"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Cambiar condiciones"/>
+                                    </Border>
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Tabla de pagos"/>
+                                    </Border>
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Eficiencia de cobros"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
