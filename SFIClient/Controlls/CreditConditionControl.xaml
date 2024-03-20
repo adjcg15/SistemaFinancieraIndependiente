@@ -5,74 +5,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:SFIClient.Controlls"
-             d:DesignHeight="260" d:DesignWidth="320">
-
-    <Border x:Name="BdrCreditConditionCard"
-            Background="#FAFAFA"
-            CornerRadius="8"
-            BorderThickness="1"
-            BorderBrush="{StaticResource LightGray}"
-            Padding="16"
-            Margin="0,0,0,8"
-            Cursor="Hand">
-
+             d:DesignHeight="310" d:DesignWidth="410">
+    <Border
+        Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+        BorderBrush="{StaticResource LightGray}"
+        Padding="32"
+        Margin="0, 0, 24, 24">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-            <!-- Rectangle indicator -->
-            <Rectangle x:Name="RectIndicator"
-           Fill="Gray"
-           Width="10"
-           Grid.RowSpan="4"
-           HorizontalAlignment="Left"
-           RadiusX="4"
-           RadiusY="4"/>
-            <!-- Card header -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Label Name="LblCreditConditionName" HorizontalAlignment="Left" Margin="22,41,0,0" Content="CCP01" 
-                       VerticalAlignment="Top" Width="196" Height="36" FontSize="19" FontWeight="Bold" Foreground="{StaticResource DarkPrimaryColor}" />
-                <Label Name="LblIsActive" HorizontalAlignment="Left" Margin="15,0,0,0" Content="Activa" 
+            <Border 
+                Grid.Column="0"
+                x:Name="BdrDecorator"
+                Width="8" Margin="0, 0, 16, 0"
+                CornerRadius="4"
+                Background="{StaticResource PrimaryColor}"/>
+
+            <StackPanel Grid.Column="1">
+                <Grid Margin="0, 0, 0, 24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Name="LblCreditConditionName" HorizontalAlignment="Left" Margin="22,41,0,0" Content="CCP01" 
+                        VerticalAlignment="Top" Width="196" Height="36" FontSize="19" FontWeight="Bold" Foreground="{StaticResource DarkPrimaryColor}" />
+                    <Label Name="LblIsActive" HorizontalAlignment="Left" Margin="15,0,0,0" Content="Activa" 
                         VerticalAlignment="Top" Width="77" Height="36" FontSize="12" Foreground="{StaticResource LightGray}" FontWeight="Bold"/>
-                <Label Name="LblApplyIVA" HorizontalAlignment="Left" Margin="205,0,0,0" Content="Aplica IVA" 
+                    <Label Name="LblApplyIVA" HorizontalAlignment="Left" Margin="205,0,0,0" Content="Aplica IVA" 
                          VerticalAlignment="Top" Width="87" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                <Label Name="LblPaymentMonths" HorizontalAlignment="Left" Margin="23,77,0,0" Content="6" 
-                            VerticalAlignment="Top" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
-                <Label  HorizontalAlignment="Left" Margin="36,77,0,0" Content="Meses de plazo para pago" 
-                            VerticalAlignment="Top" Width="176" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-                <Label Name="LblInterestRate" HorizontalAlignment="Left" Margin="23,102,0,0" Content="6" 
-                            VerticalAlignment="Top" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
-                <Label  HorizontalAlignment="Left" Margin="36,102,0,0" Content="% de interés" 
-                            VerticalAlignment="Top" Width="76" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-                <Label Name="LblInterestOnArrears" HorizontalAlignment="Left" Margin="22,127,0,0" Content="6" 
-                            VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
-                <Label  HorizontalAlignment="Left" Margin="36,127,0,0" Content="% de interés moratorio" 
-                            VerticalAlignment="Top" Width="154" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-                <Label Name="LblAdvancePaymentReduction" HorizontalAlignment="Left" Margin="22,152,0,0" Content="6" 
-                            VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
-                <Label  HorizontalAlignment="Left" Margin="36,152,0,0" Content="% de descuento por pago anticipado" 
-                            VerticalAlignment="Top" Width="210" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-
-            </Grid>
-
-            <!-- Card content -->
-
-            <!-- Card footer -->
-            <Grid Grid.Row="3" Margin="10,58,-10,31">
-                <Button Style="{StaticResource TernaryBtn}"
-                            Content="Editar"
-                            FontSize="13"
-                            Height="50"
-                            Width="96" Margin="179,-60,11,10"/>
-            </Grid>
+                    <Label Name="LblPaymentMonths" HorizontalAlignment="Left" Margin="18,0,0,0" Content="6" 
+                         VerticalAlignment="Center" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label  HorizontalAlignment="Left" Margin="36,77,0,0" Content="Meses de plazo para pago" 
+                        VerticalAlignment="Top" Width="176" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
+                    <Label Name="LblInterestRate" HorizontalAlignment="Left" Margin="18,102,0,0" Content="6" 
+                        VerticalAlignment="Top" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label  HorizontalAlignment="Left" Margin="36,102,0,0" Content="% de interés" 
+                        VerticalAlignment="Top" Width="76" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
+                    <Label Name="LblInterestOnArrears" HorizontalAlignment="Left" Margin="18,127,0,0" Content="6" 
+                        VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label  HorizontalAlignment="Left" Margin="36,127,0,0" Content="% de interés moratorio" 
+                        VerticalAlignment="Top" Width="154" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
+                    <Label Name="LblAdvancePaymentReduction" HorizontalAlignment="Left" Margin="18,152,0,0" Content="6" 
+                        VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label  HorizontalAlignment="Left" Margin="36,152,0,0" Content="% de descuento por pago anticipado" 
+                        VerticalAlignment="Top" Width="210" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
+                </Grid>
+                <StackPanel>
+                    <Button 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource TernaryBtn}"
+                        Padding="16, 12">
+                        Editar
+                    </Button>
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>
