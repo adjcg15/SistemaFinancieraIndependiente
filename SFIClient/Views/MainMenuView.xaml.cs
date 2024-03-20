@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SFIClient.Session;
+using SFIClient.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +17,33 @@ using System.Windows.Shapes;
 
 namespace SFIClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para MainMenu.xaml
-    /// </summary>
     public partial class MainMenuController : Page
     {
         public MainMenuController()
         {
             InitializeComponent();
+
+            ShowEmployeeName();
+            ShowMenuAccordingEmployeeRole();
+        }
+
+        private void ShowEmployeeName()
+        {
+            SpnEmployeeName.Inlines.Clear();
+            SpnEmployeeName.Inlines.Add(new Run($"{SystemSession.Employee.Name} {SystemSession.Employee.LastName}"));
+        }
+
+        private void ShowMenuAccordingEmployeeRole()
+        {
+            switch (SystemSession.Employee.EmployeeRole.Name)
+            {
+                case Security.Roles.MANAGER:
+                    SkpManagerOptions.Visibility = Visibility.Visible;
+                    break;
+                case Security.Roles.DEBT_COLLECTOR:
+                    SkpDebtCollectorOptions.Visibility = Visibility.Visible;
+                    break;
+            }
         }
     }
 }

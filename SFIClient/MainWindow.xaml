@@ -9,5 +9,5 @@
         ShowsNavigationUI="False"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
-        MinWidth="700" Source="Views/MainMenuView.xaml"
+        MinWidth="700" Source="Views/LoginView.xaml"
         WindowState="Maximized"/>
