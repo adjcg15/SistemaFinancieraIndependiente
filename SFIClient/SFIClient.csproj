@@ -73,7 +73,9 @@
     <Compile Include="Controlls\GrantingPoliciesListPolicyControl.xaml.cs">
       <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Session\SystemSession.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
+    <Compile Include="Utilities\Security.cs" />
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
@@ -84,6 +86,9 @@
     </Compile>
     <Compile Include="Views\CreditsListView.xaml.cs">
       <DependentUpon>CreditsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterCreditGrantingPolicyView.xaml.cs">
       <DependentUpon>RegisterCreditGrantingPolicyView.xaml</DependentUpon>
@@ -124,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreditsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +190,9 @@
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.DataTypeExample.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Employee.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\SFIServices\SFIService.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -232,5 +244,6 @@
   <ItemGroup>
     <Resource Include="Assets\EmptyItemsListIcon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
