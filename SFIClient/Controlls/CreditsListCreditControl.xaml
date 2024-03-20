@@ -82,12 +82,14 @@
                     <Button 
                         Click="BtnOpenCreditPaymentsTableClick"
                         Style="{StaticResource PrimaryBtn}" 
-                        Margin="0, 0, 16, 0">
+                        Margin="0, 0, 16, 0"
+                        Padding="16, 12">
                         Tabla de pagos
                     </Button>
                     <Button 
                         Click="BtnOpenCreditMonthlyEfficiencyClick"
-                        Style="{StaticResource SecondaryBtn}">
+                        Style="{StaticResource SecondaryBtn}"
+                        Padding="16, 12">
                         Eficiencia de cobros
                     </Button>
                 </StackPanel>
@@ -126,7 +128,9 @@
                     <Button 
                         Click="BtnChangeApplicableCreditConditionsClick"
                         Style="{StaticResource TernaryBtn}" 
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        Padding="16, 12"
+                        Margin="16, 0, 0, 0">
                         Cambiar condiciones
                     </Button>
                 </Grid>
