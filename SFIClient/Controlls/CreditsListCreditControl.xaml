@@ -91,7 +91,8 @@
                         Click="BtnOpenCreditMonthlyEfficiencyClick"
                         Style="{StaticResource SecondaryBtn}"
                         Padding="16, 12"
-                        FontSize="14">
+                        FontSize="14"
+                        Background="#FAFAFA">
                         Eficiencia de cobros
                     </Button>
                 </StackPanel>
@@ -134,7 +135,8 @@
                         Padding="16, 12"
                         FontSize="14"
                         VerticalAlignment="Top"
-                        Margin="16, 0, 0, 0">
+                        Margin="16, 0, 0, 0"
+                        Background="#FAFAFA">
                         Cambiar condiciones
                     </Button>
                 </Grid>

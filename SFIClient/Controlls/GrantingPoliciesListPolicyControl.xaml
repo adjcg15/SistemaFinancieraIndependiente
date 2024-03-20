@@ -72,7 +72,8 @@
                     <Button 
                         HorizontalAlignment="Right"
                         Style="{StaticResource TernaryBtn}"
-                        Padding="16, 12">
+                        Padding="16, 12"
+                        Background="#FAFAFA">
                         Editar
                     </Button>
                 </StackPanel>

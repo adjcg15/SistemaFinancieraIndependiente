@@ -575,11 +575,12 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            Background="White"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="2"
                             BorderBrush="{StaticResource PrimaryColor}"
                             CornerRadius="4"
@@ -611,11 +612,12 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            Background="White"
+                            Background="{TemplateBinding Background}"
                             CornerRadius="4"
                             x:Name="border"
                             Cursor="Hand"

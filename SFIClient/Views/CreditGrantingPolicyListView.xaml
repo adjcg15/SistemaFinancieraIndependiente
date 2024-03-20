@@ -85,8 +85,8 @@
                                 </Setter>
                                 <Style.Triggers>
                                     <DataTrigger 
-                    Binding="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
-                    Value="600">
+                                        Binding="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
+                                        Value="600">
                                         <Setter Property="ItemsPanel">
                                             <Setter.Value>
                                                 <ItemsPanelTemplate>
