@@ -85,6 +85,9 @@
     <Compile Include="Views\CreditsListView.xaml.cs">
       <DependentUpon>CreditsListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RegisterPolicyGrantingCreditView.xaml.cs">
+      <DependentUpon>RegisterPolicyGrantingCreditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
     <Page Include="Views\CreditsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterPolicyGrantingCreditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResponsiveExampleView.xaml">
       <SubType>Designer</SubType>

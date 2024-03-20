@@ -665,5 +665,84 @@
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
         </Style>
+
+        <!-- RadioButton -->
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="PART_Bullet"
+                                 Grid.Column="0"
+                                 Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="{TemplateBinding BorderThickness}"
+                                 Width="24" Height="24"/>
+                            <ContentPresenter Grid.Column="1"
+                  Margin="8,0,0,0"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="{StaticResource MediumGray}"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="LightGray"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RadioButtonError" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="PART_Bullet"
+                                 Grid.Column="0"
+                                 Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="{TemplateBinding BorderThickness}"
+                                 Width="24" Height="24"/>   
+                            <ContentPresenter Grid.Column="1"
+                      Margin="8,0,0,0"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="{StaticResource MediumGray}"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="LightGray"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="White"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource Red}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
