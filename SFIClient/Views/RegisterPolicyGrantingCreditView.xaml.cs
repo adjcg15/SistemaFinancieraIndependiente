@@ -22,7 +22,8 @@ namespace SFIClient.Views
     /// </summary>
     public partial class RegisterPolicyGrantingCreditView : Page
     {
-        private readonly PolicyGranting newPolicy = new PolicyGranting();
+        private readonly CreditGrantingPolicy newPolicy = new CreditGrantingPolicy();
+
         public RegisterPolicyGrantingCreditView()
         {
             InitializeComponent();
@@ -162,10 +163,10 @@ namespace SFIClient.Views
         }
         private void RegisterPolicyGranting()
         {
-            PolicyServiceClient policyClient = new PolicyServiceClient();
+            CreditGrantingPoliciesClient policyClient = new CreditGrantingPoliciesClient();
             try
             {
-                bool isRegistered = policyClient.RegisterPolicyGranting(newPolicy);
+                bool isRegistered = policyClient.RegisterCreditGrantingPolicy(newPolicy);
                 if (isRegistered)
                 {
                     MessageBox.Show($"La política de otorgamiento de crédito {newPolicy.Title} se ha registrado correctamente.",

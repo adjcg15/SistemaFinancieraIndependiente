@@ -919,9 +919,9 @@ namespace SFIClient.SFIServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PolicyGranting", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreditGrantingPolicy", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
     [System.SerializableAttribute()]
-    public partial class PolicyGranting : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class CreditGrantingPolicy : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1188,50 +1188,51 @@ namespace SFIClient.SFIServices {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIServices.IPolicyService")]
-    public interface IPolicyService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SFIServices.ICreditGrantingPolicies")]
+    public interface ICreditGrantingPolicies {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPolicyService/RegisterPolicyGranting", ReplyAction="http://tempuri.org/IPolicyService/RegisterPolicyGrantingResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IPolicyService/RegisterPolicyGrantingServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        bool RegisterPolicyGranting(SFIClient.SFIServices.PolicyGranting NewPolicy);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyServiceFau" +
+            "ltFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool RegisterCreditGrantingPolicy(SFIClient.SFIServices.CreditGrantingPolicy NewPolicy);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPolicyService/RegisterPolicyGranting", ReplyAction="http://tempuri.org/IPolicyService/RegisterPolicyGrantingResponse")]
-        System.Threading.Tasks.Task<bool> RegisterPolicyGrantingAsync(SFIClient.SFIServices.PolicyGranting NewPolicy);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyResponse")]
+        System.Threading.Tasks.Task<bool> RegisterCreditGrantingPolicyAsync(SFIClient.SFIServices.CreditGrantingPolicy NewPolicy);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPolicyServiceChannel : SFIClient.SFIServices.IPolicyService, System.ServiceModel.IClientChannel {
+    public interface ICreditGrantingPoliciesChannel : SFIClient.SFIServices.ICreditGrantingPolicies, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PolicyServiceClient : System.ServiceModel.ClientBase<SFIClient.SFIServices.IPolicyService>, SFIClient.SFIServices.IPolicyService {
+    public partial class CreditGrantingPoliciesClient : System.ServiceModel.ClientBase<SFIClient.SFIServices.ICreditGrantingPolicies>, SFIClient.SFIServices.ICreditGrantingPolicies {
         
-        public PolicyServiceClient() {
+        public CreditGrantingPoliciesClient() {
         }
         
-        public PolicyServiceClient(string endpointConfigurationName) : 
+        public CreditGrantingPoliciesClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public PolicyServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public CreditGrantingPoliciesClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public PolicyServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public CreditGrantingPoliciesClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public PolicyServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public CreditGrantingPoliciesClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public bool RegisterPolicyGranting(SFIClient.SFIServices.PolicyGranting NewPolicy) {
-            return base.Channel.RegisterPolicyGranting(NewPolicy);
+        public bool RegisterCreditGrantingPolicy(SFIClient.SFIServices.CreditGrantingPolicy NewPolicy) {
+            return base.Channel.RegisterCreditGrantingPolicy(NewPolicy);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterPolicyGrantingAsync(SFIClient.SFIServices.PolicyGranting NewPolicy) {
-            return base.Channel.RegisterPolicyGrantingAsync(NewPolicy);
+        public System.Threading.Tasks.Task<bool> RegisterCreditGrantingPolicyAsync(SFIClient.SFIServices.CreditGrantingPolicy NewPolicy) {
+            return base.Channel.RegisterCreditGrantingPolicyAsync(NewPolicy);
         }
     }
 }

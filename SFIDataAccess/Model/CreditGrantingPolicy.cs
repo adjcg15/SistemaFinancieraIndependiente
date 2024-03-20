@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SFIDataAccess.Model
 {
     [DataContract]
-    public class PolicyGranting
+    public class CreditGrantingPolicy
     {
         [DataMember]
         public string Title { get; set; }

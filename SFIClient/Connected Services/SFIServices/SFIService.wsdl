@@ -24,7 +24,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IPolicyService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_ICreditGrantingPolicies_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -85,14 +85,14 @@
   <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q5:ServiceFault" />
   </wsdl:message>
-  <wsdl:message name="IPolicyService_RegisterPolicyGranting_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterPolicyGranting" />
+  <wsdl:message name="ICreditGrantingPolicies_RegisterCreditGrantingPolicy_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCreditGrantingPolicy" />
   </wsdl:message>
-  <wsdl:message name="IPolicyService_RegisterPolicyGranting_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterPolicyGrantingResponse" />
+  <wsdl:message name="ICreditGrantingPolicies_RegisterCreditGrantingPolicy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCreditGrantingPolicyResponse" />
   </wsdl:message>
-  <wsdl:message name="IPolicyService_RegisterPolicyGranting_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q5:ServiceFault" />
+  <wsdl:message name="ICreditGrantingPolicies_RegisterCreditGrantingPolicy_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q6:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
@@ -125,11 +125,11 @@
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditConditionsService_RecoverCreditConditionsByCreditType_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IPolicyService">
-    <wsdl:operation name="RegisterPolicyGranting">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPolicyService/RegisterPolicyGranting" message="tns:IPolicyService_RegisterPolicyGranting_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPolicyService/RegisterPolicyGrantingResponse" message="tns:IPolicyService_RegisterPolicyGranting_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IPolicyService/RegisterPolicyGrantingServiceFaultFault" name="ServiceFaultFault" message="tns:IPolicyService_RegisterPolicyGranting_ServiceFaultFault_FaultMessage" />
+  <wsdl:portType name="ICreditGrantingPolicies">
+    <wsdl:operation name="RegisterCreditGrantingPolicy">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy" message="tns:ICreditGrantingPolicies_RegisterCreditGrantingPolicy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyResponse" message="tns:ICreditGrantingPolicies_RegisterCreditGrantingPolicy_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditGrantingPolicies_RegisterCreditGrantingPolicy_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -204,11 +204,11 @@
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IPolicyService" type="tns:IPolicyService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IPolicyService_policy" />
+  <wsdl:binding name="NetTcpBinding_ICreditGrantingPolicies" type="tns:ICreditGrantingPolicies">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICreditGrantingPolicies_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="RegisterPolicyGranting">
-      <soap12:operation soapAction="http://tempuri.org/IPolicyService/RegisterPolicyGranting" style="document" />
+    <wsdl:operation name="RegisterCreditGrantingPolicy">
+      <soap12:operation soapAction="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -239,7 +239,7 @@
         <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IPolicyService" binding="tns:NetTcpBinding_IPolicyService">
+    <wsdl:port name="NetTcpBinding_ICreditGrantingPolicies" binding="tns:NetTcpBinding_ICreditGrantingPolicies">
       <soap12:address location="net.tcp://localhost:8081/SFIService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>

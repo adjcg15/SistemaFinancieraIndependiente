@@ -100,7 +100,7 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCreditCondition" nillable="true" type="tns:ArrayOfCreditCondition" />
-  <xs:complexType name="PolicyGranting">
+  <xs:complexType name="CreditGrantingPolicy">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
@@ -108,5 +108,5 @@
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="PolicyGranting" nillable="true" type="tns:PolicyGranting" />
+  <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
 </xs:schema>

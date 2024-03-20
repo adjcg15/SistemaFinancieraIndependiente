@@ -46,12 +46,12 @@
   <ItemGroup>
     <Compile Include="Contracts\ICreditConditionsService.cs" />
     <Compile Include="Contracts\ICreditsService.cs" />
-    <Compile Include="Contracts\IPolicyGranting.cs" />
+    <Compile Include="Contracts\ICreditGrantingPolicies.cs" />
     <Compile Include="Contracts\IServiceExample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CreditConditionsService.cs" />
     <Compile Include="Services\CreditsService.cs" />
-    <Compile Include="Services\PolicyGrantingService.cs" />
+    <Compile Include="Services\CreditGrantingPoliciesService.cs" />
     <Compile Include="Services\ServiceExample.cs" />
   </ItemGroup>
   <ItemGroup>

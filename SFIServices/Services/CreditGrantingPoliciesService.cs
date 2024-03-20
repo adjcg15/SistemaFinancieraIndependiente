@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SFIServices
 {
-    public partial class SFIService : IPolicyService
+    public partial class SFIService : ICreditGrantingPolicies
     {
-        public bool RegisterPolicyGranting(PolicyGranting NewPolicy)
+        public bool RegisterCreditGrantingPolicy(CreditGrantingPolicy NewPolicy)
         {
-            return PolicyGrantingDAO.RegisterPolicyGranting(NewPolicy);
+            return CreditGrantingPoliciesDAO.RegisterCreditGrantingPolicy(NewPolicy);
         }
     }
 }

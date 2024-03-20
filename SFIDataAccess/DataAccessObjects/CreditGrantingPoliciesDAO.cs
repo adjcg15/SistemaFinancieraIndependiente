@@ -13,9 +13,9 @@ using SFIDataAccess.Model;
 
 namespace SFIDataAccess.DataAccessObjects
 {
-    public class PolicyGrantingDAO
+    public class CreditGrantingPoliciesDAO
     {
-        public static bool RegisterPolicyGranting(PolicyGranting newPolicy)
+        public static bool RegisterCreditGrantingPolicy(CreditGrantingPolicy newPolicy)
         {
             try
             {

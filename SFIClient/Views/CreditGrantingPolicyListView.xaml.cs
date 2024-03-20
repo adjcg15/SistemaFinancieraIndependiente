@@ -24,6 +24,8 @@ namespace SFIClient.Views
             InitializeComponent();
 
             SizeChanged += CreditGrantingPolicyListViewSizeChanged;
+
+            LoadAllCreditGrantingPolicies();
         }
 
         private void CreditGrantingPolicyListViewSizeChanged(object sender, SizeChangedEventArgs e)
@@ -50,6 +52,11 @@ namespace SFIClient.Views
 
             grantingPoliciesPanelTemplate.VisualTree.SetValue(UniformGrid.ColumnsProperty, totalPanelColumns);
             ItcGrantingPolicies.ItemsPanel = grantingPoliciesPanelTemplate;
+        }
+
+        private void LoadAllCreditGrantingPolicies()
+        {
+
         }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="aCDkcsWtJDkcMkXI2Adviux8ykUhFkC0YVN7I3/+ZUo=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="r01L4fDji5XBEj7rFYdkA5h1a6vmsQe/v57VYQhbaMo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IServiceExample">
       <properties>
@@ -355,10 +355,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IPolicyService">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_ICreditGrantingPolicies">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IPolicyService</serializedValue>
+          <serializedValue>NetTcpBinding_ICreditGrantingPolicies</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -730,7 +730,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IPolicyService" contract="SFIServices.IPolicyService" bindingType="netTcpBinding" address="net.tcp://localhost:8081/SFIService" bindingConfiguration="NetTcpBinding_IPolicyService">
+    <endpoint name="NetTcpBinding_ICreditGrantingPolicies" contract="SFIServices.ICreditGrantingPolicies" bindingType="netTcpBinding" address="net.tcp://localhost:8081/SFIService" bindingConfiguration="NetTcpBinding_ICreditGrantingPolicies">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8081/SFIService</serializedValue>
@@ -742,10 +742,10 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IPolicyService</serializedValue>
+          <serializedValue>NetTcpBinding_ICreditGrantingPolicies</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>SFIServices.IPolicyService</serializedValue>
+          <serializedValue>SFIServices.ICreditGrantingPolicies</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -805,7 +805,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IPolicyService</serializedValue>
+          <serializedValue>NetTcpBinding_ICreditGrantingPolicies</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

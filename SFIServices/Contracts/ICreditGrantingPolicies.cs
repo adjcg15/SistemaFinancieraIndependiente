@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace SFIServices.Contracts
 {
     [ServiceContract]
-    public interface IPolicyService
+    public interface ICreditGrantingPolicies
     {
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
-        bool RegisterPolicyGranting(PolicyGranting NewPolicy);
+        bool RegisterCreditGrantingPolicy(CreditGrantingPolicy NewPolicy);
     }
 }
