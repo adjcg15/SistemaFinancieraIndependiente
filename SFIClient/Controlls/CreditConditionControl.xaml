@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="YourNamespace.CreditConditionCard"
+﻿<UserControl x:Class="SFIClient.Controlls.CreditConditionControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:local="clr-namespace:SFIClient.Controlls"
              d:DesignHeight="260" d:DesignWidth="320">
 
     <Border x:Name="BdrCreditConditionCard"
@@ -38,7 +39,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="LblClientCreditStatus" HorizontalAlignment="Left" Margin="22,41,0,0" Content="CCP01" 
+                <Label Name="LblCreditConditionName" HorizontalAlignment="Left" Margin="22,41,0,0" Content="CCP01" 
                        VerticalAlignment="Top" Width="69" Height="36" FontSize="19" Foreground="{StaticResource DarkPrimaryColor} " FontWeight="Bold"/>
                 <Label Name="LblIsActive" HorizontalAlignment="Left" Margin="15,0,0,0" Content="Activa" 
                         VerticalAlignment="Top" Width="61" Height="36" FontSize="12" Foreground="{StaticResource LightGray} " FontWeight="Bold"/>

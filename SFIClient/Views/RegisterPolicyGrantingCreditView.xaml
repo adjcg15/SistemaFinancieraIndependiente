@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
-      d:Width="1280" d:Height="850"
+      d:Width="1280" d:Height="900"
       Title="RegisterPolicyGrantingCreditView">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -142,7 +142,7 @@
             </StackPanel>
 
             <!--Buttons section-->
-            <StackPanel Margin="40, 5, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Margin="40, 0, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="BtnCancelRegister" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
                 <Button x:Name="BtnAcceptRegister" Style="{StaticResource PrimaryBtn}" Content="Guardar" Click="BtnSavePolicyGrantingCreditClick"/>
             </StackPanel>

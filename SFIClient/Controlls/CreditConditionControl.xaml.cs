@@ -22,6 +22,7 @@ namespace SFIClient.Controlls
     {
         public CreditConditionControl()
         {
+            InitializeComponent();
         }
     }
 }

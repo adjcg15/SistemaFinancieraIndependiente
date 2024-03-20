@@ -73,7 +73,9 @@ namespace SFIClient.Views
         private void ShowCreditCondition(CreditCondition creditCondition)
         {
             CreditConditionControl creditConditionControl = new CreditConditionControl();
-            creditConditionControl.LblApplyIVA
+
+            creditConditionControl.LblApplyIVA.Content = creditCondition.IsIvaApplied;
+
         }
 
         private void AddCreditConditionsToUI(List<CreditCondition> creditConditions)
