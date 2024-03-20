@@ -24,10 +24,14 @@
             </StackPanel>
 
             <StackPanel Name="SkpRegisterCreditConditionMain" Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
-                <Button Name="BtnRegisterCreditConditiont" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Nueva"/>
+                <Button 
+                    Click="BtnNewCreditConditionClick" 
+                    Style="{StaticResource PlusBtn}">
+                    Nueva
+                </Button >
             </StackPanel>
 
-            <StackPanel Name="SkpNewCreditConditiont" Margin="40, 36, 40, 36">
+            <StackPanel Margin="40, 36, 40, 36">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -40,9 +44,10 @@
                     </Grid>
                 </Grid>
             </StackPanel>
-            <!--Clients-->
-            <Grid Name="GrdClients"  Margin="60, 0, 60, 0">
-                <ItemsControl Name="ItcCreditCondition" HorizontalAlignment="Left">
+            
+            <!--CreditConditions-->
+            <Grid Name="GrdCreditConditions"  Margin="60, 0, 60, 0">
+                <ItemsControl Name="ItcCreditCondition" HorizontalAlignment="Center">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel IsItemsHost="True" />
@@ -58,9 +63,10 @@
                             <RowDefinition Height="120"/>
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/Assets/StackImage.png"/>
                         <TextBlock Grid.Row="1"
                             Foreground="{StaticResource DarkGray}" FontSize="24"
-                            Text="Aún no hay clientes registrados" 
+                            Text="No existen condiciones de credito registradas" 
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                         />
@@ -68,7 +74,6 @@
                 </StackPanel>
             </Grid>
             <StackPanel Name="SkpRegisterCreditCondition" Orientation="Horizontal" Margin="0, 10, 0, 0" HorizontalAlignment="Center">
-                <Button Name="BtnRegisterCreditConditiontNew" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Nueva"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

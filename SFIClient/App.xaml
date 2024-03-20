@@ -640,7 +640,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!--Plus button-->
+        
         <Style x:Key="PlusBtn" TargetType="Button">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -650,10 +650,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-            Background="{StaticResource PrimaryColor}"
-            CornerRadius="4"
-            x:Name="border"
-            Cursor="Hand">
+                    Background="{StaticResource PrimaryColor}"
+                    CornerRadius="4"
+                    x:Name="border"
+                    Cursor="Hand">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -661,10 +661,10 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Grid.Column="0" Width="20" Height="20" Source="/Assets/Plus2Icon.png" Margin="20, 0, 10, 0"/>
                                 <ContentPresenter
-                            Grid.Column="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="{TemplateBinding Padding}"/>
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="{TemplateBinding Padding}"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -678,6 +678,15 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        
+        <Style x:Key="DecoratorBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource Gray}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

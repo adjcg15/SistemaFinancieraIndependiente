@@ -5,12 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:SFIClient.Controlls"
-             d:DesignHeight="310" d:DesignWidth="410">
+             d:DesignHeight="310" d:DesignWidth="500">
     <Border
         Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
         BorderBrush="{StaticResource LightGray}"
         Padding="32"
-        Margin="0, 0, 24, 24">
+        Margin="0, 0, 84, 24">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -18,11 +18,11 @@
             </Grid.ColumnDefinitions>
 
             <Border 
-                Grid.Column="0"
-                x:Name="BdrDecorator"
-                Width="8" Margin="0, 0, 16, 0"
-                CornerRadius="4"
-                Background="{StaticResource PrimaryColor}"/>
+            Grid.Column="0"
+            x:Name="BdrDecorator"
+            Width="8" Margin="0, 0, 16, 0"
+            CornerRadius="4"
+            Style="{StaticResource DecoratorBorderStyle}"/>
 
             <StackPanel Grid.Column="1">
                 <Grid Margin="0, 0, 0, 24">
@@ -34,7 +34,7 @@
                     <Label Name="LblCreditConditionName" HorizontalAlignment="Left" Margin="22,41,0,0" Content="CCP01" 
                         VerticalAlignment="Top" Width="196" Height="36" FontSize="19" FontWeight="Bold" Foreground="{StaticResource DarkPrimaryColor}" />
                     <Label Name="LblIsActive" HorizontalAlignment="Left" Margin="15,0,0,0" Content="Activa" 
-                        VerticalAlignment="Top" Width="77" Height="36" FontSize="12" Foreground="{StaticResource LightGray}" FontWeight="Bold"/>
+                        VerticalAlignment="Top" Width="77" Height="36" FontSize="12" Foreground="{StaticResource MediumGray}" FontWeight="Bold"/>
                     <Label Name="LblApplyIVA" HorizontalAlignment="Left" Margin="205,0,0,0" Content="Aplica IVA" 
                          VerticalAlignment="Top" Width="87" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold" Grid.ColumnSpan="2"/>
                     <Label Name="LblPaymentMonths" HorizontalAlignment="Left" Margin="18,0,0,0" Content="6" 

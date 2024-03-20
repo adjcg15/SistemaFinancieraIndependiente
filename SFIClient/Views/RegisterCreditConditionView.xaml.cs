@@ -299,7 +299,9 @@ namespace SFIClient.Views
         }
         private void BtnGoBackClick(object sender, RoutedEventArgs e)
         {
-
+            ConsultConditionsCreditView consultCreditConditions = new ConsultConditionsCreditView();
+            this.NavigationService.Navigate(consultCreditConditions);
+            NavigationService.RemoveBackEntry();
         }
         private void LoadCreditTypes()
         {

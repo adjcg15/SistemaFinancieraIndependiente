@@ -82,7 +82,15 @@ namespace SFIClient.Views
             creditConditionControl.LblInterestRate.Content = creditCondition.InterestRate;
             creditConditionControl.LblInterestOnArrears.Content = creditCondition.InterestOnArrears;
             creditConditionControl.LblAdvancePaymentReduction.Content = creditCondition.AdvancePaymentReduction;
+            creditConditionControl.DataContext = creditCondition;
             ItcCreditCondition.Items.Add(creditConditionControl);
+        }
+
+        private void BtnNewCreditConditionClick(object sender, RoutedEventArgs e)
+        {
+            RegisterCreditConditionView registerCreditCondition = new RegisterCreditConditionView();
+            this.NavigationService.Navigate(registerCreditCondition);
+            NavigationService.RemoveBackEntry();
         }
     }
 }

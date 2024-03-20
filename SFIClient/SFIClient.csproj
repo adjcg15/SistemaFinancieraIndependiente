@@ -206,9 +206,14 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\StackImage.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Plus2Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
