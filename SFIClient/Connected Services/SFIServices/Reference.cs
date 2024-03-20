@@ -1198,6 +1198,14 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyResponse")]
         System.Threading.Tasks.Task<bool> RegisterCreditGrantingPolicyAsync(SFIClient.SFIServices.CreditGrantingPolicy NewPolicy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPolicies", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesServiceFau" +
+            "ltFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditGrantingPolicy[] GetAllCreditGrantingPolicies();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPolicies", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> GetAllCreditGrantingPoliciesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1233,6 +1241,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> RegisterCreditGrantingPolicyAsync(SFIClient.SFIServices.CreditGrantingPolicy NewPolicy) {
             return base.Channel.RegisterCreditGrantingPolicyAsync(NewPolicy);
+        }
+        
+        public SFIClient.SFIServices.CreditGrantingPolicy[] GetAllCreditGrantingPolicies() {
+            return base.Channel.GetAllCreditGrantingPolicies();
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> GetAllCreditGrantingPoliciesAsync() {
+            return base.Channel.GetAllCreditGrantingPoliciesAsync();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SFIDataAccess.CustomExceptions;
 using SFIDataAccess.Model;
+using System.Data.Entity.Core;
 
 namespace SFIDataAccess.DataAccessObjects
 {
@@ -47,5 +48,38 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
         }
+
+        public static List<CreditGrantingPolicy> GetAllCreditGrantingPolicies()
+        {
+            List<CreditGrantingPolicy> policies = new List<CreditGrantingPolicy>();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    context.credit_granting_polices
+                        .ToList().ForEach(policyStored => {
+                            CreditGrantingPolicy policy = new CreditGrantingPolicy
+                            {
+                                Title = policyStored.title,
+                                Description = policyStored.description,
+                                EffectiveDate = policyStored.effective_date,
+                                IsActive = policyStored.is_active
+                            };
+
+                            policies.Add(policy);
+                        });
+                }
+            }
+            catch(EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar las políticas de otorgamiento de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return policies;
+        } 
     }
 }

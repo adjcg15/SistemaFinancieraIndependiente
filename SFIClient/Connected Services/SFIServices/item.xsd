@@ -109,4 +109,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
+  <xs:complexType name="ArrayOfCreditGrantingPolicy">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditGrantingPolicy" nillable="true" type="tns:ArrayOfCreditGrantingPolicy" />
 </xs:schema>

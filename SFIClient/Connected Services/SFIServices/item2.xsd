@@ -77,4 +77,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllCreditGrantingPolicies">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllCreditGrantingPoliciesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="GetAllCreditGrantingPoliciesResult" nillable="true" type="q7:ArrayOfCreditGrantingPolicy" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -94,6 +94,15 @@
   <wsdl:message name="ICreditGrantingPolicies_RegisterCreditGrantingPolicy_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q6:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ICreditGrantingPolicies_GetAllCreditGrantingPolicies_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCreditGrantingPolicies" />
+  </wsdl:message>
+  <wsdl:message name="ICreditGrantingPolicies_GetAllCreditGrantingPolicies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCreditGrantingPoliciesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICreditGrantingPolicies_GetAllCreditGrantingPolicies_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q7:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
@@ -130,6 +139,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy" message="tns:ICreditGrantingPolicies_RegisterCreditGrantingPolicy_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyResponse" message="tns:ICreditGrantingPolicies_RegisterCreditGrantingPolicy_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicyServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditGrantingPolicies_RegisterCreditGrantingPolicy_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCreditGrantingPolicies">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPolicies" message="tns:ICreditGrantingPolicies_GetAllCreditGrantingPolicies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesResponse" message="tns:ICreditGrantingPolicies_GetAllCreditGrantingPolicies_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditGrantingPolicies_GetAllCreditGrantingPolicies_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -209,6 +223,18 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="RegisterCreditGrantingPolicy">
       <soap12:operation soapAction="http://tempuri.org/ICreditGrantingPolicies/RegisterCreditGrantingPolicy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCreditGrantingPolicies">
+      <soap12:operation soapAction="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPolicies" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

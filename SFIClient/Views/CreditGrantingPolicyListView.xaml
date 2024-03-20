@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:controls="clr-namespace:SFIClient.Controlls"
-    xmlns:local="clr-namespace:SFIClient.Views"
     mc:Ignorable="d" 
     d:Width="1280" d:Height="800"
     Title="Políticas de crédito">
@@ -49,6 +47,7 @@
                         Margin="0, 16, 0, 24"
                         Text="Aún no hay políticas de otorgamiento de crédito registradas"/>
                     <Button 
+                        Click="BtnRegisterPolicyClick"
                         Style="{StaticResource PrimaryBtn}" 
                         HorizontalAlignment="Center">
                         Nueva
@@ -56,9 +55,10 @@
                 </StackPanel>
                 
                 <!--Main view-->
-                <StackPanel Grid.Column="0" Visibility="Collapsed">
+                <StackPanel Grid.Column="0" x:Name="SkpMainView">
                     <StackPanel Margin="0, 0, 0, 40" Orientation="Horizontal">
                         <Button 
+                            Click="BtnRegisterPolicyClick"
                             Style="{StaticResource PrimaryBtn}">Nueva</Button>
                     </StackPanel>
 
@@ -69,11 +69,6 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 
-                        <controls:GrantingPoliciesListPolicyControl/>
-                        <controls:GrantingPoliciesListPolicyControl/>
-                        <controls:GrantingPoliciesListPolicyControl/>
-                        <controls:GrantingPoliciesListPolicyControl/>
-
                         <ItemsControl.Style>
                             <Style TargetType="ItemsControl">
                                 <Setter Property="ItemsPanel">
@@ -83,19 +78,6 @@
                                         </ItemsPanelTemplate>
                                     </Setter.Value>
                                 </Setter>
-                                <Style.Triggers>
-                                    <DataTrigger 
-                                        Binding="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
-                                        Value="600">
-                                        <Setter Property="ItemsPanel">
-                                            <Setter.Value>
-                                                <ItemsPanelTemplate>
-                                                    <UniformGrid Columns="2" />
-                                                </ItemsPanelTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
                             </Style>
                         </ItemsControl.Style>
                     </ItemsControl>

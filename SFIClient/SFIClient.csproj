@@ -172,6 +172,9 @@
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditCondition.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditGrantingPolicy.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
