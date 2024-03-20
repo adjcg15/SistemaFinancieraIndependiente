@@ -15,8 +15,9 @@
                     Style="{StaticResource Title}"
                     Foreground="{StaticResource DarkPrimaryColor}"
                     Margin="0, 0, 0, 8"
-                    FontWeight="DemiBold"
-                    Text="Bienvenido de vuelta, Rodrigo Aguilar"/>
+                    FontWeight="DemiBold">
+                    Bienvenido de vuelta, <Span x:Name="SpnEmployeeName">Rodrigo Aguilar</Span>
+                </TextBlock>
                 <TextBlock
                     Style="{StaticResource Emphasis}"
                     Foreground="{StaticResource MediumGray}"
@@ -25,7 +26,7 @@
                     Text="¿Qué quieres hacer hoy?"/>
 
                 <Grid>
-                    <StackPanel x:Name="SkpDebtCollectorOptions">
+                    <StackPanel Visibility="Collapsed" x:Name="SkpDebtCollectorOptions">
                         <Border
                             Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
                             BorderBrush="{StaticResource LightGray}"
@@ -52,7 +53,7 @@
                             Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
                             BorderBrush="{StaticResource LightGray}"
                             Padding="32"
-                            Margin="0, 0, 0, 24"
+                            Margin="0, 0, 0, 32"
                             Cursor="Hand">
                             <StackPanel>
                                 <TextBlock
@@ -93,8 +94,95 @@
                             </StackPanel>
                         </Border>
                     </StackPanel>
+
+                    <StackPanel Visibility="Collapsed" x:Name="SkpManagerOptions">
+                        <Border
+                            Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                            BorderBrush="{StaticResource LightGray}"
+                            Padding="32"
+                            Margin="0, 0, 0, 32"
+                            Cursor="Hand">
+                            <StackPanel>
+                                <TextBlock
+                                    Style="{StaticResource Subtitle}"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    Margin="0, 0, 0, 8"
+                                    Text="Políticas de otorgamiento de crédito"/>
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    Foreground="{StaticResource Gray}"
+                                    TextWrapping="Wrap">
+                                    Consulta la lista completa de las políticas de otorgamiento de crédito registradas.
+                                    Además, a partir de ahí puedes registrar nuevas o modificar la información de aquellas que 
+                                    ya se encuentran registradas, para cambiar su vigencia, estado o cualquier otra información
+                                    de interés.
+                                </TextBlock>
+
+                                <Border Margin="0, 16" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource LightGray}"/>
+
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    FontWeight="Bold"
+                                    TextWrapping="Wrap"
+                                    Margin="0, 0, 0, 8"
+                                    Foreground="{StaticResource DarkGray}"
+                                    Text="Opciones relacionadas"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Registrar políticas"/>
+                                    </Border>
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Modificar políticas"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border
+                            Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                            BorderBrush="{StaticResource LightGray}"
+                            Padding="32"
+                            Margin="0, 0, 0, 32"
+                            Cursor="Hand">
+                            <StackPanel>
+                                <TextBlock
+                                    Style="{StaticResource Subtitle}"
+                                    Foreground="{StaticResource PrimaryColor}"
+                                    Margin="0, 0, 0, 8"
+                                    Text="Condiciones de crédito"/>
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    Foreground="{StaticResource Gray}"
+                                    TextWrapping="Wrap">
+                                    Consulta la lista completa de las condiciones de crédito registradas.
+                                    Además, a partir de ahí puedes registrar nuevas o modificar la información de aquellas que 
+                                    ya se encuentran registradas.
+                                </TextBlock>
+
+                                <Border Margin="0, 16" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource LightGray}"/>
+
+                                <TextBlock
+                                    Style="{StaticResource Paragraph}"
+                                    FontWeight="Bold"
+                                    TextWrapping="Wrap"
+                                    Margin="0, 0, 0, 8"
+                                    Foreground="{StaticResource DarkGray}"
+                                    Text="Opciones relacionadas"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Registrar condiciones"/>
+                                    </Border>
+                                    <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                        <TextBlock Foreground="White" Text="Modificar condiciones"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
                 </Grid>
             </StackPanel>
+            
+            
         </Grid>
     </Grid>
 </Page>
