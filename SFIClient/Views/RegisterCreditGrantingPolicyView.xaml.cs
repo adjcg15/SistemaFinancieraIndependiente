@@ -17,14 +17,11 @@ using System.Windows.Shapes;
 
 namespace SFIClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para RegisterPolicyGrantingCreditView.xaml
-    /// </summary>
-    public partial class RegisterPolicyGrantingCreditView : Page
+    public partial class RegisterCreditGrantingPolicyController : Page
     {
         private readonly CreditGrantingPolicy newPolicy = new CreditGrantingPolicy();
 
-        public RegisterPolicyGrantingCreditView()
+        public RegisterCreditGrantingPolicyController()
         {
             InitializeComponent();
             DpkEffectiveDate.DisplayDateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
