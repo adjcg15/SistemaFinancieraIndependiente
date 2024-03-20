@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using SFIDataAccess.CustomExceptions;
+using SFIDataAccess.Model;
 
 namespace SFIDataAccess.DataAccessObjects
 {
