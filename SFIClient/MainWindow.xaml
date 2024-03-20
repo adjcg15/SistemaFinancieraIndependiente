@@ -10,4 +10,4 @@
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         MinWidth="700" Source="Views/ConsultConditionsCreditView.xaml"
-        WindowState="Maximized"/>
+        WindowState="Maximized" Cursor=""/>
