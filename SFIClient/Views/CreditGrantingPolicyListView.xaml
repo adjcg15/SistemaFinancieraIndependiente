@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SFIClient.Controlls"
     xmlns:local="clr-namespace:SFIClient.Views"
     mc:Ignorable="d" 
-    d:Width="1280" d:Height="2000"
+    d:Width="1280" d:Height="800"
     Title="Políticas de crédito">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -28,50 +28,79 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Margin="40, 56">
-                <StackPanel Margin="0, 0, 0, 40" Orientation="Horizontal">
+            <Grid Margin="40, 56">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Message for empty credit granting policies list-->
+                <StackPanel Margin="0, 100" x:Name="SkpEmptyPoliciesListMessage">
+                    <Image 
+                        Width="120" Height="120" 
+                        Source="/Assets/EmptyItemsListIcon.png"/>
+                    <TextBlock
+                        Style="{StaticResource Subtitle}"
+                        FontWeight="Normal"
+                        Foreground="{StaticResource DarkGray}"
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        MaxWidth="400"
+                        TextAlignment="Center"
+                        Margin="0, 16, 0, 24"
+                        Text="Aún no hay políticas de otorgamiento de crédito registradas"/>
                     <Button 
-                        Style="{StaticResource PrimaryBtn}">Nueva</Button>
+                        Style="{StaticResource PrimaryBtn}" 
+                        HorizontalAlignment="Center">
+                        Nueva
+                    </Button>
                 </StackPanel>
+                
+                <!--Main view-->
+                <StackPanel Grid.Column="0" Visibility="Collapsed">
+                    <StackPanel Margin="0, 0, 0, 40" Orientation="Horizontal">
+                        <Button 
+                            Style="{StaticResource PrimaryBtn}">Nueva</Button>
+                    </StackPanel>
 
-                <ItemsControl x:Name="ItcGrantingPolicies">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="3" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                    <ItemsControl x:Name="ItcGrantingPolicies">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                    <controls:GrantingPoliciesListPolicyControl/>
-                    <controls:GrantingPoliciesListPolicyControl/>
-                    <controls:GrantingPoliciesListPolicyControl/>
-                    <controls:GrantingPoliciesListPolicyControl/>
+                        <controls:GrantingPoliciesListPolicyControl/>
+                        <controls:GrantingPoliciesListPolicyControl/>
+                        <controls:GrantingPoliciesListPolicyControl/>
+                        <controls:GrantingPoliciesListPolicyControl/>
 
-                    <ItemsControl.Style>
-                        <Style TargetType="ItemsControl">
-                            <Setter Property="ItemsPanel">
-                                <Setter.Value>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="1" />
-                                    </ItemsPanelTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <DataTrigger 
-                                    Binding="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
-                                    Value="600">
-                                    <Setter Property="ItemsPanel">
-                                        <Setter.Value>
-                                            <ItemsPanelTemplate>
-                                                <UniformGrid Columns="2" />
-                                            </ItemsPanelTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ItemsControl.Style>
-                </ItemsControl>
-            </StackPanel>
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Setter Property="ItemsPanel">
+                                    <Setter.Value>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="1" />
+                                        </ItemsPanelTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger 
+                    Binding="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" 
+                    Value="600">
+                                        <Setter Property="ItemsPanel">
+                                            <Setter.Value>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="2" />
+                                                </ItemsPanelTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControl.Style>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </Page>
