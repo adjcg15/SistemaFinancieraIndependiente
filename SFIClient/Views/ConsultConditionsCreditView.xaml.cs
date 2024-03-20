@@ -39,7 +39,7 @@ namespace SFIClient.Views
                 creditConditions = creditServiceClient.RecoverAllCreditConditions().ToList();
                 if (creditConditions.Count != 0)
                 {
-                    AddCreditConditionsToUI(creditConditions);
+                    ShowCreditCondition(creditConditions);
                 }
                 else
                 {
@@ -62,39 +62,17 @@ namespace SFIClient.Views
                 // TODO: Redirigir al menú principal
             }
         }
-        private void ShowClientWithAllOptions(Client client)
-        {
-            ClientControll clientControll = new ClientControll();
-            clientControll.LblClientRFC.Content = client.Rfc;
-            clientControll.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
-            clientControll.LblClientCreditStatus.Content = "Cliente sin crédito y sin solicitud activa";
-            ItcClients.Items.Add(clientControll);
-        }
         private void ShowCreditCondition(CreditCondition creditCondition)
         {
             CreditConditionControl creditConditionControl = new CreditConditionControl();
-
-            creditConditionControl.LblApplyIVA.Content = creditCondition.IsIvaApplied;
-
-        }
-
-        private void AddCreditConditionsToUI(List<CreditCondition> creditConditions)
-        {
-            ItcCreditCondition.Items.Clear();
-            foreach (var condition in creditConditions)
-            {
-                YourNamespace.CreditConditionCard conditionCard = new YourNamespace.CreditConditionCard();
-                // Asignar los datos de la condición de crédito a los elementos de la tarjeta
-                conditionCard.TbkIdentifier.Text = condition.Identifier;
-                conditionCard.TbkIva.Text = condition.IsIvaApplied ? "Aplica IVA" : "No aplica IVA";
-                conditionCard.TbkIsActive.Text = condition.IsActive ? "Activa" : "Inactiva";
-                conditionCard.SpnPaymentMonths.Text = condition.PaymentMonths.ToString();
-                conditionCard.SpnInterestRate.Text = condition.InterestRate.ToString();
-                conditionCard.BldInterestOnArrears.Text = condition.InterestOnArrears.ToString();
-                conditionCard.BldAdvancePaymentReduction.Text = condition.AdvancePaymentReduction.ToString();
-                // Agregar la tarjeta al contenedor de condiciones de crédito
-                ItcCreditCondition.Items.Add(conditionCard);
-            }
+            creditConditionControl.LblCreditConditionName.Content = creditCondition.Identifier;
+            creditConditionControl.LblIsActive.Content = creditCondition.IsActive ? "Activa" : "Inactiva";
+            creditConditionControl.LblApplyIVA.Content = creditCondition.IsIvaApplied ? "Aplica IVA" : "No aplica IVA";
+            creditConditionControl.LblPaymentMonths.Content = creditCondition.PaymentMonths;
+            creditConditionControl.LblInterestRate.Content = creditCondition.InterestRate;
+            creditConditionControl.LblInterestOnArrears.Content = creditCondition.InterestOnArrears;
+            creditConditionControl.LblAdvancePaymentReduction.Content = creditCondition.AdvancePaymentReduction;
+            ItcCreditCondition.Items.Add(creditConditionControl);
         }
     }
 }
