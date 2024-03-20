@@ -20,6 +20,9 @@ namespace SFIClient.Controlls
     public partial class CreditsListCreditControl : UserControl
     {
         public Credit BindedCredit { get; }
+        public event EventHandler<Credit> BtnPaymentsTableClick;
+        public event EventHandler<Credit> BtnMonthlyEfficiencyClick;
+        public event EventHandler<Credit> BtnChangeConditionClick;
 
         public CreditsListCreditControl(Credit credit)
         {
@@ -108,6 +111,21 @@ namespace SFIClient.Controlls
             }
 
             TbkCreditExtraInfo.Text = message;
+        }
+
+        private void BtnOpenCreditPaymentsTableClick(object sender, RoutedEventArgs e)
+        {
+            BtnPaymentsTableClick?.Invoke(this, BindedCredit);
+        }
+
+        private void BtnOpenCreditMonthlyEfficiencyClick(object sender, RoutedEventArgs e)
+        {
+            BtnMonthlyEfficiencyClick?.Invoke(this, BindedCredit);
+        }
+
+        private void BtnChangeApplicableCreditConditionsClick(object sender, RoutedEventArgs e)
+        {
+            BtnPaymentsTableClick?.Invoke(this, BindedCredit);
         }
     }
 }

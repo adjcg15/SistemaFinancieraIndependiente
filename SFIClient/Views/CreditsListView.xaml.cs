@@ -113,10 +113,27 @@ namespace SFIClient.Views
             showedCreditsList.ForEach(credit =>
             {
                 var creditCard = new CreditsListCreditControl(credit);
-                //creditConditionCard.CardClick += HighlightCreditConditionCard;
+                creditCard.BtnPaymentsTableClick += RedirectToPaymentsTable;
+                creditCard.BtnMonthlyEfficiencyClick += RedirectToCreditMonthlyEfficiency;
+                creditCard.BtnChangeConditionClick += RedirectToChangeApplicableCreditCondition;
 
                 SkpCreditsList.Children.Add(creditCard);
             });
+        }
+
+        private void RedirectToPaymentsTable(object sender, Credit selectedCredit)
+        {
+            //TODO: implementar redirección
+        }
+
+        private void RedirectToCreditMonthlyEfficiency(object sender, Credit selectedCredit)
+        {
+            //TODO: implementar redirección
+        }
+
+        private void RedirectToChangeApplicableCreditCondition(object sender, Credit selectedCredit)
+        {
+            //TODO: implementar redirección
         }
 
         private void BtnSearchCreditsClick(object sender, RoutedEventArgs e)

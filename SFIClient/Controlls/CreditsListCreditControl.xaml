@@ -80,11 +80,13 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0, 28">
                     <Button 
+                        Click="BtnOpenCreditPaymentsTableClick"
                         Style="{StaticResource PrimaryBtn}" 
                         Margin="0, 0, 16, 0">
                         Tabla de pagos
                     </Button>
                     <Button 
+                        Click="BtnOpenCreditMonthlyEfficiencyClick"
                         Style="{StaticResource SecondaryBtn}">
                         Eficiencia de cobros
                     </Button>
@@ -121,7 +123,10 @@
                         </TextBlock>
                     </StackPanel>
 
-                    <Button Style="{StaticResource TernaryBtn}" Grid.Column="1">
+                    <Button 
+                        Click="BtnChangeApplicableCreditConditionsClick"
+                        Style="{StaticResource TernaryBtn}" 
+                        Grid.Column="1">
                         Cambiar condiciones
                     </Button>
                 </Grid>
