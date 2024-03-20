@@ -70,6 +70,9 @@
     <Compile Include="Controlls\CreditsListCreditControl.xaml.cs">
       <DependentUpon>CreditsListCreditControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\GrantingPoliciesListPolicyControl.xaml.cs">
+      <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
@@ -90,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlls\CreditsListCreditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\GrantingPoliciesListPolicyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
