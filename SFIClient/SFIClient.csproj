@@ -74,6 +74,7 @@
       <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DateToolkit.cs" />
+    <Compile Include="Utilities\Security.cs" />
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
@@ -186,6 +187,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.DataTypeExample.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SFIServices\SFIService.wsdl" />

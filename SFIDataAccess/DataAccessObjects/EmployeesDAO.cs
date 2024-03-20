@@ -44,7 +44,7 @@ namespace SFIDataAccess.DataAccessObjects
             catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar la información de inicio de sesión, intente más tarde"),
+                    new ServiceFault("El sistema no se encuentra disponible, por favor intente más tarde"),
                     new FaultReason("Error")
                 );
             }

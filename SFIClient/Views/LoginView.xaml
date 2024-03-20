@@ -45,30 +45,21 @@
                     </TextBlock>
                     <TextBox 
                         Name="TbEmployeeNumber" 
-                        Style="{StaticResource TextInput}"/>
+                        Style="{StaticResource TextInput}"
+                        MaxLength="10"/>
                 </Grid>
 
                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                     Contraseña <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                 </TextBlock>
-                <Grid Width="400" Margin="0, 0, 0, 32">
-                    <TextBlock Margin="5,2" Text="*************">
-                        <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text, ElementName=TbPassword}" Value="">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBox 
-                        Name="TbPassword" 
-                        Style="{StaticResource TextInput}"/>
-                </Grid>
+                <PasswordBox 
+                    Width="400" Margin="0, 0, 0, 32"
+                    Name="PbPassword" 
+                    Style="{StaticResource PasswordInput}"/>
 
-                <Button Style="{StaticResource PrimaryBtn}">
+                <Button 
+                    Click="BtnLoginClick" 
+                    Style="{StaticResource PrimaryBtn}">
                     Iniciar sesión
                 </Button>
             </StackPanel>
