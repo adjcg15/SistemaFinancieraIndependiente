@@ -198,7 +198,7 @@
           <Property Name="last_name" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="surname" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="id_employee_rol" Type="int" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="char" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="work_centers">
           <Key>
@@ -1115,7 +1115,7 @@
           <Property Name="last_name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="surname" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="id_employee_rol" Type="Int32" Nullable="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="credit_applications" Relationship="SFIDatabaseModel.FK_credit_applications_system_accounts" FromRole="system_accounts" ToRole="credit_applications" />
           <NavigationProperty Name="dictums" Relationship="SFIDatabaseModel.FK_dictums_system_accounts" FromRole="system_accounts" ToRole="dictum" />
           <NavigationProperty Name="employee_roles" Relationship="SFIDatabaseModel.FK_system_accounts_employee_roles" FromRole="system_accounts" ToRole="employee_roles" />

@@ -115,4 +115,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCreditGrantingPolicy" nillable="true" type="tns:ArrayOfCreditGrantingPolicy" />
+  <xs:complexType name="Employee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmployeeNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeRole" nillable="true" type="tns:EmployeeRole" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Employee" nillable="true" type="tns:Employee" />
+  <xs:complexType name="EmployeeRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Identifier" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmployeeRole" nillable="true" type="tns:EmployeeRole" />
 </xs:schema>
