@@ -1,4 +1,4 @@
-﻿<Page x:Class="SFIClient.Views.ClientRegisterView"
+﻿<Page x:Class="SFIClient.Views.ClientRegisterController"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -696,7 +696,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterSatate" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterSatateTextChanged"/>
+                            <TextBox Name="TbWorkCenterState" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterSatateTextChanged"/>
                         </Grid>
                     </StackPanel>
 

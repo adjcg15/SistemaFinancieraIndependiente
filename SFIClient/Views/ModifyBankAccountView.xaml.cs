@@ -23,12 +23,12 @@ namespace SFIClient.Views
     /// <summary>
     /// Lógica de interacción para ModifyBankAccountView.xaml
     /// </summary>
-    public partial class ModifyBankAccountView : Page
+    public partial class ModifyBankAccountController : Page
     {
         readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
         BankAccount bankAccount = new BankAccount();
         private readonly string cardNumber;
-        public ModifyBankAccountView(Client client)
+        public ModifyBankAccountController(Client client)
         {
             InitializeComponent();
             TbkClientName.Text = client.Name + " " + client.Surname + " " +client.LastName;
@@ -79,7 +79,7 @@ namespace SFIClient.Views
 
             if (resultado == DialogResult.OK)
             {
-                SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController();
                 this.NavigationService.Navigate(searchClientByRFCView);
             }
         }
@@ -108,7 +108,7 @@ namespace SFIClient.Views
                         MessageBox.Show(
                             "Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente", 
                             "Actualización exitosa");
-                        SearchClientByRFCView searchClientByRFCView = new SearchClientByRFCView();
+                        SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController ();
                         this.NavigationService.Navigate(searchClientByRFCView);
                     }
                     else

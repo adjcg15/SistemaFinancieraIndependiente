@@ -23,11 +23,11 @@ namespace SFIClient.Views
     /// <summary>
     /// Lógica de interacción para SearchClientByRFCView.xaml
     /// </summary>
-    public partial class SearchClientByRFCView : Page
+    public partial class SearchClientByRFCController : Page
     {
         private readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
         private List<Client> clientsList = new List<Client>();
-        public SearchClientByRFCView()
+        public SearchClientByRFCController()
         {
             InitializeComponent();
             LoadClients();
@@ -146,7 +146,7 @@ namespace SFIClient.Views
             }
             if (client != null)
             {
-                ModifyBankAccountView modifyBankAccountView = new ModifyBankAccountView(client);
+                ModifyBankAccountController modifyBankAccountView = new ModifyBankAccountController(client);
                 this.NavigationService.Navigate(modifyBankAccountView);
             }
         }
@@ -202,7 +202,7 @@ namespace SFIClient.Views
 
             if (resultado == DialogResult.OK)
             {
-                ClientRegisterView clientRegisterView = new ClientRegisterView();
+                ClientRegisterController clientRegisterView = new ClientRegisterController();
                 this.NavigationService.Navigate(clientRegisterView);
             }
             else if (resultado == DialogResult.Cancel)
@@ -214,7 +214,7 @@ namespace SFIClient.Views
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
         {
-            ClientRegisterView clientRegisterView = new ClientRegisterView();
+            ClientRegisterController clientRegisterView = new ClientRegisterController();
             this.NavigationService.Navigate(clientRegisterView);
         }
     }
