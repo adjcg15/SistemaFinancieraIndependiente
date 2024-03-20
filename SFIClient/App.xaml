@@ -216,13 +216,13 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image 
-                            Grid.Column="0"
-                            Source="/Assets/DiscardFileIcon.png" 
-                            Width="20" Height="20" VerticalAlignment="Center" />
+                                    Grid.Column="0"
+                                    Source="/Assets/DiscardFileIcon.png" 
+                                    Width="20" Height="20" VerticalAlignment="Center" />
                                 <ContentPresenter
-                            Grid.Column="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"/>
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -434,9 +434,76 @@
             </Style.Resources>
         </Style>
 
+        <!--Checkboxes-->
+        <Style x:Key="CheckBox" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <BulletDecorator Cursor="Hand" Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Grid>
+                                    <Rectangle 
+                                        x:Name="CheckMark"
+                                        Stroke="{StaticResource DarkGray}"
+                                        RadiusX="4"
+                                        RadiusY="4"
+                                        StrokeThickness="2" 
+                                        Height="24" Width="24" 
+                                        Visibility="Collapsed">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Assets/CheckBoxIcon.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <Rectangle 
+                                        x:Name="UncheckedMark"
+                                        Visibility="Collapsed"
+                                        Stroke="{StaticResource DarkGray}"
+                                        RadiusX="4"
+                                        RadiusY="4"
+                                        StrokeThickness="2" 
+                                        Height="24" Width="24"
+                                        Fill="Transparent"/>
+                                </Grid>
+                            </BulletDecorator.Bullet>
+
+                            <ContentPresenter Margin="12,0,0,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                RecognizesAccessKey="True"/>
+                            <VisualStateManager.VisualStateGroups>
+
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                    Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="UncheckedMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </BulletDecorator>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!--===============STYLES FOR BUTTONS===============-->
         <!--Primary button-->
-        <Style x:Key="PrimaryBtn" TargetType="Button">
+        <Style x:Key="PrimaryBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="White"/>
@@ -448,11 +515,46 @@
                             Background="{StaticResource PrimaryColor}"
                             CornerRadius="4"
                             x:Name="border"
-                            Cursor="Hand">
+                            Cursor="Hand"
+                            Padding="{TemplateBinding Padding}">
                             <ContentPresenter
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="{TemplateBinding Padding}"/>
+                                VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource MiddlePrimaryColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Search button-->
+        <Style x:Key="SearchBtn" TargetType="Button">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="8, 8, 8, 8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="{StaticResource PrimaryColor}"
+                            CornerRadius="4"
+                            x:Name="border"
+                            Cursor="Hand">
+                            <Grid>
+                                <Image Width="32" Height="32" Source="/Assets/SearchIcon.png"/>
+                                <ContentPresenter
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="{TemplateBinding Padding}"/>
+                            </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -473,20 +575,21 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            Background="White"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="2"
                             BorderBrush="{StaticResource PrimaryColor}"
                             CornerRadius="4"
                             x:Name="border"
-                            Cursor="Hand">
+                            Cursor="Hand"
+                            Padding="{TemplateBinding Padding}">
                             <ContentPresenter
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="{TemplateBinding Padding}"/>
+                                VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -509,18 +612,19 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Padding" Value="24, 16, 24, 16"/>
+            <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            Background="White"
+                            Background="{TemplateBinding Background}"
                             CornerRadius="4"
                             x:Name="border"
-                            Cursor="Hand">
+                            Cursor="Hand"
+                            Padding="{TemplateBinding Padding}">
                             <ContentPresenter
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="{TemplateBinding Padding}"/>
+                                VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -560,6 +664,85 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
+        </Style>
+
+        <!-- RadioButton -->
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="PART_Bullet"
+                                 Grid.Column="0"
+                                 Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="{TemplateBinding BorderThickness}"
+                                 Width="24" Height="24"/>
+                            <ContentPresenter Grid.Column="1"
+                  Margin="8,0,0,0"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="{StaticResource MediumGray}"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="LightGray"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RadioButtonError" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="PART_Bullet"
+                                 Grid.Column="0"
+                                 Fill="{TemplateBinding Background}"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="{TemplateBinding BorderThickness}"
+                                 Width="24" Height="24"/>   
+                            <ContentPresenter Grid.Column="1"
+                      Margin="8,0,0,0"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="{StaticResource MediumGray}"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource MediumGray}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="LightGray"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="PART_Bullet" Property="Fill" Value="White"/>
+                                <Setter TargetName="PART_Bullet" Property="Stroke" Value="{StaticResource Red}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>

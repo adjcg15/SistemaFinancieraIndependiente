@@ -22,11 +22,10 @@ namespace SFIDataAccess
     
         public string invoice { get; set; }
         public System.DateTime approval_date { get; set; }
-        public System.DateTime settlement_date { get; set; }
+        public Nullable<System.DateTime> settlement_date { get; set; }
         public System.DateTime withdrawal_date { get; set; }
         public decimal ammount_approved { get; set; }
         public string client_rfc { get; set; }
-        public string credit_type_identifier { get; set; }
         public int id_credit_type { get; set; }
         public string credit_application_invoice { get; set; }
     

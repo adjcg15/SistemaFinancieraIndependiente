@@ -10,18 +10,14 @@ using System.Threading.Tasks;
 namespace SFIServices.Contracts
 {
     [ServiceContract]
-    public interface ICreditsService
+    public interface ICreditGrantingPolicies
     {
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
-        List<CreditType> GetAllCreditTypes();
+        bool RegisterCreditGrantingPolicy(CreditGrantingPolicy NewPolicy);
 
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
-        List<Credit> GetAllCredits();
-
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        void RegisterCreditApplication(CreditApplication newApplication);
+        List<CreditGrantingPolicy> GetAllCreditGrantingPolicies();
     }
 }

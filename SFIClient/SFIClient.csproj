@@ -67,15 +67,39 @@
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditsListCreditControl.xaml.cs">
+      <DependentUpon>CreditsListCreditControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlls\GrantingPoliciesListPolicyControl.xaml.cs">
+      <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\FileToolkit.cs" />
     <Compile Include="Utilities\DataValidator.cs" />
+    <Compile Include="Views\CreditGrantingPolicyListView.xaml.cs">
+      <DependentUpon>CreditGrantingPolicyListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreditsListView.xaml.cs">
+      <DependentUpon>CreditsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterPolicyGrantingCreditView.xaml.cs">
+      <DependentUpon>RegisterPolicyGrantingCreditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\CreditsListCreditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\GrantingPoliciesListPolicyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,6 +118,18 @@
     <Page Include="Views\CreditApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreditGrantingPolicyListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreditsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterPolicyGrantingCreditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResponsiveExampleView.xaml">
       <SubType>Designer</SubType>
@@ -130,7 +166,13 @@
     <None Include="Connected Services\SFIServices\item3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Credit.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditCondition.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditGrantingPolicy.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.CreditType.datasource">
@@ -178,9 +220,17 @@
   <ItemGroup>
     <Resource Include="Assets\DiscardFileIcon.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\GrayInfoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\CheckBoxIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SearchIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\EmptyItemsListIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

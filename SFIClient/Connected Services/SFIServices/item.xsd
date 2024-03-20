@@ -20,6 +20,37 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditType" nillable="true" type="tns:CreditType" />
+  <xs:complexType name="ArrayOfCredit">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Credit" nillable="true" type="tns:Credit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCredit" nillable="true" type="tns:ArrayOfCredit" />
+  <xs:complexType name="Credit">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AmountApproved" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ApprovalDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Client" nillable="true" type="tns:Client" />
+      <xs:element minOccurs="0" name="CreditApplication" nillable="true" type="tns:CreditApplication" />
+      <xs:element minOccurs="0" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+      <xs:element minOccurs="0" name="CreditType" nillable="true" type="tns:CreditType" />
+      <xs:element minOccurs="0" name="Invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SettlementDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WithdrawalDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Credit" nillable="true" type="tns:Credit" />
+  <xs:complexType name="Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Birthdate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Curp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Rfc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Client" nillable="true" type="tns:Client" />
   <xs:complexType name="CreditApplication">
     <xs:sequence>
       <xs:element minOccurs="0" name="Client" nillable="true" type="tns:Client" />
@@ -36,17 +67,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditApplication" nillable="true" type="tns:CreditApplication" />
-  <xs:complexType name="Client">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Birthdate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Curp" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Rfc" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Client" nillable="true" type="tns:Client" />
   <xs:complexType name="CreditCondition">
     <xs:sequence>
       <xs:element minOccurs="0" name="AdvancePaymentReduction" type="xs:double" />
@@ -80,4 +100,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCreditCondition" nillable="true" type="tns:ArrayOfCreditCondition" />
+  <xs:complexType name="CreditGrantingPolicy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
+  <xs:complexType name="ArrayOfCreditGrantingPolicy">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditGrantingPolicy" nillable="true" type="tns:ArrayOfCreditGrantingPolicy" />
 </xs:schema>

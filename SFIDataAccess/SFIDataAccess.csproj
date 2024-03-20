@@ -91,6 +91,7 @@
     <Compile Include="DataAccessObjects\CreditsDAO.cs" />
     <Compile Include="CustomExceptions\ServiceException.cs" />
     <Compile Include="DataAccessObjects\ExampleDAO.cs" />
+    <Compile Include="DataAccessObjects\CreditGrantingPoliciesDAO.cs" />
     <Compile Include="dictum.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
@@ -100,12 +101,14 @@
     <Compile Include="employee_roles.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Credit.cs" />
     <Compile Include="Model\CreditApplication.cs" />
     <Compile Include="Model\CreditCondition.cs" />
     <Compile Include="Model\CreditType.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\DataTypeExample.cs" />
     <Compile Include="Model\DigitalDocument.cs" />
+    <Compile Include="Model\CreditGrantingPolicy.cs" />
     <Compile Include="personal_references.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>

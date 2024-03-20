@@ -18,6 +18,11 @@ namespace SFIServices
             return CreditsDAO.GetAllCreditTypes();
         }
 
+        public List<Credit> GetAllCredits()
+        {
+            return CreditsDAO.GetAllCredits();
+        }
+
         public void RegisterCreditApplication(CreditApplication newApplication)
         {
             if(newApplication.CreditCondition == null)
