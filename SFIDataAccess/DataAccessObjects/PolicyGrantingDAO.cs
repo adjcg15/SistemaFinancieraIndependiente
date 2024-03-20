@@ -10,6 +10,8 @@ using SFIDataAccess.Model;
 using System.Data.Entity.Core;
 using System.ServiceModel;
 using SFIDataAccess.CustomExceptions;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace SFIDataAccess.DataAccessObjects
 {
@@ -34,11 +36,17 @@ namespace SFIDataAccess.DataAccessObjects
                     return result == 0;
                 }
             }
-            catch (EntityException)
+            catch (System.Data.Entity.Core.EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
         }
     }

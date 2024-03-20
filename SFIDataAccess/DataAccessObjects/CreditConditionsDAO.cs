@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -77,11 +79,17 @@ namespace SFIDataAccess.DataAccessObjects
                     return result == 0;
                 }
             }
-            catch (EntityException)
+            catch (System.Data.Entity.Core.EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
         }
         public static List<CreditCondition> RecoverAllCreditConditions()
@@ -106,26 +114,28 @@ namespace SFIDataAccess.DataAccessObjects
                             conditionsList.Add(creditCondition);
 
                         });
-
-                    // Imprimir los datos recuperados en la consola para verificar
                     foreach (var condition in conditionsList)
                     {
-                        Console.WriteLine($"Identificador: {condition.Identifier}, Tasa de Interés: {condition.InterestRate}, PaymentMonths: {condition.PaymentMonths} Iva:{condition.IsIvaApplied} Active:{condition.IsActive}");
-                        // Agrega más propiedades según sea necesario
+                        Console.WriteLine($"Identificador: {condition.Identifier}, " +
+                            $"Tasa de Interés: {condition.InterestRate}, " +
+                            $"PaymentMonths: {condition.PaymentMonths} Iva:{condition.IsIvaApplied} Active:{condition.IsActive}");
                     }
                 }
             }
-            catch (EntityException)
+            catch (System.Data.Entity.Core.EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                  new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
-
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
             return conditionsList;
         }
-
-
     }
 }
 

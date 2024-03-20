@@ -25,13 +25,11 @@ namespace SFIClient.Views
     {
         private readonly CreditConditionsServiceClient creditServiceClient = new CreditConditionsServiceClient();
         private List<CreditCondition> creditConditions = new List<CreditCondition>();
-
         public ConsultConditionsCreditView()
         {
             InitializeComponent();
             LoadCreditConditions();
         }
-
         private void LoadCreditConditions()
         {
             try
@@ -69,7 +67,7 @@ namespace SFIClient.Views
             SkpRegisterCreditCondition.Visibility = Visibility.Collapsed;
             for (int i = 0; i < clientsList.Count; i++)
             {
-                    ShowCreditCondition(clientsList[i]);
+                ShowCreditCondition(clientsList[i]);
             }
         }
         private void ShowCreditCondition(CreditCondition creditCondition)
@@ -85,7 +83,6 @@ namespace SFIClient.Views
             creditConditionControl.DataContext = creditCondition;
             ItcCreditCondition.Items.Add(creditConditionControl);
         }
-
         private void BtnNewCreditConditionClick(object sender, RoutedEventArgs e)
         {
             RegisterCreditConditionView registerCreditCondition = new RegisterCreditConditionView();
