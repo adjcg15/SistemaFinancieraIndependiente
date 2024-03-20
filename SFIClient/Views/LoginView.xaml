@@ -1,0 +1,78 @@
+﻿<Page 
+    x:Class="SFIClient.Views.LoginController"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:SFIClient.Views"
+    mc:Ignorable="d" 
+    d:Width="1280" d:Height="800"
+    Title="Inicio de sesión">
+    <Grid Background="White">
+        <Border 
+            Background="#FAFAFA" Padding="40"
+            CornerRadius="16" BorderThickness="1" 
+            BorderBrush="{StaticResource LightGray}"
+            VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock 
+                    TextAlignment="Center"
+                    Style="{StaticResource Subtitle}"
+                    Foreground="{StaticResource DarkPrimaryColor}"
+                    Text="Financiera Independiente"
+                    />
+                <TextBlock 
+                    Style="{StaticResource Emphasis}"
+                    TextAlignment="Center"
+                    Foreground="{StaticResource MediumGray}"
+                    Text="Inicio de sesión"
+                    Margin="0, 0, 0,32"/>
+
+                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                    Número de empleado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                </TextBlock>
+                <Grid Width="400" Margin="0, 0, 0, 24">
+                    <TextBlock Margin="5,2" Text="1237628967">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=TbEmployeeNumber}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox 
+                        Name="TbEmployeeNumber" 
+                        Style="{StaticResource TextInput}"/>
+                </Grid>
+
+                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                    Contraseña <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                </TextBlock>
+                <Grid Width="400" Margin="0, 0, 0, 32">
+                    <TextBlock Margin="5,2" Text="*************">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=TbPassword}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox 
+                        Name="TbPassword" 
+                        Style="{StaticResource TextInput}"/>
+                </Grid>
+
+                <Button Style="{StaticResource PrimaryBtn}">
+                    Iniciar sesión
+                </Button>
+            </StackPanel>
+            
+        </Border>
+    </Grid>
+</Page>

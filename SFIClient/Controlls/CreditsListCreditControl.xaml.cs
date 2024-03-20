@@ -125,7 +125,7 @@ namespace SFIClient.Controlls
 
         private void BtnChangeApplicableCreditConditionsClick(object sender, RoutedEventArgs e)
         {
-            BtnPaymentsTableClick?.Invoke(this, BindedCredit);
+            BtnChangeConditionClick?.Invoke(this, BindedCredit);
         }
     }
 }
