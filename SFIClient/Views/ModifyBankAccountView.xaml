@@ -116,7 +116,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbBank" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbBank" Style="{StaticResource TextInput}" MaxLength="40" TextChanged="TbBankTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -134,7 +134,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbHolder" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbHolder" Style="{StaticResource TextInput}" MaxLength="180" TextChanged="TbHolderTextChanged"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

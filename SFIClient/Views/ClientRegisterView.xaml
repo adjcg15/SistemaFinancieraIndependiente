@@ -102,7 +102,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientName" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientNameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -120,7 +120,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSurname" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientSurname" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSurnameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -138,7 +138,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientLastName" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientLastName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientLastNameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -146,7 +146,7 @@
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
                             <Border Name="BdrClientBirthdate" Style="{StaticResource RoundedBorder}">
-                                <DatePicker Name="DpkClientBirthdate" Style="{StaticResource DatePicker}"/>
+                                <DatePicker Name="DpkClientBirthdate" Style="{StaticResource DatePicker}" SelectedDateChanged="DpkSelectedDateChanged"/>
                             </Border>
                         </Grid>
 
@@ -219,7 +219,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientStreet" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientStreet" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientStreetTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -237,7 +237,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientNeighborhood" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientNeighborhood" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientNeighborhoodTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -309,7 +309,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientCity" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientCity" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientCityTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -327,7 +327,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientMunicipality" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientMunicipality" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientMunicipalityTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -345,7 +345,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSatate" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbClientSatate" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSatateTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -399,7 +399,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbBank" Style="{StaticResource TextInput}" MaxLength="40"/>
+                            <TextBox Name="TbBank" Style="{StaticResource TextInput}" MaxLength="40" TextChanged="TbBankTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -417,7 +417,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbHolder" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbHolder" Style="{StaticResource TextInput}" MaxLength="180" TextChanged="TbHolderTextChanged"/>
                         </Grid>
                     </StackPanel>
                     
@@ -457,7 +457,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbCompanyName" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbCompanyName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbCompanyNameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -493,7 +493,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbEmployeePosition" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbEmployeePosition" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbEmployeePositionTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -570,7 +570,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterStreet" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbWorkCenterStreet" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterStreetTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -588,7 +588,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterNeighborhood" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbWorkCenterNeighborhood" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterNeighborhoodTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -660,7 +660,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterCity" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbWorkCenterCity" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterCityTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -678,7 +678,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterMunicipality" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbWorkCenterMunicipality" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterMunicipalityTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -696,7 +696,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbWorkCenterSatate" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbWorkCenterSatate" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbWorkCenterSatateTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -887,7 +887,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceNameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceNameFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceNameFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -905,7 +905,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSurnameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceSurnameFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSurnameFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -923,7 +923,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceLastNameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceLastNameFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceLastNameFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -941,7 +941,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferencePhoneNumberFirst" Style="{StaticResource TextInput}" MaxLength="0" TextChanged="TbReferencePhoneNumberFirstTextChanged"/>
+                            <TextBox Name="TbReferencePhoneNumberFirst" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbReferencePhoneNumberFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -959,13 +959,13 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceKinshipFirst" Style="{StaticResource TextInput}" MaxLength="180"/>
+                            <TextBox Name="TbReferenceKinshipFirst" Style="{StaticResource TextInput}" MaxLength="180" TextChanged="TbReferenceKinshipFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Tiempo de conocimiento en años <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 10">
+                        <Grid Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa los años de relación en número">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -1006,7 +1006,7 @@
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Calle <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 12">
+                        <Grid Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa la calle">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -1018,7 +1018,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceStreetFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceStreetFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceStreetFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1036,7 +1036,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceNeighborhoodFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceNeighborhoodFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceNeighborhoodFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1108,7 +1108,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceCityFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceCityFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceCityFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1126,7 +1126,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceMunicipalityFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceMunicipalityFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceMunicipalityFirstTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1144,7 +1144,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSatateFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceSatateFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSatateFirstTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -1184,7 +1184,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceNameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceNameSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceNameSecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1202,7 +1202,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSurnameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceSurnameSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSurnameSecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1220,7 +1220,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceLastNameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceLastNameSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceLastNameSecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1256,13 +1256,13 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceKinshipSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceKinshipSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceKinshipSecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Tiempo de conocimiento en años <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 10">
+                        <Grid Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa los años de relación">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -1303,7 +1303,7 @@
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Calle <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 12">
+                        <Grid Margin="0, 0, 0, 24">
                             <TextBlock Margin="5,2,5,2" Text="Ingresa la calle">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -1315,7 +1315,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceStreetSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceStreetSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceStreetSecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1333,7 +1333,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceNeighborhoodSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceNeighborhoodSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceNeighborhoodSecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1405,7 +1405,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceCitySecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceCitySecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceCitySecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1423,7 +1423,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceMunicipalitySecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceMunicipalitySecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceMunicipalitySecondTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1441,7 +1441,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSatateSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
+                            <TextBox Name="TbReferenceSatateSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSatateSecondTextChanged"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
