@@ -36,7 +36,8 @@ namespace SFIClient.Views
         {
             try
             {
-                creditConditions = creditServiceClient.RecoverAllCreditConditions().ToList();
+                CreditConditionsServiceClient creditConditiionClient = new CreditConditionsServiceClient();
+                creditConditions = creditConditiionClient.RecoverAllCreditConditions().ToList();
                 if (creditConditions.Count != 0)
                 {
                     AddCreditConditions(creditConditions);

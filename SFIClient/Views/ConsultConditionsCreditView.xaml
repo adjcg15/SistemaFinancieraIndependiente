@@ -23,7 +23,39 @@
                 </StackPanel>
             </StackPanel>
 
-            <!--Credit conditions-->
+            <StackPanel Name="SkpRegisterClient" Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
+                <Button Name="BtnRegisterClient" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>
+            </StackPanel>
+
+            <!--Search client-->
+            <StackPanel Name="SkpSearchClient" Margin="40, 36, 40, 36">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <TextBlock Margin="5,2,5,2" Text="Buscar cliente por RFC">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TbRFCClient}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}"/>
+                    </Grid>
+                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0"  Width="48" Height="48" />
+                </Grid>
+            </StackPanel>
+
+            <!--Clients-->
             <Grid Name="GrdClients"  Margin="25, 0, 25, 0">
                 <ItemsControl Name="ItcCreditCondition" HorizontalAlignment="Left">
                     <ItemsControl.ItemsPanel>
@@ -43,7 +75,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="1"
                             Foreground="{StaticResource DarkGray}" FontSize="24"
-                            Text="No existen condiciones de crédito registradas" 
+                            Text="Aún no hay clientes registrados" 
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                         />
@@ -51,7 +83,7 @@
                 </StackPanel>
             </Grid>
             <StackPanel Name="SkpRegisterCreditCondition" Orientation="Horizontal" Margin="0, 10, 0, 0" HorizontalAlignment="Center">
-                <Button Name="btnRegisterCreditCondition" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar condición de crédito" Width="320"/>
+                <!--<Button Name="btnRegisterClientNow" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>-->
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

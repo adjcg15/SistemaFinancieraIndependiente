@@ -9,8 +9,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SFIDataAccess.DataAccessObjects
 {
@@ -90,20 +92,27 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var conditions = (from condition in context.Database.SqlQuery<CreditCondition>("GetAllCreditConditions")
-                                      select new CreditCondition
-                                      {
-                                          InterestRate = condition.InterestRate,
-                                          IsActive = condition.IsActive,
-                                          IsIvaApplied = condition.IsIvaApplied,
-                                          InterestOnArrears = condition.InterestOnArrears,
-                                          AdvancePaymentReduction = condition.AdvancePaymentReduction,
-                                          PaymentMonths = condition.PaymentMonths,
-                                          CreditType = condition.CreditType,
-                                          Identifier = condition.Identifier
-                                      }).ToList();
+                    context.credit_conditions
+                        .ToList().ForEach(storedCondition =>
+                        {
+                            CreditCondition creditCondition = new CreditCondition();
+                            creditCondition.Identifier = storedCondition.identifier;
+                            creditCondition.AdvancePaymentReduction = storedCondition.advance_payment_reduction;
+                            creditCondition.InterestOnArrears = storedCondition.interest_on_arrears;
+                            creditCondition.InterestRate = storedCondition.interest_rate;
+                            creditCondition.IsActive = storedCondition.is_active;
+                            creditCondition.IsIvaApplied = storedCondition.is_iva_applied;
+                            creditCondition.PaymentMonths = storedCondition.payment_months;
+                            conditionsList.Add(creditCondition);
 
-                    conditionsList.AddRange(conditions);
+                        });
+
+                    // Imprimir los datos recuperados en la consola para verificar
+                    foreach (var condition in conditionsList)
+                    {
+                        Console.WriteLine($"Identificador: {condition.Identifier}, Tasa de Interés: {condition.InterestRate}, PaymentMonths: {condition.PaymentMonths} Iva:{condition.IsIvaApplied} Active:{condition.IsActive}");
+                        // Agrega más propiedades según sea necesario
+                    }
                 }
             }
             catch (EntityException)
