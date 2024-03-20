@@ -73,6 +73,7 @@
     <Compile Include="Controlls\GrantingPoliciesListPolicyControl.xaml.cs">
       <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Session\SystemSession.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Utilities\Security.cs" />
     <Compile Include="Views\CreditApplicationView.xaml.cs">
@@ -243,5 +244,6 @@
   <ItemGroup>
     <Resource Include="Assets\EmptyItemsListIcon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

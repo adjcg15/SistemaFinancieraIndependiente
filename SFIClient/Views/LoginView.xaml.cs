@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Session;
+using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
@@ -134,12 +135,26 @@ namespace SFIClient.Views
 
         private void StartEmployeeSession(Employee employee)
         {
-
+            SystemSession.Employee = employee;
         }
 
         private void RedirectToMainPage()
         {
-
+            switch (SystemSession.Employee.EmployeeRole.Name)
+            {
+                case Security.Roles.MANAGER:
+                    //TODO: hacer menú para el gerente
+                    break;
+                case Security.Roles.CREDIT_ADVISOR:
+                    //TODO: redireccionar a buscar cliente por RFC
+                    break;
+                case Security.Roles.DEBT_COLLECTOR:
+                    //TODO: hacer menú para el cobrador
+                    break;
+                case Security.Roles.CREDIT_ANALYST:
+                    //TODO: redireccionar a buscar solicitud de crédito
+                    break;
+            }
         }
     }
 }

@@ -9,6 +9,14 @@ namespace SFIClient.Utilities
 {
     public class Security
     {
+        public static class Roles
+        {
+            public const string MANAGER = "GERENTE";
+            public const string CREDIT_ANALYST = "ANALISTA";
+            public const string CREDIT_ADVISOR = "ASESOR";
+            public const string DEBT_COLLECTOR = "COBRADOR";
+        }
+
         public static string HashPasswordWithSHA256(string pplainPassword)
         {
             using (SHA256 sha256 = SHA256.Create())
