@@ -26,7 +26,10 @@ namespace SFIClient.Views
         public CreditsListController()
         {
             InitializeComponent();
+        }
 
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
             LoadAllCredits();
         }
 
@@ -83,7 +86,7 @@ namespace SFIClient.Views
 
         private void RedirectToMainMenu()
         {
-            //TODO: implementar redirección a menú principal
+            NavigationService.Navigate(new MainMenuController());
         }
 
         private void DisableFilterOptions()
@@ -221,7 +224,7 @@ namespace SFIClient.Views
 
         private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
         {
-            //TODO: implementar redirección a pantalla previa
+            NavigationService.GoBack();
         }
     }
 }

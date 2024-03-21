@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:SFIClient.Views"
     mc:Ignorable="d" 
     d:Width="1280" d:Height="2000"
-    Title="Historial de créditos de clientes">
+    Title="Historial de créditos de clientes"
+    Loaded="PageLoaded">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
