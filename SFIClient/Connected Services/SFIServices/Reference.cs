@@ -1335,6 +1335,22 @@ namespace SFIClient.SFIServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditType", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionsByCreditTypeRe" +
             "sponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverCreditConditionsByCreditTypeAsync(int creditTypeIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RegisterCreditCondition", ReplyAction="http://tempuri.org/ICreditConditionsService/RegisterCreditConditionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/RegisterCreditConditionServiceFaultFa" +
+            "ult", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool RegisterCreditCondition(SFIClient.SFIServices.CreditCondition NewCondition);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RegisterCreditCondition", ReplyAction="http://tempuri.org/ICreditConditionsService/RegisterCreditConditionResponse")]
+        System.Threading.Tasks.Task<bool> RegisterCreditConditionAsync(SFIClient.SFIServices.CreditCondition NewCondition);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditions", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditionsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditionsServiceFaul" +
+            "tFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditCondition[] RecoverAllCreditConditions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditions", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditionsResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverAllCreditConditionsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1370,6 +1386,22 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverCreditConditionsByCreditTypeAsync(int creditTypeIdentifier) {
             return base.Channel.RecoverCreditConditionsByCreditTypeAsync(creditTypeIdentifier);
+        }
+        
+        public bool RegisterCreditCondition(SFIClient.SFIServices.CreditCondition NewCondition) {
+            return base.Channel.RegisterCreditCondition(NewCondition);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterCreditConditionAsync(SFIClient.SFIServices.CreditCondition NewCondition) {
+            return base.Channel.RegisterCreditConditionAsync(NewCondition);
+        }
+        
+        public SFIClient.SFIServices.CreditCondition[] RecoverAllCreditConditions() {
+            return base.Channel.RecoverAllCreditConditions();
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverAllCreditConditionsAsync() {
+            return base.Channel.RecoverAllCreditConditionsAsync();
         }
     }
     

@@ -67,6 +67,9 @@
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditConditionControl.xaml.cs">
+      <DependentUpon>CreditConditionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\CreditsListCreditControl.xaml.cs">
       <DependentUpon>CreditsListCreditControl.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,9 @@
     <Compile Include="Session\SystemSession.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Utilities\Security.cs" />
+    <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
+      <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +99,9 @@
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RegisterCreditConditionView.xaml.cs">
+      <DependentUpon>RegisterCreditConditionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterCreditGrantingPolicyView.xaml.cs">
       <DependentUpon>RegisterCreditGrantingPolicyView.xaml</DependentUpon>
     </Compile>
@@ -100,6 +109,10 @@
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\CreditConditionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +136,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ConsultConditionsCreditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreditApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterCreditConditionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,6 +272,8 @@
   <ItemGroup>
     <Resource Include="Assets\EmptyItemsListIcon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\Plus2Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

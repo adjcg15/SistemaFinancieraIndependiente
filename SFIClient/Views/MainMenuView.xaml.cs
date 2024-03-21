@@ -53,7 +53,7 @@ namespace SFIClient.Views
 
         private void BdrCreditConditionsClick(object sender, MouseButtonEventArgs e)
         {
-            //TODO: redirect to credit conditions list
+            NavigationService.Navigate(new ConsultConditionsCreditView());
         }
 
         private void BdrGeneralEfficiencyClick(object sender, MouseButtonEventArgs e)
