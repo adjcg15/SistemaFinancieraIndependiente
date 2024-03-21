@@ -63,7 +63,7 @@ namespace SFIClient.Views
 
         private void BdrCreditsListClick(object sender, MouseButtonEventArgs e)
         {
-            //TODO: redirect to client credits list
+            NavigationService.Navigate(new CreditsListController());
         }
     }
 }

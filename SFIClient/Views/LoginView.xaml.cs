@@ -146,12 +146,13 @@ namespace SFIClient.Views
                 case Security.Roles.DEBT_COLLECTOR:
                     NavigationService.Navigate(new MainMenuController());
                     break;
-                case Security.Roles.CREDIT_ADVISOR:
-                    //TODO: redireccionar a buscar cliente por RFC
-                    break;
                 case Security.Roles.CREDIT_ANALYST:
                     //TODO: redireccionar a buscar solicitud de crédito
                     break;
+                case Security.Roles.CREDIT_ADVISOR:
+                    //TODO: redireccionar a buscar cliente por RFC
+                    break;
+                
             }
         }
     }
