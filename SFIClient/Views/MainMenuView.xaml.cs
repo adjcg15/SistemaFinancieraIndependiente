@@ -45,5 +45,15 @@ namespace SFIClient.Views
                     break;
             }
         }
+
+        private void BdrGrantingPoliciesClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new CreditGrantingPolicyListController());
+        }
+
+        private void BdrCreditConditionsClick(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: redirect to credit conditions list
+        }
     }
 }
