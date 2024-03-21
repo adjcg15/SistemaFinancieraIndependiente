@@ -28,13 +28,14 @@ namespace SFIClient.Views
     /// </summary>
     public partial class ClientRegisterController : Page
     {
-        private ClientsServiceClient ClientsServiceClient = new ClientsServiceClient();
+        private readonly ClientsServiceClient ClientsServiceClient = new ClientsServiceClient();
         private bool textFieldsSame = false;
+        private string lastSalary = string.Empty;
         public ClientRegisterController()
         {
             InitializeComponent();
             CollapaseTextFields();
-            ApplyNumberOnlyRestriction();
+            ApplyRestrictionsOnFields();
         }
 
         private void CollapaseTextFields()
@@ -49,7 +50,7 @@ namespace SFIClient.Views
             GrdClientEmailThird.Visibility = Visibility.Collapsed;
         }
 
-        private void ApplyNumberOnlyRestriction()
+        private void ApplyRestrictionsOnFields()
         {
             RestrictOnlyNumbers(TbClientInteriorNumber);
             RestrictOnlyNumbers(TbClientOutdoorNumber);
@@ -57,7 +58,7 @@ namespace SFIClient.Views
             RestrictOnlyNumbers(TbCardNumber);
             RestrictOnlyNumbers(TbWorkCenterPhoneNumber);
             RestrictOnlyNumbers(TbHumanResourcesPhone);
-            RestrictOnlyNumbers(TbSalary);
+            //RestrictOnlyNumbers(TbSalary);
             RestrictOnlyNumbers(TbEmployeeSeniority);
             RestrictOnlyNumbers(TbWorkCenterInteriorNumber);
             RestrictOnlyNumbers(TbWorkCenterOutdoorNumber);
@@ -74,6 +75,29 @@ namespace SFIClient.Views
             RestrictOnlyNumbers(TbReferenceInteriorNumberSecond);
             RestrictOnlyNumbers(TbReferenceOutdoorNumberSecond);
             RestrictOnlyNumbers(TbReferencePostCodeSecond);
+            RestrictOnlyLetters(TbClientName);
+            RestrictOnlyLetters(TbClientSurname);
+            RestrictOnlyLetters(TbClientLastName);
+            RestrictOnlyLetters(TbClientName);
+            RestrictOnlyLetters(TbClientCity);
+            RestrictOnlyLetters(TbClientMunicipality);
+            RestrictOnlyLetters(TbClientState);
+            RestrictOnlyLetters(TbHolder);
+            RestrictOnlyLetters(TbWorkCenterCity);
+            RestrictOnlyLetters(TbWorkCenterMunicipality);
+            RestrictOnlyLetters(TbWorkCenterState);
+            RestrictOnlyLetters(TbReferenceNameFirst);
+            RestrictOnlyLetters(TbReferenceSurnameFirst);
+            RestrictOnlyLetters(TbReferenceLastNameFirst);
+            RestrictOnlyLetters(TbReferenceCityFirst);
+            RestrictOnlyLetters(TbReferenceMunicipalityFirst);
+            RestrictOnlyLetters(TbReferenceStateFirst);
+            RestrictOnlyLetters(TbReferenceNameSecond);
+            RestrictOnlyLetters(TbReferenceSurnameSecond);
+            RestrictOnlyLetters(TbReferenceLastNameSecond);
+            RestrictOnlyLetters(TbReferenceCitySecond);
+            RestrictOnlyLetters(TbReferenceMunicipalitySecond);
+            RestrictOnlyLetters(TbReferenceStateSecond);
         }
 
         private void BtnNewPhoneNumberClick(object sender, RoutedEventArgs e)
@@ -133,7 +157,7 @@ namespace SFIClient.Views
 
         private bool VerifyPersonalInformationTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             Style borderErrorStyle = (Style)this.FindResource("RoundedBorderError");
 
             bool correctFields = true;
@@ -141,7 +165,7 @@ namespace SFIClient.Views
             List<TextBox> textBoxes = new List<TextBox>
             {
                 TbClientName,
-                TbClientSurname,
+                //TbClientSurname,
                 TbClientLastName,
                 TbClientCurp,
                 TbClientRfc
@@ -166,7 +190,7 @@ namespace SFIClient.Views
 
         private bool VerifyClientAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -195,7 +219,7 @@ namespace SFIClient.Views
 
         private bool VerifyBankAccountTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -219,7 +243,7 @@ namespace SFIClient.Views
 
         private bool VerifyWorkCenterTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -246,7 +270,7 @@ namespace SFIClient.Views
 
         private bool VerifyWorkCenterAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -275,7 +299,7 @@ namespace SFIClient.Views
 
         private bool VerifyClientContactMethodsTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -299,13 +323,13 @@ namespace SFIClient.Views
 
         private bool VerifyFirstReferenceInformationTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
             {
                 TbReferenceNameFirst,
-                TbReferenceSurnameFirst,
+                //TbReferenceSurnameFirst,
                 TbReferenceLastNameFirst,
                 TbReferencePhoneNumberFirst,
                 TbReferenceKinshipFirst,
@@ -327,7 +351,7 @@ namespace SFIClient.Views
 
         private bool VerifyFirstReferenceAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -356,13 +380,13 @@ namespace SFIClient.Views
 
         private bool VerifySecondReferenceInformationTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
             {
                 TbReferenceNameSecond,
-                TbReferenceSurnameSecond,
+                //TbReferenceSurnameSecond,
                 TbReferenceLastNameSecond,
                 TbReferencePhoneNumberSecond,
                 TbReferenceKinshipSecond,
@@ -384,7 +408,7 @@ namespace SFIClient.Views
 
         private bool VerifySecondReferenceAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -431,7 +455,7 @@ namespace SFIClient.Views
         {
             textBox.PreviewTextInput += (sender, e) =>
             {
-                if (!char.IsDigit(e.Text, e.Text.Length-1))
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 {
                     e.Handled = true;
                 }
@@ -439,6 +463,17 @@ namespace SFIClient.Views
             textBox.PreviewKeyDown += (sender, e) =>
             {
                 if (e.Key == Key.Space)
+                {
+                    e.Handled = true;
+                }
+            };
+        }
+
+        private void RestrictOnlyLetters(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (char.IsDigit(e.Text, e.Text.Length - 1))
                 {
                     e.Handled = true;
                 }
@@ -471,6 +506,7 @@ namespace SFIClient.Views
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
         {
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool registerClient;
 
             if (VerifyTextFields() && !textFieldsSame)
@@ -497,8 +533,12 @@ namespace SFIClient.Views
                         MessageBox.Show("No fue posible registrar al cliente "
                             + TbClientName.Text + " "
                             + TbClientSurname.Text + " "
-                            + TbClientLastName.Text + ", ya se encuentra registrado",
+                            + TbClientLastName.Text + ", alguna información ya se encuentra registrada, " +
+                            "rectifique los campos marcados posibles a duplicación de información",
                             "Error de registro");
+                        TbClientRfc.Style = textInputErrorStyle;
+                        TbClientCurp.Style = textInputErrorStyle;
+                        TbCardNumber.Style = textInputErrorStyle;
                     }
                 }
             }
@@ -682,7 +722,7 @@ namespace SFIClient.Views
         private void VerifyPhoneNumbersAreNotSame()
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textFieldsSame = false;
 
             TbClientPhoneNumberFirst.Style = textInputStyle;
@@ -724,7 +764,7 @@ namespace SFIClient.Views
         private void VerifyEmailAreNotSame()
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textFieldsSame = false;
 
             TbClientEmailFirst.Style = textInputStyle;
@@ -756,7 +796,7 @@ namespace SFIClient.Views
         private void VerifyIneKeyAreNotSame()
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             TbReferenceIneKeyFirst.Style = textInputStyle;
             TbReferenceIneKeySecond.Style = textInputStyle;
@@ -774,7 +814,7 @@ namespace SFIClient.Views
             TextBox tbPostCode = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string postCode = tbPostCode.Text.Trim();
 
@@ -793,7 +833,7 @@ namespace SFIClient.Views
             TextBox tbKey = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string key = tbKey.Text.Trim();
 
@@ -812,7 +852,7 @@ namespace SFIClient.Views
             TextBox tbKey = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string key = tbKey.Text.Trim();
 
@@ -833,7 +873,7 @@ namespace SFIClient.Views
 
         private void TbClientSurnameTextChanged(object sender, TextChangedEventArgs e)
         {
-            ListenAndVerifyEmptyTextFields(sender);
+            //ListenAndVerifyEmptyTextFields(sender);
         }
 
         private void TbClientLastNameTextChanged(object sender, TextChangedEventArgs e)
@@ -870,7 +910,7 @@ namespace SFIClient.Views
             TextBox tbClientRfc = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string clientRfc = tbClientRfc.Text.Trim();
 
@@ -929,7 +969,7 @@ namespace SFIClient.Views
             TextBox tbCardNumber = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string cardNumber = tbCardNumber.Text.Trim();
 
@@ -962,7 +1002,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length >= 10)
@@ -984,6 +1024,21 @@ namespace SFIClient.Views
         {
             ListenAndVerifyEmptyTextFields(sender);
             //TODO
+            //string newSalary = TbSalary.Text.Trim();
+            //bool isWritingNewSalary = newSalary != lastSalary;
+
+            //if (isWritingNewSalary)
+            //{
+            //    if (newSalary != string.Empty && /*!DataValidator.IsValidMoneyAmmount(newSalary)*/)
+            //    {
+            //        TbSalary.Text = lastSalary;
+            //        TbSalary.CaretIndex = TbSalary.Text.Trim().Length;
+            //    }
+            //    else
+            //    {
+            //        lastSalary = newSalary;
+            //    }
+            //}
         }
 
         private void TbEmployeeSeniorityTextChanged(object sender, TextChangedEventArgs e)
@@ -995,7 +1050,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length >= 10)
@@ -1053,7 +1108,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1070,7 +1125,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1087,7 +1142,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             TbClientPhoneNumberThird.Style = textInputStyle;
             if (TbClientPhoneNumberThird.Text.Trim().Length > 0)
             {
@@ -1110,7 +1165,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             TbClientPhoneNumberThird.Style = textInputStyle;
             if (TbClientPhoneNumberThird.Text.Trim().Length > 0)
             {
@@ -1133,7 +1188,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length > 0)
@@ -1153,7 +1208,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             if (TbClientEmailSecond.Text.Trim().Length > 0)
             {
@@ -1176,7 +1231,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             if (TbClientEmailSecond.Text.Trim().Length > 0)
             {
@@ -1202,7 +1257,7 @@ namespace SFIClient.Views
 
         private void TbReferenceSurnameFirstTextChanged(object sender, TextChangedEventArgs e)
         {
-            ListenAndVerifyEmptyTextFields(sender);
+            //ListenAndVerifyEmptyTextFields(sender);
         }
 
         private void TbReferenceLastNameFirstTextChanged(object sender, TextChangedEventArgs e)
@@ -1214,7 +1269,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1240,7 +1295,7 @@ namespace SFIClient.Views
         private void TbReferenceIneKeyFirstTextChanged(object sender, TextChangedEventArgs e)
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             if (TbReferenceIneKeyFirst.Text.Trim().Length < 18)
             {
@@ -1300,7 +1355,7 @@ namespace SFIClient.Views
 
         private void TbReferenceSurnameSecondTextChanged(object sender, TextChangedEventArgs e)
         {
-            ListenAndVerifyEmptyTextFields(sender);
+            //ListenAndVerifyEmptyTextFields(sender);
         }
 
         private void TbReferenceLastNameSecondTextChanged(object sender, TextChangedEventArgs e)
@@ -1312,7 +1367,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1338,7 +1393,7 @@ namespace SFIClient.Views
         private void TbReferenceIneKeySecondTextChanged(object sender, TextChangedEventArgs e)
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             if (TbReferenceIneKeySecond.Text.Trim().Length < 18)
             {

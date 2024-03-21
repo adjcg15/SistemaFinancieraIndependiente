@@ -75,7 +75,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="TextInputError" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Style x:Key="TextInputError2" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Red"/>
             <Setter Property="FontSize" Value="16"/>
