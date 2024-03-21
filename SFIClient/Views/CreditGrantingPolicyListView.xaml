@@ -23,7 +23,7 @@
                     </Button>
                     <TextBlock 
                         Foreground="White" Style="{StaticResource Title}"
-                        Text="Políticas de crédito" 
+                        Text="Políticas de otorgamiento de crédito" 
                         VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>

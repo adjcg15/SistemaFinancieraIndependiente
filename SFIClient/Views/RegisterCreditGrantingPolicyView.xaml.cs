@@ -211,14 +211,6 @@ namespace SFIClient.Views
         {
             NavigationService.Navigate(new CreditGrantingPolicyListController());
         }
-        private void ClearPolicyFields()
-        {
-            TbPolicyName.Text = string.Empty;
-            TbPolicyDescription.Text = string.Empty;
-            DpkEffectiveDate.SelectedDate = null;
-            RbActivePolicy.IsChecked = false;
-            RbInactivePolicy.IsChecked = false;
-        }
 
         private void BtnCancelSavePolicyGrantingCreditClick(object sender, RoutedEventArgs e)
         {
@@ -227,7 +219,7 @@ namespace SFIClient.Views
 
         private void BtnGoBackClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainMenuController());
+            NavigationService.Navigate(new CreditGrantingPolicyListController());
         }
     }
 }

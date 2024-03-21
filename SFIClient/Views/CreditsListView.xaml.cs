@@ -224,7 +224,7 @@ namespace SFIClient.Views
 
         private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            RedirectToMainMenu();
         }
     }
 }

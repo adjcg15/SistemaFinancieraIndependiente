@@ -12,7 +12,10 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnGoBackClick">
+                    <Button 
+                        Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" 
+                        Width="40" Height="40" Margin="0, 0, 16, 0" 
+                        Background="Transparent" Cursor="Hand" Click="BtnGoBackClick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 

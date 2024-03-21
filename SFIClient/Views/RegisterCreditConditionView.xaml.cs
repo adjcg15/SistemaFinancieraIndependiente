@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace SFIClient.Views
 {
-    /// <summary>
-    /// Lógica de interacción para RegisterCreditConditionView.xaml
-    /// </summary>
     public partial class RegisterCreditConditionView : Page
     {
         private bool isLostFocusHandled = false;
@@ -296,11 +293,11 @@ namespace SFIClient.Views
         }
         private void BtnCancelRegisterOfCreditConditionClick(object sender, RoutedEventArgs e)
         {
-            RedirectToMainMenu();
+            NavigationService.Navigate(new ConsultConditionsCreditView());
         }
         private void BtnGoBackClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainMenuController());
+            NavigationService.Navigate(new ConsultConditionsCreditView());
         }
         private void LoadCreditTypes()
         {

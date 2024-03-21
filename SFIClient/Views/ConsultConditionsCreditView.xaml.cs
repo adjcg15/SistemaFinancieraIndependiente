@@ -93,5 +93,10 @@ namespace SFIClient.Views
         {
             NavigationService.Navigate(new MainMenuController());
         }
+
+        private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainMenuController());
+        }
     }
 }
