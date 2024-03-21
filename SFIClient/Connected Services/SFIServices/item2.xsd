@@ -63,10 +63,36 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RegisterCreditCondition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="NewCondition" nillable="true" type="q6:CreditCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterCreditConditionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterCreditConditionResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverAllCreditConditions">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverAllCreditConditionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverAllCreditConditionsResult" nillable="true" type="q7:ArrayOfCreditCondition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RegisterCreditGrantingPolicy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="NewPolicy" nillable="true" type="q6:CreditGrantingPolicy" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="NewPolicy" nillable="true" type="q8:CreditGrantingPolicy" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,7 +111,7 @@
   <xs:element name="GetAllCreditGrantingPoliciesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="GetAllCreditGrantingPoliciesResult" nillable="true" type="q7:ArrayOfCreditGrantingPolicy" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="GetAllCreditGrantingPoliciesResult" nillable="true" type="q9:ArrayOfCreditGrantingPolicy" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -100,7 +126,7 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="LoginResult" nillable="true" type="q8:Employee" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="LoginResult" nillable="true" type="q10:Employee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

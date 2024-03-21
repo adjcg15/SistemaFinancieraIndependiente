@@ -15,5 +15,11 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<CreditCondition> RecoverCreditConditionsByCreditType(int creditTypeIdentifier);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool RegisterCreditCondition(CreditCondition NewCondition);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        List<CreditCondition> RecoverAllCreditConditions();
     }
 }

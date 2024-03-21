@@ -1,0 +1,81 @@
+﻿<Page x:Class="SFIClient.Views.ConsultConditionsCreditView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:SFIClient.Views"
+      xmlns:Controlls="clr-namespace:SFIClient.Controlls"
+      mc:Ignorable="d" 
+      d:Width="1280" d:Height="1000"
+      Title="ConsultConditionsCreditView">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Condiciones de crédito" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Name="SkpRegisterCreditConditionMain" Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
+                <Button 
+                    Click="BtnNewCreditConditionClick" 
+                    Style="{StaticResource PlusBtn}">
+                    Nueva
+                </Button >
+            </StackPanel>
+
+            <StackPanel Margin="40, 36, 40, 36">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0">
+                    </Grid>
+                </Grid>
+            </StackPanel>
+
+            <!--CreditConditions-->
+            <Grid Name="GrdCreditConditions"  Margin="60, 0, 60, 0">
+                <ItemsControl Name="ItcCreditCondition" HorizontalAlignment="Center">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <StackPanel Name="SkpNoRegisteredCreditConditions" Margin="0, 220, 0, 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/Assets/EmptyItemsListIcon.png"/>
+                        <TextBlock Grid.Row="1"
+                            Foreground="{StaticResource DarkGray}" FontSize="24"
+                            Text="No existen condiciones de credito registradas" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                        />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <StackPanel Name="SkpRegisterCreditCondition" Orientation="Horizontal" Margin="0, 10, 0, 0" HorizontalAlignment="Center">
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
+
