@@ -129,10 +129,19 @@ namespace SFIClient.SFIService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.Address AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.BankAccount BankAccountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime BirthdateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string Card_numberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.ContacMethod[] ContacMethodsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CurpField;
@@ -156,10 +165,16 @@ namespace SFIClient.SFIService {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.PersonalReference[] PersonalReferencesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RfcField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.WorkCenter WorkCenterField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -168,6 +183,32 @@ namespace SFIClient.SFIService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.Address Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.BankAccount BankAccount {
+            get {
+                return this.BankAccountField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BankAccountField, value) != true)) {
+                    this.BankAccountField = value;
+                    this.RaisePropertyChanged("BankAccount");
+                }
             }
         }
         
@@ -193,6 +234,19 @@ namespace SFIClient.SFIService {
                 if ((object.ReferenceEquals(this.Card_numberField, value) != true)) {
                     this.Card_numberField = value;
                     this.RaisePropertyChanged("Card_number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.ContacMethod[] ContacMethods {
+            get {
+                return this.ContacMethodsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContacMethodsField, value) != true)) {
+                    this.ContacMethodsField = value;
+                    this.RaisePropertyChanged("ContacMethods");
                 }
             }
         }
@@ -289,6 +343,19 @@ namespace SFIClient.SFIService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.PersonalReference[] PersonalReferences {
+            get {
+                return this.PersonalReferencesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PersonalReferencesField, value) != true)) {
+                    this.PersonalReferencesField = value;
+                    this.RaisePropertyChanged("PersonalReferences");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Rfc {
             get {
                 return this.RfcField;
@@ -310,6 +377,176 @@ namespace SFIClient.SFIService {
                 if ((object.ReferenceEquals(this.SurnameField, value) != true)) {
                     this.SurnameField = value;
                     this.RaisePropertyChanged("Surname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.WorkCenter WorkCenter {
+            get {
+                return this.WorkCenterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WorkCenterField, value) != true)) {
+                    this.WorkCenterField = value;
+                    this.RaisePropertyChanged("WorkCenter");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Address", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class Address : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InteriorNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MunicipalityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NeighborhodField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OutdoorNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PostCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string InteriorNumber {
+            get {
+                return this.InteriorNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InteriorNumberField, value) != true)) {
+                    this.InteriorNumberField = value;
+                    this.RaisePropertyChanged("InteriorNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Municipality {
+            get {
+                return this.MunicipalityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MunicipalityField, value) != true)) {
+                    this.MunicipalityField = value;
+                    this.RaisePropertyChanged("Municipality");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Neighborhod {
+            get {
+                return this.NeighborhodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NeighborhodField, value) != true)) {
+                    this.NeighborhodField = value;
+                    this.RaisePropertyChanged("Neighborhod");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string OutdoorNumber {
+            get {
+                return this.OutdoorNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OutdoorNumberField, value) != true)) {
+                    this.OutdoorNumberField = value;
+                    this.RaisePropertyChanged("OutdoorNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PostCode {
+            get {
+                return this.PostCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PostCodeField, value) != true)) {
+                    this.PostCodeField = value;
+                    this.RaisePropertyChanged("PostCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StateField, value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street {
+            get {
+                return this.StreetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
+                    this.StreetField = value;
+                    this.RaisePropertyChanged("Street");
                 }
             }
         }
@@ -337,7 +574,7 @@ namespace SFIClient.SFIService {
         private string BankField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Card_numberField;
+        private string CardNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string HolderField;
@@ -366,14 +603,14 @@ namespace SFIClient.SFIService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Card_number {
+        public string CardNumber {
             get {
-                return this.Card_numberField;
+                return this.CardNumberField;
             }
             set {
-                if ((object.ReferenceEquals(this.Card_numberField, value) != true)) {
-                    this.Card_numberField = value;
-                    this.RaisePropertyChanged("Card_number");
+                if ((object.ReferenceEquals(this.CardNumberField, value) != true)) {
+                    this.CardNumberField = value;
+                    this.RaisePropertyChanged("CardNumber");
                 }
             }
         }
@@ -387,6 +624,365 @@ namespace SFIClient.SFIService {
                 if ((object.ReferenceEquals(this.HolderField, value) != true)) {
                     this.HolderField = value;
                     this.RaisePropertyChanged("Holder");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WorkCenter", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class WorkCenter : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.Address AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CompanyNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeePositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeeSeniorityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HumanResourcesPhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal SalaryField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.Address Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CompanyName {
+            get {
+                return this.CompanyNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompanyNameField, value) != true)) {
+                    this.CompanyNameField = value;
+                    this.RaisePropertyChanged("CompanyName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeePosition {
+            get {
+                return this.EmployeePositionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeePositionField, value) != true)) {
+                    this.EmployeePositionField = value;
+                    this.RaisePropertyChanged("EmployeePosition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeeSeniority {
+            get {
+                return this.EmployeeSeniorityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeSeniorityField, value) != true)) {
+                    this.EmployeeSeniorityField = value;
+                    this.RaisePropertyChanged("EmployeeSeniority");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string HumanResourcesPhone {
+            get {
+                return this.HumanResourcesPhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HumanResourcesPhoneField, value) != true)) {
+                    this.HumanResourcesPhoneField = value;
+                    this.RaisePropertyChanged("HumanResourcesPhone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Salary {
+            get {
+                return this.SalaryField;
+            }
+            set {
+                if ((this.SalaryField.Equals(value) != true)) {
+                    this.SalaryField = value;
+                    this.RaisePropertyChanged("Salary");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ContacMethod", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class ContacMethod : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MethodTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MethodType {
+            get {
+                return this.MethodTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MethodTypeField, value) != true)) {
+                    this.MethodTypeField = value;
+                    this.RaisePropertyChanged("MethodType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PersonalReference", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class PersonalReference : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIService.Address AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IneKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KinshipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RelationshipYearsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurnameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIService.Address Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IneKey {
+            get {
+                return this.IneKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IneKeyField, value) != true)) {
+                    this.IneKeyField = value;
+                    this.RaisePropertyChanged("IneKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Kinship {
+            get {
+                return this.KinshipField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KinshipField, value) != true)) {
+                    this.KinshipField = value;
+                    this.RaisePropertyChanged("Kinship");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RelationshipYears {
+            get {
+                return this.RelationshipYearsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelationshipYearsField, value) != true)) {
+                    this.RelationshipYearsField = value;
+                    this.RaisePropertyChanged("RelationshipYears");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Surname {
+            get {
+                return this.SurnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurnameField, value) != true)) {
+                    this.SurnameField = value;
+                    this.RaisePropertyChanged("Surname");
                 }
             }
         }
@@ -473,6 +1069,13 @@ namespace SFIClient.SFIService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateBankAccount", ReplyAction="http://tempuri.org/IClientsService/UpdateBankAccountResponse")]
         System.Threading.Tasks.Task<bool> UpdateBankAccountAsync(SFIClient.SFIService.BankAccount bankAccount, string cardNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RegisterClient", ReplyAction="http://tempuri.org/IClientsService/RegisterClientResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIService.ServiceFault), Action="http://tempuri.org/IClientsService/RegisterClientServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool RegisterClient(SFIClient.SFIService.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RegisterClient", ReplyAction="http://tempuri.org/IClientsService/RegisterClientResponse")]
+        System.Threading.Tasks.Task<bool> RegisterClientAsync(SFIClient.SFIService.Client client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -524,6 +1127,14 @@ namespace SFIClient.SFIService {
         
         public System.Threading.Tasks.Task<bool> UpdateBankAccountAsync(SFIClient.SFIService.BankAccount bankAccount, string cardNumber) {
             return base.Channel.UpdateBankAccountAsync(bankAccount, cardNumber);
+        }
+        
+        public bool RegisterClient(SFIClient.SFIService.Client client) {
+            return base.Channel.RegisterClient(client);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterClientAsync(SFIClient.SFIService.Client client) {
+            return base.Channel.RegisterClientAsync(client);
         }
     }
 }

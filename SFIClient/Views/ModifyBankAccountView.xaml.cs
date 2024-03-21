@@ -41,7 +41,7 @@ namespace SFIClient.Views
             try
             {
                 bankAccount = clientsServiceClient.RecoverBankDetails(cardNumber);
-                TbCardNumber.Text = bankAccount.Card_number.Trim();
+                TbCardNumber.Text = bankAccount.CardNumber.Trim();
                 TbHolder.Text = bankAccount.Holder.Trim();
                 TbBank.Text = bankAccount.Bank.Trim();
             }
@@ -98,7 +98,7 @@ namespace SFIClient.Views
                 if (resultado == DialogResult.OK)
                 {
                     BankAccount newBankAccount = new BankAccount();
-                    newBankAccount.Card_number = TbCardNumber.Text.Trim();
+                    newBankAccount.CardNumber = TbCardNumber.Text.Trim();
                     newBankAccount.Bank = TbBank.Text.Trim();
                     newBankAccount.Holder = TbHolder.Text.Trim();
 

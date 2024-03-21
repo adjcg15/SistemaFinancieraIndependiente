@@ -27,5 +27,10 @@ namespace SFIServices
         {
             return ClientsDAO.UpdateBankAccount(bankAccount, cardNumber);
         }
+
+        public bool RegisterClient(Client client)
+        {
+            return ClientsDAO.RegisterClient(client);
+        }
     }
 }

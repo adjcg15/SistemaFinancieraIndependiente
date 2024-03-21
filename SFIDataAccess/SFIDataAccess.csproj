@@ -99,9 +99,13 @@
     <Compile Include="employee_roles.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\ContacMethod.cs" />
     <Compile Include="Model\DataTypeExample.cs" />
+    <Compile Include="Model\PersonalReference.cs" />
+    <Compile Include="Model\WorkCenter.cs" />
     <Compile Include="personal_references.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
@@ -126,12 +130,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SFIDatabaseModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>

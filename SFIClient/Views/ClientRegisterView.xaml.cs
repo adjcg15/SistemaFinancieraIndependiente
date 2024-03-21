@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SFIClient.SFIService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +28,7 @@ namespace SFIClient.Views
     /// </summary>
     public partial class ClientRegisterController : Page
     {
+        private ClientsServiceClient ClientsServiceClient = new ClientsServiceClient();
         private bool textFieldsSame = false;
         public ClientRegisterController()
         {
@@ -175,7 +178,7 @@ namespace SFIClient.Views
                 TbClientPostCode,
                 TbClientCity,
                 TbClientMunicipality,
-                TbClientSatate
+                TbClientState
             };
 
             for (int i = 0; i < textBoxes.Count; i++)
@@ -336,7 +339,7 @@ namespace SFIClient.Views
                 TbReferencePostCodeFirst,
                 TbReferenceCityFirst,
                 TbReferenceMunicipalityFirst,
-                TbReferenceSatateFirst
+                TbReferenceStateFirst
             };
 
             for (int i = 0; i < textBoxes.Count; i++)
@@ -393,7 +396,7 @@ namespace SFIClient.Views
                 TbReferencePostCodeSecond,
                 TbReferenceCitySecond,
                 TbReferenceMunicipalitySecond,
-                TbReferenceSatateSecond
+                TbReferenceStateSecond
             };
 
             for (int i = 0; i < textBoxes.Count; i++)
@@ -495,7 +498,7 @@ namespace SFIClient.Views
                             + TbClientName.Text + " "
                             + TbClientSurname.Text + " "
                             + TbClientLastName.Text + ", ya se encuentra registrado",
-                            "Error de actualización");
+                            "Error de registro");
                     }
                 }
             }
@@ -507,8 +510,172 @@ namespace SFIClient.Views
 
         private bool RegisterClient()
         {
-            bool registerClient = true;
-            //TODO
+            bool registerClient = false;
+            Address addressWorkCenter = new Address
+            {
+                Street = TbWorkCenterStreet.Text.Trim(),
+                City = TbWorkCenterCity.Text.Trim(),
+                Neighborhod = TbWorkCenterNeighborhood.Text.Trim(),
+                Municipality = TbWorkCenterMunicipality.Text.Trim(),
+                InteriorNumber = TbWorkCenterInteriorNumber.Text.Trim(),
+                OutdoorNumber = TbWorkCenterOutdoorNumber.Text.Trim(),
+                PostCode = TbWorkCenterPostCode.Text.Trim(),
+                State = TbWorkCenterState.Text.Trim()
+            };
+            Address addresspersonalReferenceFirst = new Address
+            {
+                Street = TbReferenceStreetFirst.Text.Trim(),
+                City = TbReferenceCityFirst.Text.Trim(),
+                Neighborhod = TbReferenceNeighborhoodFirst.Text.Trim(),
+                Municipality = TbReferenceMunicipalityFirst.Text.Trim(),
+                InteriorNumber = TbReferenceInteriorNumberFirst.Text.Trim(),
+                OutdoorNumber = TbReferenceOutdoorNumberFirst.Text.Trim(),
+                PostCode = TbReferencePostCodeFirst.Text.Trim(),
+                State = TbReferenceStateFirst.Text.Trim()
+            };
+            PersonalReference personalReferenceClientFirst = new PersonalReference
+            {
+                Name = TbReferenceNameFirst.Text.Trim(),
+                Surname = TbReferenceSurnameFirst.Text.Trim(),
+                LastName = TbReferenceLastNameFirst.Text.Trim(),
+                PhoneNumber = TbReferencePhoneNumberFirst.Text.Trim(),
+                Kinship = TbReferenceKinshipFirst.Text.Trim(),
+                RelationshipYears = TbReferenceRelationshipFirst.Text.Trim(),
+                IneKey = TbReferenceIneKeyFirst.Text.Trim(),
+                Address = addresspersonalReferenceFirst
+            };
+            Address addresspersonalReferenceSecond = new Address
+            {
+                Street = TbReferenceStreetSecond.Text.Trim(),
+                City = TbReferenceCitySecond.Text.Trim(),
+                Neighborhod = TbReferenceNeighborhoodSecond.Text.Trim(),
+                Municipality = TbReferenceMunicipalitySecond.Text.Trim(),
+                InteriorNumber = TbReferenceInteriorNumberSecond.Text.Trim(),
+                OutdoorNumber = TbReferenceOutdoorNumberSecond.Text.Trim(),
+                PostCode = TbReferencePostCodeSecond.Text.Trim(),
+                State = TbReferenceStateSecond.Text.Trim()
+            };
+            PersonalReference personalReferenceClientSecond = new PersonalReference
+            {
+                Name = TbReferenceNameSecond.Text.Trim(),
+                Surname = TbReferenceSurnameSecond.Text.Trim(),
+                LastName = TbReferenceLastNameSecond.Text.Trim(),
+                PhoneNumber = TbReferencePhoneNumberSecond.Text.Trim(),
+                Kinship = TbReferenceKinshipSecond.Text.Trim(),
+                RelationshipYears = TbReferenceRelationshipSecond.Text.Trim(),
+                IneKey = TbReferenceIneKeySecond.Text.Trim(),
+                Address = addresspersonalReferenceSecond
+            };
+            BankAccount bankAccount = new BankAccount
+            {
+                CardNumber = TbCardNumber.Text.Trim(),
+                Bank = TbBank.Text.Trim(),
+                Holder = TbHolder.Text.Trim()
+            };
+
+            Address addressClient = new Address
+            {
+                Street = TbClientStreet.Text.Trim(),
+                City = TbClientCity.Text.Trim(),
+                Neighborhod = TbClientNeighborhood.Text.Trim(),
+                Municipality = TbClientMunicipality.Text.Trim(),
+                InteriorNumber = TbClientInteriorNumber.Text.Trim(),
+                OutdoorNumber = TbClientOutdoorNumber.Text.Trim(),
+                PostCode = TbClientPostCode.Text.Trim(),
+                State = TbClientState.Text.Trim()
+            };
+
+            WorkCenter workCenter = new WorkCenter
+            {
+                CompanyName = TbCompanyName.Text.Trim(),
+                PhoneNumber = TbWorkCenterPhoneNumber.Text.Trim(),
+                EmployeePosition = TbEmployeePosition.Text.Trim(),
+                Salary = decimal.Parse(TbSalary.Text.Trim()),
+                EmployeeSeniority = TbEmployeeSeniority.Text.Trim(),
+                HumanResourcesPhone = TbHumanResourcesPhone.Text.Trim(),
+                Address = addressWorkCenter
+            };
+
+            List<ContacMethod> contacMethods = new List<ContacMethod>
+            {
+                new ContacMethod
+                {
+                    Value = TbClientPhoneNumberFirst.Text.Trim(),
+                    MethodType = "PhoneNumber"
+                },
+                new ContacMethod
+                {
+                    Value = TbClientPhoneNumberSecond.Text.Trim(),
+                    MethodType = "PhoneNumber"
+                },
+                new ContacMethod
+                {
+                    Value = TbClientPhoneNumberThird.Text.Trim(),
+                    MethodType = "PhoneNumber"
+                },
+                new ContacMethod
+                {
+                    Value = TbClientPhoneNumberFourth.Text.Trim(),
+                    MethodType = "PhoneNumber"
+                },
+                new ContacMethod
+                {
+                    Value = TbClientEmailFirst.Text.Trim(),
+                    MethodType = "Email"
+                },
+                new ContacMethod
+                {
+                    Value = TbClientEmailSecond.Text.Trim(),
+                    MethodType = "Email"
+                },
+                new ContacMethod
+                {
+                    Value = TbClientEmailThird.Text.Trim(),
+                    MethodType = "Email"
+                }
+            };
+
+            List<PersonalReference> personalReferences = new List<PersonalReference>
+            {
+                personalReferenceClientFirst,
+                personalReferenceClientSecond
+            };
+
+            Client client = new Client
+            {
+                Rfc = TbClientRfc.Text.Trim(),
+                Curp = TbClientCurp.Text.Trim(),
+                Birthdate = DpkClientBirthdate.SelectedDate.Value,
+                Name = TbClientName.Text.Trim(),
+                LastName = TbClientLastName.Text.Trim(),
+                Surname = TbClientSurname.Text.Trim(),
+                BankAccount = bankAccount,
+                Address = addressClient,
+                WorkCenter = workCenter,
+                ContacMethods = contacMethods.ToArray(),
+                PersonalReferences = personalReferences.ToArray()
+            };
+
+            try
+            {
+                registerClient = ClientsServiceClient.RegisterClient(client);
+
+            }
+            catch (FaultException<ServiceFault> fe)
+            {
+                MessageBox.Show(fe.Message, "Error en la base de datos");
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                //TODO Redirect To Main Menu
+            }
+            catch (CommunicationException)
+            {
+                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                //TODO Redirect To Main Menu
+            }
+            
             return registerClient;
         }
 
@@ -1072,8 +1239,18 @@ namespace SFIClient.Views
 
         private void TbReferenceIneKeyFirstTextChanged(object sender, TextChangedEventArgs e)
         {
-            ListenAndVerifyCurpAndIneKeyFields(sender);
-            VerifyIneKeyAreNotSame();
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+
+            if (TbReferenceIneKeyFirst.Text.Trim().Length < 18)
+            {
+                TbReferenceIneKeyFirst.Style = textInputErrorStyle;
+            }
+            else
+            {
+                TbReferenceIneKeyFirst.Style = textInputStyle;
+                VerifyIneKeyAreNotSame();
+            }
         }
 
         private void TbReferenceStreetFirstTextChanged(object sender, TextChangedEventArgs e)
@@ -1160,8 +1337,18 @@ namespace SFIClient.Views
 
         private void TbReferenceIneKeySecondTextChanged(object sender, TextChangedEventArgs e)
         {
-            ListenAndVerifyCurpAndIneKeyFields(sender);
-            VerifyIneKeyAreNotSame();
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError");
+
+            if (TbReferenceIneKeySecond.Text.Trim().Length < 18)
+            {
+                TbReferenceIneKeySecond.Style = textInputErrorStyle;
+            }
+            else
+            {
+                TbReferenceIneKeySecond.Style = textInputStyle;
+                VerifyIneKeyAreNotSame();
+            }
         }
 
         private void TbReferenceStreetSecondTextChanged(object sender, TextChangedEventArgs e)

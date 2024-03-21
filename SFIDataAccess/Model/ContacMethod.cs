@@ -8,15 +8,12 @@ using System.Threading.Tasks;
 namespace SFIDataAccess.Model
 {
     [DataContract]
-    public class BankAccount
+    public class ContacMethod
     {
         [DataMember]
-        public string CardNumber { get; set; }
+        public string Value { get; set; }
 
         [DataMember]
-        public string Bank { get; set; }
-
-        [DataMember]
-        public string Holder { get; set; }
+        public string MethodType { get; set; }
     }
 }

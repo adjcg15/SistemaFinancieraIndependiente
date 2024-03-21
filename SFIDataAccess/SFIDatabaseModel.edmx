@@ -56,7 +56,6 @@
           <Property Name="value" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="id_contact_method_type" Type="int" Nullable="false" />
           <Property Name="client_rfc" Type="varchar" MaxLength="13" Nullable="false" />
-          <Property Name="ine_key" Type="char" MaxLength="18" Nullable="false" />
         </EntityType>
         <EntityType Name="credit_applications">
           <Key>
@@ -151,7 +150,7 @@
         </EntityType>
         <EntityType Name="personal_references">
           <Key>
-            <PropertyRef Name="ine_key" />
+            <PropertyRef Name="id_personal_reference" />
           </Key>
           <Property Name="ine_key" Type="char" MaxLength="18" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
@@ -160,7 +159,9 @@
           <Property Name="kinship" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="relationship_years" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="id_address" Type="int" Nullable="false" />
-          <Property Name="client_rfc" Type="varchar" MaxLength="13" />
+          <Property Name="client_rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="phone_number" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="id_personal_reference" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="polices_apply_dictums">
           <Key>
@@ -272,18 +273,6 @@
             </Principal>
             <Dependent Role="contact_methods">
               <PropertyRef Name="id_contact_method_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_contact_methods_personal_references">
-          <End Role="personal_references" Type="Self.personal_references" Multiplicity="1" />
-          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personal_references">
-              <PropertyRef Name="ine_key" />
-            </Principal>
-            <Dependent Role="contact_methods">
-              <PropertyRef Name="ine_key" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -444,7 +433,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_personal_references_clients">
-          <End Role="clients" Type="Self.clients" Multiplicity="0..1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
           <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="clients">
@@ -528,43 +517,6 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="UpdateBankAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CurrentCardNumber" Type="varchar" Mode="In" />
-          <Parameter Name="NewBank" Type="varchar" Mode="In" />
-          <Parameter Name="NewHolder" Type="varchar" Mode="In" />
-          <Parameter Name="NewCardNumber" Type="varchar" Mode="In" />
-          <Parameter Name="Success" Type="bit" Mode="InOut" />
-        </Function>
         <EntityContainer Name="SFIDatabaseModelStoreContainer">
           <EntitySet Name="addresses" EntityType="Self.addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" Schema="dbo" store:Type="Tables" />
@@ -604,10 +556,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_contact_methods_contact_method_types" Association="Self.FK_contact_methods_contact_method_types">
             <End Role="contact_method_types" EntitySet="contact_method_types" />
-            <End Role="contact_methods" EntitySet="contact_methods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_contact_methods_personal_references" Association="Self.FK_contact_methods_personal_references">
-            <End Role="personal_references" EntitySet="personal_references" />
             <End Role="contact_methods" EntitySet="contact_methods" />
           </AssociationSet>
           <AssociationSet Name="FK_credit_applications_clients" Association="Self.FK_credit_applications_clients">
@@ -758,10 +706,8 @@
           <Property Name="value" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_contact_method_type" Type="Int32" Nullable="false" />
           <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ine_key" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="client" Relationship="Self.FK_contact_methods_clients" FromRole="contact_methods" ToRole="clients" />
           <NavigationProperty Name="contact_method_types" Relationship="Self.FK_contact_methods_contact_method_types" FromRole="contact_methods" ToRole="contact_method_types" />
-          <NavigationProperty Name="personal_references" Relationship="Self.FK_contact_methods_personal_references" FromRole="contact_methods" ToRole="personal_references" />
         </EntityType>
         <EntityType Name="credit_applications">
           <Key>
@@ -881,7 +827,7 @@
         </EntityType>
         <EntityType Name="personal_references">
           <Key>
-            <PropertyRef Name="ine_key" />
+            <PropertyRef Name="id_personal_reference" />
           </Key>
           <Property Name="ine_key" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
@@ -890,10 +836,11 @@
           <Property Name="kinship" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="relationship_years" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_address" Type="Int32" Nullable="false" />
-          <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_personal_reference" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="address" Relationship="Self.FK_personal_references_addresses" FromRole="personal_references" ToRole="addresses" />
           <NavigationProperty Name="client" Relationship="Self.FK_personal_references_clients" FromRole="personal_references" ToRole="clients" />
-          <NavigationProperty Name="contact_methods" Relationship="Self.FK_contact_methods_personal_references" FromRole="personal_references" ToRole="contact_methods" />
         </EntityType>
         <EntityType Name="polices_apply_dictums">
           <Key>
@@ -1054,7 +1001,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_personal_references_clients">
-          <End Role="clients" Type="Self.client" Multiplicity="0..1" />
+          <End Role="clients" Type="Self.client" Multiplicity="1" />
           <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="clients">
@@ -1074,18 +1021,6 @@
             </Principal>
             <Dependent Role="contact_methods">
               <PropertyRef Name="id_contact_method_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_contact_methods_personal_references">
-          <End Role="personal_references" Type="Self.personal_references" Multiplicity="1" />
-          <End Role="contact_methods" Type="Self.contact_methods" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personal_references">
-              <PropertyRef Name="ine_key" />
-            </Principal>
-            <Dependent Role="contact_methods">
-              <PropertyRef Name="ine_key" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1330,10 +1265,6 @@
             <End Role="contact_method_types" EntitySet="contact_method_types" />
             <End Role="contact_methods" EntitySet="contact_methods" />
           </AssociationSet>
-          <AssociationSet Name="FK_contact_methods_personal_references" Association="Self.FK_contact_methods_personal_references">
-            <End Role="personal_references" EntitySet="personal_references" />
-            <End Role="contact_methods" EntitySet="contact_methods" />
-          </AssociationSet>
           <AssociationSet Name="FK_credit_applications_credit_applications_state" Association="Self.FK_credit_applications_credit_applications_state">
             <End Role="credit_applications_state" EntitySet="credit_applications_state" />
             <End Role="credit_applications" EntitySet="credit_applications" />
@@ -1394,55 +1325,7 @@
             <End Role="employee_roles" EntitySet="employee_roles" />
             <End Role="system_accounts" EntitySet="system_accounts" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SFIDatabaseModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SFIDatabaseModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="UpdateBankAccount">
-            <Parameter Name="CurrentCardNumber" Mode="In" Type="String" />
-            <Parameter Name="NewBank" Mode="In" Type="String" />
-            <Parameter Name="NewHolder" Mode="In" Type="String" />
-            <Parameter Name="NewCardNumber" Mode="In" Type="String" />
-            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
-          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1503,7 +1386,6 @@
                 <ScalarProperty Name="value" ColumnName="value" />
                 <ScalarProperty Name="id_contact_method_type" ColumnName="id_contact_method_type" />
                 <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
-                <ScalarProperty Name="ine_key" ColumnName="ine_key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1618,6 +1500,8 @@
                 <ScalarProperty Name="relationship_years" ColumnName="relationship_years" />
                 <ScalarProperty Name="id_address" ColumnName="id_address" />
                 <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="id_personal_reference" ColumnName="id_personal_reference" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1679,31 +1563,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SFIDatabaseModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SFIDatabaseModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SFIDatabaseModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SFIDatabaseModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SFIDatabaseModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SFIDatabaseModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SFIDatabaseModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SFIDatabaseModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SFIDatabaseModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="UpdateBankAccount" FunctionName="SFIDatabaseModel.Store.UpdateBankAccount" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

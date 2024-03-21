@@ -54,4 +54,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RegisterClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="client" nillable="true" type="q5:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterClientResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

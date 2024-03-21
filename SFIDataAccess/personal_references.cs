@@ -14,12 +14,6 @@ namespace SFIDataAccess
     
     public partial class personal_references
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public personal_references()
-        {
-            this.contact_methods = new HashSet<contact_methods>();
-        }
-    
         public string ine_key { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
@@ -28,10 +22,10 @@ namespace SFIDataAccess
         public string relationship_years { get; set; }
         public int id_address { get; set; }
         public string client_rfc { get; set; }
+        public string phone_number { get; set; }
+        public int id_personal_reference { get; set; }
     
         public virtual address address { get; set; }
         public virtual client client { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contact_methods> contact_methods { get; set; }
     }
 }

@@ -42,5 +42,20 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public bool Has_active_credit {  get; set; }
+
+        [DataMember]
+        public Address Address { get; set; }
+
+        [DataMember]
+        public WorkCenter WorkCenter { get; set; }
+
+        [DataMember]
+        public BankAccount BankAccount { get; set; }
+
+        [DataMember]
+        public List<ContacMethod> ContacMethods { get; set; }
+
+        [DataMember]
+        public List<PersonalReference> PersonalReferences { get; set; }
     }
 }

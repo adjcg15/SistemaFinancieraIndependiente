@@ -338,14 +338,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientSatate}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbClientState}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSatate" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSatateTextChanged"/>
+                            <TextBox Name="TbClientState" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSatateTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -689,7 +689,7 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbWorkCenterSatate}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbWorkCenterState}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -1137,14 +1137,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceSatateFirst}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceStateFirst}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSatateFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSatateFirstTextChanged"/>
+                            <TextBox Name="TbReferenceStateFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSatateFirstTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -1434,14 +1434,14 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceSatateSecond}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbReferenceStateSecond}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSatateSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSatateSecondTextChanged"/>
+                            <TextBox Name="TbReferenceStateSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSatateSecondTextChanged"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
