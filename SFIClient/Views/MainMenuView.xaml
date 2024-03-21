@@ -1,0 +1,195 @@
+﻿<Page 
+    x:Class="SFIClient.Views.MainMenuController"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:SFIClient.Views"
+    mc:Ignorable="d" 
+    d:Width="1280" d:Height="800"
+    Title="Menú principal">
+    <ScrollViewer 
+        HorizontalScrollBarVisibility="Disabled" 
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <StackPanel Margin="40 56">
+                <TextBlock
+                    Style="{StaticResource Title}"
+                    Foreground="{StaticResource DarkPrimaryColor}"
+                    Margin="0, 0, 0, 8"
+                    FontWeight="DemiBold">
+                    Bienvenido de vuelta, <Span x:Name="SpnEmployeeName">Rodrigo Aguilar</Span>
+                </TextBlock>
+                <TextBlock
+                    Style="{StaticResource Emphasis}"
+                    Foreground="{StaticResource MediumGray}"
+                    Margin="0, 0, 0, 40"
+                    FontWeight="DemiBold"
+                    Text="¿Qué quieres hacer hoy?"/>
+
+                <StackPanel Visibility="Collapsed" x:Name="SkpDebtCollectorOptions">
+                    <!--General payment efficiency-->
+                    <Border
+                        MouseLeftButtonUp="BdrGeneralEfficiencyClick"
+                        Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                        BorderBrush="{StaticResource LightGray}"
+                        Padding="32"
+                        Margin="0, 0, 0, 32"
+                        Cursor="Hand">
+                        <StackPanel>
+                            <TextBlock
+                                Style="{StaticResource Subtitle}"
+                                Foreground="{StaticResource PrimaryColor}"
+                                Margin="0, 0, 0, 8"
+                                TextWrapping="Wrap"
+                                Text="Eficiencia de cobro general"/>
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Gray}"
+                                TextWrapping="Wrap">
+                                Obten un resumen general del estado de los créditos para el mes en curso o para los meses
+                                pasados, enfocado en los cobros para todos los créditos registrados hasta el momento.
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <!--Client credits-->
+                    <Border
+                        MouseLeftButtonUp="BdrCreditsListClick"
+                        Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                        BorderBrush="{StaticResource LightGray}"
+                        Padding="32"
+                        Margin="0, 0, 0, 32"
+                        Cursor="Hand">
+                        <StackPanel>
+                            <TextBlock
+                                Style="{StaticResource Subtitle}"
+                                Foreground="{StaticResource PrimaryColor}"
+                                Margin="0, 0, 0, 8"
+                                Text="Créditos de clientes"/>
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Gray}"
+                                TextWrapping="Wrap">
+                                Obten una lista completa de todos los créditos registrados. Con esto, da un seguimiento a los
+                                créditos de tus clientes o consulta el estado en el que se encuentran dichos créditos. A partir 
+                                de ellos, podrás consultar los detalles relacionados a pagos, condiciones de aplicables y 
+                                generar las eficiencias de cobro para cada crédito en particular.
+                            </TextBlock>
+
+                            <Border Margin="0, 16" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource LightGray}"/>
+
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                FontWeight="Bold"
+                                TextWrapping="Wrap"
+                                Margin="0, 0, 0, 8"
+                                Foreground="{StaticResource DarkGray}"
+                                Text="Opciones relacionadas"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Cambiar condiciones"/>
+                                </Border>
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Tabla de pagos"/>
+                                </Border>
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Eficiencia de cobros"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Visibility="Collapsed" x:Name="SkpManagerOptions">
+                    <!--Credit granting policies-->
+                    <Border
+                        MouseLeftButtonUp="BdrGrantingPoliciesClick"
+                        Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                        BorderBrush="{StaticResource LightGray}"
+                        Padding="32"
+                        Margin="0, 0, 0, 32"
+                        Cursor="Hand">
+                        <StackPanel>
+                            <TextBlock
+                                Style="{StaticResource Subtitle}"
+                                Foreground="{StaticResource PrimaryColor}"
+                                Margin="0, 0, 0, 8"
+                                Text="Políticas de otorgamiento de crédito"/>
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Gray}"
+                                TextWrapping="Wrap">
+                                Consulta la lista completa de las políticas de otorgamiento de crédito registradas.
+                                Además, a partir de ahí puedes registrar nuevas o modificar la información de aquellas que 
+                                ya se encuentran registradas, para cambiar su vigencia, estado o cualquier otra información
+                                de interés.
+                            </TextBlock>
+
+                            <Border Margin="0, 16" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource LightGray}"/>
+
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                FontWeight="Bold"
+                                TextWrapping="Wrap"
+                                Margin="0, 0, 0, 8"
+                                Foreground="{StaticResource DarkGray}"
+                                Text="Opciones relacionadas"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Registrar políticas"/>
+                                </Border>
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Modificar políticas"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!--Credit Conditions-->
+                    <Border
+                        MouseLeftButtonUp="BdrCreditConditionsClick"
+                        Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
+                        BorderBrush="{StaticResource LightGray}"
+                        Padding="32"
+                        Margin="0, 0, 0, 32"
+                        Cursor="Hand">
+                        <StackPanel>
+                            <TextBlock
+                                Style="{StaticResource Subtitle}"
+                                Foreground="{StaticResource PrimaryColor}"
+                                Margin="0, 0, 0, 8"
+                                Text="Condiciones de crédito"/>
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Gray}"
+                                TextWrapping="Wrap">
+                                Consulta la lista completa de las condiciones de crédito registradas.
+                                Además, a partir de ahí puedes registrar nuevas o modificar la información de aquellas que 
+                                ya se encuentran registradas.
+                            </TextBlock>
+
+                            <Border Margin="0, 16" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource LightGray}"/>
+
+                            <TextBlock
+                                Style="{StaticResource Paragraph}"
+                                FontWeight="Bold"
+                                TextWrapping="Wrap"
+                                Margin="0, 0, 0, 8"
+                                Foreground="{StaticResource DarkGray}"
+                                Text="Opciones relacionadas"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Registrar condiciones"/>
+                                </Border>
+                                <Border Margin="0, 0, 16, 0" CornerRadius="8" Padding="16 8" Background="{StaticResource Gray}">
+                                    <TextBlock Foreground="White" Text="Modificar condiciones"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

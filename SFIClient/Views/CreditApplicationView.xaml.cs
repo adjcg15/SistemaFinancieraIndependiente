@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SFIClient.Controlls;
+using SFIClient.Session;
 using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
@@ -28,11 +29,7 @@ namespace SFIClient.Views
         {
             InitializeComponent();
 
-            //TODO: acceder al número de empleado (algún singleton)
-            newApplication.EmployeeNumber = "1234567890";
-
-            LoadCreditTypes();
-            ShowClientInformation();
+            newApplication.EmployeeNumber = SystemSession.Employee.EmployeeNumber;
         }
 
         public CredditApplicationController(Client requestingClient)
@@ -40,9 +37,11 @@ namespace SFIClient.Views
             InitializeComponent();
 
             newApplication.Client = requestingClient;
-            //TODO: acceder al número de empleado (algún singleton)
-            newApplication.EmployeeNumber = "1234567890";
+            newApplication.EmployeeNumber = SystemSession.Employee.EmployeeNumber;
+        }
 
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
             LoadCreditTypes();
             ShowClientInformation();
         }
@@ -97,8 +96,7 @@ namespace SFIClient.Views
 
         private void RedirectToMainMenu()
         {
-            //TODO: redireccionar cuando exista el menú principal
-            Console.WriteLine("Redireccionando al menú principal...");
+            NavigationService.Navigate(new MainMenuController());
         }
 
         private void ShowClientInformation()

@@ -143,17 +143,16 @@ namespace SFIClient.Views
             switch (SystemSession.Employee.EmployeeRole.Name)
             {
                 case Security.Roles.MANAGER:
-                    //TODO: hacer menú para el gerente
-                    break;
-                case Security.Roles.CREDIT_ADVISOR:
-                    //TODO: redireccionar a buscar cliente por RFC
-                    break;
                 case Security.Roles.DEBT_COLLECTOR:
-                    //TODO: hacer menú para el cobrador
+                    NavigationService.Navigate(new MainMenuController());
                     break;
                 case Security.Roles.CREDIT_ANALYST:
                     //TODO: redireccionar a buscar solicitud de crédito
                     break;
+                case Security.Roles.CREDIT_ADVISOR:
+                    //TODO: redireccionar a buscar cliente por RFC
+                    break;
+                
             }
         }
     }

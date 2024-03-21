@@ -26,7 +26,10 @@ namespace SFIClient.Views
             InitializeComponent();
 
             SizeChanged += CreditGrantingPolicyListViewSizeChanged;
+        }
 
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
             LoadAllCreditGrantingPolicies();
         }
 
@@ -105,7 +108,7 @@ namespace SFIClient.Views
 
         private void RedirectToMainMenu()
         {
-            //TODO: implementar redirección a menú principal
+            NavigationService.Navigate(new MainMenuController());
         }
 
         private void ShowEmptyPoliciesListMessage()
@@ -141,7 +144,6 @@ namespace SFIClient.Views
         private void RedirectToEditPolicy(object sender, CreditGrantingPolicy selectedPolicy)
         {
             //TODO: implementar redirección
-            Console.WriteLine("EDITAR");
         }
     }
 }
