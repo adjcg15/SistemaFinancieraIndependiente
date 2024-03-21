@@ -30,6 +30,7 @@
                 <StackPanel Visibility="Collapsed" x:Name="SkpDebtCollectorOptions">
                     <!--General payment efficiency-->
                     <Border
+                        MouseLeftButtonUp="BdrGeneralEfficiencyClick"
                         Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
                         BorderBrush="{StaticResource LightGray}"
                         Padding="32"
@@ -54,6 +55,7 @@
 
                     <!--Client credits-->
                     <Border
+                        MouseLeftButtonUp="BdrCreditsListClick"
                         Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
                         BorderBrush="{StaticResource LightGray}"
                         Padding="32"
@@ -146,11 +148,12 @@
 
                     <!--Credit Conditions-->
                     <Border
+                        MouseLeftButtonUp="BdrCreditConditionsClick"
                         Background="#FAFAFA" CornerRadius="4" BorderThickness="1" 
                         BorderBrush="{StaticResource LightGray}"
                         Padding="32"
                         Margin="0, 0, 0, 32"
-                        Cursor="Hand" MouseLeftButtonUp="BdrCreditConditionsClick">
+                        Cursor="Hand">
                         <StackPanel>
                             <TextBlock
                                 Style="{StaticResource Subtitle}"

@@ -55,5 +55,15 @@ namespace SFIClient.Views
         {
             //TODO: redirect to credit conditions list
         }
+
+        private void BdrGeneralEfficiencyClick(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: redirect to generate general efficiency
+        }
+
+        private void BdrCreditsListClick(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: redirect to client credits list
+        }
     }
 }
