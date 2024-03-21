@@ -53,12 +53,12 @@ namespace SFIClient.Views
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
-                // TODO: Redirigir al menú principal
+                RedirectToMainMenu();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde");
-                // TODO: Redirigir al menú principal
+                RedirectToMainMenu();
             }
         }
         private void AddCreditConditions(List<CreditCondition> clientsList)
@@ -88,6 +88,10 @@ namespace SFIClient.Views
             RegisterCreditConditionView registerCreditCondition = new RegisterCreditConditionView();
             this.NavigationService.Navigate(registerCreditCondition);
             NavigationService.RemoveBackEntry();
+        }
+        private void RedirectToMainMenu()
+        {
+            NavigationService.Navigate(new MainMenuController());
         }
     }
 }

@@ -9,5 +9,5 @@
         ShowsNavigationUI="False"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
-        MinWidth="700" Source="Views/ConsultConditionsCreditView.xaml"
+        MinWidth="700" Source="Views/CreditGrantingPolicyListView.xaml"
         WindowState="Maximized"/>

@@ -140,7 +140,8 @@ namespace SFIClient.Views
         }
         private void ShowInvalidFieldsDialog()
         {
-            MessageBox.Show("Por favor, verifique que los campos marcados en rojo cuenten con una respuesta y que haya seleccionado una fecha de vigencia.",
+            MessageBox.Show("Por favor, verifique que los campos marcados en rojo " +
+                "cuenten con una respuesta y que haya seleccionado una fecha de vigencia.",
                                 "Campos requeridos", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         private void ShowCreateNewPolicyConfirmDialog()
@@ -166,14 +167,16 @@ namespace SFIClient.Views
                 bool isRegistered = policyClient.RegisterCreditGrantingPolicy(newPolicy);
                 if (isRegistered)
                 {
-                    MessageBox.Show($"La política de otorgamiento de crédito {newPolicy.Title} se ha registrado correctamente.",
-                                    "Registro exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
-                    ClearPolicyFields();
+                    MessageBox.Show($"La política de otorgamiento de crédito {newPolicy.Title} " +
+                        $"se ha registrado correctamente.",
+                        "Registro exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    RedirectToMainMenu();
                 }
                 else
                 {
-                    MessageBox.Show($"Ya existe una política de otorgamiento de crédito con el nombre {newPolicy.Title}. No se pudo registrar.",
-                                    "Error de registro", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Ya existe una política de otorgamiento de crédito con el nombre" +
+                        $" {newPolicy.Title}. No se pudo registrar.",
+                        "Error de registro", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (System.ServiceModel.FaultException<ServiceFault> fault)
@@ -206,8 +209,7 @@ namespace SFIClient.Views
         }
         private void RedirectToMainMenu()
         {
-            //TODO: redireccionar cuando exista el menú principal
-            Console.WriteLine("Redireccionando al menú principal...");
+            NavigationService.Navigate(new CreditGrantingPolicyListController());
         }
         private void ClearPolicyFields()
         {
@@ -216,6 +218,16 @@ namespace SFIClient.Views
             DpkEffectiveDate.SelectedDate = null;
             RbActivePolicy.IsChecked = false;
             RbInactivePolicy.IsChecked = false;
+        }
+
+        private void BtnCancelSavePolicyGrantingCreditClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CreditGrantingPolicyListController());
+        }
+
+        private void BtnGoBackClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainMenuController());
         }
     }
 }

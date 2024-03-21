@@ -138,7 +138,7 @@ namespace SFIClient.Views
 
         private void BtnRegisterPolicyClick(object sender, RoutedEventArgs e)
         {
-            //TODO: redirect to create policy view
+            NavigationService.Navigate(new RegisterCreditGrantingPolicyController());
         }
 
         private void RedirectToEditPolicy(object sender, CreditGrantingPolicy selectedPolicy)

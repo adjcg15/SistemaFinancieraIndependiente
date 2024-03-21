@@ -290,7 +290,8 @@ namespace SFIClient.Views
         }
         private void ShowInvalidFieldsDialog()
         {
-            MessageBox.Show("Por favor, verifique que los campos marcados en rojo cuenten con una respuesta o que esté dada en un formato válido.",
+            MessageBox.Show("Por favor, verifique que los campos marcados en rojo " +
+                "cuenten con una respuesta o que esté dada en un formato válido.",
                                 "Campos requeridos", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         private void BtnCancelRegisterOfCreditConditionClick(object sender, RoutedEventArgs e)
@@ -299,9 +300,7 @@ namespace SFIClient.Views
         }
         private void BtnGoBackClick(object sender, RoutedEventArgs e)
         {
-            ConsultConditionsCreditView consultCreditConditions = new ConsultConditionsCreditView();
-            this.NavigationService.Navigate(consultCreditConditions);
-            NavigationService.RemoveBackEntry();
+            NavigationService.Navigate(new MainMenuController());
         }
         private void LoadCreditTypes()
         {
@@ -365,8 +364,9 @@ namespace SFIClient.Views
             Regex regex = new Regex(@"^CCP\d{3}$");
             if (!regex.IsMatch(input))
             {
-                MessageBox.Show("El nombre debe tener el formato CCP000 donde '000' puede ser cualquier número entre 0 y 9.",
-                                "Formato inválido", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("El nombre debe tener el formato CCP000 donde '000' " +
+                    "puede ser cualquier número entre 0 y 9.",
+                    "Formato inválido", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 textBox.Style = (Style)FindResource("TextInputError");
                 return;

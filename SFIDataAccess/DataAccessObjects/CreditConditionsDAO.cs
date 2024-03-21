@@ -110,12 +110,6 @@ namespace SFIDataAccess.DataAccessObjects
                             conditionsList.Add(creditCondition);
 
                         });
-                    foreach (var condition in conditionsList)
-                    {
-                        Console.WriteLine($"Identificador: {condition.Identifier}, " +
-                            $"Tasa de Interés: {condition.InterestRate}, " +
-                            $"PaymentMonths: {condition.PaymentMonths} Iva:{condition.IsIvaApplied} Active:{condition.IsActive}");
-                    }
                 }
             }
             catch (System.Data.Entity.Core.EntityException)
