@@ -7,12 +7,17 @@
       xmlns:Controlls="clr-namespace:SFIClient.Controlls"
       mc:Ignorable="d" 
       d:Width="1280" d:Height="1000"
-      Title="SearchClientByRFCView">
+      Title="SearchClientByRFCView"
+      Loaded="PageLoaded">
+    
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnGoToLoginViewClick">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
                     <TextBlock 
                         Foreground="White" Style="{StaticResource Title}"
                         Text="Búsqueda de clientes" 

@@ -1,5 +1,4 @@
-﻿
-using SFIClient.Controlls;
+﻿using SFIClient.Controlls;
 using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,6 @@ using System.Windows.Forms;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
-using SFIClient.SFIServices;
 
 namespace SFIClient.Views
 {
@@ -32,6 +30,10 @@ namespace SFIClient.Views
         public SearchClientByRFCController()
         {
             InitializeComponent();
+        }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
             LoadClients();
         }
 
@@ -59,13 +61,23 @@ namespace SFIClient.Views
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToLoginView();
             }
+        }
+
+        private void RedirectToLoginView()
+        {
+            this.NavigationService.Navigate(new SearchClientByRFCController());
+        }
+
+        private void BtnGoToLoginViewClick(object sender, EventArgs e)
+        {
+            RedirectToLoginView();
         }
 
         private void AddClientsToClientsList()
@@ -150,8 +162,7 @@ namespace SFIClient.Views
             }
             if (client != null)
             {
-                ModifyBankAccountController modifyBankAccountView = new ModifyBankAccountController(client);
-                this.NavigationService.Navigate(modifyBankAccountView);
+                this.NavigationService.Navigate(new ModifyBankAccountController(client));
             }
         }
 
@@ -173,6 +184,19 @@ namespace SFIClient.Views
         private void BtnApplyForCreditClick(object sender, EventArgs e)
         {
             ClientControll clientControll = (ClientControll)sender;
+            Client client = new Client();
+            for (int i = 0; i < clientsList.Count; i++)
+            {
+                if (clientsList[i].Rfc == clientControll.LblClientRFC.Content.ToString())
+                {
+                    client = clientsList[i];
+                    break;
+                }
+            }
+            if (client != null)
+            {
+                this.NavigationService.Navigate(new CredditApplicationController(client));
+            }
         }
 
         private void BtnSearchClientClick(object sender, RoutedEventArgs e)

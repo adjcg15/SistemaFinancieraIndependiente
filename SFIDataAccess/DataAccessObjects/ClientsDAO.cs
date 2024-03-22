@@ -63,15 +63,21 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (System.Data.Entity.Core.EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
             }
 
             return clientsList;

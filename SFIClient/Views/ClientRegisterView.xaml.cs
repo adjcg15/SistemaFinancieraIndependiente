@@ -1,5 +1,6 @@
 ﻿
 using SFIClient.SFIServices;
+using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,6 @@ namespace SFIClient.Views
             RestrictOnlyNumbers(TbCardNumber);
             RestrictOnlyNumbers(TbWorkCenterPhoneNumber);
             RestrictOnlyNumbers(TbHumanResourcesPhone);
-            //RestrictOnlyNumbers(TbSalary);
             RestrictOnlyNumbers(TbEmployeeSeniority);
             RestrictOnlyNumbers(TbWorkCenterInteriorNumber);
             RestrictOnlyNumbers(TbWorkCenterOutdoorNumber);
@@ -166,7 +166,6 @@ namespace SFIClient.Views
             List<TextBox> textBoxes = new List<TextBox>
             {
                 TbClientName,
-                //TbClientSurname,
                 TbClientLastName,
                 TbClientCurp,
                 TbClientRfc
@@ -330,7 +329,6 @@ namespace SFIClient.Views
             List<TextBox> textBoxes = new List<TextBox>
             {
                 TbReferenceNameFirst,
-                //TbReferenceSurnameFirst,
                 TbReferenceLastNameFirst,
                 TbReferencePhoneNumberFirst,
                 TbReferenceKinshipFirst,
@@ -387,7 +385,6 @@ namespace SFIClient.Views
             List<TextBox> textBoxes = new List<TextBox>
             {
                 TbReferenceNameSecond,
-                //TbReferenceSurnameSecond,
                 TbReferenceLastNameSecond,
                 TbReferencePhoneNumberSecond,
                 TbReferenceKinshipSecond,
@@ -483,15 +480,15 @@ namespace SFIClient.Views
 
         private void BtnGoBackClick(object sender, RoutedEventArgs e)
         {
-            ShowCancelUpdateBankAccountConfirmationMessage();
+            ShowCancelRegisterClientConfirmationMessage();
         }
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
-            ShowCancelUpdateBankAccountConfirmationMessage();
+            ShowCancelRegisterClientConfirmationMessage();
         }
 
-        private void ShowCancelUpdateBankAccountConfirmationMessage()
+        private void ShowCancelRegisterClientConfirmationMessage()
         {
             DialogResult resultado = MessageBox.Show(
                 "¿Deseas cancelar el registro del cliente?",
@@ -500,8 +497,7 @@ namespace SFIClient.Views
 
             if (resultado == DialogResult.OK)
             {
-                SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController();
-                this.NavigationService.Navigate(searchClientByRFCView);
+                RedirectToSearchClientByRfcView();
             }
         }
 
@@ -512,7 +508,8 @@ namespace SFIClient.Views
 
             if (VerifyTextFields() && !textFieldsSame)
             {
-                DialogResult resultado = MessageBox.Show("¿Deseas registrar al cliente?",
+                DialogResult resultado = MessageBox.Show("¿Deseas registrar la información del cliente " 
+                    + TbClientName.Text + " " + TbClientSurname.Text + " " + TbClientLastName.Text + "?",
                     "Confirmación de registro",
                     MessageBoxButtons.OKCancel);
 
@@ -525,7 +522,7 @@ namespace SFIClient.Views
                             + TbClientName.Text + " "
                             + TbClientSurname.Text + " "
                             + TbClientLastName.Text + " correctamente",
-                            "Actualización exitosa");
+                            "Registro exitoso");
                         SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController();
                         this.NavigationService.Navigate(searchClientByRFCView);
                     }
@@ -547,6 +544,11 @@ namespace SFIClient.Views
             {
                 MessageBox.Show("Verifique que la información ingresada sea correcta", "Campos inválidos");
             }
+        }
+
+        private void RedirectToSearchClientByRfcView()
+        {
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private bool RegisterClient()
@@ -708,13 +710,17 @@ namespace SFIClient.Views
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                MessageBox.Show(
+                    "No fue posible establecer la conexión con el servicio, intente más tarde", 
+                    "Error en el servicio");
+                RedirectToSearchClientByRfcView();
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                MessageBox.Show(
+                    "No fue posible establecer la conexión con el servicio, intente más tarde", 
+                    "Error en el servicio");
+                RedirectToSearchClientByRfcView();
             }
 
             return registerClient;
@@ -1024,22 +1030,21 @@ namespace SFIClient.Views
         private void TbSalaryTextChanged(object sender, TextChangedEventArgs e)
         {
             ListenAndVerifyEmptyTextFields(sender);
-            //TODO
-            //string newSalary = TbSalary.Text.Trim();
-            //bool isWritingNewSalary = newSalary != lastSalary;
+            string newSalary = TbSalary.Text.Trim();
+            bool isWritingNewSalary = newSalary != lastSalary;
 
-            //if (isWritingNewSalary)
-            //{
-            //    if (newSalary != string.Empty && /*!DataValidator.IsValidMoneyAmmount(newSalary)*/)
-            //    {
-            //        TbSalary.Text = lastSalary;
-            //        TbSalary.CaretIndex = TbSalary.Text.Trim().Length;
-            //    }
-            //    else
-            //    {
-            //        lastSalary = newSalary;
-            //    }
-            //}
+            if (isWritingNewSalary)
+            {
+                if (newSalary != string.Empty && !DataValidator.IsValidMoneyAmount(newSalary))
+                {
+                    TbSalary.Text = lastSalary;
+                    TbSalary.CaretIndex = TbSalary.Text.Trim().Length;
+                }
+                else
+                {
+                    lastSalary = newSalary;
+                }
+            }
         }
 
         private void TbEmployeeSeniorityTextChanged(object sender, TextChangedEventArgs e)

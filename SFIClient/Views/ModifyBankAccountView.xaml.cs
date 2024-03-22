@@ -34,10 +34,14 @@ namespace SFIClient.Views
             InitializeComponent();
             TbkClientName.Text = client.Name + " " + client.Surname + " " + client.LastName;
             cardNumber = client.Card_number;
-            LoadBankDetails();
         }
 
-        private void LoadBankDetails()
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadBankAccount();
+        }
+
+        private void LoadBankAccount()
         {
             try
             {
@@ -80,8 +84,7 @@ namespace SFIClient.Views
 
             if (resultado == DialogResult.OK)
             {
-                SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController();
-                this.NavigationService.Navigate(searchClientByRFCView);
+                RedirectToSearchClientByRfcView();
             }
         }
 
@@ -126,6 +129,11 @@ namespace SFIClient.Views
             }
         }
 
+        private void RedirectToSearchClientByRfcView()
+        {
+            NavigationService.Navigate(new SearchClientByRFCController());
+        }
+
         private bool VerifyTextFields()
         {
             bool correctFields = true;
@@ -168,12 +176,12 @@ namespace SFIClient.Views
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToSearchClientByRfcView();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToSearchClientByRfcView();
             }
 
             return updateBankAccount;
