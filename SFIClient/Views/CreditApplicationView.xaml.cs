@@ -96,7 +96,7 @@ namespace SFIClient.Views
 
         private void RedirectToMainMenu()
         {
-            NavigationService.Navigate(new MainMenuController());
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private void ShowClientInformation()
@@ -599,7 +599,7 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                NavigationService.GoBack();
+                RedirectToMainMenu();
             }
         }
     }

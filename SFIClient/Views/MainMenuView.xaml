@@ -13,6 +13,12 @@
         VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <StackPanel Margin="40 56">
+                <Button
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource PrimaryBtn}"
+                    Click="BtnLogOutClick">
+                    Cerrar sesión
+                </Button>
                 <TextBlock
                     Style="{StaticResource Title}"
                     Foreground="{StaticResource DarkPrimaryColor}"
