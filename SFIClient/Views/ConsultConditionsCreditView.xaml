@@ -7,7 +7,8 @@
       xmlns:Controlls="clr-namespace:SFIClient.Controlls"
       mc:Ignorable="d" 
       d:Width="1280" d:Height="1000"
-      Title="ConsultConditionsCreditView">
+      Title="ConsultConditionsCreditView"
+       Loaded="PageLoaded">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <!--Navigation bar-->

@@ -27,8 +27,11 @@ namespace SFIClient.Views
         {
             InitializeComponent();
             InitializeEventHandlers();
-            LoadCreditTypes();
             ApplyNumericRestrictions();
+        }
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadCreditTypes();
         }
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -334,14 +337,11 @@ namespace SFIClient.Views
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
                 message,
-                "No fue posible recuperar los tipos de crédito existentes, por favor intenta más tarde",
+                "Error en operación",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );
-            if (buttonClicked == MessageBoxResult.OK)
-            {
-                RedirectToMainMenu();
-            }
+
         }
         private void RedirectToMainMenu()
         {

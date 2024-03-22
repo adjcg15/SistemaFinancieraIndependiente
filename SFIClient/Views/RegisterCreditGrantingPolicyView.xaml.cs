@@ -198,7 +198,7 @@ namespace SFIClient.Views
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
                 message,
-                "No fue posible recuperar los tipos de crédito existentes, por favor intenta más tarde",
+                "Error de operación",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );

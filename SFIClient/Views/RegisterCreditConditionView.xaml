@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
       d:Width="1280" d:Height="1400"
-      Title="RegisterCreditConditionView">
+      Title="RegisterCreditConditionView"
+      Loaded="PageLoaded">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <!--Navigation bar-->

@@ -28,6 +28,9 @@ namespace SFIClient.Views
         public ConsultConditionsCreditView()
         {
             InitializeComponent();
+        }
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
             LoadCreditConditions();
         }
         private void LoadCreditConditions()
