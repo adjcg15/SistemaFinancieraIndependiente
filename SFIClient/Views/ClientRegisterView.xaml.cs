@@ -189,13 +189,13 @@ namespace SFIClient.Views
             if (TbClientRfc.Text.Trim().Length < 12)
             {
                 correctFields = false;
-                BdrClientBirthdate.Style = borderErrorStyle;
+                TbClientRfc.Style = textInputErrorStyle;
             }
 
             if (TbClientCurp.Text.Trim().Length < 18)
             {
                 correctFields = false;
-                BdrClientBirthdate.Style = borderErrorStyle;
+                TbClientCurp.Style = textInputErrorStyle;
             }
 
             return correctFields;
@@ -514,7 +514,7 @@ namespace SFIClient.Views
                 }
             }
 
-            if (TbReferencePostCodeSecond.Text.Trim().Length < 18)
+            if (TbReferencePostCodeSecond.Text.Trim().Length < 5)
             {
                 TbReferencePostCodeSecond.Style = textInputErrorStyle;
                 correctFields = false;

@@ -945,6 +945,13 @@
             <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
         </Style>
 
+        <!--Rounded border-->
+        <Style TargetType="Border" x:Key="RoundedBorderError">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+
         <!--Blue border decorator-->
         <Style x:Key="DecoratorBorderStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource Gray}" />
