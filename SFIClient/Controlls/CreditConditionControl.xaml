@@ -37,20 +37,20 @@
                         VerticalAlignment="Top" Width="77" Height="36" FontSize="12" Foreground="{StaticResource MediumGray}" FontWeight="Bold"/>
                     <Label Name="LblApplyIVA" HorizontalAlignment="Left" Margin="205,0,0,0" Content="Aplica IVA" 
                          VerticalAlignment="Top" Width="87" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                    <Label Name="LblPaymentMonths" HorizontalAlignment="Left" Margin="18,0,0,0" Content="6" 
-                         VerticalAlignment="Center" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label Name="LblPaymentMonths" HorizontalAlignment="Left" Margin="10,0,0,0" Content="6" 
+                         VerticalAlignment="Center" Width="38" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
                     <Label  HorizontalAlignment="Left" Margin="36,77,0,0" Content="Meses de plazo para pago" 
                         VerticalAlignment="Top" Width="176" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-                    <Label Name="LblInterestRate" HorizontalAlignment="Left" Margin="18,102,0,0" Content="6" 
-                        VerticalAlignment="Top" Width="27" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label Name="LblInterestRate" HorizontalAlignment="Left" Margin="10,102,0,0" Content="6" 
+                        VerticalAlignment="Top" Width="35" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
                     <Label  HorizontalAlignment="Left" Margin="36,102,0,0" Content="% de interés" 
                         VerticalAlignment="Top" Width="76" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-                    <Label Name="LblInterestOnArrears" HorizontalAlignment="Left" Margin="18,127,0,0" Content="6" 
-                        VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label Name="LblInterestOnArrears" HorizontalAlignment="Left" Margin="10,127,0,0" Content="6" 
+                        VerticalAlignment="Top" Width="36" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
                     <Label  HorizontalAlignment="Left" Margin="36,127,0,0" Content="% de interés moratorio" 
                         VerticalAlignment="Top" Width="154" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
-                    <Label Name="LblAdvancePaymentReduction" HorizontalAlignment="Left" Margin="18,152,0,0" Content="6" 
-                        VerticalAlignment="Top" Width="28" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
+                    <Label Name="LblAdvancePaymentReduction" HorizontalAlignment="Left" Margin="10,152,0,0" Content="6" 
+                        VerticalAlignment="Top" Width="36" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}" FontWeight="Bold"/>
                     <Label  HorizontalAlignment="Left" Margin="36,152,0,0" Content="% de descuento por pago anticipado" 
                         VerticalAlignment="Top" Width="210" Height="25" FontSize="12" Foreground="{StaticResource DarkGray}"/>
                 </Grid>
