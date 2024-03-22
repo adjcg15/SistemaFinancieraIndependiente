@@ -41,7 +41,7 @@
                     Style="{StaticResource Emphasis}" FontWeight="Bold" Margin="0, 8">
                     Con CURP registrado <Span x:Name="SpnClientCurp">LOOB531113HVZRRNA2</Span>
                 </TextBlock>
-                <TextBlock Style="{StaticResource Paragraph}">
+                <TextBlock x:Name="TbkWorkCenterInformation" Style="{StaticResource Paragraph}">
                     Salario neto registrado de 
                     <Bold x:Name="BldClientSalary">125,000</Bold><Bold>MXN</Bold> 
                     mensuales en "<Span x:Name="SpnClientWorkCenterName">Gobierno de México</Span>".

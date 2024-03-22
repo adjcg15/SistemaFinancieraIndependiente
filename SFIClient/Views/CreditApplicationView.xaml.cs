@@ -98,9 +98,16 @@ namespace SFIClient.Views
             SpnClientCurp.Inlines.Add(new Run(newApplication.Client.Curp));
 
             BldClientSalary.Inlines.Clear();
-            BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary.ToString()));
             SpnClientWorkCenterName.Inlines.Clear();
-            SpnClientWorkCenterName.Inlines.Add(new Run(newApplication.Client.WorkCenter.CompanyName));
+            if(newApplication.Client.WorkCenter != null)
+            {
+                BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary.ToString()));
+                SpnClientWorkCenterName.Inlines.Add(new Run(newApplication.Client.WorkCenter.CompanyName));
+            }
+            else
+            {
+                TbkWorkCenterInformation.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
