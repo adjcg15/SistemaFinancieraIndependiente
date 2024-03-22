@@ -65,5 +65,11 @@ namespace SFIClient.Views
         {
             NavigationService.Navigate(new CreditsListController());
         }
+
+        private void BtnLogOutClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
+        }
     }
 }
