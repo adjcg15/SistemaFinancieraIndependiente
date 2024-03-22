@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
+using SFIClient.Session;
 
 namespace SFIClient.Views
 {
@@ -72,7 +73,8 @@ namespace SFIClient.Views
 
         private void RedirectToLoginView()
         {
-            this.NavigationService.Navigate(new SearchClientByRFCController());
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
         }
 
         private void BtnGoToLoginViewClick(object sender, EventArgs e)
@@ -244,6 +246,11 @@ namespace SFIClient.Views
         {
             ClientRegisterController clientRegisterView = new ClientRegisterController();
             this.NavigationService.Navigate(clientRegisterView);
+        }
+
+        private void BtnGoToLoginViewClick(object sender, RoutedEventArgs e)
+        {
+            RedirectToLoginView();
         }
     }
 }

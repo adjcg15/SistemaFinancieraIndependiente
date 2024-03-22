@@ -25,13 +25,6 @@ namespace SFIClient.Views
         private readonly CreditApplication newApplication = new CreditApplication();
         private readonly List<DigitalDocument> attachedDocuments = new List<DigitalDocument>();
 
-        public CredditApplicationController()
-        {
-            InitializeComponent();
-
-            newApplication.EmployeeNumber = SystemSession.Employee.EmployeeNumber;
-        }
-
         public CredditApplicationController(Client requestingClient)
         {
             InitializeComponent();
@@ -101,18 +94,13 @@ namespace SFIClient.Views
 
         private void ShowClientInformation()
         {
-            //TODO: remover asignación estática del ciente
-            newApplication.Client = new Client();
-            newApplication.Client.Name = "Ángel";
-            newApplication.Client.Surname = "De la cruz";
-            newApplication.Client.LastName = "García";
-            newApplication.Client.Curp = "CUGA010415HVZRRNA2";
-            newApplication.Client.Rfc = "MALJ800515K1A";
-
             TbkClientName.Text = $"{newApplication.Client.Name} {newApplication.Client.Surname} {newApplication.Client.LastName}";
             SpnClientCurp.Inlines.Add(new Run(newApplication.Client.Curp));
-            //BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary));
-            //SpnClientWorkCenterName.Inlines.Add(new Run(newApplication.Client.WorkCenter.companyName));
+
+            BldClientSalary.Inlines.Clear();
+            BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary.ToString()));
+            SpnClientWorkCenterName.Inlines.Clear();
+            SpnClientWorkCenterName.Inlines.Add(new Run(newApplication.Client.WorkCenter.CompanyName));
         }
 
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
