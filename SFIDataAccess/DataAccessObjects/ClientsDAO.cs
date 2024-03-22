@@ -20,6 +20,7 @@ namespace SFIDataAccess.DataAccessObjects
         public static List<Client> RecoverClients()
         {
             List<Client> clientsList = new List<Client>();
+            WorkCenter workCenter = new WorkCenter();
 
             try
             {
@@ -32,17 +33,21 @@ namespace SFIDataAccess.DataAccessObjects
                                    join credit_applications in context.credit_applications
                                    on client.rfc equals credit_applications.client_rfc into creditApplicationsGroup
                                    from credit_application in creditApplicationsGroup.DefaultIfEmpty()
+                                   join work_center in context.work_centers
+                                   on client.id_work_center equals work_center.id_work_center
                                    where credit != null || credit_application != null || credit == null && credit_application == null
                                    select new
                                    {
                                        client,
                                        has_active_credit = credit != null,
-                                       has_credit_application = credit_application != null
+                                       has_credit_application = credit_application != null,
+                                       work_center.company_name
                                    }).Distinct().ToList();
 
 
                     foreach (var item in clients)
                     {
+                        workCenter.CompanyName = item.client.work_centers.company_name;
                         Client clientItem = new Client
                         {
                             Curp = item.client.curp,
@@ -55,7 +60,8 @@ namespace SFIDataAccess.DataAccessObjects
                             Card_number = item.client.card_number,
                             Id_address = item.client.id_address,
                             Has_active_credit = item.has_active_credit,
-                            Has_credit_application = item.has_credit_application
+                            Has_credit_application = item.has_credit_application,
+                            WorkCenter = workCenter
                         };
                         clientsList.Add(clientItem);
                     }
