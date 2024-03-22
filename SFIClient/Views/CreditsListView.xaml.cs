@@ -165,12 +165,12 @@ namespace SFIClient.Views
             return allCreditsList
                 .Where(credit =>
                 {
-                    string clientFullName = credit.Client.LastName;
-                    clientFullName += credit.Client.Surname != "" ? " {credit.Client.Surname} " : " ";
+                    string clientFullName = credit.Client.Name;
+                    clientFullName += (credit.Client.Surname != "" ? $" {credit.Client.Surname} " : " ");
                     clientFullName += credit.Client.LastName;
 
-                    return credit.Invoice.Contains(searchQuery)
-                        || clientFullName.Contains(searchQuery);
+                    return credit.Invoice.ToLower().Contains(searchQuery.ToLower())
+                        || clientFullName.ToLower().Contains(searchQuery.ToLower());
                 })
                 .Where(credit => fromDate <= credit.ApprovalDate)
                 .Where(credit => credit.ApprovalDate <= toDate)
@@ -195,13 +195,14 @@ namespace SFIClient.Views
         private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)
         {
             string searchQuery = TbSearchbar.Text.Trim();
-            List<Credit> creditsFilteredJustBySearch = allCreditsList.Where(credit => {
-                string clientFullName = credit.Client.LastName;
-                clientFullName += credit.Client.Surname != "" ? " {credit.Client.Surname} " : " ";
+            List<Credit> creditsFilteredJustBySearch = allCreditsList.Where(credit => 
+            {
+                string clientFullName = credit.Client.Name;
+                clientFullName += (credit.Client.Surname != "" ? $" {credit.Client.Surname} " : " ");
                 clientFullName += credit.Client.LastName;
 
-                return credit.Invoice.Contains(searchQuery)
-                    || clientFullName.Contains(searchQuery);
+                return credit.Invoice.ToLower().Contains(searchQuery.ToLower())
+                    || clientFullName.ToLower().Contains(searchQuery.ToLower());
             })
             .ToList();
 
