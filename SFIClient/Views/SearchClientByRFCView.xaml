@@ -1,0 +1,88 @@
+﻿<Page x:Class="SFIClient.Views.SearchClientByRFCController"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SFIClient.Views"
+      xmlns:Controlls="clr-namespace:SFIClient.Controlls"
+      mc:Ignorable="d" 
+      d:Width="1280" d:Height="1000"
+      Title="SearchClientByRFCView">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Búsqueda de clientes" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Name="SkpRegisterClient" Orientation="Horizontal" Margin="40, 30, 0, 0" HorizontalAlignment="Left">
+                <Button Name="BtnRegisterClient" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente" Click="BtnRegisterClientClick"/>
+            </StackPanel>
+
+            <!--Search client-->
+            <StackPanel Name="SkpSearchClient" Margin="40, 36, 40, 36">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <TextBlock Margin="5,2,5,2" Text="Buscar cliente por RFC (no ingrese espacios)">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TbRFCClient}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox Margin ="0, 0, 10,0" Name="TbRFCClient" Style="{StaticResource TextInput}" MaxLength="13"/>
+                    </Grid>
+                    <Button Name="BtnSearchClient" Grid.Column="1" Grid.Row="0" Style="{StaticResource SearchBtn}" Width="48" Height="48" Click="BtnSearchClientClick"/>
+                </Grid>
+            </StackPanel>
+
+            <!--Clients-->
+            <Grid Name="GrdClients"  Margin="25, 0, 25, 0">
+                <ItemsControl Name="ItcClients" HorizontalAlignment="Left">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <StackPanel Name="SkpNoRegisteredClients" Margin="0, 220, 0, 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/Assets/EmptyItemsListIcon.png"/>
+                        <TextBlock Grid.Row="1"
+                            Foreground="{StaticResource DarkGray}" FontSize="24"
+                            Text="Aún no hay clientes registrados" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                        />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <StackPanel Name="SkpRegisterClientNow" Orientation="Horizontal" Margin="0, 10, 0, 0" HorizontalAlignment="Center">
+                <!--<Button Name="btnRegisterClientNow" Style="{StaticResource PlusBtn}" Margin="0, 0, 0, 0" Content="Registrar cliente"/>-->
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -48,6 +48,410 @@ namespace SFIDataAccess
         public virtual DbSet<system_accounts> system_accounts { get; set; }
         public virtual DbSet<work_centers> work_centers { get; set; }
     
+        public virtual int InsertCreditConditionProcedure(Nullable<double> interestRate, Nullable<bool> isActive, Nullable<bool> isIvaApplied, Nullable<double> interestOnArrears, Nullable<double> advancePaymentReduction, Nullable<int> paymentMonths, Nullable<int> creditTypeId, string identifier, ObjectParameter exists)
+        {
+            var interestRateParameter = interestRate.HasValue ?
+                new ObjectParameter("InterestRate", interestRate) :
+                new ObjectParameter("InterestRate", typeof(double));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            var isIvaAppliedParameter = isIvaApplied.HasValue ?
+                new ObjectParameter("IsIvaApplied", isIvaApplied) :
+                new ObjectParameter("IsIvaApplied", typeof(bool));
+    
+            var interestOnArrearsParameter = interestOnArrears.HasValue ?
+                new ObjectParameter("InterestOnArrears", interestOnArrears) :
+                new ObjectParameter("InterestOnArrears", typeof(double));
+    
+            var advancePaymentReductionParameter = advancePaymentReduction.HasValue ?
+                new ObjectParameter("AdvancePaymentReduction", advancePaymentReduction) :
+                new ObjectParameter("AdvancePaymentReduction", typeof(double));
+    
+            var paymentMonthsParameter = paymentMonths.HasValue ?
+                new ObjectParameter("PaymentMonths", paymentMonths) :
+                new ObjectParameter("PaymentMonths", typeof(int));
+    
+            var creditTypeIdParameter = creditTypeId.HasValue ?
+                new ObjectParameter("CreditTypeId", creditTypeId) :
+                new ObjectParameter("CreditTypeId", typeof(int));
+    
+            var identifierParameter = identifier != null ?
+                new ObjectParameter("Identifier", identifier) :
+                new ObjectParameter("Identifier", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertCreditConditionProcedure", interestRateParameter, isActiveParameter, isIvaAppliedParameter, interestOnArrearsParameter, advancePaymentReductionParameter, paymentMonthsParameter, creditTypeIdParameter, identifierParameter, exists);
+        }
+    
+        public virtual int InsertCreditPolicyProcedure(string title, string description, Nullable<System.DateTime> effectiveDate, Nullable<bool> isActive, ObjectParameter exists)
+        {
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var effectiveDateParameter = effectiveDate.HasValue ?
+                new ObjectParameter("EffectiveDate", effectiveDate) :
+                new ObjectParameter("EffectiveDate", typeof(System.DateTime));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertCreditPolicyProcedure", titleParameter, descriptionParameter, effectiveDateParameter, isActiveParameter, exists);
+        }
+    
+        public virtual int RegisterClient(string clientName, string clientSurname, string clientLastName, Nullable<System.DateTime> clientBirthdate, string clientCurp, string clientRfc, string clientStreet, string clientNeighborhood, string clientInteriorNumber, string clientOutdoorNumber, string clientPostCode, string clientCity, string clientMunicipality, string clientState, string cardNumber, string bank, string holder, string companyName, string workCenterPhoneNumber, string employeePosition, Nullable<decimal> salary, string employeeSeniority, string humanResourcesPhone, string workCenterStreet, string workCenterNeighborhood, string workCenterInteriorNumber, string workCenterOutdoorNumber, string workCenterPostCode, string workCenterCity, string workCenterMunicipality, string workCenterState, string clientPhoneNumberFirst, string clientPhoneNumberFirstType, string clientPhoneNumberSecond, string clientPhoneNumberSecondType, string clientPhoneNumberThird, string clientPhoneNumberThirdType, string clientPhoneNumberFourth, string clientPhoneNumberFourthType, string clientEmailFirst, string clientEmailFirstType, string clientEmailSecond, string clientEmailSecondType, string clientEmailThird, string clientEmailThirdType, string referenceNameFirst, string referenceSurnameFirst, string referenceLastNameFirst, string referencePhoneNumberFirst, string referenceKinshipFirst, string referenceRelationshipFirst, string referenceIneKeyFirst, string referenceStreetFirst, string referenceNeighborhoodFirst, string referenceInteriorNumberFirst, string referenceOutdoorNumberFirst, string referencePostCodeFirst, string referenceCityFirst, string referenceMunicipalityFirst, string referenceStateFirst, string referenceNameSecond, string referenceSurnameSecond, string referenceLastNameSecond, string referencePhoneNumberSecond, string referenceKinshipSecond, string referenceRelationshipSecond, string referenceIneKeySecond, string referenceStreetSecond, string referenceNeighborhoodSecond, string referenceInteriorNumberSecond, string referenceOutdoorNumberSecond, string referencePostCodeSecond, string referenceCitySecond, string referenceMunicipalitySecond, string referenceStateSecond, ObjectParameter success)
+        {
+            var clientNameParameter = clientName != null ?
+                new ObjectParameter("ClientName", clientName) :
+                new ObjectParameter("ClientName", typeof(string));
+    
+            var clientSurnameParameter = clientSurname != null ?
+                new ObjectParameter("ClientSurname", clientSurname) :
+                new ObjectParameter("ClientSurname", typeof(string));
+    
+            var clientLastNameParameter = clientLastName != null ?
+                new ObjectParameter("ClientLastName", clientLastName) :
+                new ObjectParameter("ClientLastName", typeof(string));
+    
+            var clientBirthdateParameter = clientBirthdate.HasValue ?
+                new ObjectParameter("ClientBirthdate", clientBirthdate) :
+                new ObjectParameter("ClientBirthdate", typeof(System.DateTime));
+    
+            var clientCurpParameter = clientCurp != null ?
+                new ObjectParameter("ClientCurp", clientCurp) :
+                new ObjectParameter("ClientCurp", typeof(string));
+    
+            var clientRfcParameter = clientRfc != null ?
+                new ObjectParameter("ClientRfc", clientRfc) :
+                new ObjectParameter("ClientRfc", typeof(string));
+    
+            var clientStreetParameter = clientStreet != null ?
+                new ObjectParameter("ClientStreet", clientStreet) :
+                new ObjectParameter("ClientStreet", typeof(string));
+    
+            var clientNeighborhoodParameter = clientNeighborhood != null ?
+                new ObjectParameter("ClientNeighborhood", clientNeighborhood) :
+                new ObjectParameter("ClientNeighborhood", typeof(string));
+    
+            var clientInteriorNumberParameter = clientInteriorNumber != null ?
+                new ObjectParameter("ClientInteriorNumber", clientInteriorNumber) :
+                new ObjectParameter("ClientInteriorNumber", typeof(string));
+    
+            var clientOutdoorNumberParameter = clientOutdoorNumber != null ?
+                new ObjectParameter("ClientOutdoorNumber", clientOutdoorNumber) :
+                new ObjectParameter("ClientOutdoorNumber", typeof(string));
+    
+            var clientPostCodeParameter = clientPostCode != null ?
+                new ObjectParameter("ClientPostCode", clientPostCode) :
+                new ObjectParameter("ClientPostCode", typeof(string));
+    
+            var clientCityParameter = clientCity != null ?
+                new ObjectParameter("ClientCity", clientCity) :
+                new ObjectParameter("ClientCity", typeof(string));
+    
+            var clientMunicipalityParameter = clientMunicipality != null ?
+                new ObjectParameter("ClientMunicipality", clientMunicipality) :
+                new ObjectParameter("ClientMunicipality", typeof(string));
+    
+            var clientStateParameter = clientState != null ?
+                new ObjectParameter("ClientState", clientState) :
+                new ObjectParameter("ClientState", typeof(string));
+    
+            var cardNumberParameter = cardNumber != null ?
+                new ObjectParameter("CardNumber", cardNumber) :
+                new ObjectParameter("CardNumber", typeof(string));
+    
+            var bankParameter = bank != null ?
+                new ObjectParameter("Bank", bank) :
+                new ObjectParameter("Bank", typeof(string));
+    
+            var holderParameter = holder != null ?
+                new ObjectParameter("Holder", holder) :
+                new ObjectParameter("Holder", typeof(string));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("CompanyName", companyName) :
+                new ObjectParameter("CompanyName", typeof(string));
+    
+            var workCenterPhoneNumberParameter = workCenterPhoneNumber != null ?
+                new ObjectParameter("WorkCenterPhoneNumber", workCenterPhoneNumber) :
+                new ObjectParameter("WorkCenterPhoneNumber", typeof(string));
+    
+            var employeePositionParameter = employeePosition != null ?
+                new ObjectParameter("EmployeePosition", employeePosition) :
+                new ObjectParameter("EmployeePosition", typeof(string));
+    
+            var salaryParameter = salary.HasValue ?
+                new ObjectParameter("Salary", salary) :
+                new ObjectParameter("Salary", typeof(decimal));
+    
+            var employeeSeniorityParameter = employeeSeniority != null ?
+                new ObjectParameter("EmployeeSeniority", employeeSeniority) :
+                new ObjectParameter("EmployeeSeniority", typeof(string));
+    
+            var humanResourcesPhoneParameter = humanResourcesPhone != null ?
+                new ObjectParameter("HumanResourcesPhone", humanResourcesPhone) :
+                new ObjectParameter("HumanResourcesPhone", typeof(string));
+    
+            var workCenterStreetParameter = workCenterStreet != null ?
+                new ObjectParameter("WorkCenterStreet", workCenterStreet) :
+                new ObjectParameter("WorkCenterStreet", typeof(string));
+    
+            var workCenterNeighborhoodParameter = workCenterNeighborhood != null ?
+                new ObjectParameter("WorkCenterNeighborhood", workCenterNeighborhood) :
+                new ObjectParameter("WorkCenterNeighborhood", typeof(string));
+    
+            var workCenterInteriorNumberParameter = workCenterInteriorNumber != null ?
+                new ObjectParameter("WorkCenterInteriorNumber", workCenterInteriorNumber) :
+                new ObjectParameter("WorkCenterInteriorNumber", typeof(string));
+    
+            var workCenterOutdoorNumberParameter = workCenterOutdoorNumber != null ?
+                new ObjectParameter("WorkCenterOutdoorNumber", workCenterOutdoorNumber) :
+                new ObjectParameter("WorkCenterOutdoorNumber", typeof(string));
+    
+            var workCenterPostCodeParameter = workCenterPostCode != null ?
+                new ObjectParameter("WorkCenterPostCode", workCenterPostCode) :
+                new ObjectParameter("WorkCenterPostCode", typeof(string));
+    
+            var workCenterCityParameter = workCenterCity != null ?
+                new ObjectParameter("WorkCenterCity", workCenterCity) :
+                new ObjectParameter("WorkCenterCity", typeof(string));
+    
+            var workCenterMunicipalityParameter = workCenterMunicipality != null ?
+                new ObjectParameter("WorkCenterMunicipality", workCenterMunicipality) :
+                new ObjectParameter("WorkCenterMunicipality", typeof(string));
+    
+            var workCenterStateParameter = workCenterState != null ?
+                new ObjectParameter("WorkCenterState", workCenterState) :
+                new ObjectParameter("WorkCenterState", typeof(string));
+    
+            var clientPhoneNumberFirstParameter = clientPhoneNumberFirst != null ?
+                new ObjectParameter("ClientPhoneNumberFirst", clientPhoneNumberFirst) :
+                new ObjectParameter("ClientPhoneNumberFirst", typeof(string));
+    
+            var clientPhoneNumberFirstTypeParameter = clientPhoneNumberFirstType != null ?
+                new ObjectParameter("ClientPhoneNumberFirstType", clientPhoneNumberFirstType) :
+                new ObjectParameter("ClientPhoneNumberFirstType", typeof(string));
+    
+            var clientPhoneNumberSecondParameter = clientPhoneNumberSecond != null ?
+                new ObjectParameter("ClientPhoneNumberSecond", clientPhoneNumberSecond) :
+                new ObjectParameter("ClientPhoneNumberSecond", typeof(string));
+    
+            var clientPhoneNumberSecondTypeParameter = clientPhoneNumberSecondType != null ?
+                new ObjectParameter("ClientPhoneNumberSecondType", clientPhoneNumberSecondType) :
+                new ObjectParameter("ClientPhoneNumberSecondType", typeof(string));
+    
+            var clientPhoneNumberThirdParameter = clientPhoneNumberThird != null ?
+                new ObjectParameter("ClientPhoneNumberThird", clientPhoneNumberThird) :
+                new ObjectParameter("ClientPhoneNumberThird", typeof(string));
+    
+            var clientPhoneNumberThirdTypeParameter = clientPhoneNumberThirdType != null ?
+                new ObjectParameter("ClientPhoneNumberThirdType", clientPhoneNumberThirdType) :
+                new ObjectParameter("ClientPhoneNumberThirdType", typeof(string));
+    
+            var clientPhoneNumberFourthParameter = clientPhoneNumberFourth != null ?
+                new ObjectParameter("ClientPhoneNumberFourth", clientPhoneNumberFourth) :
+                new ObjectParameter("ClientPhoneNumberFourth", typeof(string));
+    
+            var clientPhoneNumberFourthTypeParameter = clientPhoneNumberFourthType != null ?
+                new ObjectParameter("ClientPhoneNumberFourthType", clientPhoneNumberFourthType) :
+                new ObjectParameter("ClientPhoneNumberFourthType", typeof(string));
+    
+            var clientEmailFirstParameter = clientEmailFirst != null ?
+                new ObjectParameter("ClientEmailFirst", clientEmailFirst) :
+                new ObjectParameter("ClientEmailFirst", typeof(string));
+    
+            var clientEmailFirstTypeParameter = clientEmailFirstType != null ?
+                new ObjectParameter("ClientEmailFirstType", clientEmailFirstType) :
+                new ObjectParameter("ClientEmailFirstType", typeof(string));
+    
+            var clientEmailSecondParameter = clientEmailSecond != null ?
+                new ObjectParameter("ClientEmailSecond", clientEmailSecond) :
+                new ObjectParameter("ClientEmailSecond", typeof(string));
+    
+            var clientEmailSecondTypeParameter = clientEmailSecondType != null ?
+                new ObjectParameter("ClientEmailSecondType", clientEmailSecondType) :
+                new ObjectParameter("ClientEmailSecondType", typeof(string));
+    
+            var clientEmailThirdParameter = clientEmailThird != null ?
+                new ObjectParameter("ClientEmailThird", clientEmailThird) :
+                new ObjectParameter("ClientEmailThird", typeof(string));
+    
+            var clientEmailThirdTypeParameter = clientEmailThirdType != null ?
+                new ObjectParameter("ClientEmailThirdType", clientEmailThirdType) :
+                new ObjectParameter("ClientEmailThirdType", typeof(string));
+    
+            var referenceNameFirstParameter = referenceNameFirst != null ?
+                new ObjectParameter("ReferenceNameFirst", referenceNameFirst) :
+                new ObjectParameter("ReferenceNameFirst", typeof(string));
+    
+            var referenceSurnameFirstParameter = referenceSurnameFirst != null ?
+                new ObjectParameter("ReferenceSurnameFirst", referenceSurnameFirst) :
+                new ObjectParameter("ReferenceSurnameFirst", typeof(string));
+    
+            var referenceLastNameFirstParameter = referenceLastNameFirst != null ?
+                new ObjectParameter("ReferenceLastNameFirst", referenceLastNameFirst) :
+                new ObjectParameter("ReferenceLastNameFirst", typeof(string));
+    
+            var referencePhoneNumberFirstParameter = referencePhoneNumberFirst != null ?
+                new ObjectParameter("ReferencePhoneNumberFirst", referencePhoneNumberFirst) :
+                new ObjectParameter("ReferencePhoneNumberFirst", typeof(string));
+    
+            var referenceKinshipFirstParameter = referenceKinshipFirst != null ?
+                new ObjectParameter("ReferenceKinshipFirst", referenceKinshipFirst) :
+                new ObjectParameter("ReferenceKinshipFirst", typeof(string));
+    
+            var referenceRelationshipFirstParameter = referenceRelationshipFirst != null ?
+                new ObjectParameter("ReferenceRelationshipFirst", referenceRelationshipFirst) :
+                new ObjectParameter("ReferenceRelationshipFirst", typeof(string));
+    
+            var referenceIneKeyFirstParameter = referenceIneKeyFirst != null ?
+                new ObjectParameter("ReferenceIneKeyFirst", referenceIneKeyFirst) :
+                new ObjectParameter("ReferenceIneKeyFirst", typeof(string));
+    
+            var referenceStreetFirstParameter = referenceStreetFirst != null ?
+                new ObjectParameter("ReferenceStreetFirst", referenceStreetFirst) :
+                new ObjectParameter("ReferenceStreetFirst", typeof(string));
+    
+            var referenceNeighborhoodFirstParameter = referenceNeighborhoodFirst != null ?
+                new ObjectParameter("ReferenceNeighborhoodFirst", referenceNeighborhoodFirst) :
+                new ObjectParameter("ReferenceNeighborhoodFirst", typeof(string));
+    
+            var referenceInteriorNumberFirstParameter = referenceInteriorNumberFirst != null ?
+                new ObjectParameter("ReferenceInteriorNumberFirst", referenceInteriorNumberFirst) :
+                new ObjectParameter("ReferenceInteriorNumberFirst", typeof(string));
+    
+            var referenceOutdoorNumberFirstParameter = referenceOutdoorNumberFirst != null ?
+                new ObjectParameter("ReferenceOutdoorNumberFirst", referenceOutdoorNumberFirst) :
+                new ObjectParameter("ReferenceOutdoorNumberFirst", typeof(string));
+    
+            var referencePostCodeFirstParameter = referencePostCodeFirst != null ?
+                new ObjectParameter("ReferencePostCodeFirst", referencePostCodeFirst) :
+                new ObjectParameter("ReferencePostCodeFirst", typeof(string));
+    
+            var referenceCityFirstParameter = referenceCityFirst != null ?
+                new ObjectParameter("ReferenceCityFirst", referenceCityFirst) :
+                new ObjectParameter("ReferenceCityFirst", typeof(string));
+    
+            var referenceMunicipalityFirstParameter = referenceMunicipalityFirst != null ?
+                new ObjectParameter("ReferenceMunicipalityFirst", referenceMunicipalityFirst) :
+                new ObjectParameter("ReferenceMunicipalityFirst", typeof(string));
+    
+            var referenceStateFirstParameter = referenceStateFirst != null ?
+                new ObjectParameter("ReferenceStateFirst", referenceStateFirst) :
+                new ObjectParameter("ReferenceStateFirst", typeof(string));
+    
+            var referenceNameSecondParameter = referenceNameSecond != null ?
+                new ObjectParameter("ReferenceNameSecond", referenceNameSecond) :
+                new ObjectParameter("ReferenceNameSecond", typeof(string));
+    
+            var referenceSurnameSecondParameter = referenceSurnameSecond != null ?
+                new ObjectParameter("ReferenceSurnameSecond", referenceSurnameSecond) :
+                new ObjectParameter("ReferenceSurnameSecond", typeof(string));
+    
+            var referenceLastNameSecondParameter = referenceLastNameSecond != null ?
+                new ObjectParameter("ReferenceLastNameSecond", referenceLastNameSecond) :
+                new ObjectParameter("ReferenceLastNameSecond", typeof(string));
+    
+            var referencePhoneNumberSecondParameter = referencePhoneNumberSecond != null ?
+                new ObjectParameter("ReferencePhoneNumberSecond", referencePhoneNumberSecond) :
+                new ObjectParameter("ReferencePhoneNumberSecond", typeof(string));
+    
+            var referenceKinshipSecondParameter = referenceKinshipSecond != null ?
+                new ObjectParameter("ReferenceKinshipSecond", referenceKinshipSecond) :
+                new ObjectParameter("ReferenceKinshipSecond", typeof(string));
+    
+            var referenceRelationshipSecondParameter = referenceRelationshipSecond != null ?
+                new ObjectParameter("ReferenceRelationshipSecond", referenceRelationshipSecond) :
+                new ObjectParameter("ReferenceRelationshipSecond", typeof(string));
+    
+            var referenceIneKeySecondParameter = referenceIneKeySecond != null ?
+                new ObjectParameter("ReferenceIneKeySecond", referenceIneKeySecond) :
+                new ObjectParameter("ReferenceIneKeySecond", typeof(string));
+    
+            var referenceStreetSecondParameter = referenceStreetSecond != null ?
+                new ObjectParameter("ReferenceStreetSecond", referenceStreetSecond) :
+                new ObjectParameter("ReferenceStreetSecond", typeof(string));
+    
+            var referenceNeighborhoodSecondParameter = referenceNeighborhoodSecond != null ?
+                new ObjectParameter("ReferenceNeighborhoodSecond", referenceNeighborhoodSecond) :
+                new ObjectParameter("ReferenceNeighborhoodSecond", typeof(string));
+    
+            var referenceInteriorNumberSecondParameter = referenceInteriorNumberSecond != null ?
+                new ObjectParameter("ReferenceInteriorNumberSecond", referenceInteriorNumberSecond) :
+                new ObjectParameter("ReferenceInteriorNumberSecond", typeof(string));
+    
+            var referenceOutdoorNumberSecondParameter = referenceOutdoorNumberSecond != null ?
+                new ObjectParameter("ReferenceOutdoorNumberSecond", referenceOutdoorNumberSecond) :
+                new ObjectParameter("ReferenceOutdoorNumberSecond", typeof(string));
+    
+            var referencePostCodeSecondParameter = referencePostCodeSecond != null ?
+                new ObjectParameter("ReferencePostCodeSecond", referencePostCodeSecond) :
+                new ObjectParameter("ReferencePostCodeSecond", typeof(string));
+    
+            var referenceCitySecondParameter = referenceCitySecond != null ?
+                new ObjectParameter("ReferenceCitySecond", referenceCitySecond) :
+                new ObjectParameter("ReferenceCitySecond", typeof(string));
+    
+            var referenceMunicipalitySecondParameter = referenceMunicipalitySecond != null ?
+                new ObjectParameter("ReferenceMunicipalitySecond", referenceMunicipalitySecond) :
+                new ObjectParameter("ReferenceMunicipalitySecond", typeof(string));
+    
+            var referenceStateSecondParameter = referenceStateSecond != null ?
+                new ObjectParameter("ReferenceStateSecond", referenceStateSecond) :
+                new ObjectParameter("ReferenceStateSecond", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegisterClient", clientNameParameter, clientSurnameParameter, clientLastNameParameter, clientBirthdateParameter, clientCurpParameter, clientRfcParameter, clientStreetParameter, clientNeighborhoodParameter, clientInteriorNumberParameter, clientOutdoorNumberParameter, clientPostCodeParameter, clientCityParameter, clientMunicipalityParameter, clientStateParameter, cardNumberParameter, bankParameter, holderParameter, companyNameParameter, workCenterPhoneNumberParameter, employeePositionParameter, salaryParameter, employeeSeniorityParameter, humanResourcesPhoneParameter, workCenterStreetParameter, workCenterNeighborhoodParameter, workCenterInteriorNumberParameter, workCenterOutdoorNumberParameter, workCenterPostCodeParameter, workCenterCityParameter, workCenterMunicipalityParameter, workCenterStateParameter, clientPhoneNumberFirstParameter, clientPhoneNumberFirstTypeParameter, clientPhoneNumberSecondParameter, clientPhoneNumberSecondTypeParameter, clientPhoneNumberThirdParameter, clientPhoneNumberThirdTypeParameter, clientPhoneNumberFourthParameter, clientPhoneNumberFourthTypeParameter, clientEmailFirstParameter, clientEmailFirstTypeParameter, clientEmailSecondParameter, clientEmailSecondTypeParameter, clientEmailThirdParameter, clientEmailThirdTypeParameter, referenceNameFirstParameter, referenceSurnameFirstParameter, referenceLastNameFirstParameter, referencePhoneNumberFirstParameter, referenceKinshipFirstParameter, referenceRelationshipFirstParameter, referenceIneKeyFirstParameter, referenceStreetFirstParameter, referenceNeighborhoodFirstParameter, referenceInteriorNumberFirstParameter, referenceOutdoorNumberFirstParameter, referencePostCodeFirstParameter, referenceCityFirstParameter, referenceMunicipalityFirstParameter, referenceStateFirstParameter, referenceNameSecondParameter, referenceSurnameSecondParameter, referenceLastNameSecondParameter, referencePhoneNumberSecondParameter, referenceKinshipSecondParameter, referenceRelationshipSecondParameter, referenceIneKeySecondParameter, referenceStreetSecondParameter, referenceNeighborhoodSecondParameter, referenceInteriorNumberSecondParameter, referenceOutdoorNumberSecondParameter, referencePostCodeSecondParameter, referenceCitySecondParameter, referenceMunicipalitySecondParameter, referenceStateSecondParameter, success);
+        }
+    
+        public virtual int RegisterCreditApplication(string invoice, Nullable<System.DateTime> expedition_date, Nullable<decimal> minimun_amount_accepted, string purpose, Nullable<decimal> requested_amount, string client_rfc, string employee_number, string credit_condition_identifier, Nullable<int> id_credit_type)
+        {
+            var invoiceParameter = invoice != null ?
+                new ObjectParameter("invoice", invoice) :
+                new ObjectParameter("invoice", typeof(string));
+    
+            var expedition_dateParameter = expedition_date.HasValue ?
+                new ObjectParameter("expedition_date", expedition_date) :
+                new ObjectParameter("expedition_date", typeof(System.DateTime));
+    
+            var minimun_amount_acceptedParameter = minimun_amount_accepted.HasValue ?
+                new ObjectParameter("minimun_amount_accepted", minimun_amount_accepted) :
+                new ObjectParameter("minimun_amount_accepted", typeof(decimal));
+    
+            var purposeParameter = purpose != null ?
+                new ObjectParameter("purpose", purpose) :
+                new ObjectParameter("purpose", typeof(string));
+    
+            var requested_amountParameter = requested_amount.HasValue ?
+                new ObjectParameter("requested_amount", requested_amount) :
+                new ObjectParameter("requested_amount", typeof(decimal));
+    
+            var client_rfcParameter = client_rfc != null ?
+                new ObjectParameter("client_rfc", client_rfc) :
+                new ObjectParameter("client_rfc", typeof(string));
+    
+            var employee_numberParameter = employee_number != null ?
+                new ObjectParameter("employee_number", employee_number) :
+                new ObjectParameter("employee_number", typeof(string));
+    
+            var credit_condition_identifierParameter = credit_condition_identifier != null ?
+                new ObjectParameter("credit_condition_identifier", credit_condition_identifier) :
+                new ObjectParameter("credit_condition_identifier", typeof(string));
+    
+            var id_credit_typeParameter = id_credit_type.HasValue ?
+                new ObjectParameter("id_credit_type", id_credit_type) :
+                new ObjectParameter("id_credit_type", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegisterCreditApplication", invoiceParameter, expedition_dateParameter, minimun_amount_acceptedParameter, purposeParameter, requested_amountParameter, client_rfcParameter, employee_numberParameter, credit_condition_identifierParameter, id_credit_typeParameter);
+        }
+    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?
@@ -151,45 +555,25 @@ namespace SFIDataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual int RegisterCreditApplication(string invoice, Nullable<System.DateTime> expedition_date, Nullable<decimal> minimun_amount_accepted, string purpose, Nullable<decimal> requested_amount, string client_rfc, string employee_number, string credit_condition_identifier, Nullable<int> id_credit_type)
+        public virtual int UpdateBankAccount(string currentCardNumber, string newBank, string newHolder, string newCardNumber, ObjectParameter success)
         {
-            var invoiceParameter = invoice != null ?
-                new ObjectParameter("invoice", invoice) :
-                new ObjectParameter("invoice", typeof(string));
+            var currentCardNumberParameter = currentCardNumber != null ?
+                new ObjectParameter("CurrentCardNumber", currentCardNumber) :
+                new ObjectParameter("CurrentCardNumber", typeof(string));
     
-            var expedition_dateParameter = expedition_date.HasValue ?
-                new ObjectParameter("expedition_date", expedition_date) :
-                new ObjectParameter("expedition_date", typeof(System.DateTime));
+            var newBankParameter = newBank != null ?
+                new ObjectParameter("NewBank", newBank) :
+                new ObjectParameter("NewBank", typeof(string));
     
-            var minimun_amount_acceptedParameter = minimun_amount_accepted.HasValue ?
-                new ObjectParameter("minimun_amount_accepted", minimun_amount_accepted) :
-                new ObjectParameter("minimun_amount_accepted", typeof(decimal));
+            var newHolderParameter = newHolder != null ?
+                new ObjectParameter("NewHolder", newHolder) :
+                new ObjectParameter("NewHolder", typeof(string));
     
-            var purposeParameter = purpose != null ?
-                new ObjectParameter("purpose", purpose) :
-                new ObjectParameter("purpose", typeof(string));
+            var newCardNumberParameter = newCardNumber != null ?
+                new ObjectParameter("NewCardNumber", newCardNumber) :
+                new ObjectParameter("NewCardNumber", typeof(string));
     
-            var requested_amountParameter = requested_amount.HasValue ?
-                new ObjectParameter("requested_amount", requested_amount) :
-                new ObjectParameter("requested_amount", typeof(decimal));
-    
-            var client_rfcParameter = client_rfc != null ?
-                new ObjectParameter("client_rfc", client_rfc) :
-                new ObjectParameter("client_rfc", typeof(string));
-    
-            var employee_numberParameter = employee_number != null ?
-                new ObjectParameter("employee_number", employee_number) :
-                new ObjectParameter("employee_number", typeof(string));
-    
-            var credit_condition_identifierParameter = credit_condition_identifier != null ?
-                new ObjectParameter("credit_condition_identifier", credit_condition_identifier) :
-                new ObjectParameter("credit_condition_identifier", typeof(string));
-    
-            var id_credit_typeParameter = id_credit_type.HasValue ?
-                new ObjectParameter("id_credit_type", id_credit_type) :
-                new ObjectParameter("id_credit_type", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegisterCreditApplication", invoiceParameter, expedition_dateParameter, minimun_amount_acceptedParameter, purposeParameter, requested_amountParameter, client_rfcParameter, employee_numberParameter, credit_condition_identifierParameter, id_credit_typeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateBankAccount", currentCardNumberParameter, newBankParameter, newHolderParameter, newCardNumberParameter, success);
         }
     }
 }

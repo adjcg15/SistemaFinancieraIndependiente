@@ -42,15 +42,90 @@
   <xs:element name="Credit" nillable="true" type="tns:Credit" />
   <xs:complexType name="Client">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address" />
+      <xs:element minOccurs="0" name="BankAccount" nillable="true" type="tns:BankAccount" />
       <xs:element minOccurs="0" name="Birthdate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Card_number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContacMethods" nillable="true" type="tns:ArrayOfContacMethod" />
       <xs:element minOccurs="0" name="Curp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Has_active_credit" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Has_credit_application" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id_address" type="xs:int" />
+      <xs:element minOccurs="0" name="Id_work_center" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonalReferences" nillable="true" type="tns:ArrayOfPersonalReference" />
       <xs:element minOccurs="0" name="Rfc" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkCenter" nillable="true" type="tns:WorkCenter" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Client" nillable="true" type="tns:Client" />
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InteriorNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Municipality" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Neighborhod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OutdoorNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Address" nillable="true" type="tns:Address" />
+  <xs:complexType name="BankAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bank" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Holder" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankAccount" nillable="true" type="tns:BankAccount" />
+  <xs:complexType name="ArrayOfContacMethod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContacMethod" nillable="true" type="tns:ContacMethod" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContacMethod" nillable="true" type="tns:ArrayOfContacMethod" />
+  <xs:complexType name="ContacMethod">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MethodType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ContacMethod" nillable="true" type="tns:ContacMethod" />
+  <xs:complexType name="ArrayOfPersonalReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PersonalReference" nillable="true" type="tns:PersonalReference" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPersonalReference" nillable="true" type="tns:ArrayOfPersonalReference" />
+  <xs:complexType name="PersonalReference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address" />
+      <xs:element minOccurs="0" name="IneKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Kinship" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RelationshipYears" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PersonalReference" nillable="true" type="tns:PersonalReference" />
+  <xs:complexType name="WorkCenter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeePosition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeSeniority" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HumanResourcesPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salary" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WorkCenter" nillable="true" type="tns:WorkCenter" />
   <xs:complexType name="CreditApplication">
     <xs:sequence>
       <xs:element minOccurs="0" name="Client" nillable="true" type="tns:Client" />
@@ -133,4 +208,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EmployeeRole" nillable="true" type="tns:EmployeeRole" />
+  <xs:complexType name="ArrayOfClient">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Client" nillable="true" type="tns:Client" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClient" nillable="true" type="tns:ArrayOfClient" />
 </xs:schema>

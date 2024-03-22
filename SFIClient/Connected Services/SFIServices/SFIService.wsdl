@@ -40,6 +40,14 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IClientsService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8080/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -138,6 +146,42 @@
   <wsdl:message name="IAuthenticationService_Login_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q10:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverClients_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverClients" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverClients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverClients_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q11:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverBankDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverBankDetails" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverBankDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverBankDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q12:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_UpdateBankAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBankAccount" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_UpdateBankAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBankAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_UpdateBankAccount_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q13:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RegisterClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterClient" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RegisterClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RegisterClient_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q14:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
@@ -196,6 +240,28 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthenticationService/Login" message="tns:IAuthenticationService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthenticationService/LoginResponse" message="tns:IAuthenticationService_Login_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IAuthenticationService/LoginServiceFaultFault" name="ServiceFaultFault" message="tns:IAuthenticationService_Login_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IClientsService">
+    <wsdl:operation name="RecoverClients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RecoverClients" message="tns:IClientsService_RecoverClients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverClientsResponse" message="tns:IClientsService_RecoverClients_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverClientsServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverClients_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverBankDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetails" message="tns:IClientsService_RecoverBankDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetailsResponse" message="tns:IClientsService_RecoverBankDetails_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverBankDetailsServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBankAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/UpdateBankAccount" message="tns:IClientsService_UpdateBankAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/UpdateBankAccountResponse" message="tns:IClientsService_UpdateBankAccount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/UpdateBankAccountServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_UpdateBankAccount_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RegisterClient" message="tns:IClientsService_RegisterClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RegisterClientResponse" message="tns:IClientsService_RegisterClient_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RegisterClientServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RegisterClient_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -338,6 +404,58 @@
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IClientsService" type="tns:IClientsService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IClientsService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RecoverClients">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/RecoverClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverBankDetails">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/RecoverBankDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBankAccount">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/UpdateBankAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterClient">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/RegisterClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="SFIService">
     <wsdl:port name="NetTcpBinding_IServiceExample" binding="tns:NetTcpBinding_IServiceExample">
       <soap12:address location="net.tcp://localhost:8081/SFIService" />
@@ -364,6 +482,12 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAuthenticationService" binding="tns:NetTcpBinding_IAuthenticationService">
+      <soap12:address location="net.tcp://localhost:8081/SFIService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IClientsService" binding="tns:NetTcpBinding_IClientsService">
       <soap12:address location="net.tcp://localhost:8081/SFIService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/SFIService</wsa10:Address>

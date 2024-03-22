@@ -1,0 +1,58 @@
+﻿
+<UserControl x:Class="SFIClient.Controlls.ClientControll"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SFIClient.Controlls"
+             mc:Ignorable="d">
+    <Border Background="#FAFAFA" BorderBrush="#BFB8B8" BorderThickness="1" CornerRadius="10" Height="234" Width="433" Margin="15, 15, 15, 15">
+        <Grid>
+            <Label Name="LblClientRFC" HorizontalAlignment="Left" Margin="15,10,0,0" Content="AULR031119CH5" VerticalAlignment="Top" Width="246" Height="40" FontSize="26" FontWeight="Bold"/>
+            <Label Name="LblClientName" HorizontalAlignment="Left" Margin="15,43,0,0" Content="Aguilar López Rodrigo" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
+            <Button Name="BtnSeePersonalInformation" Style="{StaticResource SeeMoreBtn}" Margin="330,10,10,184" Content="Ver más" Width="86" Height="33" Click="BtnSeePersonalInformationClick"/>
+            <Label Name="LblClientCreditStatus" HorizontalAlignment="Left" Margin="15,68,0,0" Content="Cliente con crédito en curso" VerticalAlignment="Top" Width="324" Height="36" FontSize="16" Foreground="{StaticResource DarkPrimaryColor}"/>
+            <Label HorizontalAlignment="Left" Margin="15,139,0,0" Content="Otras opciones" VerticalAlignment="Top" Width="99" Height="29" FontSize="13" Foreground="{StaticResource DarkPrimaryColor}"/>
+            <Button Name="BtnModifyBankAccount" Style="{StaticResource NoHoverStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="20,180,372,22" Click="BtnModifyBankAccountClick">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Modificar datos bancarios" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Assets/BankAccountIcon.png" Width="34" Height="25" />
+            </Button>
+            <Button Name="BtnModifyPersonalInformation" Style="{StaticResource NoHoverStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="59,180,333,22" Click="BtnModifyPersonalInformationClick">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Modificar datos personales" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Assets/PersonalInformationIcon.png" Width="34" Height="25" />
+            </Button>
+            <Button Name="BtnModifyWorkCenter" Style="{StaticResource NoHoverStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="98,180,294,22" Click="BtnModifyWorkCenterClick">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Modificar lugar de trabajo" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Assets/WorkCenterIcon.png" Width="34" Height="25" />
+            </Button>
+            <Button Name="BtnModifyPersonalReferences" Style="{StaticResource NoHoverStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="137,180,255,22" Click="BtnModifyPersonalReferencesClick">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Modificar referencias personales" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Assets/PersonalReferencesIcon.png" Width="34" Height="25" />
+            </Button>
+            <Button Name="BtnApplyForCredit" Style="{StaticResource NoHoverStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="176,180,216,22" Click="BtnApplyForCreditClick">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Solicitar crédito" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <Image Source="/Assets/ApplyForCreditIcon.png" Width="34" Height="25" />
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

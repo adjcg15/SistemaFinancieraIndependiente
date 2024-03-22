@@ -18,10 +18,8 @@ namespace SFIDataAccess
         public string value { get; set; }
         public int id_contact_method_type { get; set; }
         public string client_rfc { get; set; }
-        public string ine_key { get; set; }
     
         public virtual client client { get; set; }
         public virtual contact_method_types contact_method_types { get; set; }
-        public virtual personal_references personal_references { get; set; }
     }
 }

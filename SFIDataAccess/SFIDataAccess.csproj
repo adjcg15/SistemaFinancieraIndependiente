@@ -87,6 +87,7 @@
     <Compile Include="credit_types.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessObjects\ClientsDAO.cs" />
     <Compile Include="DataAccessObjects\EmployeesDAO.cs" />
     <Compile Include="DataAccessObjects\CreditConditionsDAO.cs" />
     <Compile Include="DataAccessObjects\CreditsDAO.cs" />
@@ -102,6 +103,9 @@
     <Compile Include="employee_roles.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\BankAccount.cs" />
+    <Compile Include="Model\ContacMethod.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Credit.cs" />
     <Compile Include="Model\CreditApplication.cs" />
@@ -112,6 +116,8 @@
     <Compile Include="Model\DigitalDocument.cs" />
     <Compile Include="Model\CreditGrantingPolicy.cs" />
     <Compile Include="Model\EmployeeRole.cs" />
+    <Compile Include="Model\PersonalReference.cs" />
+    <Compile Include="Model\WorkCenter.cs" />
     <Compile Include="personal_references.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>
@@ -165,6 +171,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="SFIDatabaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SFIDatabaseModel.edmx</DependentUpon>
@@ -175,9 +184,6 @@
       <DependentUpon>SFIDatabaseModel.edmx</DependentUpon>
       <LastGenOutput>SFIDatabaseModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

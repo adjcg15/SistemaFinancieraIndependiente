@@ -150,7 +150,7 @@ namespace SFIClient.Views
                     //TODO: redireccionar a buscar solicitud de crédito
                     break;
                 case Security.Roles.CREDIT_ADVISOR:
-                    //TODO: redireccionar a buscar cliente por RFC
+                    NavigationService.Navigate(new SearchClientByRFCController());
                     break;
                 
             }

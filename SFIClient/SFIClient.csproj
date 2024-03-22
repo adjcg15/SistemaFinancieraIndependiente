@@ -64,6 +64,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\ClientControll.xaml.cs">
+      <DependentUpon>ClientControll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
     </Compile>
@@ -79,6 +82,9 @@
     <Compile Include="Session\SystemSession.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Utilities\Security.cs" />
+    <Compile Include="Views\ClientRegisterView.xaml.cs">
+      <DependentUpon>ClientRegisterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
       <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +105,9 @@
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyBankAccountView.xaml.cs">
+      <DependentUpon>ModifyBankAccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterCreditConditionView.xaml.cs">
       <DependentUpon>RegisterCreditConditionView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +117,13 @@
     <Compile Include="Views\ResponsiveExampleView.xaml.cs">
       <DependentUpon>ResponsiveExampleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchClientByRFCView.xaml.cs">
+      <DependentUpon>SearchClientByRFCView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controlls\ClientControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +152,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ClientRegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConsultConditionsCreditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +180,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModifyBankAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegisterCreditConditionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +193,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ResponsiveExampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchClientByRFCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,6 +230,12 @@
     </None>
     <None Include="Connected Services\SFIServices\item3.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.BankAccount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Client.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Credit.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -274,6 +308,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Plus2Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ApplyForCreditDisabledIcon.png" />
+    <Resource Include="Assets\ApplyForCreditIcon.png" />
+    <Resource Include="Assets\BankAccountIcon.png" />
+    <Resource Include="Assets\NoApplyForCreditIcon.png" />
+    <Resource Include="Assets\PersonalInformationIcon.png" />
+    <Resource Include="Assets\PersonalReferencesIcon.png" />
+    <Resource Include="Assets\Plus3Icon.png" />
+    <Resource Include="Assets\WorkCenterIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
