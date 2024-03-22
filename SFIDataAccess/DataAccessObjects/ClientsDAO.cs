@@ -26,19 +26,19 @@ namespace SFIDataAccess.DataAccessObjects
                 using (var context = new SFIDatabaseContext())
                 {
                     var clients = (from client in context.clients
-                                 join credit in context.credits
-                                 on client.rfc equals credit.client_rfc into creditGroup
-                                 from credit in creditGroup.DefaultIfEmpty()
-                                 join credit_applications in context.credit_applications
-                                 on client.rfc equals credit_applications.client_rfc into creditApplicationsGroup
-                                 from credit_application in creditApplicationsGroup.DefaultIfEmpty()
-                                 where credit != null || credit_application != null
-                                 select new
-                                 {
-                                     client,
-                                     has_active_credit = credit != null,
-                                     has_credit_application = credit_application != null
-                                 }).Distinct().ToList();
+                                   join credit in context.credits
+                                   on client.rfc equals credit.client_rfc into creditGroup
+                                   from credit in creditGroup.DefaultIfEmpty()
+                                   join credit_applications in context.credit_applications
+                                   on client.rfc equals credit_applications.client_rfc into creditApplicationsGroup
+                                   from credit_application in creditApplicationsGroup.DefaultIfEmpty()
+                                   where credit != null || credit_application != null || credit == null && credit_application == null
+                                   select new
+                                   {
+                                       client,
+                                       has_active_credit = credit != null,
+                                       has_credit_application = credit_application != null
+                                   }).Distinct().ToList();
 
 
                     foreach (var item in clients)
