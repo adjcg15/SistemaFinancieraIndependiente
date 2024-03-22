@@ -41,13 +41,14 @@ namespace SFIDataAccess.DataAccessObjects
                                        client,
                                        has_active_credit = credit != null,
                                        has_credit_application = credit_application != null,
-                                       work_center.company_name
+                                       work_center
                                    }).Distinct().ToList();
 
 
                     foreach (var item in clients)
                     {
                         workCenter.CompanyName = item.client.work_centers.company_name;
+                        workCenter.Salary = item.client.work_centers.salary;
                         Client clientItem = new Client
                         {
                             Curp = item.client.curp,
