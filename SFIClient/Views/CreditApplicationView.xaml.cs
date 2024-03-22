@@ -101,7 +101,7 @@ namespace SFIClient.Views
             SpnClientWorkCenterName.Inlines.Clear();
             if(newApplication.Client.WorkCenter != null)
             {
-                BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary.ToString()));
+                BldClientSalary.Inlines.Add(new Run(newApplication.Client.WorkCenter.Salary.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
                 SpnClientWorkCenterName.Inlines.Add(new Run(newApplication.Client.WorkCenter.CompanyName));
             }
             else
