@@ -95,6 +95,8 @@ namespace SFIClient.Views
         private void ShowClientInformation()
         {
             TbkClientName.Text = $"{newApplication.Client.Name} {newApplication.Client.Surname} {newApplication.Client.LastName}";
+
+            SpnClientCurp.Inlines.Clear();
             SpnClientCurp.Inlines.Add(new Run(newApplication.Client.Curp));
 
             BldClientSalary.Inlines.Clear();

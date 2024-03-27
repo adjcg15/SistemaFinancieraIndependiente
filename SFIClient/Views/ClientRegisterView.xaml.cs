@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Page = System.Windows.Controls.Page;
@@ -185,6 +186,18 @@ namespace SFIClient.Views
                 BdrClientBirthdate.Style = borderErrorStyle;
             }
 
+            if (TbClientRfc.Text.Trim().Length < 12)
+            {
+                correctFields = false;
+                TbClientRfc.Style = textInputErrorStyle;
+            }
+
+            if (TbClientCurp.Text.Trim().Length < 18)
+            {
+                correctFields = false;
+                TbClientCurp.Style = textInputErrorStyle;
+            }
+
             return correctFields;
         }
 
@@ -214,6 +227,12 @@ namespace SFIClient.Views
                 }
             }
 
+            if (TbClientPostCode.Text.Trim().Length < 5)
+            {
+                TbClientPostCode.Style = textInputErrorStyle;
+                correctFields = false;
+            }
+
             return correctFields;
         }
 
@@ -236,6 +255,11 @@ namespace SFIClient.Views
                     textBoxes[i].Style = textInputErrorStyle;
                     correctFields = false;
                 }
+            }
+            if (TbCardNumber.Text.Trim().Length < 16)
+            {
+                TbCardNumber.Style = textInputErrorStyle;
+                correctFields = false;
             }
 
             return correctFields;
@@ -263,6 +287,18 @@ namespace SFIClient.Views
                     textBoxes[i].Style = textInputErrorStyle;
                     correctFields = false;
                 }
+            }
+
+            if (TbWorkCenterPhoneNumber.Text.Trim().Length < 10)
+            {
+                TbWorkCenterPhoneNumber.Style = textInputErrorStyle;
+                correctFields = false;
+            }
+
+            if (TbHumanResourcesPhone.Text.Trim().Length < 10)
+            {
+                TbHumanResourcesPhone.Style = textInputErrorStyle;
+                correctFields = false;
             }
 
             return correctFields;
@@ -294,6 +330,12 @@ namespace SFIClient.Views
                 }
             }
 
+            if (TbWorkCenterPostCode.Text.Trim().Length < 5)
+            {
+                TbWorkCenterPostCode.Style = textInputErrorStyle;
+                correctFields = false;
+            }
+
             return correctFields;
         }
 
@@ -306,16 +348,40 @@ namespace SFIClient.Views
             {
                 TbClientPhoneNumberFirst,
                 TbClientPhoneNumberSecond,
-                TbClientEmailFirst
+                TbClientPhoneNumberThird,
+                TbClientPhoneNumberFourth
             };
 
             for (int i = 0; i < textBoxes.Count; i++)
             {
-                if (textBoxes[i].Text.Trim().Length == 0)
+                if (i < 2)
                 {
-                    textBoxes[i].Style = textInputErrorStyle;
-                    correctFields = false;
+                    if (textBoxes[i].Text.Trim().Length < 10)
+                    {
+                        textBoxes[i].Style = textInputErrorStyle;
+                        correctFields = false;
+                    }
                 }
+                else
+                {
+                    if (textBoxes[i].Text.Trim().Length > 0 && textBoxes[i].Text.Trim().Length < 10)
+                    {
+                        textBoxes[i].Style = textInputErrorStyle;
+                        correctFields = false;
+                    }
+                }
+            }
+
+            if (TbClientPhoneNumberFirst.Text.Trim().Length < 10)
+            {
+                TbClientPhoneNumberFirst.Style = textInputErrorStyle;
+                correctFields = false;
+            }
+
+            if (TbClientPhoneNumberSecond.Text.Trim().Length < 10)
+            {
+                TbClientPhoneNumberFirst.Style = textInputErrorStyle;
+                correctFields = false;
             }
 
             return correctFields;
@@ -343,6 +409,12 @@ namespace SFIClient.Views
                     textBoxes[i].Style = textInputErrorStyle;
                     correctFields = false;
                 }
+            }
+
+            if (TbReferenceIneKeyFirst.Text.Trim().Length < 18)
+            {
+                TbReferenceIneKeyFirst.Style = textInputErrorStyle;
+                correctFields = false;
             }
 
             return correctFields;
@@ -374,6 +446,12 @@ namespace SFIClient.Views
                 }
             }
 
+            if (TbReferencePostCodeFirst.Text.Trim().Length < 5)
+            {
+                TbReferencePostCodeFirst.Style = textInputErrorStyle;
+                correctFields = false;
+            }
+
             return correctFields;
         }
 
@@ -399,6 +477,12 @@ namespace SFIClient.Views
                     textBoxes[i].Style = textInputErrorStyle;
                     correctFields = false;
                 }
+            }
+
+            if (TbReferenceIneKeySecond.Text.Trim().Length < 18)
+            {
+                TbReferenceIneKeySecond.Style = textInputErrorStyle;
+                correctFields = false;
             }
 
             return correctFields;
@@ -428,6 +512,12 @@ namespace SFIClient.Views
                     textBoxes[i].Style = textInputErrorStyle;
                     correctFields = false;
                 }
+            }
+
+            if (TbReferencePostCodeSecond.Text.Trim().Length < 5)
+            {
+                TbReferencePostCodeSecond.Style = textInputErrorStyle;
+                correctFields = false;
             }
 
             return correctFields;

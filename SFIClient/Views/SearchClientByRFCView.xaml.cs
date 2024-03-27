@@ -99,6 +99,20 @@ namespace SFIClient.Views
             }
         }
 
+        private void AddSearchedClientToClientList(Client client)
+        {
+            SkpNoRegisteredClients.Visibility = Visibility.Collapsed;
+            SkpRegisterClientNow.Visibility = Visibility.Collapsed;
+            if (client.Has_active_credit || client.Has_credit_application)
+            {
+                ShowClientWithAllOptionsWithoutCreditApplication(client);
+            }
+            else
+            {
+                ShowClientWithAllOptions(client);
+            }
+        }
+
         private void ShowClientWithAllOptions(Client client)
         {
             ClientControll clientControll = new ClientControll();
@@ -212,7 +226,7 @@ namespace SFIClient.Views
                 if (clientsList[i].Rfc.Contains(rfcWanted))
                 {
                     clientExists = true;
-                    AddClientsToClientsList();
+                    AddSearchedClientToClientList(clientsList[i]);
                 }
                 else
                 {
