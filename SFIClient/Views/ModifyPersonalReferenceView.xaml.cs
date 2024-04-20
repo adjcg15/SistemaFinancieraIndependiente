@@ -50,6 +50,7 @@ namespace SFIClient.Views
             RestrictOnlyLetters(TbCity);
             RestrictOnlyLetters(TbMunicipality);
             RestrictOnlyLetters(TbState);
+            RestrictOnlyNumbers(TbRelationship);
             RestrictOnlyNumbers(TbPostCode);
             RestrictOnlyNumbers(TbPhoneNumber);
             RestrictOnlyNumbers(TbInteriorNumber);
@@ -151,7 +152,16 @@ namespace SFIClient.Views
 
         private void BtnUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
         {
-            ShowPersonalReferenceUpdateConfirmationDialog();
+            bool isValidInformation = VerifyPersonalReferenceInformation();
+            if (isValidInformation)
+            {
+                ShowPersonalReferenceUpdateConfirmationDialog();
+            }
+            else
+            {
+                HighLightInvalidFields();
+                ShowInvalidFieldsAlertDialog();
+            }
         }
 
         private void ShowPersonalReferenceUpdateConfirmationDialog()
@@ -166,16 +176,7 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                bool isValidInformation = VerifyPersonalReferenceInformation();
-                if (isValidInformation)
-                {
-                    UpdatePersonalReference();
-                }
-                else
-                {
-                    HighLightInvalidFields();
-                    ShowInvalidFieldsAlertDialog();
-                }
+                UpdatePersonalReference();
             }
         }
 
@@ -256,7 +257,7 @@ namespace SFIClient.Views
                 PhoneNumber = TbPhoneNumber.Text.Trim(),
                 Kinship = TbKinship.Text.Trim(),
                 RelationshipYears = TbRelationship.Text.Trim(),
-                IneKey = TbIneKey.Text.Trim(),
+                IneKey = TbIneKey.Text.Trim().ToUpper(),
                 ClientRfc = client.Rfc,
                 Address = newAddress
             };
@@ -317,12 +318,15 @@ namespace SFIClient.Views
 
         private void ShowExistingPersonalReferenceMessageDialog()
         {
+
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
             MessageBox.Show(
                 "Verifique que la información ingresada para la clave del elector sea la correcta",
                 "Referencia personal ya registrada para el cliente",
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning
             );
+            TbIneKey.Style = textInputErrorStyle;
         }
 
         private void RedirectToSearchClienByRFCView()

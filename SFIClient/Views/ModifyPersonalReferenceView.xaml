@@ -150,7 +150,7 @@
                             Número de teléfono <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ingresa el nombre del titular de la tarjeta">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número de teléfono (10 números)">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -161,7 +161,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbPhoneNumber" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbPhoneNumberTextChanged"/>
+                            <TextBox Name="TbPhoneNumber" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbPhoneNumberTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -179,7 +179,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbKinship" Style="{StaticResource TextInput}" MaxLength="18" TextChanged="TbKinshipTextChanged"/>
+                            <TextBox Name="TbKinship" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbKinshipTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -197,14 +197,14 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbRelationship" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbRelationshipTextChanged"/>
+                            <TextBox Name="TbRelationship" Style="{StaticResource TextInput}" MaxLength="2" TextChanged="TbRelationshipTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Clave de elector <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ingresa la clave de elector">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la clave de elector (18 dígitos)">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -312,7 +312,7 @@
                             Código postal <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ingresa el código postal">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el código postal (5 números)">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
