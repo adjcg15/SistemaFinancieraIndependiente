@@ -253,11 +253,11 @@ namespace SFIClient.Views
 
             if (result == DialogResult.Yes)
             {
-                this.NavigationService.Navigate(new ModifyPersonalReferenceController());
+                this.NavigationService.Navigate(new ModifyPersonalReferenceController(personalReferences[0], client));
             }
             else if (result == DialogResult.No)
             {
-                this.NavigationService.Navigate(new ModifyPersonalReferenceController());
+                this.NavigationService.Navigate(new ModifyPersonalReferenceController(personalReferences[1], client));
             }
         }
 

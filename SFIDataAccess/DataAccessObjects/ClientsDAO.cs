@@ -311,21 +311,39 @@ namespace SFIDataAccess.DataAccessObjects
                 using (var context = new SFIDatabaseContext())
                 {
                     var personalReferences = (from personalReference in context.personal_references
+                                              join address in context.addresses
+                                              on personalReference.id_address equals address.id_address
                                               where personalReference.client_rfc == rfc
-                                              select personalReference).ToList();
+                                              select new
+                                              {
+                                                  personalReference,
+                                                  address
+                                              }).ToList();
                     if (personalReferences != null)
                     {
                         foreach (var item in personalReferences)
                         {
+                            Address personalReferenceAddress = new Address
+                            {
+                                Street = item.address.street,
+                                Neighborhod = item.address.neighborhod,
+                                InteriorNumber = item.address.inteior_number,
+                                OutdoorNumber = item.address.outdoor_number,
+                                PostCode = item.address.post_code,
+                                Municipality = item.address.municipality,
+                                City = item.address.city,
+                                State = item.address.state
+                            };
                             PersonalReference personalReference = new PersonalReference
                             {
-                                Name = item.name,
-                                Surname = item.surname,
-                                LastName = item.last_name,
-                                PhoneNumber = item.phone_number,
-                                Kinship = item.kinship,
-                                RelationshipYears = item.relationship_years,
-                                IneKey = item.ine_key
+                                Name = item.personalReference.name,
+                                Surname = item.personalReference.surname,
+                                LastName = item.personalReference.last_name,
+                                PhoneNumber = item.personalReference.phone_number,
+                                Kinship = item.personalReference.kinship,
+                                RelationshipYears = item.personalReference.relationship_years,
+                                IneKey = item.personalReference.ine_key,
+                                Address = personalReferenceAddress
                             };
                             personalReferencesList.Add(personalReference);
                         }

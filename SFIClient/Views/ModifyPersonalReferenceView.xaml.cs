@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -20,29 +23,147 @@ namespace SFIClient.Views
     /// </summary>
     public partial class ModifyPersonalReferenceController : Page
     {
-        public ModifyPersonalReferenceController()
+        private readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
+        private readonly PersonalReference personalReference;
+        private readonly Client client;
+        public ModifyPersonalReferenceController(PersonalReference personalReference, Client client)
         {
             InitializeComponent();
+            this.personalReference = personalReference;
+            this.client = client;
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            
+            ShowPersonalReference();
+        }
+
+        private void ShowPersonalReference()
+        {
+            TbName.Text = personalReference.Name;
+            TbSurname.Text = personalReference.Surname;
+            TbLastName.Text = personalReference.LastName;
+            TbPhoneNumber.Text = personalReference.PhoneNumber;
+            TbKinship.Text = personalReference.Kinship;
+            TbRelationship.Text = personalReference.RelationshipYears;
+            TbIneKey.Text = personalReference.IneKey;
+            TbStreet.Text = personalReference.Address.Street;
+            TbNeighborhood.Text = personalReference.Address.Neighborhod;
+            TbInteriorNumber.Text = personalReference.Address.InteriorNumber;
+            TbOutdoorNumber.Text = personalReference.Address.OutdoorNumber;
+            TbPostCode.Text = personalReference.Address.PostCode;
+            TbCity.Text = personalReference.Address.City;
+            TbMunicipality.Text = personalReference.Address.Municipality;
+            TbState.Text = personalReference.Address.State;
         }
 
         private void BtnDiscardUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
         {
+            ShowDiscardUpdatePersonalReferenceDialog();
+        }
 
+        private void ShowDiscardUpdatePersonalReferenceDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea regresar a la ventana previa? Todos los cambios sin guardar se perderán",
+                "Regresar a ventana previa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToSearchClientByRFCView();
+            }
+        }
+
+        private void RedirectToSearchClientByRFCView()
+        {
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private void BtnCancelUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
         {
+            ShowCancelUpdatePersonalReferenceDialog();
+        }
 
+        private void ShowCancelUpdatePersonalReferenceDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea cancelar la actualización de la referencia personal del cliente? Todos los cambios sin guardar se perderán",
+                "Cancelar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToSearchClientByRFCView();
+            }
         }
 
         private void BtnUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
         {
+            ShowPersonalReferenceUpdateConfirmationDialog();
+        }
 
+        private void ShowPersonalReferenceUpdateConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea guardar los cambios realizados a la referencia personal del cliente " 
+                + client.Name + " " + client.Surname + " " + client.LastName,
+                "Confirmación de actualización",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                UpdatePersonalReference();
+            }
+        }
+
+        private bool UpdatePersonalReference()
+        {
+            bool updatedPersonalReference = false;
+
+            try
+            {
+                updatedPersonalReference = true; //TODO
+            }
+            catch (FaultException<ServiceFault> fe)
+            {
+                ShowPersonalReferenceUpdateError(fe.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowPersonalReferenceUpdateError(errorMessage);
+                RedirectToSearchClienByRFCView();
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowPersonalReferenceUpdateError(errorMessage);
+                RedirectToSearchClienByRFCView();
+            }
+
+            return updatedPersonalReference;
+        }
+
+        private void ShowPersonalReferenceUpdateError(string message)
+        {
+            MessageBox.Show(
+                message,
+                "Sistema no disponible",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
+
+        private void RedirectToSearchClienByRFCView()
+        {
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private void TbSatateTextChanged(object sender, TextChangedEventArgs e)
