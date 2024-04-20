@@ -24,5 +24,100 @@ namespace SFIClient.Views
         {
             InitializeComponent();
         }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void BtnDiscardUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnCancelUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TbSatateTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbMunicipalityTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbCityTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbPostCodeTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbOutdoorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbInteriorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbNeighborhoodTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbStreetTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbIneKeyTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbRelationshipTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbKinshipTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbPhoneNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbLastNameTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbSurnameTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TbNameTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -12,21 +12,23 @@ namespace SFIDataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class credit_granting_polices
+    public partial class payment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public credit_granting_polices()
+        public payment()
         {
-            this.polices_apply_dictums = new HashSet<polices_apply_dictums>();
+            this.payment_layouts = new HashSet<payment_layouts>();
         }
     
-        public int id_credit_granting_policy { get; set; }
-        public string title { get; set; }
-        public System.DateTime effective_date { get; set; }
-        public string description { get; set; }
-        public bool is_active { get; set; }
+        public int id_payment { get; set; }
+        public decimal amount { get; set; }
+        public string invoice { get; set; }
+        public System.DateTime planned_date { get; set; }
+        public string credit_invoice { get; set; }
+        public System.DateTime reconciliation_date { get; set; }
     
+        public virtual credit credit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<polices_apply_dictums> polices_apply_dictums { get; set; }
+        public virtual ICollection<payment_layouts> payment_layouts { get; set; }
     }
 }

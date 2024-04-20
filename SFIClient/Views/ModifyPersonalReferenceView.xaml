@@ -14,7 +14,7 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnGoBackClick">
+                    <Button Name="BtnDiscardUpdatePersonalReference" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnDiscardUpdatePersonalReferenceClick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -107,7 +107,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientNameTextChanged"/>
+                            <TextBox Name="TbName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbNameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -125,7 +125,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbSurname" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSurnameTextChanged"/>
+                            <TextBox Name="TbSurname" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbSurnameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -143,7 +143,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbLastName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientLastNameTextChanged"/>
+                            <TextBox Name="TbLastName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbLastNameTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -161,7 +161,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbPhoneNumber" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientLastNameTextChanged"/>
+                            <TextBox Name="TbPhoneNumber" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbPhoneNumberTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -179,7 +179,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbKinship" Style="{StaticResource TextInput}" MaxLength="18" TextChanged="TbClientCurpTextChanged"/>
+                            <TextBox Name="TbKinship" Style="{StaticResource TextInput}" MaxLength="18" TextChanged="TbKinshipTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -197,7 +197,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbRelationship" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbClientRfcTextChanged"/>
+                            <TextBox Name="TbRelationship" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbRelationshipTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -215,7 +215,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbIneKey" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbClientRfcTextChanged"/>
+                            <TextBox Name="TbIneKey" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbIneKeyTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -251,7 +251,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbStreet" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientStreetTextChanged"/>
+                            <TextBox Name="TbStreet" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbStreetTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -269,7 +269,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbNeighborhood" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientNeighborhoodTextChanged"/>
+                            <TextBox Name="TbNeighborhood" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbNeighborhoodTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -287,7 +287,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbInteriorNumber" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbClientInteriorNumberTextChanged"/>
+                            <TextBox Name="TbInteriorNumber" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbInteriorNumberTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -305,7 +305,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbOutdoorNumber" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbClientOutdoorNumberTextChanged"/>
+                            <TextBox Name="TbOutdoorNumber" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbOutdoorNumberTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -323,7 +323,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbPostCode" Style="{StaticResource TextInput}" MaxLength="5" TextChanged="TbClientPostCodeTextChanged"/>
+                            <TextBox Name="TbPostCode" Style="{StaticResource TextInput}" MaxLength="5" TextChanged="TbPostCodeTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -341,7 +341,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbCity" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientCityTextChanged"/>
+                            <TextBox Name="TbCity" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbCityTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -359,7 +359,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbMunicipality" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientMunicipalityTextChanged"/>
+                            <TextBox Name="TbMunicipality" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbMunicipalityTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -377,7 +377,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbState" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSatateTextChanged"/>
+                            <TextBox Name="TbState" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbSatateTextChanged"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
@@ -385,8 +385,8 @@
 
             <!--Buttons section-->
             <StackPanel Margin="40, 120, 40, 0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnCancel" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelClick"/>
-                <Button Name="BtnUpdateData" Style="{StaticResource PrimaryBtn}" Content="Actualizar datos" Click="BtnUpdateBankAccountClick"/>
+                <Button Name="BtnCancelUpdatePersonalReference" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelUpdatePersonalReferenceClick"/>
+                <Button Name="BtnUpdatePersonalReference" Style="{StaticResource PrimaryBtn}" Content="Actualizar datos" Click="BtnUpdatePersonalReferenceClick"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

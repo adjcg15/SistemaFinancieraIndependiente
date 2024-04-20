@@ -41,6 +41,8 @@ namespace SFIDataAccess
         public virtual DbSet<dictum> dictums { get; set; }
         public virtual DbSet<digital_documents> digital_documents { get; set; }
         public virtual DbSet<employee_roles> employee_roles { get; set; }
+        public virtual DbSet<payment_layouts> payment_layouts { get; set; }
+        public virtual DbSet<payment> payments { get; set; }
         public virtual DbSet<personal_references> personal_references { get; set; }
         public virtual DbSet<polices_apply_dictums> polices_apply_dictums { get; set; }
         public virtual DbSet<regime> regimes { get; set; }
