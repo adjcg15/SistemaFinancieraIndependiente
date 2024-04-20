@@ -301,5 +301,57 @@ namespace SFIDataAccess.DataAccessObjects
 
             return success;
         }
+
+        public static List<PersonalReference> RecoverPersonalReferences(string rfc)
+        {
+            List<PersonalReference> personalReferencesList = new List<PersonalReference>();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var personalReferences = (from personalReference in context.personal_references
+                                              where personalReference.client_rfc == rfc
+                                              select personalReference).ToList();
+                    if (personalReferences != null)
+                    {
+                        foreach (var item in personalReferences)
+                        {
+                            PersonalReference personalReference = new PersonalReference
+                            {
+                                Name = item.name,
+                                Surname = item.surname,
+                                LastName = item.last_name,
+                                PhoneNumber = item.phone_number,
+                                Kinship = item.kinship,
+                                RelationshipYears = item.relationship_years,
+                                IneKey = item.ine_key
+                            };
+                            personalReferencesList.Add(personalReference);
+                        }
+                    }
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+
+            return personalReferencesList;
+        }
     }
 }

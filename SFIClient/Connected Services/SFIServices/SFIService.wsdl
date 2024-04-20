@@ -182,6 +182,15 @@
   <wsdl:message name="IClientsService_RegisterClient_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q14:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverPersonalReferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverPersonalReferences" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverPersonalReferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverPersonalReferencesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_RecoverPersonalReferences_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q15:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
@@ -262,6 +271,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RegisterClient" message="tns:IClientsService_RegisterClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RegisterClientResponse" message="tns:IClientsService_RegisterClient_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RegisterClientServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RegisterClient_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverPersonalReferences">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RecoverPersonalReferences" message="tns:IClientsService_RecoverPersonalReferences_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverPersonalReferencesResponse" message="tns:IClientsService_RecoverPersonalReferences_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverPersonalReferencesServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverPersonalReferences_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -445,6 +459,18 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterClient">
       <soap12:operation soapAction="http://tempuri.org/IClientsService/RegisterClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverPersonalReferences">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/RecoverPersonalReferences" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

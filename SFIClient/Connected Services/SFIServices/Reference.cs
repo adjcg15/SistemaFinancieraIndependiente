@@ -2302,6 +2302,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RegisterClient", ReplyAction="http://tempuri.org/IClientsService/RegisterClientResponse")]
         System.Threading.Tasks.Task<bool> RegisterClientAsync(SFIClient.SFIServices.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverPersonalReferences", ReplyAction="http://tempuri.org/IClientsService/RecoverPersonalReferencesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/RecoverPersonalReferencesServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.PersonalReference[] RecoverPersonalReferences(string rfc);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverPersonalReferences", ReplyAction="http://tempuri.org/IClientsService/RecoverPersonalReferencesResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.PersonalReference[]> RecoverPersonalReferencesAsync(string rfc);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2361,6 +2368,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> RegisterClientAsync(SFIClient.SFIServices.Client client) {
             return base.Channel.RegisterClientAsync(client);
+        }
+        
+        public SFIClient.SFIServices.PersonalReference[] RecoverPersonalReferences(string rfc) {
+            return base.Channel.RecoverPersonalReferences(rfc);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.PersonalReference[]> RecoverPersonalReferencesAsync(string rfc) {
+            return base.Channel.RecoverPersonalReferencesAsync(rfc);
         }
     }
 }
