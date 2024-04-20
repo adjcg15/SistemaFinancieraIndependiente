@@ -33,11 +33,56 @@ namespace SFIClient.Views
             this.personalReference = personalReference;
             this.client = client;
             currentIneKey = personalReference.IneKey;
+            ApplyRestApplyRestrictionsOnFields();
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
             ShowPersonalReference();
+        }
+
+        private void ApplyRestApplyRestrictionsOnFields()
+        {
+            RestrictOnlyLetters(TbName);
+            RestrictOnlyLetters(TbSurname);
+            RestrictOnlyLetters(TbLastName);
+            RestrictOnlyLetters(TbKinship);
+            RestrictOnlyLetters(TbCity);
+            RestrictOnlyLetters(TbMunicipality);
+            RestrictOnlyLetters(TbState);
+            RestrictOnlyNumbers(TbPostCode);
+            RestrictOnlyNumbers(TbPhoneNumber);
+            RestrictOnlyNumbers(TbInteriorNumber);
+            RestrictOnlyNumbers(TbOutdoorNumber);
+        }
+
+        private void RestrictOnlyLetters(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                }
+            };
+        }
+
+        private void RestrictOnlyNumbers(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                }
+            };
+            textBox.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Space)
+                {
+                    e.Handled = true;
+                }
+            };
         }
 
         private void ShowPersonalReference()
@@ -59,7 +104,7 @@ namespace SFIClient.Views
             TbState.Text = personalReference.Address.State;
         }
 
-        private void BtnDiscardUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
+        private void BtnDiscardPersonalReferenceUpdateClick(object sender, RoutedEventArgs e)
         {
             ShowDiscardUpdatePersonalReferenceDialog();
         }
@@ -84,7 +129,7 @@ namespace SFIClient.Views
             NavigationService.Navigate(new SearchClientByRFCController());
         }
 
-        private void BtnCancelUpdatePersonalReferenceClick(object sender, RoutedEventArgs e)
+        private void BtnCancelPersonalReferenceUpdateClick(object sender, RoutedEventArgs e)
         {
             ShowCancelUpdatePersonalReferenceDialog();
         }
@@ -121,16 +166,68 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                if (VerifyPersonalReferenceInformation())
+                bool isValidInformation = VerifyPersonalReferenceInformation();
+                if (isValidInformation)
                 {
                     UpdatePersonalReference();
+                }
+                else
+                {
+                    HighLightInvalidFields();
+                    ShowInvalidFieldsAlertDialog();
                 }
             }
         }
 
         private bool VerifyPersonalReferenceInformation()
         {
-            return true;
+            bool validFields = true;
+            if (TbName.Text.Trim().Length == 0) validFields = false;
+            if (TbLastName.Text.Trim().Length == 0) validFields = false;
+            if (TbPhoneNumber.Text.Trim().Length < 10) validFields = false;
+            if (TbKinship.Text.Trim().Length == 0) validFields = false;
+            if (TbRelationship.Text.Trim().Length == 0) validFields = false;
+            if (TbIneKey.Text.Trim().Length < 18) validFields = false;
+            if (TbStreet.Text.Trim().Length == 0) validFields = false;
+            if (TbNeighborhood.Text.Trim().Length == 0) validFields = false;
+            if (TbInteriorNumber.Text.Trim().Length == 0) validFields = false;
+            if (TbOutdoorNumber.Text.Trim().Length == 0) validFields = false;
+            if (TbPostCode.Text.Trim().Length < 5) validFields = false;
+            if (TbCity.Text.Trim().Length == 0) validFields = false;
+            if (TbMunicipality.Text.Trim().Length == 0) validFields = false;
+            if (TbState.Text.Trim().Length == 0) validFields = false;
+
+            return validFields;
+        }
+
+        private void HighLightInvalidFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            if (TbName.Text.Trim().Length == 0) TbName.Style = textInputErrorStyle;
+            if (TbLastName.Text.Trim().Length == 0) TbLastName.Style = textInputErrorStyle;
+            if (TbPhoneNumber.Text.Trim().Length < 10) TbPhoneNumber.Style = textInputErrorStyle;
+            if (TbKinship.Text.Trim().Length == 0) TbKinship.Style = textInputErrorStyle;
+            if (TbRelationship.Text.Trim().Length == 0) TbRelationship.Style = textInputErrorStyle;
+            if (TbIneKey.Text.Trim().Length < 18) TbIneKey.Style = textInputErrorStyle;
+            if (TbStreet.Text.Trim().Length == 0) TbIneKey.Style = textInputErrorStyle;
+            if (TbNeighborhood.Text.Trim().Length == 0) TbNeighborhood.Style = textInputErrorStyle;
+            if (TbInteriorNumber.Text.Trim().Length == 0) TbInteriorNumber.Style = textInputErrorStyle;
+            if (TbOutdoorNumber.Text.Trim().Length == 0) TbOutdoorNumber.Style = textInputErrorStyle;
+            if (TbPostCode.Text.Trim().Length < 5) TbPostCode.Style = textInputErrorStyle;
+            if (TbCity.Text.Trim().Length == 0) TbCity.Style = textInputErrorStyle;
+            if (TbMunicipality.Text.Trim().Length == 0) TbMunicipality.Style = textInputErrorStyle;
+            if (TbState.Text.Trim().Length == 0) TbState.Style = textInputErrorStyle;
+
+        }
+
+        private void ShowInvalidFieldsAlertDialog()
+        {
+            MessageBox.Show(
+                "Verifique que la información ingresada sea correcta y no existan campos vacíos",
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
 
         private bool UpdatePersonalReference()
@@ -167,6 +264,15 @@ namespace SFIClient.Views
             try
             {
                 updatedPersonalReference = clientsServiceClient.UpdatePersonalReference(newPersonalReference, currentIneKey);
+                if (updatedPersonalReference)
+                {
+                    ShowPersonalReferenceSuccessfulUpdateMessageDialog();
+                    RedirectToSearchClienByRFCView();
+                }
+                else
+                {
+                    ShowExistingPersonalReferenceMessageDialog();
+                }
             }
             catch (FaultException<ServiceFault> fe)
             {
@@ -198,84 +304,149 @@ namespace SFIClient.Views
             );
         }
 
+        private void ShowPersonalReferenceSuccessfulUpdateMessageDialog()
+        {
+            MessageBox.Show(
+                "La información de la referencia personal del cliente " + client.Name + " " + client.Surname + " " + 
+                client.LastName + " ha sido actualizada correctamente",
+                "Actualización existosa",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+        }
+
+        private void ShowExistingPersonalReferenceMessageDialog()
+        {
+            MessageBox.Show(
+                "Verifique que la información ingresada para la clave del elector sea la correcta",
+                "Referencia personal ya registrada para el cliente",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+        }
+
         private void RedirectToSearchClienByRFCView()
         {
             NavigationService.Navigate(new SearchClientByRFCController());
         }
 
-        private void TbSatateTextChanged(object sender, TextChangedEventArgs e)
+        private void ListenAndVerifyEmptyTextFields(object sender)
         {
+            TextBox tbKey = sender as TextBox;
 
-        }
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
 
-        private void TbMunicipalityTextChanged(object sender, TextChangedEventArgs e)
-        {
+            string key = tbKey.Text.Trim();
 
-        }
-
-        private void TbCityTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbPostCodeTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbOutdoorNumberTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbInteriorNumberTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbNeighborhoodTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbStreetTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbIneKeyTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbRelationshipTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbKinshipTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbPhoneNumberTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbLastNameTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TbSurnameTextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            if (key.Length == 0)
+            {
+                tbKey.Style = textInputErrorStyle;
+            }
+            else
+            {
+                tbKey.Style = textInputStyle;
+            }
         }
 
         private void TbNameTextChanged(object sender, TextChangedEventArgs e)
         {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
 
+        private void TbSatateTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbMunicipalityTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbCityTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbPostCodeTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+
+            if (TbPostCode.Text.Trim().Length < 5)
+            {
+                TbPostCode.Style = textInputErrorStyle;
+            }
+            else
+            {
+                TbPostCode.Style = textInputStyle;
+            }
+        }
+
+        private void TbOutdoorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbInteriorNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbNeighborhoodTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbStreetTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbIneKeyTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+
+            if (TbIneKey.Text.Trim().Length < 18)
+            {
+                TbIneKey.Style = textInputErrorStyle;
+            }
+            else
+            {
+                TbIneKey.Style = textInputStyle;
+            }
+        }
+
+        private void TbRelationshipTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbKinshipTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
+        }
+
+        private void TbPhoneNumberTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+
+            if (TbPhoneNumber.Text.Trim().Length < 10)
+            {
+                TbPhoneNumber.Style = textInputErrorStyle;
+            }
+            else
+            {
+                TbPhoneNumber.Style = textInputStyle;
+            }
+        }
+
+        private void TbLastNameTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListenAndVerifyEmptyTextFields(sender);
         }
     }
 }
