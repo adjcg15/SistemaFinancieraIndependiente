@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SFIDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SFIDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="addresses">
           <Key>
             <PropertyRef Name="id_address" />
@@ -707,6 +707,28 @@
           <Parameter Name="NewCardNumber" Type="varchar" Mode="In" />
           <Parameter Name="Success" Type="bit" Mode="InOut" />
         </Function>
+        <Function Name="UpdatePersonalReference" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPersonalReference" Type="int" Mode="In" />
+          <Parameter Name="CurrentIneKey" Type="char" Mode="In" />
+          <Parameter Name="IneKey" Type="char" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Surname" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Kinship" Type="nvarchar" Mode="In" />
+          <Parameter Name="RelationshipYears" Type="int" Mode="In" />
+          <Parameter Name="IdAddress" Type="int" Mode="In" />
+          <Parameter Name="ClientRfc" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="char" Mode="In" />
+          <Parameter Name="Street" Type="nvarchar" Mode="In" />
+          <Parameter Name="Neighborhood" Type="nvarchar" Mode="In" />
+          <Parameter Name="InteriorNumber" Type="varchar" Mode="In" />
+          <Parameter Name="OutdoorNumber" Type="varchar" Mode="In" />
+          <Parameter Name="PostCode" Type="char" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="Municipality" Type="nvarchar" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="Success" Type="bit" Mode="InOut" />
+        </Function>
         <EntityContainer Name="SFIDatabaseModelStoreContainer">
           <EntitySet Name="addresses" EntityType="Self.addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" Schema="dbo" store:Type="Tables" />
@@ -839,8 +861,7 @@
             <End Role="work_centers" EntitySet="work_centers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SFIDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1730,6 +1751,28 @@
             <Parameter Name="NewCardNumber" Mode="In" Type="String" />
             <Parameter Name="Success" Mode="InOut" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="UpdatePersonalReference">
+            <Parameter Name="IdPersonalReference" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentIneKey" Mode="In" Type="String" />
+            <Parameter Name="IneKey" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Kinship" Mode="In" Type="String" />
+            <Parameter Name="RelationshipYears" Mode="In" Type="Int32" />
+            <Parameter Name="IdAddress" Mode="In" Type="Int32" />
+            <Parameter Name="ClientRfc" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="Street" Mode="In" Type="String" />
+            <Parameter Name="Neighborhood" Mode="In" Type="String" />
+            <Parameter Name="InteriorNumber" Mode="In" Type="String" />
+            <Parameter Name="OutdoorNumber" Mode="In" Type="String" />
+            <Parameter Name="PostCode" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="Municipality" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2032,6 +2075,7 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SFIDatabaseModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SFIDatabaseModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UpdateBankAccount" FunctionName="SFIDatabaseModel.Store.UpdateBankAccount" />
+          <FunctionImportMapping FunctionImportName="UpdatePersonalReference" FunctionName="SFIDatabaseModel.Store.UpdatePersonalReference" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

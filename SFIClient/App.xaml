@@ -160,7 +160,7 @@
         </Style>
 
         <!--Basic text inputs with error 2-->
-        <Style x:Key="TextInputError2" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Style x:Key="SecondTextInputError" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="Red"/>
             <Setter Property="FontSize" Value="16"/>

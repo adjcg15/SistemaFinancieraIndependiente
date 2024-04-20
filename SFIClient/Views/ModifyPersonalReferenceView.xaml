@@ -14,7 +14,7 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnDiscardUpdatePersonalReference" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnDiscardUpdatePersonalReferenceClick">
+                    <Button Name="BtnDiscardPersonalReferenceUpdate" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnDiscardPersonalReferenceUpdateClick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -125,7 +125,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbSurname" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbSurnameTextChanged"/>
+                            <TextBox Name="TbSurname" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -150,7 +150,7 @@
                             Número de teléfono <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ingresa el nombre del titular de la tarjeta">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el número de teléfono (10 números)">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -161,7 +161,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbPhoneNumber" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbPhoneNumberTextChanged"/>
+                            <TextBox Name="TbPhoneNumber" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbPhoneNumberTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -179,7 +179,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbKinship" Style="{StaticResource TextInput}" MaxLength="18" TextChanged="TbKinshipTextChanged"/>
+                            <TextBox Name="TbKinship" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbKinshipTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -197,14 +197,14 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbRelationship" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbRelationshipTextChanged"/>
+                            <TextBox Name="TbRelationship" Style="{StaticResource TextInput}" MaxLength="2" TextChanged="TbRelationshipTextChanged"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                             Clave de elector <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ingresa la clave de elector">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa la clave de elector (18 dígitos)">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -215,7 +215,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbIneKey" Style="{StaticResource TextInput}" MaxLength="13" TextChanged="TbIneKeyTextChanged"/>
+                            <TextBox Name="TbIneKey" Style="{StaticResource TextInput}" MaxLength="18" TextChanged="TbIneKeyTextChanged"/>
                         </Grid>
                     </StackPanel>
 
@@ -312,7 +312,7 @@
                             Código postal <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Margin="5,2,5,2" Text="Ingresa el código postal">
+                            <TextBlock Margin="5,2,5,2" Text="Ingresa el código postal (5 números)">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
@@ -385,7 +385,7 @@
 
             <!--Buttons section-->
             <StackPanel Margin="40, 120, 40, 0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnCancelUpdatePersonalReference" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelUpdatePersonalReferenceClick"/>
+                <Button Name="BtnCancelPersonalReferenceUpdate" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelPersonalReferenceUpdateClick"/>
                 <Button Name="BtnUpdatePersonalReference" Style="{StaticResource PrimaryBtn}" Content="Actualizar datos" Click="BtnUpdatePersonalReferenceClick"/>
             </StackPanel>
         </StackPanel>

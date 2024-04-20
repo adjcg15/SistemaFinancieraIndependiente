@@ -577,5 +577,86 @@ namespace SFIDataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateBankAccount", currentCardNumberParameter, newBankParameter, newHolderParameter, newCardNumberParameter, success);
         }
+    
+        public virtual int UpdatePersonalReference(Nullable<int> idPersonalReference, string currentIneKey, string ineKey, string name, string surname, string lastName, string kinship, Nullable<int> relationshipYears, Nullable<int> idAddress, string clientRfc, string phoneNumber, string street, string neighborhood, string interiorNumber, string outdoorNumber, string postCode, string city, string municipality, string state, ObjectParameter success)
+        {
+            var idPersonalReferenceParameter = idPersonalReference.HasValue ?
+                new ObjectParameter("IdPersonalReference", idPersonalReference) :
+                new ObjectParameter("IdPersonalReference", typeof(int));
+    
+            var currentIneKeyParameter = currentIneKey != null ?
+                new ObjectParameter("CurrentIneKey", currentIneKey) :
+                new ObjectParameter("CurrentIneKey", typeof(string));
+    
+            var ineKeyParameter = ineKey != null ?
+                new ObjectParameter("IneKey", ineKey) :
+                new ObjectParameter("IneKey", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var surnameParameter = surname != null ?
+                new ObjectParameter("Surname", surname) :
+                new ObjectParameter("Surname", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var kinshipParameter = kinship != null ?
+                new ObjectParameter("Kinship", kinship) :
+                new ObjectParameter("Kinship", typeof(string));
+    
+            var relationshipYearsParameter = relationshipYears.HasValue ?
+                new ObjectParameter("RelationshipYears", relationshipYears) :
+                new ObjectParameter("RelationshipYears", typeof(int));
+    
+            var idAddressParameter = idAddress.HasValue ?
+                new ObjectParameter("IdAddress", idAddress) :
+                new ObjectParameter("IdAddress", typeof(int));
+    
+            var clientRfcParameter = clientRfc != null ?
+                new ObjectParameter("ClientRfc", clientRfc) :
+                new ObjectParameter("ClientRfc", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
+    
+            var streetParameter = street != null ?
+                new ObjectParameter("Street", street) :
+                new ObjectParameter("Street", typeof(string));
+    
+            var neighborhoodParameter = neighborhood != null ?
+                new ObjectParameter("Neighborhood", neighborhood) :
+                new ObjectParameter("Neighborhood", typeof(string));
+    
+            var interiorNumberParameter = interiorNumber != null ?
+                new ObjectParameter("InteriorNumber", interiorNumber) :
+                new ObjectParameter("InteriorNumber", typeof(string));
+    
+            var outdoorNumberParameter = outdoorNumber != null ?
+                new ObjectParameter("OutdoorNumber", outdoorNumber) :
+                new ObjectParameter("OutdoorNumber", typeof(string));
+    
+            var postCodeParameter = postCode != null ?
+                new ObjectParameter("PostCode", postCode) :
+                new ObjectParameter("PostCode", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var municipalityParameter = municipality != null ?
+                new ObjectParameter("Municipality", municipality) :
+                new ObjectParameter("Municipality", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePersonalReference", idPersonalReferenceParameter, currentIneKeyParameter, ineKeyParameter, nameParameter, surnameParameter, lastNameParameter, kinshipParameter, relationshipYearsParameter, idAddressParameter, clientRfcParameter, phoneNumberParameter, streetParameter, neighborhoodParameter, interiorNumberParameter, outdoorNumberParameter, postCodeParameter, cityParameter, municipalityParameter, stateParameter, success);
+        }
     }
 }

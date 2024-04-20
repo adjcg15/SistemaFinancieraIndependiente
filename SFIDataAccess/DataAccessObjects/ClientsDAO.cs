@@ -7,11 +7,14 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SFIDataAccess.DataAccessObjects
 {
@@ -297,6 +300,142 @@ namespace SFIDataAccess.DataAccessObjects
             catch (DbEntityValidationException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+
+            return success;
+        }
+
+        public static List<PersonalReference> RecoverPersonalReferences(string rfc)
+        {
+            List<PersonalReference> personalReferencesList = new List<PersonalReference>();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var personalReferences = (from personalReference in context.personal_references
+                                              join address in context.addresses
+                                              on personalReference.id_address equals address.id_address
+                                              where personalReference.client_rfc == rfc
+                                              select new
+                                              {
+                                                  personalReference,
+                                                  address
+                                              }).ToList();
+                    if (personalReferences != null)
+                    {
+                        foreach (var item in personalReferences)
+                        {
+                            Address personalReferenceAddress = new Address
+                            {
+                                IdAddress = item.address.id_address,
+                                Street = item.address.street,
+                                Neighborhod = item.address.neighborhod,
+                                InteriorNumber = item.address.inteior_number,
+                                OutdoorNumber = item.address.outdoor_number,
+                                PostCode = item.address.post_code,
+                                Municipality = item.address.municipality,
+                                City = item.address.city,
+                                State = item.address.state,
+                            };
+                            PersonalReference personalReference = new PersonalReference
+                            {
+                                IdPersonalReference = item.personalReference.id_personal_reference,
+                                Name = item.personalReference.name,
+                                Surname = item.personalReference.surname,
+                                LastName = item.personalReference.last_name,
+                                PhoneNumber = item.personalReference.phone_number,
+                                Kinship = item.personalReference.kinship,
+                                RelationshipYears = item.personalReference.relationship_years,
+                                IneKey = item.personalReference.ine_key,
+                                ClientRfc = item.personalReference.client_rfc,
+                                Address = personalReferenceAddress
+                            };
+                            personalReferencesList.Add(personalReference);
+                        }
+                    }
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+
+            return personalReferencesList;
+        }
+
+        public static bool UpdatePersonalReference(PersonalReference personalReference, string currentIneKey)
+        {
+            bool success = false;
+
+            try
+            {
+                using (var dbContext = new SFIDatabaseContext())
+                {
+                    var idPersonalReference = new SqlParameter("@IdPersonalReference", personalReference.IdPersonalReference);
+                    var currentInekey = new SqlParameter("@CurrentIneKey", currentIneKey);
+                    var ineKey = new SqlParameter("@IneKey", personalReference.IneKey);
+                    var name = new SqlParameter("@Name", personalReference.Name);
+                    var surname = new SqlParameter("@Surname", personalReference.Surname);
+                    var lastName = new SqlParameter("@LastName", personalReference.LastName);
+                    var kinship = new SqlParameter("@Kinship", personalReference.Kinship);
+                    var relationshipYears = new SqlParameter("@RelationshipYears", personalReference.RelationshipYears);
+                    var idAddress = new SqlParameter("@IdAddress", personalReference.Address.IdAddress);
+                    var clientRfc = new SqlParameter("@ClientRfc", personalReference.ClientRfc);
+                    var phoneNumber = new SqlParameter("@PhoneNumber", personalReference.PhoneNumber);
+                    var street = new SqlParameter("@Street", personalReference.Address.Street);
+                    var neighborhood = new SqlParameter("@Neighborhood", personalReference.Address.Neighborhod);
+                    var interiorNumber = new SqlParameter("@InteriorNumber", personalReference.Address.InteriorNumber);
+                    var outdoorNumber = new SqlParameter("@OutdoorNumber", personalReference.Address.OutdoorNumber);
+                    var postCode = new SqlParameter("@PostCode", personalReference.Address.PostCode);
+                    var city = new SqlParameter("@City", personalReference.Address.City);
+                    var municipality = new SqlParameter("@Municipality", personalReference.Address.Municipality);
+                    var state = new SqlParameter("@State", personalReference.Address.State);
+
+                    var successParam = new SqlParameter("@Success", SqlDbType.Bit);
+                    successParam.Direction = ParameterDirection.Output;
+
+                    dbContext.Database.ExecuteSqlCommand(
+                        "EXEC UpdatePersonalReference @IdPersonalReference, @CurrentIneKey, @IneKey, @Name, @Surname, @LastName, " +
+                        "@Kinship, @RelationshipYears, @IdAddress, @ClientRfc, @PhoneNumber, @Street, @Neighborhood, @InteriorNumber, " +
+                        "@OutdoorNumber, @PostCode, @City, @Municipality, @State, @Success OUTPUT",
+                        idPersonalReference, currentInekey, ineKey, name, surname, lastName, kinship, relationshipYears, idAddress, clientRfc, 
+                        phoneNumber, street, neighborhood, interiorNumber, outdoorNumber, postCode, city, municipality, state, successParam);
+
+                    success = (bool)successParam.Value;
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
             }
 
             return success;
