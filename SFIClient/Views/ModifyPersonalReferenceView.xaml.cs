@@ -25,12 +25,14 @@ namespace SFIClient.Views
     {
         private readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
         private readonly PersonalReference personalReference;
+        private readonly string currentIneKey;
         private readonly Client client;
         public ModifyPersonalReferenceController(PersonalReference personalReference, Client client)
         {
             InitializeComponent();
             this.personalReference = personalReference;
             this.client = client;
+            currentIneKey = personalReference.IneKey;
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -119,17 +121,52 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                UpdatePersonalReference();
+                if (VerifyPersonalReferenceInformation())
+                {
+                    UpdatePersonalReference();
+                }
             }
+        }
+
+        private bool VerifyPersonalReferenceInformation()
+        {
+            return true;
         }
 
         private bool UpdatePersonalReference()
         {
             bool updatedPersonalReference = false;
 
+            Address newAddress = new Address
+            {
+                IdAddress = personalReference.Address.IdAddress,
+                Street = TbStreet.Text.Trim(),
+                Neighborhod = TbNeighborhood.Text.Trim(),
+                InteriorNumber = TbInteriorNumber.Text.Trim(),
+                OutdoorNumber = TbOutdoorNumber.Text.Trim(),
+                PostCode = TbInteriorNumber.Text.Trim(),
+                Municipality = TbMunicipality.Text.Trim(),
+                City = TbCity.Text.Trim(),
+                State = TbStreet.Text.Trim(),
+            };
+
+            PersonalReference newPersonalReference = new PersonalReference
+            {
+                IdPersonalReference = personalReference.IdPersonalReference,
+                Name = TbName.Text.Trim(),
+                Surname = TbSurname.Text.Trim(),
+                LastName = TbLastName.Text.Trim(),
+                PhoneNumber = TbPhoneNumber.Text.Trim(),
+                Kinship = TbKinship.Text.Trim(),
+                RelationshipYears = TbRelationship.Text.Trim(),
+                IneKey = TbIneKey.Text.Trim(),
+                ClientRfc = client.Rfc,
+                Address = newAddress
+            };
+
             try
             {
-                updatedPersonalReference = true; //TODO
+                updatedPersonalReference = clientsServiceClient.UpdatePersonalReference(newPersonalReference, currentIneKey);
             }
             catch (FaultException<ServiceFault> fe)
             {
@@ -137,13 +174,13 @@ namespace SFIClient.Views
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClienByRFCView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClienByRFCView();
             }

@@ -38,5 +38,10 @@ namespace SFIServices
         {
             return ClientsDAO.RecoverPersonalReferences(rfc);
         }
+
+        public bool UpdatePersonalReference(PersonalReference personalReference, string currenIneKey)
+        {
+            return ClientsDAO.UpdatePersonalReference(personalReference, currenIneKey);
+        }
     }
 }

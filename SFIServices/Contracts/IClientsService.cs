@@ -32,5 +32,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<PersonalReference> RecoverPersonalReferences(string rfc);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool UpdatePersonalReference(PersonalReference personalReference, string currentIneKey);
     }
 }

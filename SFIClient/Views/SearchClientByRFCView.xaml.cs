@@ -219,13 +219,13 @@ namespace SFIClient.Views
                 }
                 catch (EndpointNotFoundException)
                 {
-                    string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                    string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
                     ShowErrorRecoveringPersonalReferences(errorMessage);
                     RedirectToLoginView();
                 }
                 catch (CommunicationException)
                 {
-                    string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                    string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
                     ShowErrorRecoveringPersonalReferences(errorMessage);
                     RedirectToLoginView();
                 }
