@@ -82,6 +82,9 @@
     <Compile Include="Session\SystemSession.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
     <Compile Include="Utilities\Security.cs" />
+    <Compile Include="Views\ClientInformationView.xaml.cs">
+      <DependentUpon>ClientInformationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClientRegisterView.xaml.cs">
       <DependentUpon>ClientRegisterView.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ClientInformationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ClientRegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
