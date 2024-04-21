@@ -485,13 +485,6 @@ namespace SFIDataAccess.DataAccessObjects
                     var personalReferenceAddresses = (from address in context.addresses
                                                       where addressIds.Contains(address.id_address)
                                                       select address).ToList();
-                    /*var personalReferencesInformation = (from personalReference in context.personal_references
-                                                         where personalReference.client_rfc == clientRfc
-                                                         select personalReference).ToList();
-                    var personalReferenceAddresses = (from address in context.addresses
-                                                      where address.id_address == personalReferencesInformation[0].id_address ||
-                                                      address.id_address == personalReferencesInformation[1].id_address
-                                                      select address).ToList();*/
                     Address addressWorkCenter = new Address
                     {
                         Street = workCenterAddress.street,

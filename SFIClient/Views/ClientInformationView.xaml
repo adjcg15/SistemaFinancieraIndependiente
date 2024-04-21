@@ -224,7 +224,7 @@
                             <TextBlock Name="TbkSalary" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Salario neto"/>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Antigüedad en la empresa"/>
                         <Grid Margin="0, 0, 0, 24">
                             <TextBlock Name="TbkEmployeeSeniority" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
                         </Grid>
@@ -234,7 +234,7 @@
                             <TextBlock Name="TbkWorkCenterPhoneNumber" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Teléfono de contacto de la empresa"/>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Teléfono de contacto de Recursos Humanos"/>
                         <Grid Margin="0, 0, 0, 24">
                             <TextBlock Name="TbkHumanResourcesPhoneNumber" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
                         </Grid>
@@ -277,7 +277,7 @@
                             <TextBlock Name="TbkFirstPersonalReferenceKinship" TextWrapping="Wrap" Margin="0,0,0,0" Text="AULR031119CH05" FontSize="32"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Tiempo de conocimiento en años"/>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Tiempo de conocer al cliente"/>
                         <Grid Margin="0, 0, 0, 24">
                             <TextBlock Name="TbkFirstPersonalReferenceRelationship" TextWrapping="Wrap" Margin="0,0,0,0" Text="AULR031119HVZGPDA5" FontSize="32"/>
                         </Grid>
@@ -325,7 +325,7 @@
                             <TextBlock Name="TbkSecondPersonalReferenceKinship" TextWrapping="Wrap" Margin="0,0,0,0" Text="AULR031119CH05" FontSize="32"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Tiempo de conocimiento en años"/>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Tiempo de conocer al cliente"/>
                         <Grid Margin="0, 0, 0, 24">
                             <TextBlock Name="TbkSecondPersonalReferenceRelationship" TextWrapping="Wrap" Margin="0,0,0,0" Text="AULR031119HVZGPDA5" FontSize="32"/>
                         </Grid>
