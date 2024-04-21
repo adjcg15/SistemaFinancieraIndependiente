@@ -268,7 +268,7 @@ namespace SFIClient.Views
                 if (updatedPersonalReference)
                 {
                     ShowPersonalReferenceSuccessfulUpdateMessageDialog();
-                    RedirectToSearchClienByRFCView();
+                    RedirectToSearchClientByRFCView();
                 }
                 else
                 {
@@ -283,13 +283,13 @@ namespace SFIClient.Views
             {
                 string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
-                RedirectToSearchClienByRFCView();
+                RedirectToSearchClientByRFCView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
-                RedirectToSearchClienByRFCView();
+                RedirectToSearchClientByRFCView();
             }
 
             return updatedPersonalReference;
@@ -327,11 +327,6 @@ namespace SFIClient.Views
                 MessageBoxImage.Warning
             );
             TbIneKey.Style = textInputErrorStyle;
-        }
-
-        private void RedirectToSearchClienByRFCView()
-        {
-            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private void ListenAndVerifyEmptyTextFields(object sender)

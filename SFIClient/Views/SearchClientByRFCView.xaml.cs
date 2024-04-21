@@ -163,6 +163,19 @@ namespace SFIClient.Views
         private void BtnSeePersonalInformationClick(object sender, EventArgs e)
         {
             ClientControll clientControll = (ClientControll)sender;
+            Client client = new Client();
+            for (int i = 0; i < clientsList.Count; i++)
+            {
+                if (clientsList[i].Rfc == clientControll.LblClientRFC.Content.ToString())
+                {
+                    client = clientsList[i];
+                    break;
+                }
+            }
+            if (client != null)
+            {
+                this.NavigationService.Navigate(new ClientInformationController(client));
+            }
         }
 
         private void BtnModifyBankAccountClick(object sender, EventArgs e)
