@@ -98,6 +98,9 @@
     </Compile>
     <Compile Include="Utilities\FileToolkit.cs" />
     <Compile Include="Utilities\DataValidator.cs" />
+    <Compile Include="Views\CreditAuthorizationDictumView.xaml.cs">
+      <DependentUpon>CreditAuthorizationDictumView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditGrantingPolicyListView.xaml.cs">
       <DependentUpon>CreditGrantingPolicyListView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreditApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreditAuthorizationDictumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,6 +344,9 @@
     <Resource Include="Assets\PersonalReferencesIcon.png" />
     <Resource Include="Assets\Plus3Icon.png" />
     <Resource Include="Assets\WorkCenterIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\DownloadIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
