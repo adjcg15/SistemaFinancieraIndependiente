@@ -214,4 +214,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RecoverClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientRfc" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientResult" nillable="true" type="q17:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

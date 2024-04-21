@@ -440,5 +440,205 @@ namespace SFIDataAccess.DataAccessObjects
 
             return success;
         }
+
+        public static Client RecoverClient(string clientRfc)
+        {
+            Client fullClient = null;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var clientInformation = (from client in context.clients
+                                             where client.rfc == clientRfc
+                                             select client).FirstOrDefault();
+                    var clientAddress = (from address in context.addresses
+                                         where address.id_address == clientInformation.id_address
+                                         select address).FirstOrDefault();
+                    var phoneNumberType = (from contactMethodType in  context.contact_method_types
+                                           where contactMethodType.name == "PhoneNumber"
+                                           select contactMethodType.id_contact_method_type).FirstOrDefault();
+                    var clientPhoneNumbers = (from contactMethod in context.contact_methods
+                                              where contactMethod.client_rfc == clientRfc && 
+                                              contactMethod.id_contact_method_type == phoneNumberType
+                                              select contactMethod).ToList();
+                    var emailType = (from contactMethodType in context.contact_method_types
+                                     where contactMethodType.name == "Email"
+                                     select contactMethodType.id_contact_method_type).FirstOrDefault();
+                    var clientEmails = (from contactMethod in context.contact_methods
+                                       where contactMethod.client_rfc == clientRfc &&
+                                       contactMethod.id_contact_method_type == emailType
+                                       select contactMethod).ToList();
+                    var bankAccountInformation = (from bankAccount in context.bank_accounts 
+                                                  where bankAccount.card_number == clientInformation.card_number
+                                                  select bankAccount).FirstOrDefault();
+                    var workCenterInformation = (from workCenter in context.work_centers
+                                                 where workCenter.id_work_center == clientInformation.id_work_center
+                                                 select workCenter).FirstOrDefault();
+                    var workCenterAddress = (from address in context.addresses
+                                             where address.id_address == workCenterInformation.id_address
+                                             select address).FirstOrDefault();
+                    var personalReferencesInformation = (from personalReference in context.personal_references
+                                                         where personalReference.client_rfc == clientRfc
+                                                         select personalReference).ToList();
+                    var addressIds = personalReferencesInformation.Select(pr => pr.id_address).ToList();
+                    var personalReferenceAddresses = (from address in context.addresses
+                                                      where addressIds.Contains(address.id_address)
+                                                      select address).ToList();
+                    /*var personalReferencesInformation = (from personalReference in context.personal_references
+                                                         where personalReference.client_rfc == clientRfc
+                                                         select personalReference).ToList();
+                    var personalReferenceAddresses = (from address in context.addresses
+                                                      where address.id_address == personalReferencesInformation[0].id_address ||
+                                                      address.id_address == personalReferencesInformation[1].id_address
+                                                      select address).ToList();*/
+                    Address addressWorkCenter = new Address
+                    {
+                        Street = workCenterAddress.street,
+                        City = workCenterAddress.city,
+                        Neighborhod = workCenterAddress.neighborhod,
+                        Municipality = workCenterAddress.municipality,
+                        InteriorNumber = workCenterAddress.inteior_number,
+                        OutdoorNumber = workCenterAddress.outdoor_number,
+                        PostCode = workCenterAddress.post_code,
+                        State = workCenterAddress.state
+                    };
+                    Address addresspersonalReferenceFirst = new Address
+                    {
+                        Street = personalReferenceAddresses[0].street,
+                        City = personalReferenceAddresses[0].city,
+                        Neighborhod = personalReferenceAddresses[0].neighborhod,
+                        Municipality = personalReferenceAddresses[0].municipality,
+                        InteriorNumber = personalReferenceAddresses[0].inteior_number,
+                        OutdoorNumber = personalReferenceAddresses[0].outdoor_number,
+                        PostCode = personalReferenceAddresses[0].post_code,
+                        State = personalReferenceAddresses[0].state
+                    };
+                    PersonalReference personalReferenceClientFirst = new PersonalReference
+                    {
+                        Name = personalReferencesInformation[0].name,
+                        Surname = personalReferencesInformation[0].surname,
+                        LastName = personalReferencesInformation[0].last_name,
+                        PhoneNumber = personalReferencesInformation[0].phone_number,
+                        Kinship = personalReferencesInformation[0].kinship,
+                        RelationshipYears = personalReferencesInformation[0].relationship_years,
+                        IneKey = personalReferencesInformation[0].ine_key,
+                        Address = addresspersonalReferenceFirst
+                    };
+                    Address addresspersonalReferenceSecond = new Address
+                    {
+                        Street = personalReferenceAddresses[1].street,
+                        City = personalReferenceAddresses[1].city,
+                        Neighborhod = personalReferenceAddresses[1].neighborhod,
+                        Municipality = personalReferenceAddresses[1].municipality,
+                        InteriorNumber = personalReferenceAddresses[1].inteior_number,
+                        OutdoorNumber = personalReferenceAddresses[1].outdoor_number,
+                        PostCode = personalReferenceAddresses[1].post_code,
+                        State = personalReferenceAddresses[1].state
+                    };
+                    PersonalReference personalReferenceClientSecond = new PersonalReference
+                    {
+                        Name = personalReferencesInformation[1].name,
+                        Surname = personalReferencesInformation[1].surname,
+                        LastName = personalReferencesInformation[1].last_name,
+                        PhoneNumber = personalReferencesInformation[1].phone_number,
+                        Kinship = personalReferencesInformation[1].kinship,
+                        RelationshipYears = personalReferencesInformation[1].relationship_years,
+                        IneKey = personalReferencesInformation[1].ine_key,
+                        Address = addresspersonalReferenceSecond
+                    };
+                    BankAccount clientBankAccount = new BankAccount
+                    {
+                        CardNumber = bankAccountInformation.card_number,
+                        Bank = bankAccountInformation.bank,
+                        Holder = bankAccountInformation.holder
+                    };
+
+                    Address addressClient = new Address
+                    {
+                        Street = clientAddress.street,
+                        City = clientAddress.city,
+                        Neighborhod = clientAddress.neighborhod,
+                        Municipality = clientAddress.municipality,
+                        InteriorNumber = clientAddress.inteior_number,
+                        OutdoorNumber = clientAddress.outdoor_number,
+                        PostCode = clientAddress.post_code,
+                        State = clientAddress.state
+                    };
+
+                    WorkCenter clientWorkCenter = new WorkCenter
+                    {
+                        CompanyName = workCenterInformation.company_name,
+                        PhoneNumber = workCenterInformation.phone_number,
+                        EmployeePosition = workCenterInformation.employee_position,
+                        Salary = workCenterInformation.salary,
+                        EmployeeSeniority = workCenterInformation.employee_seniority,
+                        HumanResourcesPhone = workCenterInformation.human_resources_phone,
+                        Address = addressWorkCenter
+                    };
+
+                    List<ContacMethod> contactMethods = new List<ContacMethod>();
+                    foreach (var phoneNumber in clientPhoneNumbers)
+                    {
+                        ContacMethod contactMethod = new ContacMethod
+                        {
+                            Value = phoneNumber.value,
+                            MethodType = "PhoneNumber"
+                        };
+                        contactMethods.Add(contactMethod);
+                    }
+                    foreach (var email in clientEmails)
+                    {
+                        ContacMethod contactMethod = new ContacMethod
+                        {
+                            Value = email.value,
+                            MethodType = "Email"
+                        };
+                        contactMethods.Add(contactMethod);
+                    }
+
+                    List<PersonalReference> personalReferences = new List<PersonalReference>
+                    {
+                        personalReferenceClientFirst,
+                        personalReferenceClientSecond
+                    };
+
+                    fullClient = new Client
+                    {
+                        Rfc = clientInformation.rfc,
+                        Curp = clientInformation.curp,
+                        Birthdate = clientInformation.birthdate,
+                        Name = clientInformation.name,
+                        LastName = clientInformation.last_name,
+                        Surname = clientInformation.surname,
+                        BankAccount = clientBankAccount,
+                        Address = addressClient,
+                        WorkCenter = clientWorkCenter,
+                        ContacMethods = contactMethods,
+                        PersonalReferences = personalReferences
+                    };
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
+                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+            }
+
+            return fullClient;
+        }
     }
 }

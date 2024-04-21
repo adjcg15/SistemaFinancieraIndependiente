@@ -21,6 +21,7 @@ namespace SFIClient.Views
     /// </summary>
     public partial class ClientInformationController : Page
     {
+        private readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
         private readonly Client client;
         public ClientInformationController(Client client)
         {
@@ -30,12 +31,12 @@ namespace SFIClient.Views
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            
+            LoadClient();
         }
 
         private void LoadClient()
         {
-
+            clientsServiceClient.RecoverClient(client.Rfc);
         }
 
         private void BtnGoToSearchClientByRFCViewClick(object sender, RoutedEventArgs e)

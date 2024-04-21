@@ -2364,6 +2364,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdatePersonalReference", ReplyAction="http://tempuri.org/IClientsService/UpdatePersonalReferenceResponse")]
         System.Threading.Tasks.Task<bool> UpdatePersonalReferenceAsync(SFIClient.SFIServices.PersonalReference personalReference, string currentIneKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverClient", ReplyAction="http://tempuri.org/IClientsService/RecoverClientResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/RecoverClientServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Client RecoverClient(string clientRfc);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverClient", ReplyAction="http://tempuri.org/IClientsService/RecoverClientResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Client> RecoverClientAsync(string clientRfc);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2439,6 +2446,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> UpdatePersonalReferenceAsync(SFIClient.SFIServices.PersonalReference personalReference, string currentIneKey) {
             return base.Channel.UpdatePersonalReferenceAsync(personalReference, currentIneKey);
+        }
+        
+        public SFIClient.SFIServices.Client RecoverClient(string clientRfc) {
+            return base.Channel.RecoverClient(clientRfc);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> RecoverClientAsync(string clientRfc) {
+            return base.Channel.RecoverClientAsync(clientRfc);
         }
     }
 }
