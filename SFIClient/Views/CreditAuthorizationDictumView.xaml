@@ -14,7 +14,7 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnGoToSearchClientByRFCView" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnGoToSearchClientByRFCViewClick">
+                    <Button Name="BtnDiscardDictumGenerationClick" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -272,27 +272,23 @@
                         <Grid Margin="0, 0, 0, 24">
                             <Button 
                             x:Name="BtnDownloadProofOfIncome"
-                            Click="BtnDownloadProofOfIncomeClick"
                             Content="copia_ine_amlo.pdf " 
                             Style="{StaticResource FileDownloader}"/>
                             <Button 
                             Visibility="Hidden" 
                             Content="archivo_ine.pdf" 
                             Style="{StaticResource FilePresenter}"
-                            x:Name="BtnDetachIne"
-                            Click="BtnDetachIneClick"/>
+                            x:Name="BtnDetachIne"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Comprobante de domicilio"/>
                         <Grid Margin="0, 0, 0, 24">
                             <Button 
                             x:Name="BtnDownloadProofOfAddress"
-                            Click="BtnDownloadProofOfAddressClick"
                             Content="copia_domicilio_amlo.pdf" 
                             Style="{StaticResource FileDownloader}"/>
                             <Button 
                             x:Name="BtnDetachProofOfAddress"
-                            Click="BtnDetachProofOfAddressClick"
                             Visibility="Hidden" 
                             Content="archivo_ine.pdf" 
                             Style="{StaticResource FilePresenter}"/>
@@ -302,12 +298,10 @@
                         <Grid>
                             <Button 
                             x:Name="BtnDownloadINE"
-                            Click="BtnDownloadINEClick"
                             Content="copia_ingresos_amlo.pdf" 
                             Style="{StaticResource FileDownloader}"/>
                             <Button 
                             x:Name="BtnDetachProofOfIncome"
-                            Click="BtnDetachProofOfIncomeClick"
                             Visibility="Hidden" 
                             Content="archivo_ine.pdf" 
                             Style="{StaticResource FilePresenter}"/>
