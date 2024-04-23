@@ -24,5 +24,10 @@ namespace SFIClient.Views
         {
             InitializeComponent();
         }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
