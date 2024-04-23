@@ -64,6 +64,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\ApplicationsListCreditApplicationControl.xaml.cs">
+      <DependentUpon>ApplicationsListCreditApplicationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\ClientControll.xaml.cs">
       <DependentUpon>ClientControll.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,9 @@
     </Compile>
     <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
       <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreditApplicationsListView.xaml.cs">
+      <DependentUpon>CreditApplicationsListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
@@ -128,6 +134,10 @@
     <Compile Include="Views\SearchClientByRFCView.xaml.cs">
       <DependentUpon>SearchClientByRFCView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\ApplicationsListCreditApplicationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlls\ClientControll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ConsultConditionsCreditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreditApplicationsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
