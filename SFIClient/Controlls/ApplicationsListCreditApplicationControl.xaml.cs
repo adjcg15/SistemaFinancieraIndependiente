@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SFIClient.Views
+namespace SFIClient.Controlls
 {
-    public partial class CreditApplicationsListController : Page
+    public partial class ApplicationsListCreditApplicationControl : UserControl
     {
-        public CreditApplicationsListController()
+        public ApplicationsListCreditApplicationControl()
         {
             InitializeComponent();
         }
 
-        private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnSearchCreditApplicationsClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
+        private void BtnGenerateDictumClick(object sender, RoutedEventArgs e)
         {
 
         }

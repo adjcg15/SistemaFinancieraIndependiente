@@ -3,8 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:local="clr-namespace:SFIClient.Views"
-    mc:Ignorable="d" 
+    xmlns:local="clr-namespace:SFIClient.Views" 
+    xmlns:controlls="clr-namespace:SFIClient.Controlls"
+    mc:Ignorable="d"
     d:Width="1280" d:Height="2000"
     Title="Solicitudes de crédito de clientes">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -128,7 +129,7 @@
 
                     <!--Credit applications list-->
                     <Grid>
-                        <StackPanel x:Name="SkpEmptyCreditsListMessage" Visibility="Collapsed" Margin="0 64">
+                        <StackPanel x:Name="SkpEmptyCreditApplicationsListMessage" Visibility="Collapsed" Margin="0 64">
                             <Image Width="120" Height="120" Source="/Assets/EmptyItemsListicon.png"/>
                             <TextBlock 
                                 Text="Aún no hay solicitudes de crédito registradas"
@@ -141,6 +142,11 @@
                                 MaxWidth="300"/>
                         </StackPanel>
                         <StackPanel x:Name="SkpCreditApplicationsList">
+                            <controlls:ApplicationsListCreditApplicationControl/>
+                            <controlls:ApplicationsListCreditApplicationControl/>
+                            <controlls:ApplicationsListCreditApplicationControl/>
+                            <controlls:ApplicationsListCreditApplicationControl/>
+                            <controlls:ApplicationsListCreditApplicationControl/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
