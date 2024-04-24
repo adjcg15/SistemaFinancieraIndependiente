@@ -191,11 +191,12 @@ namespace SFIDataAccess.DataAccessObjects
                     var identifierParam = new SqlParameter("@Identifier", updateCreditCondition.Identifier);
                     var resultParam = new SqlParameter("@Result", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
-                    context.Database.ExecuteSqlCommand("" +
-                        "InsertCreditConditionProcedure @InterestRate, @IsActive, @IsIvaApplied, @InterestOnArrears, " +
-                        "@AdvancePaymentReduction, @PaymentMonths, @CreditTypeId, @Identifier, @Result OUTPUT",
-                                     interestRateParam, isActiveParam, isIvaAppliedParam, interestOnArrearsParam,
-                                     advancePaymentReductionParam, paymentMonthsParam, creditTypeIdParam, identifierParam, resultParam);
+                    context.Database.ExecuteSqlCommand(
+                        "UpdateCreditCondition @identifier, @IsActive, @IsIvaApplied, @paymentMonths, " +
+                        "@interestRate, @interestOnArrears, @advancePaymentReduction, @creditTypeId, @result OUTPUT",
+                                    identifierParam, isActiveParam, isIvaAppliedParam, paymentMonthsParam,
+                                    interestRateParam, interestOnArrearsParam, advancePaymentReductionParam, creditTypeIdParam, resultParam);
+
 
                     int result = (int)resultParam.Value;
                     return result == 1;
@@ -216,37 +217,3 @@ namespace SFIDataAccess.DataAccessObjects
         }
     }
 }
-public static bool UpdateBankAccount(BankAccount bankAccount, string cardNumber)
-{
-    bool success;
-    try
-    {
-        using (var dbContext = new SFIDatabaseContext())
-        {
-            var currentCardNumberParam = new SqlParameter("@CurrentCardNumber", cardNumber);
-            var newBankParam = new SqlParameter("@NewBank", bankAccount.Bank);
-            var newHolderParam = new SqlParameter("@NewHolder", bankAccount.Holder);
-            var newCardNumberParam = new SqlParameter("@NewCardNumber", bankAccount.CardNumber);
-
-            var successParam = new SqlParameter("@Success", SqlDbType.Bit);
-            successParam.Direction = ParameterDirection.Output;
-
-            dbContext.Database.ExecuteSqlCommand(
-                "EXEC UpdateBankAccount @CurrentCardNumber, @NewBank, @NewHolder, @NewCardNumber, @Success OUTPUT",
-                currentCardNumberParam, newBankParam, newHolderParam, newCardNumberParam, successParam);
-
-            success = (bool)successParam.Value;
-        }
-    }
-    catch (System.Data.Entity.Core.EntityException)
-    {
-        throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-    }
-    catch (DbUpdateException)
-    {
-        throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-    }
-    catch (DbEntityValidationException)
-    {
-        throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-    }

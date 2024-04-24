@@ -60,12 +60,12 @@ namespace SFIClient.Views
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToMainMenu();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToMainMenu();
             }
         }
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -287,29 +287,27 @@ namespace SFIClient.Views
         private void ShowSaveChangesConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                $"¿Desea registrar la condición de crédito {newCondition.Identifier}?",
+                $"¿Desea actualizar la información de la condición de crédito {newCondition.Identifier}?",
                 "Confirme el registro de la solicitud",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
             );
-
             if (buttonClicked == MessageBoxResult.Yes)
             {
                 UpdateCreditConditionInformation();
             }
-
         }
         private void UpdateCreditConditionInformation()
         {
             CreditConditionsServiceClient creditConditiionClient = new CreditConditionsServiceClient();
             try
             {
-                bool isRegistered = creditConditiionClient.RegisterCreditCondition(newCondition);
+                bool isRegistered = creditConditiionClient.UpdateCreditCondition(newCondition);
                 if (isRegistered)
                 {
-                    MessageBox.Show($"La política de otorgamiento de crédito " +
+                    MessageBox.Show($"La condición de crédito " +
                         $"{newCondition.Identifier} se ha actualizado correctamente.",
-                                    "Registro exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    "Actualización exitosa", MessageBoxButton.OK, MessageBoxImage.Information);
                     RedirectToMainMenu();
                 }
             }

@@ -24,5 +24,8 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         CreditCondition RecoverCreditConditionDetails(string identifier);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool UpdateCreditCondition(CreditCondition updateCreditCondition);
     }
 }
