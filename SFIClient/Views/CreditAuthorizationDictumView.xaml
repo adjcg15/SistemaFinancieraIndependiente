@@ -3,9 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controlls="clr-namespace:SFIClient.Controlls"
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
-      d:Height="3550" d:Width="1280"
+      d:Height="3750" d:Width="1280"
       Title="CreditAuthorizationDictumView"
       Loaded="PageLoaded">
 
@@ -48,6 +49,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -330,10 +333,97 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Grid.Row="15"
-                        Margin="0, 24, 0, 24" Padding="0, 0, 0, 8"
+                        Margin="0, 24, 0, 50" Padding="0, 0, 0, 8"
                         BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
                     </Border>
+
+                    <!--Nineth Row-->
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="16"
+                        Style="{StaticResource Title}" 
+                        Text="Dictaminación"/>
+
+                    <!--Tenth Row-->
+                    <Border
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="17"
+                        Margin="0, 0, 0, 25" Padding="0, 0, 0, 8"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    </Border>
+
+                    <StackPanel Grid.Column="0" Grid.Row="18">
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Grid.Column="0"
+                            Grid.Row="18"
+                            Text="Aprobación del crédito" 
+                            Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}" Margin="0, 0, 10, 0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="18">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 8, 0, 8">
+                            Estatus <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton Grid.Column="0" x:Name="RbRejectApplication" Style="{StaticResource RadioButtonStyle}" Content="Rechazar"/>
+                            <RadioButton Grid.Column="1" x:Name="RbApproveApplication" Style="{StaticResource RadioButtonStyle}" Content="Aprobar"/>
+                        </Grid>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8">
+                            Políticas de otorgamiento de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <StackPanel Name="SkpCreditGrantingPolices">
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                            <controlls:CreditAuthorizationDictumPolicyControl/>
+                        </StackPanel>
+                        
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8">
+                            Dictamen <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Margin="5,2" Text="Descripción detallada de por qué se aprobó o rechazó el crédito al cliente" TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TbCreditPurpose}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox 
+                                Name="TbCreditPurpose" 
+                                Style="{StaticResource TextInput}"
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                VerticalScrollBarVisibility="Auto"
+                                Height="160"
+                                MaxLength="300"
+                            />
+                        </Grid>
+                    </StackPanel>
                 </Grid>
+            </StackPanel>
+
+            <!--Buttons section-->
+            <StackPanel Margin="40, 100, 40, 100" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="BtnCancelDictumGenerationClick" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
+                <Button Name="BtnGenerateDictumClick" Style="{StaticResource PrimaryBtn}" Content="Generar dictamen"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

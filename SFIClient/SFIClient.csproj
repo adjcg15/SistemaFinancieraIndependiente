@@ -73,6 +73,9 @@
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditAuthorizationDictumPolicyControl.xaml.cs">
+      <DependentUpon>CreditAuthorizationDictumPolicyControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\CreditConditionControl.xaml.cs">
       <DependentUpon>CreditConditionControl.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\CreditAuthorizationDictumPolicyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
