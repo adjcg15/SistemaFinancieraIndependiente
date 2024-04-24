@@ -103,8 +103,80 @@ namespace SFIDataAccess.DataAccessObjects
                     new FaultReason("Error")
                 );
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
 
             return allCredits;
+        }
+
+        public static List<CreditApplication> GetAllCreditApplications()
+        {
+            List<CreditApplication> allCreditApplications = new List<CreditApplication>();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    context.credit_applications
+                        .OrderByDescending(creditApplication => creditApplication.expedition_date)
+                        .ToList()
+                        .ForEach(storedCreditApplication => {
+                            CreditType creditType = new CreditType
+                            {
+                                Identifier = storedCreditApplication.credit_types.id_credit_type,
+                                Name = storedCreditApplication.credit_types.name
+                            };
+
+                            dictum storedDictum = context.dictums
+                                .Where(dictum => dictum.credit_application_invoice == storedCreditApplication.invoice)
+                                .FirstOrDefault();
+
+                            Dictum associatedDictum = null;
+                            if (storedDictum != null)
+                            {
+                                associatedDictum = new Dictum
+                                {
+                                    GenerationDate = storedDictum.generation_date,
+                                    IsApproved = storedDictum.is_approved
+                                };
+                            }
+
+                            CreditApplication creditApplication = new CreditApplication
+                            {
+                                Invoice = storedCreditApplication.invoice,
+                                ExpeditionDate = storedCreditApplication.expedition_date,
+                                RequestedAmount = storedCreditApplication.requested_amount,
+                                CreditType = creditType,
+                                Dictum = associatedDictum
+                            };
+
+                            allCreditApplications.Add(creditApplication);
+                        });
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar las solicitudes " +
+                        "de crédito de los clientes, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar las solicitudes " +
+                        "de crédito de los clientes, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return allCreditApplications;
         }
 
         public static void RegisterCreditApplication(CreditApplication applicationInformation)

@@ -23,5 +23,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         void RegisterCreditApplication(CreditApplication newApplication);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        List<CreditApplication> GetAllCreditApplications();
     }
 }

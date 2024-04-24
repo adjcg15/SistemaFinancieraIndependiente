@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using SFIClient.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +19,72 @@ namespace SFIClient.Controlls
 {
     public partial class ApplicationsListCreditApplicationControl : UserControl
     {
-        public ApplicationsListCreditApplicationControl()
+        public CreditApplication BindedCreditApplication { get; }
+        public event EventHandler<CreditApplication> WriteDictumClick;
+
+        public ApplicationsListCreditApplicationControl(CreditApplication creditApplication)
         {
             InitializeComponent();
+            BindedCreditApplication = creditApplication;
+
+            ShowCreditApplicationInformation();
+            if(creditApplication.Dictum != null)
+            {
+                ShowCreditApplicationDictumInformation();
+            }
+        }
+
+        private void ShowCreditApplicationInformation()
+        {
+            SpnExpeditionDate.Inlines.Clear();
+            SpnExpeditionDate.Inlines.Add(
+                new Run(DateToolkit.FormatAsDateWithHour(BindedCreditApplication.ExpeditionDate))
+            );
+
+            SpnRequestedAmount.Inlines.Clear();
+            SpnRequestedAmount.Inlines.Add(
+                new Run(BindedCreditApplication.RequestedAmount.ToString("C", new System.Globalization.CultureInfo("es-MX")))
+            );
+
+            TbkInvoice.Text = BindedCreditApplication.Invoice;
+
+            SpnCreditType.Inlines.Clear();
+            if(BindedCreditApplication.CreditType != null)
+            {
+                SpnCreditType.Inlines.Add(
+                    new Run(BindedCreditApplication.CreditType.Name)
+                );
+            }
+        }
+
+        private void ShowCreditApplicationDictumInformation()
+        {
+            BtnGenerateDictum.Visibility = Visibility.Collapsed;
+
+            Dictum dictum = BindedCreditApplication.Dictum;
+            SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+            SolidColorBrush gray = (SolidColorBrush)Application.Current.Resources["Gray"];
+            if (dictum.IsApproved)
+            {
+                TbkApprovalDate.Text = "Solicitud aprobada el " 
+                    + DateToolkit.FormatAsDateWithHour(dictum.GenerationDate);
+                BdrDecorator.BorderBrush = primaryColor;
+                BdrDecorator.Background = primaryColor;
+            } else
+            {
+                TbkApprovalDate.Text = "Rechazada el "
+                    + DateToolkit.FormatAsDateWithHour(dictum.GenerationDate);
+                BdrDecorator.BorderBrush = gray;
+                BdrDecorator.Background = gray;
+            }
         }
 
         private void BtnGenerateDictumClick(object sender, RoutedEventArgs e)
         {
-
+            if (BindedCreditApplication.Dictum == null)
+            {
+                WriteDictumClick?.Invoke(this, BindedCreditApplication);
+            }
         }
     }
 }

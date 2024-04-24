@@ -17,5 +17,10 @@ namespace SFIClient.Utilities
         {
             return date.ToString("d 'de' MMMM 'de' yyyy");
         }
+
+        public static string FormatAsDateWithHour(DateTime date)
+        {
+            return date.ToString("d 'de' MMMM 'del' yyyy 'a las' HH':'mm");
+        }
     }
 }
