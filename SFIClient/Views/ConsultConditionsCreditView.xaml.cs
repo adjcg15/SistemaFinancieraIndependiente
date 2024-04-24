@@ -28,6 +28,7 @@ namespace SFIClient.Views
         public ConsultConditionsCreditView()
         {
             InitializeComponent();
+            InitializeEventHandlers();
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
@@ -76,6 +77,7 @@ namespace SFIClient.Views
         private void ShowCreditCondition(CreditCondition creditCondition)
         {
             CreditConditionControl creditConditionControl = new CreditConditionControl();
+            creditConditionControl.ButtonEditCreditCondition += BtnEditCreditConditionClick;
             creditConditionControl.LblCreditConditionName.Content = creditCondition.Identifier;
             creditConditionControl.LblIsActive.Content = creditCondition.IsActive ? "Activa" : "Inactiva";
             creditConditionControl.LblApplyIVA.Content = creditCondition.IsIvaApplied ? "Aplica IVA" : "No aplica IVA";
@@ -85,6 +87,18 @@ namespace SFIClient.Views
             creditConditionControl.LblAdvancePaymentReduction.Content = creditCondition.AdvancePaymentReduction;
             creditConditionControl.DataContext = creditCondition;
             ItcCreditCondition.Items.Add(creditConditionControl);
+        }
+        private void BtnEditCreditConditionClick(object sender, EventArgs e)
+        {
+            CreditConditionControl creditConditionControl = (CreditConditionControl)sender;
+            CreditCondition creditCondition = creditConditionControl.DataContext as CreditCondition;
+
+            if (creditCondition != null)
+            {
+                RegisterCreditConditionView registerCreditConditionView = new RegisterCreditConditionView();
+                registerCreditConditionView.IsEditMode = true;
+                this.NavigationService.Navigate(registerCreditConditionView);
+            }
         }
         private void BtnNewCreditConditionClick(object sender, RoutedEventArgs e)
         {
@@ -100,6 +114,10 @@ namespace SFIClient.Views
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MainMenuController());
+        }
+        private void InitializeEventHandlers()
+        {
+            CreditConditionControl creditConditionControl = new CreditConditionControl();
         }
     }
 }

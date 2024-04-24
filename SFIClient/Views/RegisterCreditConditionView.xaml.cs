@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,15 +24,24 @@ namespace SFIClient.Views
     {
         private bool isLostFocusHandled = false;
         private readonly CreditCondition newCondition = new CreditCondition();
+        public bool IsEditMode { get; set; }
         public RegisterCreditConditionView()
         {
             InitializeComponent();
-            InitializeEventHandlers();
-            ApplyNumericRestrictions();
+            
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
             LoadCreditTypes();
+            InitializeEventHandlers();
+            ApplyNumericRestrictions();
+
+            if (IsEditMode)
+            {
+                BtnSaveCreditCondition.Content = "Guardar cambios";
+                BtnCancelRegisterOfCreditCondition.Content = "Cancelar";
+                TbCreditConditionName.IsEnabled = false;
+            }
         }
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -44,6 +54,7 @@ namespace SFIClient.Views
         private void InitializeEventHandlers()
         {
             TbCreditConditionName.LostFocus += TbCreditConditionNameLostFocus;
+            CreditConditionControl creditConditionControl = new CreditConditionControl();
         }
         private bool VerifyCreditConditionInformationFields()
         {
@@ -393,4 +404,5 @@ namespace SFIClient.Views
             return regex.IsMatch(name);
         }
     }
+
 }
