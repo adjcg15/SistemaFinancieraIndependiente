@@ -10,7 +10,7 @@
       Title="CreditAuthorizationDictumView"
       Loaded="PageLoaded">
 
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer Name="scvCreditAuthorizationDictumComponents" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
@@ -274,40 +274,25 @@
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 8, 0, 8" Text="INE"/>
                         <Grid Margin="0, 0, 0, 24">
                             <Button 
-                            x:Name="BtnDownloadProofOfIncome"
+                            x:Name="BtnDownloadINE"
                             Content="copia_ine_amlo.pdf " 
-                            Style="{StaticResource FileDownloader}"/>
-                            <Button 
-                            Visibility="Hidden" 
-                            Content="archivo_ine.pdf" 
-                            Style="{StaticResource FilePresenter}"
-                            x:Name="BtnDetachIne"/>
+                            Style="{StaticResource FileDownloader}" Click="BtnDownloadINEClick"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Comprobante de domicilio"/>
                         <Grid Margin="0, 0, 0, 24">
                             <Button 
-                            x:Name="BtnDownloadProofOfAddress"
+                            x:Name="BtnDownloadProofOfAddressS"
                             Content="copia_domicilio_amlo.pdf" 
-                            Style="{StaticResource FileDownloader}"/>
-                            <Button 
-                            x:Name="BtnDetachProofOfAddress"
-                            Visibility="Hidden" 
-                            Content="archivo_ine.pdf" 
-                            Style="{StaticResource FilePresenter}"/>
+                            Style="{StaticResource FileDownloader}" Click="BtnDownloadProofOfAddressSClick"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Comprobante de ingresos"/>
                         <Grid>
                             <Button 
-                            x:Name="BtnDownloadINE"
+                            x:Name="BtnDownloadProofOfIncome"
                             Content="copia_ingresos_amlo.pdf" 
-                            Style="{StaticResource FileDownloader}"/>
-                            <Button 
-                            x:Name="BtnDetachProofOfIncome"
-                            Visibility="Hidden" 
-                            Content="archivo_ine.pdf" 
-                            Style="{StaticResource FilePresenter}"/>
+                            Style="{StaticResource FileDownloader}" Click="BtnDownloadProofOfIncomeClick"/>
                         </Grid>
                     </StackPanel>
 

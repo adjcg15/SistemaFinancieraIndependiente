@@ -35,7 +35,7 @@ namespace SFIDataAccess.DataAccessObjects
                     return result == 0;
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
@@ -71,12 +71,17 @@ namespace SFIDataAccess.DataAccessObjects
                         });
                 }
             }
-            catch(EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar las políticas de otorgamiento de crédito, intente más tarde"),
-                    new FaultReason("Error")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
 
             return policies;
