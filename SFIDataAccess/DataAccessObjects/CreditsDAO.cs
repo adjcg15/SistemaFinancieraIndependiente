@@ -135,14 +135,22 @@ namespace SFIDataAccess.DataAccessObjects
                             dictum storedDictum = context.dictums
                                 .Where(dictum => dictum.credit_application_invoice == storedCreditApplication.invoice)
                                 .FirstOrDefault();
-                            Dictum associatedDictum = new Dictum
+
+                            Dictum associatedDictum = null;
+                            if (storedDictum != null)
                             {
-                                GenerationDate = storedDictum.generation_date,
-                                IsApproved = storedDictum.is_approved
-                            };
+                                associatedDictum = new Dictum
+                                {
+                                    GenerationDate = storedDictum.generation_date,
+                                    IsApproved = storedDictum.is_approved
+                                };
+                            }
 
                             CreditApplication creditApplication = new CreditApplication
                             {
+                                Invoice = storedCreditApplication.invoice,
+                                ExpeditionDate = storedCreditApplication.expedition_date,
+                                RequestedAmount = storedCreditApplication.requested_amount,
                                 CreditType = creditType,
                                 Dictum = associatedDictum
                             };
@@ -154,14 +162,16 @@ namespace SFIDataAccess.DataAccessObjects
             catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar las solicitudes " +
+                        "de crédito de los clientes, intente más tarde"),
                     new FaultReason("Error")
                 );
             }
             catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar las solicitudes " +
+                        "de crédito de los clientes, intente más tarde"),
                     new FaultReason("Error")
                 );
             }

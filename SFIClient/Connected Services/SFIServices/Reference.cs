@@ -657,6 +657,9 @@ namespace SFIClient.SFIServices {
         private SFIClient.SFIServices.CreditType CreditTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIServices.Dictum DictumField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SFIClient.SFIServices.DigitalDocument[] DigitalDocumentsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -725,6 +728,19 @@ namespace SFIClient.SFIServices {
                 if ((object.ReferenceEquals(this.CreditTypeField, value) != true)) {
                     this.CreditTypeField = value;
                     this.RaisePropertyChanged("CreditType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIServices.Dictum Dictum {
+            get {
+                return this.DictumField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DictumField, value) != true)) {
+                    this.DictumField = value;
+                    this.RaisePropertyChanged("Dictum");
                 }
             }
         }
@@ -1643,6 +1659,83 @@ namespace SFIClient.SFIServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Dictum", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class Dictum : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime GenerationDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsApprovedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string JustificationField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime GenerationDate {
+            get {
+                return this.GenerationDateField;
+            }
+            set {
+                if ((this.GenerationDateField.Equals(value) != true)) {
+                    this.GenerationDateField = value;
+                    this.RaisePropertyChanged("GenerationDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsApproved {
+            get {
+                return this.IsApprovedField;
+            }
+            set {
+                if ((this.IsApprovedField.Equals(value) != true)) {
+                    this.IsApprovedField = value;
+                    this.RaisePropertyChanged("IsApproved");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Justification {
+            get {
+                return this.JustificationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JustificationField, value) != true)) {
+                    this.JustificationField = value;
+                    this.RaisePropertyChanged("Justification");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DigitalDocument", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
     [System.SerializableAttribute()]
     public partial class DigitalDocument : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2069,6 +2162,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RegisterCreditApplication", ReplyAction="http://tempuri.org/ICreditsService/RegisterCreditApplicationResponse")]
         System.Threading.Tasks.Task RegisterCreditApplicationAsync(SFIClient.SFIServices.CreditApplication newApplication);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllCreditApplications", ReplyAction="http://tempuri.org/ICreditsService/GetAllCreditApplicationsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetAllCreditApplicationsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditApplication[] GetAllCreditApplications();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllCreditApplications", ReplyAction="http://tempuri.org/ICreditsService/GetAllCreditApplicationsResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication[]> GetAllCreditApplicationsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2120,6 +2220,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task RegisterCreditApplicationAsync(SFIClient.SFIServices.CreditApplication newApplication) {
             return base.Channel.RegisterCreditApplicationAsync(newApplication);
+        }
+        
+        public SFIClient.SFIServices.CreditApplication[] GetAllCreditApplications() {
+            return base.Channel.GetAllCreditApplications();
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication[]> GetAllCreditApplicationsAsync() {
+            return base.Channel.GetAllCreditApplicationsAsync();
         }
     }
     
