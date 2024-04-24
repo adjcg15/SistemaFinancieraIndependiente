@@ -40,14 +40,7 @@ namespace SFIClient.Views
                 RbInactivePolicy.IsChecked = !newCondition.IsActive;
                 RbApplyIVa.IsChecked = newCondition.IsIvaApplied;
                 RbDontApplyIVA.IsChecked = !newCondition.IsIvaApplied;
-                foreach (var item in CbCreditTypes.Items)
-                {
-                    if (item is CreditType creditType && creditType.Identifier == newCondition.CreditType.Identifier)
-                    {
-                        CbCreditTypes.SelectedItem = item;
-                        break;
-                    }
-                }
+                CbCreditTypes.SelectedItem = newCondition.CreditType;
                 TbPaymentMonths.Text = newCondition.PaymentMonths.ToString();
                 TbInterestRate.Text = newCondition.InterestRate.ToString();
                 TbInterestOnArrears.Text = newCondition.InterestOnArrears.ToString();
@@ -60,21 +53,31 @@ namespace SFIClient.Views
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                RedirectToMainMenu();
+                RedirectToConsultConditionsCredit();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                RedirectToMainMenu();
+                RedirectToConsultConditionsCredit();
             }
         }
+
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CbCreditTypes.SelectedIndex != -1)
+            if (CbCreditTypes.SelectedItem == null)
             {
-                CreditType selectedCreditType = (CreditType)CbCreditTypes.SelectedItem;
-                newCondition.CreditType = selectedCreditType;
+                TextBlockPlaceholder.Visibility = Visibility.Visible;
+                if (CbCreditTypes.SelectedIndex != -1)
+                {
+                    CreditType selectedCreditType = (CreditType)CbCreditTypes.SelectedItem;
+                    newCondition.CreditType = selectedCreditType;
+                }
             }
+            else
+            {
+                TextBlockPlaceholder.Visibility = Visibility.Collapsed;
+            }
+            
         }
         private void LoadCreditTypes()
         {
@@ -115,7 +118,6 @@ namespace SFIClient.Views
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );
-
         }
         private void ApplyNumericRestrictions()
         {
@@ -264,9 +266,9 @@ namespace SFIClient.Views
                 control.Style = defaultStyle;
             }
         }
-        private void BtnGoBackClick(object sender, RoutedEventArgs e)
+        private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ConsultConditionsCreditView());
+            ShowReturnPreviousPageConfirmationDialog();
         }
         private void BtnSaveModificationOfCreditConditionClick(object sender, RoutedEventArgs e)
         {
@@ -288,13 +290,39 @@ namespace SFIClient.Views
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
                 $"¿Desea actualizar la información de la condición de crédito {newCondition.Identifier}?",
-                "Confirme el registro de la solicitud",
+                "Confirme actualización",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
             );
             if (buttonClicked == MessageBoxResult.Yes)
             {
                 UpdateCreditConditionInformation();
+            }
+        }
+        private void ShowReturnPreviousPageConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                $"¿Está seguro de que desea regresar a la ventana previa? Todos los cambios sin guardar se perderán",
+                "Regresar a ventana previa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToConsultConditionsCredit();
+            }
+        }
+        private void ShowDiscardChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                $"¿Está seguro de que desea cancelar la actualización de la condición de crédito ? Todos los cambios sin guardar se perderán",
+                "Descartar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToConsultConditionsCredit();
             }
         }
         private void UpdateCreditConditionInformation()
@@ -323,7 +351,7 @@ namespace SFIClient.Views
                 {
                     MessageBox.Show($"La condición de crédito {newCondition.Identifier} se ha actualizado correctamente.",
                                     "Actualización exitosa", MessageBoxButton.OK, MessageBoxImage.Information);
-                    RedirectToMainMenu();
+                    RedirectToConsultConditionsCredit();
                 }
             }
             catch (System.ServiceModel.FaultException<ServiceFault> fault)
@@ -341,15 +369,15 @@ namespace SFIClient.Views
                 ShowErrorRecoveringCreditTypesDialog(errorMessage);
             }
         }
-        private void RedirectToMainMenu()
+        private void RedirectToConsultConditionsCredit()
         {
             ConsultConditionsCreditView consultCreditConditions = new ConsultConditionsCreditView();
             this.NavigationService.Navigate(consultCreditConditions);
             NavigationService.RemoveBackEntry();
         }
-        private void BtnCancelModificationOfCreditConditionClick(object sender, RoutedEventArgs e)
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
-
+            ShowDiscardChangesConfirmationDialog();
         }
     }
 }
