@@ -1,4 +1,5 @@
 ﻿using SFIClient.SFIServices;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,11 +26,11 @@ namespace SFIClient.Views
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            LoadCreditCondition();
+            ShowCreditConditionInformation();
             LoadCreditTypes();
             ApplyNumericRestrictions();
         }
-        private void LoadCreditCondition()
+        private void ShowCreditConditionInformation()
         {
             try
             {
@@ -39,12 +40,18 @@ namespace SFIClient.Views
                 RbInactivePolicy.IsChecked = !newCondition.IsActive;
                 RbApplyIVa.IsChecked = newCondition.IsIvaApplied;
                 RbDontApplyIVA.IsChecked = !newCondition.IsIvaApplied;
-                CbCreditTypes.SelectedItem = newCondition.CreditType;
+                foreach (var item in CbCreditTypes.Items)
+                {
+                    if (item is CreditType creditType && creditType.Identifier == newCondition.CreditType.Identifier)
+                    {
+                        CbCreditTypes.SelectedItem = item;
+                        break;
+                    }
+                }
                 TbPaymentMonths.Text = newCondition.PaymentMonths.ToString();
                 TbInterestRate.Text = newCondition.InterestRate.ToString();
                 TbInterestOnArrears.Text = newCondition.InterestOnArrears.ToString();
                 TbAdvancePaymentReduction.Text = newCondition.AdvancePaymentReduction.ToString();
-
             }
             catch (FaultException<ServiceFault> fe)
             {
@@ -263,9 +270,70 @@ namespace SFIClient.Views
         }
         private void BtnSaveModificationOfCreditConditionClick(object sender, RoutedEventArgs e)
         {
+            bool isValidCreditCondition = VerifyCreditConditionInformationFields();
+            if (isValidCreditCondition)
+            {
+                newCondition.IsActive = RbActivePolicy.IsChecked ?? false;
+                newCondition.IsIvaApplied = RbApplyIVa.IsChecked ?? false;
+                newCondition.CreditType = (CreditType)CbCreditTypes.SelectedItem;
+                newCondition.PaymentMonths = Convert.ToInt32(TbPaymentMonths.Text.Trim());
+                newCondition.InterestRate = Convert.ToDouble(TbInterestRate.Text.Trim());
+                newCondition.InterestOnArrears = Convert.ToDouble(TbInterestOnArrears.Text.Trim());
+                newCondition.AdvancePaymentReduction = Convert.ToDouble(TbAdvancePaymentReduction.Text.Trim());
+
+                ShowSaveChangesConfirmationDialog();
+            }
+        }
+        private void ShowSaveChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                $"¿Desea registrar la condición de crédito {newCondition.Identifier}?",
+                "Confirme el registro de la solicitud",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                UpdateCreditConditionInformation();
+            }
 
         }
-
+        private void UpdateCreditConditionInformation()
+        {
+            CreditConditionsServiceClient creditConditiionClient = new CreditConditionsServiceClient();
+            try
+            {
+                bool isRegistered = creditConditiionClient.RegisterCreditCondition(newCondition);
+                if (isRegistered)
+                {
+                    MessageBox.Show($"La política de otorgamiento de crédito " +
+                        $"{newCondition.Identifier} se ha actualizado correctamente.",
+                                    "Registro exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    RedirectToMainMenu();
+                }
+            }
+            catch (System.ServiceModel.FaultException<ServiceFault> fault)
+            {
+                ShowErrorRecoveringCreditTypesDialog(fault.Detail.Message);
+            }
+            catch (System.ServiceModel.EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditTypesDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringCreditTypesDialog(errorMessage);
+            }
+        }
+        private void RedirectToMainMenu()
+        {
+            ConsultConditionsCreditView consultCreditConditions = new ConsultConditionsCreditView();
+            this.NavigationService.Navigate(consultCreditConditions);
+            NavigationService.RemoveBackEntry();
+        }
         private void BtnCancelModificationOfCreditConditionClick(object sender, RoutedEventArgs e)
         {
 
