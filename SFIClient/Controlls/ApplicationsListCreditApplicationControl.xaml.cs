@@ -42,9 +42,11 @@ namespace SFIClient.Controlls
             );
 
             SpnRequestedAmount.Inlines.Clear();
-            SpnExpeditionDate.Inlines.Add(
+            SpnRequestedAmount.Inlines.Add(
                 new Run(BindedCreditApplication.RequestedAmount.ToString("C", new System.Globalization.CultureInfo("es-MX")))
             );
+
+            TbkInvoice.Text = BindedCreditApplication.Invoice;
 
             SpnCreditType.Inlines.Clear();
             if(BindedCreditApplication.CreditType != null)
@@ -57,7 +59,7 @@ namespace SFIClient.Controlls
 
         private void ShowCreditApplicationDictumInformation()
         {
-            BtnGenerateDictum.Visibility = Visibility.Visible;
+            BtnGenerateDictum.Visibility = Visibility.Collapsed;
 
             Dictum dictum = BindedCreditApplication.Dictum;
             SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];

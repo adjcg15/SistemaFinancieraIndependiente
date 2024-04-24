@@ -118,13 +118,16 @@ namespace SFIClient.Views
             showedCreditApplicationsList.ForEach(credit =>
             {
                 var applicationCard = new ApplicationsListCreditApplicationControl(credit);
-                //creditCard.BtnPaymentsTableClick += RedirectToPaymentsTable;
-                //creditCard.BtnMonthlyEfficiencyClick += RedirectToCreditMonthlyEfficiency;
-                //creditCard.BtnChangeConditionClick += RedirectToChangeApplicableCreditCondition;
+                applicationCard.WriteDictumClick += BtnGenerateDictumClick;
 
-                //SkpCreditsList.Children.Add(creditCard);
+                SkpCreditApplicationsList.Children.Add(applicationCard);
             });
 
+        }
+
+        private void BtnGenerateDictumClick(object sender, CreditApplication selectedApplication)
+        {
+            //TODO: implementar redirección
         }
 
         private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)
