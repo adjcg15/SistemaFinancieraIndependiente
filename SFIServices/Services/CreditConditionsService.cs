@@ -31,5 +31,13 @@ namespace SFIServices
         {
             return CreditConditionsDAO.UpdateCreditCondition(updateCreditCondition);
         }
+        public bool VerifyUsageInCreditApplications(string conditionIdentifier)
+        {
+            return CreditConditionsDAO.VerifyUsageInCreditApplications(conditionIdentifier);
+        }
+        public bool VerifyUsageInRegimen(string conditionIdentifier)
+        {
+            return CreditConditionsDAO.VerifyUsageInRegimen(conditionIdentifier);
+        }
     }
 }

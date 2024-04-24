@@ -299,14 +299,29 @@ namespace SFIClient.Views
         }
         private void UpdateCreditConditionInformation()
         {
-            CreditConditionsServiceClient creditConditiionClient = new CreditConditionsServiceClient();
+            CreditConditionsServiceClient creditConditionClient = new CreditConditionsServiceClient();
             try
             {
-                bool isRegistered = creditConditiionClient.UpdateCreditCondition(newCondition);
+                if (creditConditionClient.VerifyUsageInCreditApplications(newCondition.Identifier))
+                {
+                    MessageBox.Show($"La condición de crédito {newCondition.Identifier} " +
+                        $"está siendo utilizada en al menos una solicitud de crédito por lo que no puede ser modificada, " +
+                        $"intente nuevamente más tarde.",
+                                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return; 
+                }
+                if (creditConditionClient.VerifyUsageInRegimen(newCondition.Identifier))
+                {
+                    MessageBox.Show($"La condición de crédito {newCondition.Identifier} " +
+                        $"está siendo utilizada en al menos un regimen por lo que no puede ser modificada, " +
+                        $"intente nuevamente más tarde.",
+                                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return; 
+                }
+                bool isRegistered = creditConditionClient.UpdateCreditCondition(newCondition);
                 if (isRegistered)
                 {
-                    MessageBox.Show($"La condición de crédito " +
-                        $"{newCondition.Identifier} se ha actualizado correctamente.",
+                    MessageBox.Show($"La condición de crédito {newCondition.Identifier} se ha actualizado correctamente.",
                                     "Actualización exitosa", MessageBoxButton.OK, MessageBoxImage.Information);
                     RedirectToMainMenu();
                 }

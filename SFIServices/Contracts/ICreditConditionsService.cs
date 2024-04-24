@@ -27,5 +27,13 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         bool UpdateCreditCondition(CreditCondition updateCreditCondition);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool VerifyUsageInCreditApplications(string conditionIdentifier);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool VerifyUsageInRegimen(string conditionIdentifier);
     }
 }
+
+

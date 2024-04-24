@@ -215,5 +215,49 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
         }
+        public static bool VerifyUsageInCreditApplications(string conditionIdentifier)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    return context.credit_applications.Any(ca => ca.credit_conditions.identifier == conditionIdentifier);
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+        }
+        public static bool VerifyUsageInRegimen(string conditionIdentifier)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    return context.regimes.Any(r => r.credit_conditions.identifier == conditionIdentifier);
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+        }
     }
 }
