@@ -154,14 +154,16 @@ namespace SFIDataAccess.DataAccessObjects
             catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar las solicitudes " +
+                        "de crédito de los clientes, intente más tarde"),
                     new FaultReason("Error")
                 );
             }
             catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar las solicitudes " +
+                        "de crédito de los clientes, intente más tarde"),
                     new FaultReason("Error")
                 );
             }
