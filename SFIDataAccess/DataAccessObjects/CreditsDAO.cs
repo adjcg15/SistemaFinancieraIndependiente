@@ -135,14 +135,22 @@ namespace SFIDataAccess.DataAccessObjects
                             dictum storedDictum = context.dictums
                                 .Where(dictum => dictum.credit_application_invoice == storedCreditApplication.invoice)
                                 .FirstOrDefault();
-                            Dictum associatedDictum = new Dictum
+
+                            Dictum associatedDictum = null;
+                            if (storedDictum != null)
                             {
-                                GenerationDate = storedDictum.generation_date,
-                                IsApproved = storedDictum.is_approved
-                            };
+                                associatedDictum = new Dictum
+                                {
+                                    GenerationDate = storedDictum.generation_date,
+                                    IsApproved = storedDictum.is_approved
+                                };
+                            }
 
                             CreditApplication creditApplication = new CreditApplication
                             {
+                                Invoice = storedCreditApplication.invoice,
+                                ExpeditionDate = storedCreditApplication.expedition_date,
+                                RequestedAmount = storedCreditApplication.requested_amount,
                                 CreditType = creditType,
                                 Dictum = associatedDictum
                             };

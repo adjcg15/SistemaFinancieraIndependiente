@@ -39,8 +39,6 @@ namespace SFIClient.Views
             try
             {
                 List<CreditApplication> creditApplicationsList = creditsService.GetAllCreditApplications().ToList();
-
-                Console.WriteLine(creditApplicationsList);
                 if (creditApplicationsList.Count == 0)
                 {
                     DisableFilterOptions();
