@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,6 +110,20 @@ namespace SFIClient.Views
 
         private void ShowCreditApplicationsList()
         {
+            SkpEmptyCreditApplicationsListMessage.Visibility = Visibility.Collapsed;
+            SkpCreditApplicationsList.Visibility = Visibility.Visible;
+
+            SkpCreditApplicationsList.Children.Clear();
+
+            showedCreditApplicationsList.ForEach(credit =>
+            {
+                var applicationCard = new ApplicationsListCreditApplicationControl(credit);
+                //creditCard.BtnPaymentsTableClick += RedirectToPaymentsTable;
+                //creditCard.BtnMonthlyEfficiencyClick += RedirectToCreditMonthlyEfficiency;
+                //creditCard.BtnChangeConditionClick += RedirectToChangeApplicableCreditCondition;
+
+                //SkpCreditsList.Children.Add(creditCard);
+            });
 
         }
 

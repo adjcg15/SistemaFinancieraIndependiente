@@ -22,8 +22,7 @@
                     x:Name="BdrDecorator"
                     Width="12" Margin="0, 0, 24, 0"
                     BorderThickness="3" BorderBrush="{StaticResource PrimaryColor}"
-                    CornerRadius="4"
-                    Background="{StaticResource PrimaryColor}"/>
+                    CornerRadius="4"/>
 
                 <StackPanel Grid.Column="1">
                     <TextBlock
@@ -31,7 +30,7 @@
                         Style="{StaticResource Paragraph}"
                         Foreground="{StaticResource Gray}"
                         FontWeight="Bold"
-                        Text="Solicitud aprobada el 20 de marzo del 2024 a las 15:13"
+                        Text="En espera de dictamen"
                         TextWrapping="Wrap"
                         Margin="0, 0, 16, 0"/>
                     <TextBlock
@@ -45,9 +44,8 @@
                         Style="{StaticResource TinyText}"
                         FontWeight="Normal"
                         Foreground="{StaticResource DarkGray}"
-                        Margin="0, 0, 0, 24"
-                        x:Name="TbkExpeditionDate">
-                        Expedida el 17 de marzo de 2024 a las 15:53
+                        Margin="0, 0, 0, 24">
+                        Expedida el <Span x:Name="SpnExpeditionDate">17 de marzo de 2024 a las 15:53</Span>
                     </TextBlock>
 
                     <TextBlock
@@ -61,14 +59,16 @@
                         Foreground="{StaticResource DarkGray}"
                         Margin="0, 0, 0, 4"
                         TextWrapping="Wrap">
-                        Para un crédito <Span x:Name="SpnCreditType">Personal</Span>
+                        Para un <Span x:Name="SpnCreditType">Crédito Personal</Span>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button 
                             Style="{StaticResource SecondaryBtn}"
                             Padding="12, 8, 12, 8"
-                            Click="BtnGenerateDictumClick">Generar dictamen</Button>
+                            Visibility="Collapsed"
+                            Click="BtnGenerateDictumClick"
+                            x:Name="BtnGenerateDictum">Generar dictamen</Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>
