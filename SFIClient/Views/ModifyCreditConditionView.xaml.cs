@@ -34,31 +34,6 @@ namespace SFIClient.Views
             LoadCreditTypes();
             ApplyNumericRestrictions();
         }
-        private void LoadBankAccount()
-        {
-            try
-            {
-                newCondition = creditConditionsServiceClient.Rw
-                bankAccount = clientsServiceClient.RecoverBankDetails(cardNumber);
-                TbCardNumber.Text = bankAccount.CardNumber.Trim();
-                TbHolder.Text = bankAccount.Holder.Trim();
-                TbBank.Text = bankAccount.Bank.Trim();
-            }
-            catch (FaultException<ServiceFault> fe)
-            {
-                MessageBox.Show(fe.Message, "Error en la base de datos");
-            }
-            catch (EndpointNotFoundException)
-            {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
-            }
-            catch (CommunicationException)
-            {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
-            }
-        }
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CbCreditTypes.SelectedIndex != -1)
