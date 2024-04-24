@@ -122,7 +122,6 @@ namespace SFIClient.Views
 
                 SkpCreditApplicationsList.Children.Add(applicationCard);
             });
-
         }
 
         private void BtnGenerateDictumClick(object sender, CreditApplication selectedApplication)

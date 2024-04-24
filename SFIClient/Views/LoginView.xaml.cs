@@ -147,7 +147,7 @@ namespace SFIClient.Views
                     NavigationService.Navigate(new MainMenuController());
                     break;
                 case Security.Roles.CREDIT_ANALYST:
-                    //TODO: redireccionar a buscar solicitud de crédito
+                    NavigationService.Navigate(new CreditApplicationsListController());
                     break;
                 case Security.Roles.CREDIT_ADVISOR:
                     NavigationService.Navigate(new SearchClientByRFCController());
