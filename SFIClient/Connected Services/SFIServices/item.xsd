@@ -134,6 +134,7 @@
       <xs:element minOccurs="0" name="Client" nillable="true" type="tns:Client" />
       <xs:element minOccurs="0" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
       <xs:element minOccurs="0" name="CreditType" nillable="true" type="tns:CreditType" />
+      <xs:element minOccurs="0" name="Dictum" nillable="true" type="tns:Dictum" />
       <xs:element minOccurs="0" name="DigitalDocuments" nillable="true" type="tns:ArrayOfDigitalDocument" />
       <xs:element minOccurs="0" name="EmployeeNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExpeditionDate" type="xs:dateTime" />
@@ -158,6 +159,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+  <xs:complexType name="Dictum">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GenerationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsApproved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Justification" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Dictum" nillable="true" type="tns:Dictum" />
   <xs:complexType name="ArrayOfDigitalDocument">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DigitalDocument" nillable="true" type="tns:DigitalDocument" />
@@ -172,6 +181,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DigitalDocument" nillable="true" type="tns:DigitalDocument" />
+  <xs:complexType name="ArrayOfCreditApplication">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditApplication" nillable="true" type="tns:CreditApplication" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditApplication" nillable="true" type="tns:ArrayOfCreditApplication" />
   <xs:complexType name="ArrayOfCreditCondition">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />

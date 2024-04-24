@@ -92,6 +92,15 @@
   <wsdl:message name="ICreditsService_RegisterCreditApplication_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q4:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ICreditsService_GetAllCreditApplications_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCreditApplications" />
+  </wsdl:message>
+  <wsdl:message name="ICreditsService_GetAllCreditApplications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllCreditApplicationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICreditsService_GetAllCreditApplications_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q5:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverCreditConditionsByCreditType" />
   </wsdl:message>
@@ -99,7 +108,7 @@
     <wsdl:part name="parameters" element="tns:RecoverCreditConditionsByCreditTypeResponse" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q5:ServiceFault" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q6:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RegisterCreditCondition_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterCreditCondition" />
@@ -108,7 +117,7 @@
     <wsdl:part name="parameters" element="tns:RegisterCreditConditionResponse" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RegisterCreditCondition_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q6:ServiceFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q7:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverAllCreditConditions_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverAllCreditConditions" />
@@ -117,7 +126,7 @@
     <wsdl:part name="parameters" element="tns:RecoverAllCreditConditionsResponse" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverAllCreditConditions_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q7:ServiceFault" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q8:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ICreditGrantingPolicies_RegisterCreditGrantingPolicy_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterCreditGrantingPolicy" />
@@ -126,7 +135,7 @@
     <wsdl:part name="parameters" element="tns:RegisterCreditGrantingPolicyResponse" />
   </wsdl:message>
   <wsdl:message name="ICreditGrantingPolicies_RegisterCreditGrantingPolicy_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q8:ServiceFault" />
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q9:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ICreditGrantingPolicies_GetAllCreditGrantingPolicies_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllCreditGrantingPolicies" />
@@ -135,7 +144,7 @@
     <wsdl:part name="parameters" element="tns:GetAllCreditGrantingPoliciesResponse" />
   </wsdl:message>
   <wsdl:message name="ICreditGrantingPolicies_GetAllCreditGrantingPolicies_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q9:ServiceFault" />
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q10:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IAuthenticationService_Login_InputMessage">
     <wsdl:part name="parameters" element="tns:Login" />
@@ -144,7 +153,7 @@
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
   <wsdl:message name="IAuthenticationService_Login_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q10:ServiceFault" />
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q11:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverClients_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverClients" />
@@ -153,7 +162,7 @@
     <wsdl:part name="parameters" element="tns:RecoverClientsResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverClients_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q11:ServiceFault" />
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q12:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverBankDetails_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverBankDetails" />
@@ -162,7 +171,7 @@
     <wsdl:part name="parameters" element="tns:RecoverBankDetailsResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverBankDetails_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q12:ServiceFault" />
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q13:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_UpdateBankAccount_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateBankAccount" />
@@ -171,7 +180,7 @@
     <wsdl:part name="parameters" element="tns:UpdateBankAccountResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_UpdateBankAccount_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q13:ServiceFault" />
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q14:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RegisterClient_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterClient" />
@@ -180,7 +189,7 @@
     <wsdl:part name="parameters" element="tns:RegisterClientResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RegisterClient_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q14:ServiceFault" />
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q15:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverPersonalReferences_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverPersonalReferences" />
@@ -189,7 +198,7 @@
     <wsdl:part name="parameters" element="tns:RecoverPersonalReferencesResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverPersonalReferences_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q15:ServiceFault" />
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q16:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_UpdatePersonalReference_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePersonalReference" />
@@ -198,7 +207,7 @@
     <wsdl:part name="parameters" element="tns:UpdatePersonalReferenceResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_UpdatePersonalReference_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q16:ServiceFault" />
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q17:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverClient_InputMessage">
     <wsdl:part name="parameters" element="tns:RecoverClient" />
@@ -207,7 +216,7 @@
     <wsdl:part name="parameters" element="tns:RecoverClientResponse" />
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverClient_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q17:ServiceFault" />
+    <wsdl:part xmlns:q18="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q18:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
@@ -231,6 +240,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/RegisterCreditApplication" message="tns:ICreditsService_RegisterCreditApplication_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/RegisterCreditApplicationResponse" message="tns:ICreditsService_RegisterCreditApplication_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/RegisterCreditApplicationServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_RegisterCreditApplication_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCreditApplications">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditApplications" message="tns:ICreditsService_GetAllCreditApplications_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditApplicationsResponse" message="tns:ICreditsService_GetAllCreditApplications_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/GetAllCreditApplicationsServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_GetAllCreditApplications_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICreditConditionsService">
@@ -351,6 +365,18 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterCreditApplication">
       <soap12:operation soapAction="http://tempuri.org/ICreditsService/RegisterCreditApplication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllCreditApplications">
+      <soap12:operation soapAction="http://tempuri.org/ICreditsService/GetAllCreditApplications" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

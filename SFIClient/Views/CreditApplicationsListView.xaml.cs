@@ -22,6 +22,16 @@ namespace SFIClient.Views
             InitializeComponent();
         }
 
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadAllCreditApplications();
+        }
+
+        private void LoadAllCreditApplications()
+        {
+
+        }
+
         private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)
         {
 

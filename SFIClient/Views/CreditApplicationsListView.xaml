@@ -7,7 +7,8 @@
     xmlns:controlls="clr-namespace:SFIClient.Controlls"
     mc:Ignorable="d"
     d:Width="1280" d:Height="2000"
-    Title="Solicitudes de crédito de clientes">
+    Title="Solicitudes de crédito de clientes"
+    Loaded="PageLoaded">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
