@@ -23,6 +23,9 @@ namespace SFIDataAccess.Model
         public Client Client { get; set; }
 
         [DataMember]
+        public Dictum Dictum { get; set; }
+
+        [DataMember]
         public DateTime ExpeditionDate { get; set; }
 
         [DataMember]

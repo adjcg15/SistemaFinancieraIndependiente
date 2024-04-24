@@ -46,7 +46,6 @@ namespace SFIDataAccess
         public virtual DbSet<personal_references> personal_references { get; set; }
         public virtual DbSet<polices_apply_dictums> polices_apply_dictums { get; set; }
         public virtual DbSet<regime> regimes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<system_accounts> system_accounts { get; set; }
         public virtual DbSet<work_centers> work_centers { get; set; }
     
