@@ -12,14 +12,13 @@ namespace SFIDataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class polices_apply_dictums
+    public partial class payment_layouts
     {
-        public int id_polices_apply_dictums { get; set; }
-        public int id_dictum { get; set; }
-        public Nullable<int> id_credit_granting_policy { get; set; }
-        public bool is_applied { get; set; }
+        public int id_payment_layout { get; set; }
+        public string capture_line { get; set; }
+        public System.DateTime generation_date { get; set; }
+        public int id_payment { get; set; }
     
-        public virtual credit_granting_polices credit_granting_polices { get; set; }
-        public virtual dictum dictum { get; set; }
+        public virtual payment payment { get; set; }
     }
 }

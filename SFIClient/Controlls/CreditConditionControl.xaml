@@ -58,9 +58,11 @@
                     <Button 
                         HorizontalAlignment="Right"
                         Style="{StaticResource TernaryBtn}"
-                        Padding="16, 12">
+                        Padding="16, 12"
+                        Click="BtnEditCreditConditionClick">
                         Editar
                     </Button>
+
                 </StackPanel>
             </StackPanel>
         </Grid>

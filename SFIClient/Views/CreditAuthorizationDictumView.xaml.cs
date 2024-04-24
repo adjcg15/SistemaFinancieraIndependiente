@@ -1,5 +1,4 @@
-﻿using SFIClient.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,21 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SFIClient.Controlls
+namespace SFIClient.Views
 {
     /// <summary>
-    /// Lógica de interacción para CreditConditionControl.xaml
+    /// Lógica de interacción para CreditAuthorizationDictumView.xaml
     /// </summary>
-    public partial class CreditConditionControl : UserControl
+    public partial class CreditAuthorizationDictumController : Page
     {
-        public event EventHandler ButtonEditCreditCondition;
-        public CreditConditionControl()
+        public CreditAuthorizationDictumController()
         {
             InitializeComponent();
         }
-        private void BtnEditCreditConditionClick(object sender, RoutedEventArgs e)
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            ButtonEditCreditCondition?.Invoke(this, EventArgs.Empty);
+
         }
     }
 }

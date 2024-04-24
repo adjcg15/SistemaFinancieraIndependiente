@@ -17,6 +17,7 @@ namespace SFIDataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public credit()
         {
+            this.payments = new HashSet<payment>();
             this.regimes = new HashSet<regime>();
         }
     
@@ -32,6 +33,8 @@ namespace SFIDataAccess
         public virtual client client { get; set; }
         public virtual credit_applications credit_applications { get; set; }
         public virtual credit_types credit_types { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<payment> payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<regime> regimes { get; set; }
     }

@@ -11,6 +11,9 @@ namespace SFIDataAccess.Model
     public class PersonalReference
     {
         [DataMember]
+        public int IdPersonalReference { get; set; }
+
+        [DataMember]
         public string IneKey { get; set; }
 
         [DataMember]
@@ -30,6 +33,9 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public string RelationshipYears { get; set; }
+
+        [DataMember]
+        public string ClientRfc { get; set; }
 
         [DataMember]
         public Address Address { get; set; }

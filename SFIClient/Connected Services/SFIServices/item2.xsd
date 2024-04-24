@@ -185,4 +185,47 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RecoverPersonalReferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="rfc" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverPersonalReferencesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverPersonalReferencesResult" nillable="true" type="q15:ArrayOfPersonalReference" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePersonalReference">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="personalReference" nillable="true" type="q16:PersonalReference" />
+        <xs:element minOccurs="0" name="currentIneKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePersonalReferenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdatePersonalReferenceResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientRfc" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecoverClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientResult" nillable="true" type="q17:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
