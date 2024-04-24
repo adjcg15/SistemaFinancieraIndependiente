@@ -1,4 +1,5 @@
-﻿using SFIDataAccess.CustomExceptions;
+﻿using SFIDataAccess;
+using SFIDataAccess.CustomExceptions;
 using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -173,5 +174,79 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return creditCondition;
         }
+        public static bool UpdateCreditCondition(CreditCondition updateCreditCondition)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+
+                    var interestRateParam = new SqlParameter("@InterestRate", updateCreditCondition.InterestRate);
+                    var isActiveParam = new SqlParameter("@IsActive", updateCreditCondition.IsActive);
+                    var isIvaAppliedParam = new SqlParameter("@IsIvaApplied", updateCreditCondition.IsIvaApplied);
+                    var interestOnArrearsParam = new SqlParameter("@InterestOnArrears", updateCreditCondition.InterestOnArrears);
+                    var advancePaymentReductionParam = new SqlParameter("@AdvancePaymentReduction", updateCreditCondition.AdvancePaymentReduction);
+                    var paymentMonthsParam = new SqlParameter("@PaymentMonths", updateCreditCondition.PaymentMonths);
+                    var creditTypeIdParam = new SqlParameter("@CreditTypeId", updateCreditCondition.CreditType.Identifier);
+                    var identifierParam = new SqlParameter("@Identifier", updateCreditCondition.Identifier);
+                    var resultParam = new SqlParameter("@Result", SqlDbType.Int) { Direction = ParameterDirection.Output };
+
+                    context.Database.ExecuteSqlCommand("" +
+                        "InsertCreditConditionProcedure @InterestRate, @IsActive, @IsIvaApplied, @InterestOnArrears, " +
+                        "@AdvancePaymentReduction, @PaymentMonths, @CreditTypeId, @Identifier, @Result OUTPUT",
+                                     interestRateParam, isActiveParam, isIvaAppliedParam, interestOnArrearsParam,
+                                     advancePaymentReductionParam, paymentMonthsParam, creditTypeIdParam, identifierParam, resultParam);
+
+                    int result = (int)resultParam.Value;
+                    return result == 1;
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+        }
     }
 }
+public static bool UpdateBankAccount(BankAccount bankAccount, string cardNumber)
+{
+    bool success;
+    try
+    {
+        using (var dbContext = new SFIDatabaseContext())
+        {
+            var currentCardNumberParam = new SqlParameter("@CurrentCardNumber", cardNumber);
+            var newBankParam = new SqlParameter("@NewBank", bankAccount.Bank);
+            var newHolderParam = new SqlParameter("@NewHolder", bankAccount.Holder);
+            var newCardNumberParam = new SqlParameter("@NewCardNumber", bankAccount.CardNumber);
+
+            var successParam = new SqlParameter("@Success", SqlDbType.Bit);
+            successParam.Direction = ParameterDirection.Output;
+
+            dbContext.Database.ExecuteSqlCommand(
+                "EXEC UpdateBankAccount @CurrentCardNumber, @NewBank, @NewHolder, @NewCardNumber, @Success OUTPUT",
+                currentCardNumberParam, newBankParam, newHolderParam, newCardNumberParam, successParam);
+
+            success = (bool)successParam.Value;
+        }
+    }
+    catch (System.Data.Entity.Core.EntityException)
+    {
+        throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+    }
+    catch (DbUpdateException)
+    {
+        throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+    }
+    catch (DbEntityValidationException)
+    {
+        throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+    }
