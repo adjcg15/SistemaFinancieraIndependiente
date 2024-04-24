@@ -1,20 +1,12 @@
 ﻿using SFIClient.SFIServices;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SFIClient.Views
 {
@@ -25,24 +17,34 @@ namespace SFIClient.Views
     {
         readonly CreditConditionsServiceClient creditConditionsServiceClient = new CreditConditionsServiceClient();
         CreditCondition newCondition = new CreditCondition();
-        public ModifyCreditConditionController()
+        private readonly string identifier;
+        public ModifyCreditConditionController(CreditCondition creditCondition)
         {
             InitializeComponent();
+            identifier = creditCondition.Identifier;
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
+            LoadCreditCondition();
             LoadCreditTypes();
             ApplyNumericRestrictions();
         }
-        private void LoadBankAccount()
+        private void LoadCreditCondition()
         {
             try
             {
-                newCondition = creditConditionsServiceClient.Rw
-                bankAccount = clientsServiceClient.RecoverBankDetails(cardNumber);
-                TbCardNumber.Text = bankAccount.CardNumber.Trim();
-                TbHolder.Text = bankAccount.Holder.Trim();
-                TbBank.Text = bankAccount.Bank.Trim();
+                newCondition = creditConditionsServiceClient.RecoverCreditConditionDetails(identifier);
+                TbkCreditCondition.Text = newCondition.Identifier;
+                RbActivePolicy.IsChecked = newCondition.IsActive;
+                RbInactivePolicy.IsChecked = !newCondition.IsActive;
+                RbApplyIVa.IsChecked = newCondition.IsIvaApplied;
+                RbDontApplyIVA.IsChecked = !newCondition.IsIvaApplied;
+                CbCreditTypes.SelectedItem = newCondition.CreditType;
+                TbPaymentMonths.Text = newCondition.PaymentMonths.ToString();
+                TbInterestRate.Text = newCondition.InterestRate.ToString();
+                TbInterestOnArrears.Text = newCondition.InterestOnArrears.ToString();
+                TbAdvancePaymentReduction.Text = newCondition.AdvancePaymentReduction.ToString();
+
             }
             catch (FaultException<ServiceFault> fe)
             {

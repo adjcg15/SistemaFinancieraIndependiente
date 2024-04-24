@@ -23,5 +23,9 @@ namespace SFIServices
         {
             return CreditConditionsDAO.RecoverAllCreditConditions();
         }
+        public CreditCondition RecoverCreditConditionDetails(string identifier)
+        {
+            return CreditConditionsDAO.RecoverCreditConditionDetails(identifier);
+        }
     }
 }

@@ -26,7 +26,8 @@ namespace SFIDataAccess.DataAccessObjects
                 {
                     context.credit_conditions
                         .Where(condition => condition.id_credit_type == creditTypeIdentifier)
-                        .ToList().ForEach(storedCondition => {
+                        .ToList().ForEach(storedCondition =>
+                        {
                             CreditCondition condition = new CreditCondition();
 
                             condition.Identifier = storedCondition.identifier;
@@ -126,24 +127,26 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return conditionsList;
         }
-        public static CreditCondition RecoverCreditCondition (string identifier)
+        public static CreditCondition RecoverCreditConditionDetails(string identifier)
         {
-            CreditCondition creditCondition = new CreditCondition();
+            CreditCondition creditCondition = null;
             try
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var account = (from creditcondition in context.credit_conditions
-                                   where creditcondition.identifier == identifier
-                                   select creditcondition).FirstOrDefault();
-                    if (account != null)
+                    var creditConditionEntity = (from creditcondition in context.credit_conditions
+                                                 where creditcondition.identifier == identifier
+                                                 select creditcondition).FirstOrDefault();
+                    if (creditConditionEntity != null)
                     {
-                        creditCondition.IsActive = account.is_active;
-                        creditCondition.IsIvaApplied = account.is_iva_applied;
-                        creditCondition.PaymentMonths = account.payment_months;
-                        creditCondition.InterestRate = account.interest_rate;
-                        creditCondition.InterestOnArrears = account.interest_on_arrears;
-                        creditCondition.AdvancePaymentReduction = account.advance_payment_reduction;
+                        creditCondition = new CreditCondition();
+                        creditCondition.Identifier = creditConditionEntity.identifier;
+                        creditCondition.IsActive = creditConditionEntity.is_active;
+                        creditCondition.IsIvaApplied = creditConditionEntity.is_iva_applied;
+                        creditCondition.PaymentMonths = creditConditionEntity.payment_months;
+                        creditCondition.InterestRate = creditConditionEntity.interest_rate;
+                        creditCondition.InterestOnArrears = creditConditionEntity.interest_on_arrears;
+                        creditCondition.AdvancePaymentReduction = creditConditionEntity.advance_payment_reduction;
                     }
                 }
             }
@@ -162,5 +165,6 @@ namespace SFIDataAccess.DataAccessObjects
 
             return creditCondition;
         }
+
     }
 }

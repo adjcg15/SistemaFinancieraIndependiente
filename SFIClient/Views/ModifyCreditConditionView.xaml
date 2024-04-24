@@ -1,5 +1,5 @@
-﻿<Page x:Class="SFIClient.Views.ModifyCreditConditionController"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Page  x:Class="SFIClient.Views.ModifyCreditConditionController"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -21,11 +21,17 @@
                     </Button>
                     <TextBlock 
                  Foreground="White" Style="{StaticResource Title}"
-                 Text="Registro condición de crédito" 
+                 Text="Modificar condición de crédito" 
                  VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel >
-            <StackPanel Margin="40, 40, 40, 0">
+            <StackPanel Name="SkpClientInformation" Margin="40, 46" HorizontalAlignment="Left">
+                <TextBlock 
+                Name="TbkCreditCondition" 
+                Style="{StaticResource Title}" Foreground="{StaticResource DarkPrimaryColor}" Margin="0, 0"
+                Text="CCP00"/>    
+            </StackPanel>
+            <StackPanel Margin="40, 0, 40, 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
@@ -38,11 +44,6 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="TbkCreditCondition"
-                Grid.Column="0" 
-                Grid.Row="0"
-                Style="{StaticResource Title}" 
-                Text="CCP001"/>
                     <TextBlock 
                 Grid.Column="1"
                 Grid.Row="0"
