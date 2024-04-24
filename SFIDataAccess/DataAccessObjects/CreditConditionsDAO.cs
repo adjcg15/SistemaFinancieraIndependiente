@@ -147,6 +147,15 @@ namespace SFIDataAccess.DataAccessObjects
                         creditCondition.InterestRate = creditConditionEntity.interest_rate;
                         creditCondition.InterestOnArrears = creditConditionEntity.interest_on_arrears;
                         creditCondition.AdvancePaymentReduction = creditConditionEntity.advance_payment_reduction;
+                        var creditTypeEntity = context.credit_types.FirstOrDefault(ct => ct.id_credit_type == creditConditionEntity.id_credit_type);
+                        if (creditTypeEntity != null)
+                        {
+                            creditCondition.CreditType = new CreditType
+                            {
+                                Identifier = creditTypeEntity.id_credit_type,
+                                Name = creditTypeEntity.name
+                            };
+                        }
                     }
                 }
             }
@@ -162,9 +171,7 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
-
             return creditCondition;
         }
-
     }
 }
