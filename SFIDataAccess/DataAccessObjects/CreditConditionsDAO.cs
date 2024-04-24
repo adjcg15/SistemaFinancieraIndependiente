@@ -126,5 +126,41 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return conditionsList;
         }
+        public static CreditCondition RecoverCreditCondition (string identifier)
+        {
+            CreditCondition creditCondition = new CreditCondition();
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var account = (from creditcondition in context.credit_conditions
+                                   where creditcondition.identifier == identifier
+                                   select creditcondition).FirstOrDefault();
+                    if (account != null)
+                    {
+                        creditCondition.IsActive = account.is_active;
+                        creditCondition.IsIvaApplied = account.is_iva_applied;
+                        creditCondition.PaymentMonths = account.payment_months;
+                        creditCondition.InterestRate = account.interest_rate;
+                        creditCondition.InterestOnArrears = account.interest_on_arrears;
+                        creditCondition.AdvancePaymentReduction = account.advance_payment_reduction;
+                    }
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+
+            return creditCondition;
+        }
     }
 }

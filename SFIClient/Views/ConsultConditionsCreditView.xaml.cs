@@ -95,9 +95,8 @@ namespace SFIClient.Views
 
             if (creditCondition != null)
             {
-                RegisterCreditConditionView registerCreditConditionView = new RegisterCreditConditionView();
-                registerCreditConditionView.IsEditMode = true;
-                this.NavigationService.Navigate(registerCreditConditionView);
+                ModifyCreditConditionController modifyCreditConditionController = new ModifyCreditConditionController();
+                this.NavigationService.Navigate(modifyCreditConditionController);
             }
         }
         private void BtnNewCreditConditionClick(object sender, RoutedEventArgs e)
