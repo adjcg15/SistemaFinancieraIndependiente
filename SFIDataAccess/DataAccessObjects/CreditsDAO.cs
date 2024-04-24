@@ -103,6 +103,13 @@ namespace SFIDataAccess.DataAccessObjects
                     new FaultReason("Error")
                 );
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
 
             return allCredits;
         }
