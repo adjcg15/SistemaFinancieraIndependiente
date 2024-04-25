@@ -40,7 +40,7 @@ namespace SFIClient.Views
             try
             {
                 List<CreditApplication> creditApplicationsList = creditsService.GetAllCreditApplications().ToList();
-                if (creditApplicationsList.Count == 0)
+                if (creditApplicationsList.Count != 0)
                 {
                     DisableFilterOptions();
                     ShowEmptyCreditApplicationsListMessage();
@@ -97,6 +97,7 @@ namespace SFIClient.Views
             DpkFromDate.IsEnabled = false;
             DpkToDate.IsEnabled = false;
             TbSearchbar.IsEnabled = false;
+            BtnApplyFilters.IsEnabled = false;
             CkbCreditApplicationsWaitingDictum.IsEnabled = false;
             CkbCreditApplicationsRejected.IsEnabled = false;
             CkbPaidCreditApplicationsApproved.IsEnabled = false;
