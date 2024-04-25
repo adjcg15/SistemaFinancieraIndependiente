@@ -657,5 +657,30 @@ namespace SFIDataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePersonalReference", idPersonalReferenceParameter, currentIneKeyParameter, ineKeyParameter, nameParameter, surnameParameter, lastNameParameter, kinshipParameter, relationshipYearsParameter, idAddressParameter, clientRfcParameter, phoneNumberParameter, streetParameter, neighborhoodParameter, interiorNumberParameter, outdoorNumberParameter, postCodeParameter, cityParameter, municipalityParameter, stateParameter, success);
         }
+    
+        public virtual int UpdateCreditGrantingPolicy(Nullable<int> id_credit_granting_policy, string title, Nullable<bool> is_active, Nullable<System.DateTime> effective_date, string description, ObjectParameter updated)
+        {
+            var id_credit_granting_policyParameter = id_credit_granting_policy.HasValue ?
+                new ObjectParameter("id_credit_granting_policy", id_credit_granting_policy) :
+                new ObjectParameter("id_credit_granting_policy", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var is_activeParameter = is_active.HasValue ?
+                new ObjectParameter("is_active", is_active) :
+                new ObjectParameter("is_active", typeof(bool));
+    
+            var effective_dateParameter = effective_date.HasValue ?
+                new ObjectParameter("effective_date", effective_date) :
+                new ObjectParameter("effective_date", typeof(System.DateTime));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCreditGrantingPolicy", id_credit_granting_policyParameter, titleParameter, is_activeParameter, effective_dateParameter, descriptionParameter, updated);
+        }
     }
 }
