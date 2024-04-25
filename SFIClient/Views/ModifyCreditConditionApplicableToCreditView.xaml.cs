@@ -24,5 +24,20 @@ namespace SFIClient.Views
         {
             InitializeComponent();
         }
+
+        private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnModifyCreditConditionClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnCancelChangesClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
