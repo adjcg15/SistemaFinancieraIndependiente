@@ -26,5 +26,15 @@ namespace SFIClient.Views
         {
 
         }
+
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
