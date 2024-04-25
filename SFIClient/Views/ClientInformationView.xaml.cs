@@ -86,29 +86,36 @@ namespace SFIClient.Views
 
             if (phoneNumbers.Count >= 2)
             {
-                TbkFirstPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[0]);
-                TbkSecondPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[1]);
+                brdFirstPhoneNumber.Visibility = Visibility.Visible;
+                brdSecondPhoneNumber.Visibility = Visibility.Visible;
+                tbkFirstPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[0]);
+                tbkSecondPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[1]);
             }
             else if (phoneNumbers.Count >= 3)
             {
-                TbkThirdPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[2]);
+                brdThirdPhoneNumber.Visibility = Visibility.Visible;
+                tbkThirdPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[2]);
             }
             else if (phoneNumbers.Count == 4)
             {
-                TbkFourthPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[3]);
+                brdThirdPhoneNumber.Visibility = Visibility.Visible;
+                tbkFourthPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[3]);
             }
 
             if (emails.Count >= 1)
             {
-                TbkFirstEmail.Text = emails[0];
+                brdFirstEmail.Visibility = Visibility.Visible;
+                tbkFirstEmail.Text = emails[0];
             }
             else if (phoneNumbers.Count >= 2)
             {
-                TbkSecondEmail.Text = emails[1];
+                brdSecondEmail.Visibility = Visibility.Visible;
+                tbkSecondEmail.Text = emails[1];
             }
             else if (phoneNumbers.Count == 3)
-            {
-                TbkThirdEmail.Text = emails[3];
+            {   
+                brdThirdEmail.Visibility = Visibility.Visible;
+                tbkThirdEmail.Text = emails[3];
             }
 
             TbkCardNumber.Text = 

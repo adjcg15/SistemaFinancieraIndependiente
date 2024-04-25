@@ -10,12 +10,12 @@
       Title="CreditAuthorizationDictumView"
       Loaded="PageLoaded">
 
-    <ScrollViewer Name="scvCreditAuthorizationDictumComponents" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer Name="scvCreditAuthorizationDictum" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnDiscardDictumGenerationClick" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                    <Button Name="btnDiscardDictumGeneration" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnDiscardDictumGenerationClick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -124,28 +124,28 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" >
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkFirstPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdFirstPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkFirstPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkSecondPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdSecondPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkSecondPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkThirdPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdThirdPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkThirdPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 0" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkFourthPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdFourthPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 0" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkFourthPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
                             </StackPanel>
                             <StackPanel Grid.Column="1" >
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkFirstEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
+                                <Border Name="brdFirstEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkFirstEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkSecondEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
+                                <Border Name="brdSecondEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkSecondEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkThirdEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
+                                <Border Name="brdThirdEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkThirdEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
                                 </Border>
                             </StackPanel>
                         </Grid>
@@ -235,22 +235,22 @@
                     <StackPanel Grid.Column="1" Grid.Row="10" Margin="0, 0, 0, 12">
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 8, 0, 8" Text="Tipo de crédito"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkCreditType" TextWrapping="Wrap" Margin="0,0,0,0" Text="Juan" Style="{StaticResource Title}" Foreground="{StaticResource DarkPrimaryColor}"/>
+                            <TextBlock Name="TbkCreditType" TextWrapping="Wrap" Margin="0,0,0,0" Style="{StaticResource Title}" Foreground="{StaticResource DarkPrimaryColor}"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Monto aspirado"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkAmountAspirated" TextWrapping="Wrap" Margin="0,0,0,0" Text="19 de marzo de 2021" FontSize="32"/>
+                            <TextBlock Name="TbkAmountAspirated" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Monto mínimo aceptado"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkMinimumAcceptedAmount" TextWrapping="Wrap" Margin="0,0,0,0" Text="AULR031119CH05" FontSize="32"/>
+                            <TextBlock Name="TbkMinimumAcceptedAmount" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Propósito del crédito"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkPurposeOfCredit" TextWrapping="Wrap" Margin="0,0,0,0" Text="AULR031119HVZGPDA5" FontSize="24"/>
+                            <TextBlock Name="TbkPurposeOfCredit" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="24"/>
                         </Grid>
                     </StackPanel>
 
@@ -357,19 +357,19 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <RadioButton Grid.Column="0" x:Name="RbRejectApplication" Style="{StaticResource RadioButtonStyle}" Content="Rechazar"/>
-                            <RadioButton Grid.Column="1" x:Name="RbApproveApplication" Style="{StaticResource RadioButtonStyle}" Content="Aprobar"/>
+                            <RadioButton Grid.Column="0" x:Name="rbRejectApplication" Style="{StaticResource RadioButtonStyle}" Content="Rechazar" Checked="RbRejectApplicationChecked"/>
+                            <RadioButton Grid.Column="1" x:Name="rbApproveApplication" Style="{StaticResource RadioButtonStyle}" Content="Aprobar" Checked="RbApproveApplicationChecked"/>
                         </Grid>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8">
+                        <TextBlock Name="tbkPolicys" FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8" Visibility="Collapsed">
                             Políticas de otorgamiento de crédito <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <StackPanel Name="skpCreditGrantingPolices"/>
+                        <StackPanel Name="skpCreditGrantingPolices" Visibility="Collapsed"/>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8">
+                        <TextBlock Name="tbkJustification" FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8" Visibility="Collapsed">
                             Dictamen <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
-                        <Grid Margin="0, 0, 0, 24">
+                        <Grid Name="grdJusitification" Margin="0, 0, 0, 24" Visibility="Collapsed">
                             <TextBlock Margin="5,2" Text="Descripción detallada de por qué se aprobó o rechazó el crédito al cliente" TextWrapping="Wrap">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -397,8 +397,8 @@
 
             <!--Buttons section-->
             <StackPanel Margin="40, 100, 40, 100" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnCancelDictumGenerationClick" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar"/>
-                <Button Name="BtnGenerateDictumClick" Style="{StaticResource PrimaryBtn}" Content="Generar dictamen"/>
+                <Button Name="btnCancelDictumGeneration" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelDictumGenerationClick"/>
+                <Button Name="btnGenerateDictum" Style="{StaticResource PrimaryBtn}" Content="Generar dictamen" Visibility="Collapsed" Click="BtnGenerateDictumClick"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
