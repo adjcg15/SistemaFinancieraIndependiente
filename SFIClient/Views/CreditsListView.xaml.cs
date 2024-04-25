@@ -136,7 +136,9 @@ namespace SFIClient.Views
 
         private void RedirectToChangeApplicableCreditCondition(object sender, Credit selectedCredit)
         {
-            //TODO: implementar redirección
+            ModifyCreditConditionApplicableToCreditController modifyCreditConditionWindow
+                = new ModifyCreditConditionApplicableToCreditController(selectedCredit);
+            NavigationService.Navigate(modifyCreditConditionWindow);
         }
 
         private void BtnSearchCreditsClick(object sender, RoutedEventArgs e)
