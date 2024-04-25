@@ -85,7 +85,8 @@
                                     Style="{StaticResource TextInput}"
                                     TextWrapping="Wrap"
                                     AcceptsReturn="True"
-                                    VerticalScrollBarVisibility="Auto"/>
+                                    VerticalScrollBarVisibility="Auto"
+                                    MaxLength="60"/>
                             </Grid>
                         </StackPanel>
 
@@ -138,7 +139,7 @@
                                     AcceptsReturn="True"
                                     VerticalScrollBarVisibility="Auto"
                                     Height="160"
-                                    MaxLength="300"/>
+                                    MaxLength="200"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>

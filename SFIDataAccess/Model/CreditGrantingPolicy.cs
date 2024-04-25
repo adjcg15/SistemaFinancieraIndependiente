@@ -11,6 +11,9 @@ namespace SFIDataAccess.Model
     public class CreditGrantingPolicy
     {
         [DataMember]
+        public int Identifier { get; set; }
+
+        [DataMember]
         public string Title { get; set; }
         [DataMember]
         public string Description { get; set; }
