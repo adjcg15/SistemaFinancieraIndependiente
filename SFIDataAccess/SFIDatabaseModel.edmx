@@ -666,6 +666,14 @@
           <Parameter Name="NewCardNumber" Type="varchar" Mode="In" />
           <Parameter Name="Success" Type="bit" Mode="InOut" />
         </Function>
+        <Function Name="UpdateCreditGrantingPolicy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_credit_granting_policy" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="is_active" Type="bit" Mode="In" />
+          <Parameter Name="effective_date" Type="date" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="updated" Type="bit" Mode="InOut" />
+        </Function>
         <Function Name="UpdatePersonalReference" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdPersonalReference" Type="int" Mode="In" />
           <Parameter Name="CurrentIneKey" Type="char" Mode="In" />
@@ -1119,6 +1127,14 @@
             <End Role="payment" EntitySet="payments" />
             <End Role="payment_layouts" EntitySet="payment_layouts" />
           </AssociationSet>
+          <FunctionImport Name="UpdateCreditGrantingPolicy">
+            <Parameter Name="id_credit_granting_policy" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="is_active" Mode="In" Type="Boolean" />
+            <Parameter Name="effective_date" Mode="In" Type="DateTime" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="updated" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1988,6 +2004,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCreditGrantingPolicy" FunctionName="SFIDatabaseModel.Store.UpdateCreditGrantingPolicy" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
