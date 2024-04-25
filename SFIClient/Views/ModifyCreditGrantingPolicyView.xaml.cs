@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,13 @@ namespace SFIClient.Views
 {
     public partial class ModifyCreditGrantingPolicyController : Page
     {
-        public ModifyCreditGrantingPolicyController()
+        private CreditGrantingPolicy editedPolicy;
+
+        public ModifyCreditGrantingPolicyController(CreditGrantingPolicy policy)
         {
             InitializeComponent();
+
+            this.editedPolicy = policy;
         }
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)

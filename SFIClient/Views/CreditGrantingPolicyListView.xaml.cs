@@ -143,7 +143,7 @@ namespace SFIClient.Views
 
         private void RedirectToEditPolicy(object sender, CreditGrantingPolicy selectedPolicy)
         {
-            //TODO: implementar redirección
+            NavigationService.Navigate(new ModifyCreditGrantingPolicyController(selectedPolicy));
         }
     }
 }
