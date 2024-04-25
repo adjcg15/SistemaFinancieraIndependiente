@@ -14,7 +14,7 @@
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
                     <Button 
-                    Click="BtnModifyCreditConditionClick" 
+                    Click="BtnBackPreviousPageClick" 
                     Style="{StaticResource NoHoverStyle}" 
                     Width="40" Height="40" Margin="0, 0, 16, 0" 
                     Background="Transparent" Cursor="Hand">
@@ -38,12 +38,12 @@
                 Style="{StaticResource Subtitle}" 
                 Text="Andrés Manuel López Obrador"/>
                 <TextBlock 
-                Style="{StaticResource Paragraph}" Margin="0, 8">
-                Salario neto registrado <Bold x:Name="SpnClientSalaryAmmount">4263</Bold><Bold>MXN</Bold>
+                    Style="{StaticResource Paragraph}" Margin="0, 8">
+                    Salario neto registrado <Bold x:Name="SpnClientSalaryAmmount">4263</Bold>
                 </TextBlock>
                 <TextBlock x:Name="TbkMoneyInformation" Style="{StaticResource Paragraph}">
-                Moto de credito aprobado 
-                <Bold x:Name="BldApprovedAmountCredit">125,000</Bold><Bold>MXN</Bold>
+                    Moto de credito aprobado 
+                    <Bold x:Name="BldApprovedAmountCredit">125,000</Bold>
                 </TextBlock>
             </StackPanel>
 
