@@ -97,6 +97,7 @@ namespace SFIClient.Views
             DpkFromDate.IsEnabled = false;
             DpkToDate.IsEnabled = false;
             TbSearchbar.IsEnabled = false;
+            BtnApplyFilters.IsEnabled = false;
             CkbCreditApplicationsWaitingDictum.IsEnabled = false;
             CkbCreditApplicationsRejected.IsEnabled = false;
             CkbPaidCreditApplicationsApproved.IsEnabled = false;
@@ -124,6 +125,11 @@ namespace SFIClient.Views
             });
         }
 
+        private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
+        {
+            RedirectToLogin();
+        }
+
         private void BtnGenerateDictumClick(object sender, CreditApplication selectedApplication)
         {
             //TODO: implementar redirección
@@ -131,17 +137,83 @@ namespace SFIClient.Views
 
         private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)
         {
+            string searchQuery = TbSearchbar.Text.Trim();
+            List<CreditApplication> applicationsFilteredJustBySearch = 
+                allCreditApplicationsList.Where(creditApplication =>
+                {
+                    return creditApplication.Invoice.ToLower().Contains(searchQuery.ToLower());
+                })
+                .ToList();
 
+            showedCreditApplicationsList = applicationsFilteredJustBySearch;
+
+            if (showedCreditApplicationsList.Count == 0)
+            {
+                ShowEmptyCreditApplicationsListMessage();
+            }
+            else
+            {
+                ShowCreditApplicationsList();
+            }
+
+            DpkFromDate.SelectedDate = null;
+            DpkToDate.SelectedDate = null;
+            CkbCreditApplicationsRejected.IsChecked = false;
+            CkbCreditApplicationsWaitingDictum.IsChecked = false;
+            CkbPaidCreditApplicationsApproved.IsChecked = false;
         }
 
         private void BtnSearchCreditApplicationsClick(object sender, RoutedEventArgs e)
         {
+            List<CreditApplication> filteredApplicationsList = FilterCreditApplicationsList();
+            showedCreditApplicationsList = filteredApplicationsList;
 
+            if (showedCreditApplicationsList.Count == 0)
+            {
+                ShowEmptyCreditApplicationsListMessage();
+            }
+            else
+            {
+                ShowCreditApplicationsList();
+            }
         }
 
-        private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
+        private List<CreditApplication> FilterCreditApplicationsList()
         {
+            string searchQuery = TbSearchbar.Text.Trim();
+            DateTime fromDate = DpkFromDate.SelectedDate.HasValue ? 
+                DpkFromDate.SelectedDate.Value.AddDays(-1) : DateTime.MinValue;
+            DateTime toDate = DpkToDate.SelectedDate.HasValue ? 
+                DpkToDate.SelectedDate.Value.AddDays(1) : DateTime.MaxValue;
+            bool includeApplicationsWaitingDictum = (bool)CkbCreditApplicationsWaitingDictum.IsChecked;
+            bool includeApplicationsApproved = (bool)CkbPaidCreditApplicationsApproved.IsChecked;
+            bool includeApplicationsRejected = (bool)CkbCreditApplicationsRejected.IsChecked;
 
+            return allCreditApplicationsList
+                .Where(creditApplication =>
+                {
+                    return creditApplication.Invoice.ToLower().Contains(searchQuery.ToLower());
+                })
+                .Where(creditApplication => fromDate <= creditApplication.ExpeditionDate)
+                .Where(creditApplication => creditApplication.ExpeditionDate <= toDate)
+                .Where(creditApplication =>
+                {
+                    bool allFilterSelected = includeApplicationsApproved && includeApplicationsRejected && includeApplicationsWaitingDictum;
+                    bool noneFilterSelecter = !includeApplicationsApproved && !includeApplicationsRejected && !includeApplicationsWaitingDictum;
+                    
+                    if(allFilterSelected || noneFilterSelecter)
+                    {
+                        return true;
+                    } else
+                    {
+                        return (includeApplicationsWaitingDictum && creditApplication.Dictum == null)
+                            || (includeApplicationsApproved && creditApplication.Dictum != null
+                                && creditApplication.Dictum.IsApproved)
+                            || (includeApplicationsRejected && creditApplication.Dictum != null
+                                && !creditApplication.Dictum.IsApproved);
+                    }
+                })
+                .ToList();
         }
     }
 }
