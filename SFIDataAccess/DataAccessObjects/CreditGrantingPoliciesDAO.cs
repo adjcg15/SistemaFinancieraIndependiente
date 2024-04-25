@@ -86,5 +86,55 @@ namespace SFIDataAccess.DataAccessObjects
 
             return policies;
         } 
+
+        public static bool UpdateCreditGrantingPolicy(CreditGrantingPolicy policy)
+        {
+            bool updated = false;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var updateParam = new SqlParameter("@updated", SqlDbType.Bit);
+                    updateParam.Direction = ParameterDirection.Output;
+
+                    context.Database.ExecuteSqlCommand(
+                        "EXEC UpdateCreditGrantingPolicy @id_credit_granting_policy, " +
+                        "@title, @is_active, @effective_date, @description",
+                        new SqlParameter("@id_credit_granting_policy", policy.Identifier),
+                        new SqlParameter("@title", policy.Title),
+                        new SqlParameter("@is_active", policy.IsActive),
+                        new SqlParameter("@effective_date", policy.EffectiveDate),
+                        new SqlParameter("@description", policy.Description),
+                        updateParam
+                    );
+
+                    updated = (bool)updateParam.Value;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+
+            return updated;
+        }
     }
 }
