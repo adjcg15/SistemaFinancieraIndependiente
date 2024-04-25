@@ -1,0 +1,30 @@
+﻿<Page x:Class="SFIClient.Views.ModifyCreditGrantingPolicyView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:SFIClient.Views"
+    mc:Ignorable="d" 
+    d:Width="1280" d:Height="800"
+    Title="Modificar política de otorgamiento de crédito">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button
+                        Click="BtnReturnToPreviousPageClick"
+                        Style="{StaticResource NoHoverStyle}" 
+                        Width="40" Height="40" Margin="0, 0, 16, 0" 
+                        Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Modificar política de otorgamiento de crédito" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

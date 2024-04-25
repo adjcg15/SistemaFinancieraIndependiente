@@ -131,6 +131,9 @@
     <Compile Include="Views\ModifyCreditConditionView.xaml.cs">
       <DependentUpon>ModifyCreditConditionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyCreditGrantingPolicyView.xaml.cs">
+      <DependentUpon>ModifyCreditGrantingPolicyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModifyPersonalReferenceView.xaml.cs">
       <DependentUpon>ModifyPersonalReferenceView.xaml</DependentUpon>
     </Compile>
@@ -237,6 +240,10 @@
     <Page Include="Views\ModifyCreditConditionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ModifyCreditGrantingPolicyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModifyPersonalReferenceView.xaml">
       <SubType>Designer</SubType>
