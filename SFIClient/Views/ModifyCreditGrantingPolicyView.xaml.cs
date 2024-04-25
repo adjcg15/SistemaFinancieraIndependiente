@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace SFIClient.Views
 {
-    public partial class ModifyCreditGrantingPolicyView : Page
+    public partial class ModifyCreditGrantingPolicyController : Page
     {
-        public ModifyCreditGrantingPolicyView()
+        public ModifyCreditGrantingPolicyController()
         {
             InitializeComponent();
         }
