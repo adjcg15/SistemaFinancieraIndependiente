@@ -2169,6 +2169,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllCreditApplications", ReplyAction="http://tempuri.org/ICreditsService/GetAllCreditApplicationsResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication[]> GetAllCreditApplicationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RecoverCreditApplication", ReplyAction="http://tempuri.org/ICreditsService/RecoverCreditApplicationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/RecoverCreditApplicationServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditApplication RecoverCreditApplication(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RecoverCreditApplication", ReplyAction="http://tempuri.org/ICreditsService/RecoverCreditApplicationResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication> RecoverCreditApplicationAsync(string invoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2228,6 +2235,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication[]> GetAllCreditApplicationsAsync() {
             return base.Channel.GetAllCreditApplicationsAsync();
+        }
+        
+        public SFIClient.SFIServices.CreditApplication RecoverCreditApplication(string invoice) {
+            return base.Channel.RecoverCreditApplication(invoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication> RecoverCreditApplicationAsync(string invoice) {
+            return base.Channel.RecoverCreditApplicationAsync(invoice);
         }
     }
     

@@ -132,7 +132,7 @@ namespace SFIClient.Views
 
         private void BtnGenerateDictumClick(object sender, CreditApplication selectedApplication)
         {
-            //TODO: implementar redirección
+            NavigationService.Navigate(new CreditAuthorizationDictumController(selectedApplication.Invoice));
         }
 
         private void BtnRestartFiltersClick(object sender, RoutedEventArgs e)

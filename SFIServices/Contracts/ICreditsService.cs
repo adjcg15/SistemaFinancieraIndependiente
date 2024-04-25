@@ -27,5 +27,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<CreditApplication> GetAllCreditApplications();
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        CreditApplication RecoverCreditApplication(string invoice);
     }
 }
