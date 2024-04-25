@@ -25,6 +25,23 @@ namespace SFIClient.Views
             InitializeComponent();
 
             editedPolicy = policy;
+            ShowCreditGrantingPolicyInformation();
+        }
+
+        private void ShowCreditGrantingPolicyInformation()
+        {
+            TbPoliticTitle.Text = editedPolicy.Title;
+            DpkEffectiveDate.SelectedDate = editedPolicy.EffectiveDate;
+            TbPolicyDescription.Text = editedPolicy.Description;
+
+            if(editedPolicy.IsActive)
+            {
+                RbActiveStatus.IsChecked = true;
+            }
+            else
+            {
+                RbInactiveStatus.IsChecked = true;
+            }
         }
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
