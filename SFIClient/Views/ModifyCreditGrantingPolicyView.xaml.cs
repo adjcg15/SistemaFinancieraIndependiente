@@ -35,7 +35,8 @@ namespace SFIClient.Views
         private void ShowReturnToPreviousPageConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                "¿Está seguro que desea regresar a la ventana previa ? Todos los cambios sin guardar se perderá",
+                "¿Está seguro que desea regresar a la ventana previa? " +
+                "Todos los cambios sin guardar se perderá",
                 "Regresar a ventana previa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
@@ -54,7 +55,23 @@ namespace SFIClient.Views
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
+            ShowDiscardChangesConfirmationDialog();
+        }
 
+        private void ShowDiscardChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea cancelar la actualización de la política? " +
+                "Todos los cambios sin guardar se perderán",
+                "Descartar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToCreditGrantingPolicyList();
+            }
         }
 
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
