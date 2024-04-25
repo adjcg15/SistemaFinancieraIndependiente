@@ -27,6 +27,8 @@ namespace SFIClient.Views
         private readonly CreditsServiceClient credititsServiceClient = new CreditsServiceClient();
         private CreditGrantingPolicy[] creditGrantingPolicesList;
         private CreditApplication creditApplication;
+        private bool dictumIsApproved;
+        private List<CreditGrantingPolicy> creditGrantingPolicesListThatApply = new List<CreditGrantingPolicy>();
         private readonly string creditInvoice;
         public CreditAuthorizationDictumController(string invoice)
         {
@@ -226,6 +228,7 @@ namespace SFIClient.Views
 
         private void RbRejectApplicationChecked(object sender, RoutedEventArgs e)
         {
+            dictumIsApproved = false;
             tbkPolicys.Visibility = Visibility.Collapsed;
             skpCreditGrantingPolices.Visibility = Visibility.Collapsed;
             ShowDictumJustificationField();
@@ -234,6 +237,7 @@ namespace SFIClient.Views
 
         private void RbApproveApplicationChecked(object sender, RoutedEventArgs e)
         {
+            dictumIsApproved = true;
             ShowCreditGrantingPolices();
             ShowDictumJustificationField();
             ShowGenerateDictumButton();
@@ -248,6 +252,7 @@ namespace SFIClient.Views
             {
                 CreditAuthorizationDictumPolicyControl policyControl = new CreditAuthorizationDictumPolicyControl();
                 policyControl.tbkPolicyName.Text = polices.Title;
+                policyControl.CheckCreditGrantingPolicy += CkbSelectCreditGrantingPolicyChecked;
                 policyControl.tbkPolicyName.ToolTip = polices.Description;
                 skpCreditGrantingPolices.Children.Add(policyControl);
             }
@@ -265,39 +270,155 @@ namespace SFIClient.Views
             btnGenerateDictum.Visibility = Visibility.Visible;
         }
 
+        private void CkbSelectCreditGrantingPolicyChecked(object sender, EventArgs e)
+        {
+            CreditAuthorizationDictumPolicyControl policyControl = (CreditAuthorizationDictumPolicyControl)sender;
+            foreach (var policy in creditGrantingPolicesList)
+            {
+                if (policy.Title == policyControl.tbkPolicyName.Text)
+                {
+                    creditGrantingPolicesListThatApply.Add(policy);
+                }
+                break;
+            }
+        }
+
         private void BtnGenerateDictumClick(object sender, RoutedEventArgs e)
         {
-
+            bool isValidInformation = VerifyDictumInformation();
+            if (isValidInformation)
+            {
+                ShowGenerateDictumConfirmationDIalog();
+            }
+            else
+            {
+                HighLightInvalidFields();
+                ShowInvalidFieldsAlertDialog();
+            }
         }
 
         private void BtnCancelDictumGenerationClick(object sender, RoutedEventArgs e)
         {
-
+            ShowCancelDictumGenerationDialog();
         }
 
         private void BtnDiscardDictumGenerationClick(object sender, RoutedEventArgs e)
         {
-
+            ShowDiscardDictumGenerationDialog();
         }
 
         private void ShowGenerateDictumConfirmationDIalog()
         {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea guardar los cambios realizados a la referencia personal del cliente "
+                + creditApplication.Client.Name + " " + creditApplication.Client.Surname + " " + creditApplication.Client.LastName,
+                "Confirmación de actualización",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
 
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                GenerateDictum();
+            }
         }
 
         private void ShowCancelDictumGenerationDialog()
         {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea cancelar la generación del dictamen? Todos los cambios sin guardar se perderán",
+                "Cancelar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
 
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToCreditApplicationListView();
+            }
         }
 
         private void ShowDiscardDictumGenerationDialog()
         {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea regresar a la ventana previa? Todos los cambios sin guardar se perderán",
+                "Regresar a ventana previa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
 
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToCreditApplicationListView();
+            }
         }
 
         private void RedirectToCreditApplicationListView()
         {
+            NavigationService.Navigate(new CreditApplicationsListController());
+        }
 
+        private bool VerifyDictumInformation()
+        {
+            bool isValidFields = true;
+
+            if (dictumIsApproved)
+            {
+                if (tbJustification.Text.Trim().Length == 0) isValidFields = false;
+                if (creditGrantingPolicesListThatApply.Count == 0) isValidFields = false;
+            }
+            else
+            {
+                if (tbJustification.Text.Trim().Length == 0) isValidFields = false;
+            }
+
+            return isValidFields;
+        }
+        private void HighLightInvalidFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            if (dictumIsApproved)
+            {
+                if (tbJustification.Text.Trim().Length == 0) tbJustification.Style = textInputErrorStyle;
+            }
+            else
+            {
+                if (tbJustification.Text.Trim().Length == 0) tbJustification.Style = textInputErrorStyle;
+            }
+        }
+
+        private void ShowInvalidFieldsAlertDialog()
+        {
+            MessageBox.Show(
+                "Verifique que la información ingresada sea correcta y no existan campos vacíos",
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+        }
+
+        private void GenerateDictum()
+        {
+
+        }
+
+        private void TbJustificationTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tbJusitification = sender as TextBox;
+
+            Style textInputStyle = (Style)this.FindResource("TextInput");
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+
+            string justification = tbJusitification.Text.Trim();
+
+            if (justification.Length == 0)
+            {
+                tbJusitification.Style = textInputErrorStyle;
+            }
+            else
+            {
+                tbJusitification.Style = textInputStyle;
+            }
         }
     }
 }

@@ -20,9 +20,15 @@ namespace SFIClient.Controlls
     /// </summary>
     public partial class CreditAuthorizationDictumPolicyControl : UserControl
     {
+        public event EventHandler CheckCreditGrantingPolicy;
         public CreditAuthorizationDictumPolicyControl()
         {
             InitializeComponent();
+        }
+
+        private void CkbSelectCreditGrantingPolicyChecked(object sender, RoutedEventArgs e)
+        {
+            CheckCreditGrantingPolicy?.Invoke(this, EventArgs.Empty);
         }
     }
 }

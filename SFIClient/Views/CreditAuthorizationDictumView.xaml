@@ -382,13 +382,13 @@
                                 </TextBlock.Style>
                             </TextBlock>
                             <TextBox 
-                                Name="TbCreditPurpose" 
+                                Name="tbJustification" 
                                 Style="{StaticResource TextInput}"
                                 TextWrapping="Wrap"
                                 AcceptsReturn="True"
                                 VerticalScrollBarVisibility="Auto"
                                 Height="160"
-                                MaxLength="300"
+                                MaxLength="300" TextChanged="TbJustificationTextChanged"
                             />
                         </Grid>
                     </StackPanel>
