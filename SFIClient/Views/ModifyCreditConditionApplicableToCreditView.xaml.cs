@@ -48,20 +48,20 @@ namespace SFIClient.Views
         private void ShowReturnPreviousPageConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                $"¿Está seguro de que desea regresar al menú principal? Todos los cambios sin guardar se perderán",
+                $"¿Está seguro de que desea regresar a la lista de créditos? Todos los cambios sin guardar se perderán",
                 "Regresar a ventana previa",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
             );
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                RedirectToConsultConditionsCredit();
+                RedirectToConsultCreditsList();
             }
         }
         private void ShowDiscardChangesConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                $"¿Está seguro de que desea cancelar modificacion de condición de crédito aplicable a crédito? " +
+                $"¿Está seguro de que desea cancelar modificacion de la condición de crédito aplicable a crédito? " +
                 $"Todos los cambios sin guardar se perderán",
                 "Descartar cambios",
                 MessageBoxButton.YesNo,
@@ -69,13 +69,13 @@ namespace SFIClient.Views
             );
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                RedirectToConsultConditionsCredit();
+                RedirectToConsultCreditsList();
             }
         }
-        private void RedirectToConsultConditionsCredit()
+        private void RedirectToConsultCreditsList()
         {
-            MainMenu mainMenu = new MainMenu();
-            this.NavigationService.Navigate(mainMenu);
+            CreditsListController creditList = new CreditsListController();
+            this.NavigationService.Navigate(creditList);
             NavigationService.RemoveBackEntry();
         }
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
