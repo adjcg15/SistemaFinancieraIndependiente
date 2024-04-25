@@ -23,5 +23,21 @@ namespace SFIServices
         {
             return CreditConditionsDAO.RecoverAllCreditConditions();
         }
+        public CreditCondition RecoverCreditConditionDetails(string identifier)
+        {
+            return CreditConditionsDAO.RecoverCreditConditionDetails(identifier);
+        }
+        public bool UpdateCreditCondition(CreditCondition updateCreditCondition)
+        {
+            return CreditConditionsDAO.UpdateCreditCondition(updateCreditCondition);
+        }
+        public bool VerifyUsageInCreditApplications(string conditionIdentifier)
+        {
+            return CreditConditionsDAO.VerifyUsageInCreditApplications(conditionIdentifier);
+        }
+        public bool VerifyUsageInRegimen(string conditionIdentifier)
+        {
+            return CreditConditionsDAO.VerifyUsageInRegimen(conditionIdentifier);
+        }
     }
 }

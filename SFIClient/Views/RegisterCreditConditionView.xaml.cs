@@ -276,20 +276,6 @@ namespace SFIClient.Views
                 ShowErrorRecoveringCreditTypesDialog(errorMessage);
             }
         }
-        private void ClearCreditConditionFields()
-        {
-            TbCreditConditionName.Text = string.Empty;
-            ClearFieldHighlight(TbCreditConditionName);
-            RbActivePolicy.IsChecked = false;
-            RbInactivePolicy.IsChecked = false;
-            CbCreditTypes.SelectedIndex = -1;
-            TbPaymentMonths.Text = string.Empty;
-            RbApplyIVa.IsChecked = false;
-            RbDontApplyIVA.IsChecked = false;
-            TbInterestRate.Text = string.Empty;
-            TbInterestOnArrears.Text = string.Empty;
-            TbAdvancePaymentReduction.Text = string.Empty;
-        }
         private void ShowInvalidFieldsDialog()
         {
             MessageBox.Show("Por favor, verifique que los campos marcados en rojo " +

@@ -1,5 +1,6 @@
 ﻿using SFIClient.Controlls;
 using SFIClient.SFIServices;
+using SFIClient.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,12 +92,11 @@ namespace SFIClient.Views
         private void BtnEditCreditConditionClick(object sender, EventArgs e)
         {
             CreditConditionControl creditConditionControl = (CreditConditionControl)sender;
-            CreditCondition creditCondition = creditConditionControl.DataContext as CreditCondition;
+            CreditCondition creditCondition = (CreditCondition)creditConditionControl.DataContext;
 
             if (creditCondition != null)
             {
-                ModifyCreditConditionController modifyCreditConditionController = new ModifyCreditConditionController();
-                this.NavigationService.Navigate(modifyCreditConditionController);
+                this.NavigationService.Navigate(new ModifyCreditConditionController(creditCondition));
             }
         }
         private void BtnNewCreditConditionClick(object sender, RoutedEventArgs e)

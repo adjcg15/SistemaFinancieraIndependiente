@@ -1,4 +1,5 @@
-﻿using SFIDataAccess.CustomExceptions;
+﻿using SFIDataAccess;
+using SFIDataAccess.CustomExceptions;
 using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace SFIDataAccess.DataAccessObjects
                 {
                     context.credit_conditions
                         .Where(condition => condition.id_credit_type == creditTypeIdentifier)
-                        .ToList().ForEach(storedCondition => {
+                        .ToList().ForEach(storedCondition =>
+                        {
                             CreditCondition condition = new CreditCondition();
 
                             condition.Identifier = storedCondition.identifier;
@@ -126,24 +128,35 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return conditionsList;
         }
-        public static CreditCondition RecoverCreditCondition (string identifier)
+        public static CreditCondition RecoverCreditConditionDetails(string identifier)
         {
-            CreditCondition creditCondition = new CreditCondition();
+            CreditCondition creditCondition = null;
             try
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var account = (from creditcondition in context.credit_conditions
-                                   where creditcondition.identifier == identifier
-                                   select creditcondition).FirstOrDefault();
-                    if (account != null)
+                    var creditConditionEntity = (from creditcondition in context.credit_conditions
+                                                 where creditcondition.identifier == identifier
+                                                 select creditcondition).FirstOrDefault();
+                    if (creditConditionEntity != null)
                     {
-                        creditCondition.IsActive = account.is_active;
-                        creditCondition.IsIvaApplied = account.is_iva_applied;
-                        creditCondition.PaymentMonths = account.payment_months;
-                        creditCondition.InterestRate = account.interest_rate;
-                        creditCondition.InterestOnArrears = account.interest_on_arrears;
-                        creditCondition.AdvancePaymentReduction = account.advance_payment_reduction;
+                        creditCondition = new CreditCondition();
+                        creditCondition.Identifier = creditConditionEntity.identifier;
+                        creditCondition.IsActive = creditConditionEntity.is_active;
+                        creditCondition.IsIvaApplied = creditConditionEntity.is_iva_applied;
+                        creditCondition.PaymentMonths = creditConditionEntity.payment_months;
+                        creditCondition.InterestRate = creditConditionEntity.interest_rate;
+                        creditCondition.InterestOnArrears = creditConditionEntity.interest_on_arrears;
+                        creditCondition.AdvancePaymentReduction = creditConditionEntity.advance_payment_reduction;
+                        var creditTypeEntity = context.credit_types.FirstOrDefault(ct => ct.id_credit_type == creditConditionEntity.id_credit_type);
+                        if (creditTypeEntity != null)
+                        {
+                            creditCondition.CreditType = new CreditType
+                            {
+                                Identifier = creditTypeEntity.id_credit_type,
+                                Name = creditTypeEntity.name
+                            };
+                        }
                     }
                 }
             }
@@ -159,8 +172,92 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
-
             return creditCondition;
+        }
+        public static bool UpdateCreditCondition(CreditCondition updateCreditCondition)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+
+                    var interestRateParam = new SqlParameter("@InterestRate", updateCreditCondition.InterestRate);
+                    var isActiveParam = new SqlParameter("@IsActive", updateCreditCondition.IsActive);
+                    var isIvaAppliedParam = new SqlParameter("@IsIvaApplied", updateCreditCondition.IsIvaApplied);
+                    var interestOnArrearsParam = new SqlParameter("@InterestOnArrears", updateCreditCondition.InterestOnArrears);
+                    var advancePaymentReductionParam = new SqlParameter("@AdvancePaymentReduction", updateCreditCondition.AdvancePaymentReduction);
+                    var paymentMonthsParam = new SqlParameter("@PaymentMonths", updateCreditCondition.PaymentMonths);
+                    var creditTypeIdParam = new SqlParameter("@CreditTypeId", updateCreditCondition.CreditType.Identifier);
+                    var identifierParam = new SqlParameter("@Identifier", updateCreditCondition.Identifier);
+                    var resultParam = new SqlParameter("@Result", SqlDbType.Int) { Direction = ParameterDirection.Output };
+
+                    context.Database.ExecuteSqlCommand(
+                        "UpdateCreditCondition @identifier, @IsActive, @IsIvaApplied, @paymentMonths, " +
+                        "@interestRate, @interestOnArrears, @advancePaymentReduction, @creditTypeId, @result OUTPUT",
+                                    identifierParam, isActiveParam, isIvaAppliedParam, paymentMonthsParam,
+                                    interestRateParam, interestOnArrearsParam, advancePaymentReductionParam, creditTypeIdParam, resultParam);
+
+
+                    int result = (int)resultParam.Value;
+                    return result == 1;
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+        }
+        public static bool VerifyUsageInCreditApplications(string conditionIdentifier)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    return context.credit_applications.Any(ca => ca.credit_conditions.identifier == conditionIdentifier);
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+        }
+        public static bool VerifyUsageInRegimen(string conditionIdentifier)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    return context.regimes.Any(r => r.credit_conditions.identifier == conditionIdentifier);
+                }
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
         }
     }
 }

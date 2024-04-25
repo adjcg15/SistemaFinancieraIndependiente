@@ -2260,6 +2260,42 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditions", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverAllCreditConditionsResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverAllCreditConditionsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionDetails", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionDetailsResponse" +
+            "")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionDetailsServiceF" +
+            "aultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditCondition RecoverCreditConditionDetails(string identifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionDetails", ReplyAction="http://tempuri.org/ICreditConditionsService/RecoverCreditConditionDetailsResponse" +
+            "")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition> RecoverCreditConditionDetailsAsync(string identifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/UpdateCreditCondition", ReplyAction="http://tempuri.org/ICreditConditionsService/UpdateCreditConditionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/UpdateCreditConditionServiceFaultFaul" +
+            "t", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool UpdateCreditCondition([System.ServiceModel.MessageParameterAttribute(Name="updateCreditCondition")] SFIClient.SFIServices.CreditCondition updateCreditCondition1);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/UpdateCreditCondition", ReplyAction="http://tempuri.org/ICreditConditionsService/UpdateCreditConditionResponse")]
+        System.Threading.Tasks.Task<bool> UpdateCreditConditionAsync(SFIClient.SFIServices.CreditCondition updateCreditCondition);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInCreditApplications", ReplyAction="http://tempuri.org/ICreditConditionsService/VerifyUsageInCreditApplicationsRespon" +
+            "se")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInCreditApplicationsServic" +
+            "eFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool VerifyUsageInCreditApplications(string conditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInCreditApplications", ReplyAction="http://tempuri.org/ICreditConditionsService/VerifyUsageInCreditApplicationsRespon" +
+            "se")]
+        System.Threading.Tasks.Task<bool> VerifyUsageInCreditApplicationsAsync(string conditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimen", ReplyAction="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimenResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimenServiceFaultFault" +
+            "", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool VerifyUsageInRegimen(string conditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimen", ReplyAction="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimenResponse")]
+        System.Threading.Tasks.Task<bool> VerifyUsageInRegimenAsync(string conditionIdentifier);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2311,6 +2347,38 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition[]> RecoverAllCreditConditionsAsync() {
             return base.Channel.RecoverAllCreditConditionsAsync();
+        }
+        
+        public SFIClient.SFIServices.CreditCondition RecoverCreditConditionDetails(string identifier) {
+            return base.Channel.RecoverCreditConditionDetails(identifier);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition> RecoverCreditConditionDetailsAsync(string identifier) {
+            return base.Channel.RecoverCreditConditionDetailsAsync(identifier);
+        }
+        
+        public bool UpdateCreditCondition(SFIClient.SFIServices.CreditCondition updateCreditCondition1) {
+            return base.Channel.UpdateCreditCondition(updateCreditCondition1);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateCreditConditionAsync(SFIClient.SFIServices.CreditCondition updateCreditCondition) {
+            return base.Channel.UpdateCreditConditionAsync(updateCreditCondition);
+        }
+        
+        public bool VerifyUsageInCreditApplications(string conditionIdentifier) {
+            return base.Channel.VerifyUsageInCreditApplications(conditionIdentifier);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyUsageInCreditApplicationsAsync(string conditionIdentifier) {
+            return base.Channel.VerifyUsageInCreditApplicationsAsync(conditionIdentifier);
+        }
+        
+        public bool VerifyUsageInRegimen(string conditionIdentifier) {
+            return base.Channel.VerifyUsageInRegimen(conditionIdentifier);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyUsageInRegimenAsync(string conditionIdentifier) {
+            return base.Channel.VerifyUsageInRegimenAsync(conditionIdentifier);
         }
     }
     
