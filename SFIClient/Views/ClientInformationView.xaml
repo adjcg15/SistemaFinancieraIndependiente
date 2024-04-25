@@ -132,28 +132,28 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" >
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkFirstPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdFirstPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkFirstPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkSecondPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdSecondPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkSecondPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkThirdPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdThirdPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkThirdPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 0" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkFourthPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
+                                <Border Name="brdFourthPhoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 0" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkFourthPhoneNumber" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="2321983692" FontSize="16"/>
                                 </Border>
                             </StackPanel>
                             <StackPanel Grid.Column="1" >
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkFirstEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
+                                <Border Name="brdFirstEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkFirstEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkSecondEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
+                                <Border Name="brdSecondEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkSecondEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
                                 </Border>
-                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5">
-                                    <TextBlock Name="TbkThirdEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
+                                <Border Name="brdThirdEmail" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0, 0, 0, 10" Style="{StaticResource RoundedBorder}" BorderThickness="1" Padding="5" Visibility="Collapsed">
+                                    <TextBlock Name="tbkThirdEmail" TextWrapping="Wrap" Margin="10, 10, 10, 10" Text="rodri.lopezenero@gmail.com" FontSize="16"/>
                                 </Border>
                             </StackPanel>
                         </Grid>

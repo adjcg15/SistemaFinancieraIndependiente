@@ -278,6 +278,9 @@ namespace SFIDataAccess.DataAccessObjects
                     var creditConditionInformation = (from creditCondition in context.credit_conditions
                                                       where creditCondition.identifier == creditApplicationInformation.credit_condition_identifier
                                                       select creditCondition).FirstOrDefault();
+                    var creditTypeInformation = (from creditType in context.credit_types
+                                          where creditType.id_credit_type == creditConditionInformation.id_credit_type
+                                          select creditType).FirstOrDefault();
                     Address addressClient = new Address
                     {
                         Street = clientAddress.street,
@@ -352,13 +355,20 @@ namespace SFIDataAccess.DataAccessObjects
                         InterestRate = creditConditionInformation.interest_rate,
                         PaymentMonths = creditConditionInformation.payment_months
                     };
+                    CreditType creditTypeInfo = new CreditType
+                    {
+                        Identifier = creditTypeInformation.id_credit_type,
+                        Name = creditTypeInformation.name
+                    };
                     fullCreditApplication = new CreditApplication
                     {
                         Invoice = creditApplicationInformation.invoice,
                         MinimumAmountAccepted = creditApplicationInformation.minimun_amount_accepted,
                         RequestedAmount = creditApplicationInformation.requested_amount,
+                        Purpose = creditApplicationInformation.purpose,
                         Client = clientInfo,
-                        CreditCondition = creditConditionInfo
+                        CreditCondition = creditConditionInfo,
+                        CreditType = creditTypeInfo
                     };
                 }
             }

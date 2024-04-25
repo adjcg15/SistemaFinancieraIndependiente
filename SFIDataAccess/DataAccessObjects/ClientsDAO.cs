@@ -481,10 +481,18 @@ namespace SFIDataAccess.DataAccessObjects
                     var personalReferencesInformation = (from personalReference in context.personal_references
                                                          where personalReference.client_rfc == clientRfc
                                                          select personalReference).ToList();
-                    var addressIds = personalReferencesInformation.Select(pr => pr.id_address).ToList();
-                    var personalReferenceAddresses = (from address in context.addresses
-                                                      where addressIds.Contains(address.id_address)
-                                                      select address).ToList();
+                    var personalReferenceFirst = personalReferencesInformation[0];
+                    var personalReferenceSecond = personalReferencesInformation[1];
+                    var personalReferenceAddresFirst = (from referenceAddressFirst in context.addresses
+                                                        where referenceAddressFirst.id_address == personalReferenceFirst.id_address
+                                                        select referenceAddressFirst).FirstOrDefault();
+                    var personalReferenceAddresSecond = (from referenceAddressSecond in context.addresses
+                                                         where referenceAddressSecond.id_address == personalReferenceSecond.id_address
+                                                        select referenceAddressSecond).FirstOrDefault();
+                    //var addressIds = personalReferencesInformation.Select(pr => pr.id_address).ToList();
+                    //var personalReferenceAddresses = (from address in context.addresses
+                    //                                  where addressIds.Contains(address.id_address)
+                    //                                  select address).ToList();
                     Address addressWorkCenter = new Address
                     {
                         Street = workCenterAddress.street,
@@ -498,14 +506,14 @@ namespace SFIDataAccess.DataAccessObjects
                     };
                     Address addresspersonalReferenceFirst = new Address
                     {
-                        Street = personalReferenceAddresses[0].street,
-                        City = personalReferenceAddresses[0].city,
-                        Neighborhod = personalReferenceAddresses[0].neighborhod,
-                        Municipality = personalReferenceAddresses[0].municipality,
-                        InteriorNumber = personalReferenceAddresses[0].inteior_number,
-                        OutdoorNumber = personalReferenceAddresses[0].outdoor_number,
-                        PostCode = personalReferenceAddresses[0].post_code,
-                        State = personalReferenceAddresses[0].state
+                        Street = personalReferenceAddresFirst.street,
+                        City = personalReferenceAddresFirst.city,
+                        Neighborhod = personalReferenceAddresFirst.neighborhod,
+                        Municipality = personalReferenceAddresFirst.municipality,
+                        InteriorNumber = personalReferenceAddresFirst.inteior_number,
+                        OutdoorNumber = personalReferenceAddresFirst.outdoor_number,
+                        PostCode = personalReferenceAddresFirst.post_code,
+                        State = personalReferenceAddresFirst.state
                     };
                     PersonalReference personalReferenceClientFirst = new PersonalReference
                     {
@@ -520,14 +528,14 @@ namespace SFIDataAccess.DataAccessObjects
                     };
                     Address addresspersonalReferenceSecond = new Address
                     {
-                        Street = personalReferenceAddresses[1].street,
-                        City = personalReferenceAddresses[1].city,
-                        Neighborhod = personalReferenceAddresses[1].neighborhod,
-                        Municipality = personalReferenceAddresses[1].municipality,
-                        InteriorNumber = personalReferenceAddresses[1].inteior_number,
-                        OutdoorNumber = personalReferenceAddresses[1].outdoor_number,
-                        PostCode = personalReferenceAddresses[1].post_code,
-                        State = personalReferenceAddresses[1].state
+                        Street = personalReferenceAddresSecond.street,
+                        City = personalReferenceAddresSecond.city,
+                        Neighborhod = personalReferenceAddresSecond.neighborhod,
+                        Municipality = personalReferenceAddresSecond.municipality,
+                        InteriorNumber = personalReferenceAddresSecond.inteior_number,
+                        OutdoorNumber = personalReferenceAddresSecond.outdoor_number,
+                        PostCode = personalReferenceAddresSecond.post_code,
+                        State = personalReferenceAddresSecond.state
                     };
                     PersonalReference personalReferenceClientSecond = new PersonalReference
                     {
