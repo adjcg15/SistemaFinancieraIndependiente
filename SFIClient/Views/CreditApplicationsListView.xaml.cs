@@ -40,7 +40,7 @@ namespace SFIClient.Views
             try
             {
                 List<CreditApplication> creditApplicationsList = creditsService.GetAllCreditApplications().ToList();
-                if (creditApplicationsList.Count != 0)
+                if (creditApplicationsList.Count == 0)
                 {
                     DisableFilterOptions();
                     ShowEmptyCreditApplicationsListMessage();
@@ -125,6 +125,11 @@ namespace SFIClient.Views
             });
         }
 
+        private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
+        {
+            RedirectToLogin();
+        }
+
         private void BtnGenerateDictumClick(object sender, CreditApplication selectedApplication)
         {
             //TODO: implementar redirección
@@ -136,11 +141,6 @@ namespace SFIClient.Views
         }
 
         private void BtnSearchCreditApplicationsClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnReturnToPreviousScreenClick(object sender, RoutedEventArgs e)
         {
 
         }
