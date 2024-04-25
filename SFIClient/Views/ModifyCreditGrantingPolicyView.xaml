@@ -88,6 +88,12 @@
                                     VerticalScrollBarVisibility="Auto"
                                     MaxLength="60"/>
                             </Grid>
+                            <TextBlock
+                                x:Name="TbkTitleError"
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Red}"
+                                Visibility="Collapsed"
+                                Text="El título de la política de otorgamiento de crédito es obligatorio"/>
                         </StackPanel>
 
                         <!--Status field-->
@@ -99,6 +105,13 @@
                                 <RadioButton x:Name="RbActiveStatus" Style="{StaticResource RadioButtonStyle}" Content="Activa"/>
                                 <RadioButton x:Name="RbInactiveStatus" Style="{StaticResource RadioButtonStyle}" Content="Inactiva"/>
                             </StackPanel>
+                            <TextBlock
+                                x:Name="TbkStatusError"
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Red}"
+                                Text="Debe seleccionar un estado"
+                                Margin="0, 8, 0, 0"
+                                Visibility="Collapsed"/>
                         </StackPanel>
 
                         <!--Date field-->
@@ -106,13 +119,19 @@
                             <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                                 Fecha de vigencia <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                             </TextBlock>
-                            <Grid Margin="0, 0, 0, 16">
+                            <Grid>
                                 <Border Style="{StaticResource RoundedBorder}">
                                     <DatePicker 
                                         x:Name="DpkEffectiveDate"
                                         Style="{StaticResource DatePicker}"/>
                                 </Border>
                             </Grid>
+                            <TextBlock
+                                x:Name="TbkEffectiveDateError"
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Red}"
+                                Visibility="Collapsed"
+                                Text="La fecha debe ser mayor a la actual"/>
                         </StackPanel>
 
                         <!--Description field-->
@@ -120,7 +139,7 @@
                             <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                                 Descripción <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                             </TextBlock>
-                            <Grid Margin="0, 0, 0, 24">
+                            <Grid>
                                 <TextBlock Margin="5,2" Text="Descripción detallada del motivo de la solicitud." TextWrapping="Wrap">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
@@ -141,6 +160,12 @@
                                     Height="160"
                                     MaxLength="200"/>
                             </Grid>
+                            <TextBlock
+                                x:Name="TbkDescriptionError"
+                                Style="{StaticResource Paragraph}"
+                                Foreground="{StaticResource Red}"
+                                Text="La descripción de la política es obligatoria"
+                                Visibility="Collapsed"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
