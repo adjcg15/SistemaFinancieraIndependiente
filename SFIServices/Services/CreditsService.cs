@@ -61,5 +61,10 @@ namespace SFIServices
         {
             return CreditsDAO.GetAllCreditApplications();
         }
+
+        public CreditApplication RecoverCreditApplication(string invoice)
+        {
+            return CreditsDAO.RecoverCreditApplication(invoice);
+        }
     }
 }
