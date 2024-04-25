@@ -1,11 +1,7 @@
 ﻿using SFIDataAccess.DataAccessObjects;
 using SFIDataAccess.Model;
 using SFIServices.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SFIServices
 {
@@ -19,6 +15,11 @@ namespace SFIServices
         public List<CreditGrantingPolicy> GetAllCreditGrantingPolicies()
         {
             return CreditGrantingPoliciesDAO.GetAllCreditGrantingPolicies();
+        }
+
+        public bool UpdateCreditGrantingPolicy(CreditGrantingPolicy policy)
+        {
+            return CreditGrantingPoliciesDAO.UpdateCreditGrantingPolicy(policy);
         }
     }
 }

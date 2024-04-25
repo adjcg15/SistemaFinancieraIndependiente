@@ -19,5 +19,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<CreditGrantingPolicy> GetAllCreditGrantingPolicies();
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool UpdateCreditGrantingPolicy(CreditGrantingPolicy policy);
     }
 }
