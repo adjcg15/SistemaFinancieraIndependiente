@@ -1827,6 +1827,9 @@ namespace SFIClient.SFIServices {
         private System.DateTime EffectiveDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdentifierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsActiveField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1864,6 +1867,19 @@ namespace SFIClient.SFIServices {
                 if ((this.EffectiveDateField.Equals(value) != true)) {
                     this.EffectiveDateField = value;
                     this.RaisePropertyChanged("EffectiveDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Identifier {
+            get {
+                return this.IdentifierField;
+            }
+            set {
+                if ((this.IdentifierField.Equals(value) != true)) {
+                    this.IdentifierField = value;
+                    this.RaisePropertyChanged("Identifier");
                 }
             }
         }
@@ -2416,6 +2432,14 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPolicies", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> GetAllCreditGrantingPoliciesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicy", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicyServiceFault" +
+            "Fault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool UpdateCreditGrantingPolicy(SFIClient.SFIServices.CreditGrantingPolicy policy);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicy", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicyResponse")]
+        System.Threading.Tasks.Task<bool> UpdateCreditGrantingPolicyAsync(SFIClient.SFIServices.CreditGrantingPolicy policy);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2459,6 +2483,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> GetAllCreditGrantingPoliciesAsync() {
             return base.Channel.GetAllCreditGrantingPoliciesAsync();
+        }
+        
+        public bool UpdateCreditGrantingPolicy(SFIClient.SFIServices.CreditGrantingPolicy policy) {
+            return base.Channel.UpdateCreditGrantingPolicy(policy);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateCreditGrantingPolicyAsync(SFIClient.SFIServices.CreditGrantingPolicy policy) {
+            return base.Channel.UpdateCreditGrantingPolicyAsync(policy);
         }
     }
     
