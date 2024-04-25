@@ -61,6 +61,7 @@ namespace SFIDataAccess.DataAccessObjects
                         .ToList().ForEach(policyStored => {
                             CreditGrantingPolicy policy = new CreditGrantingPolicy
                             {
+                                Identifier = policyStored.id_credit_granting_policy,
                                 Title = policyStored.title,
                                 Description = policyStored.description,
                                 EffectiveDate = policyStored.effective_date,

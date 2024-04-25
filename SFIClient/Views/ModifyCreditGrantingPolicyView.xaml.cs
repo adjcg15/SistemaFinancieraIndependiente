@@ -24,7 +24,7 @@ namespace SFIClient.Views
         {
             InitializeComponent();
 
-            this.editedPolicy = policy;
+            editedPolicy = policy;
         }
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
