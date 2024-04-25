@@ -1,0 +1,165 @@
+﻿<Page x:Class="SFIClient.Views.ModifyCreditGrantingPolicyController"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:SFIClient.Views"
+    mc:Ignorable="d" 
+    d:Width="1280" d:Height="900"
+    Title="Modificar política de otorgamiento de crédito">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button
+                        Click="BtnReturnToPreviousPageClick"
+                        Style="{StaticResource NoHoverStyle}" 
+                        Width="40" Height="40" Margin="0, 0, 16, 0" 
+                        Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Modificar política de otorgamiento de crédito" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!--Form-->
+            <StackPanel Margin="40">
+                <Border 
+                    Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    <TextBlock Style="{StaticResource Title}" Text="Política de otorgamiento de crédito"/>
+                </Border>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--Left column-->
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Datos generales" 
+                            Style="{StaticResource Subtitle}" 
+                            Foreground="{StaticResource DarkGray}"
+                            Margin="0, 0, 0, 8"/>
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Style="{StaticResource Paragraph}" 
+                            Foreground="{StaticResource DarkGray}">
+                            <Bold>Nota</Bold>: debe ingresar información en los campos 
+                            marcados con un asterisco (<Span Foreground="{StaticResource PrimaryColor}">*</Span>)
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--Right column-->
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 12, 0, 0">
+                        <!--Title field-->
+                        <StackPanel Margin="0, 0, 0, 24">
+                            <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                Título <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            </TextBlock>
+                            <Grid>
+                                <TextBlock Margin="5,2" Text="Ingrese el título de la política" TextWrapping="Wrap">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbPoliticTitle}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox 
+                                    Name="TbPoliticTitle" 
+                                    Style="{StaticResource TextInput}"
+                                    TextWrapping="Wrap"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!--Status field-->
+                        <StackPanel Margin="0, 0, 0, 24">
+                            <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                Estatus <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            </TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton x:Name="RbActiveStatus" Style="{StaticResource RadioButtonStyle}" Content="Activa"/>
+                                <RadioButton x:Name="RbInactiveStatus" Style="{StaticResource RadioButtonStyle}" Content="Inactiva"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!--Date field-->
+                        <StackPanel Margin="0, 0, 0, 24">
+                            <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                Fecha de vigencia <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            </TextBlock>
+                            <Grid Margin="0, 0, 0, 16">
+                                <Border Style="{StaticResource RoundedBorder}">
+                                    <DatePicker 
+                                        x:Name="DpkEffectiveDate"
+                                        Style="{StaticResource DatePicker}"/>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+
+                        <!--Description field-->
+                        <StackPanel>
+                            <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                Descripción <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                            </TextBlock>
+                            <Grid Margin="0, 0, 0, 24">
+                                <TextBlock Margin="5,2" Text="Descripción detallada del motivo de la solicitud." TextWrapping="Wrap">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbPolicyDescription}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox 
+                                    Name="TbPolicyDescription" 
+                                    Style="{StaticResource TextInput}"
+                                    TextWrapping="Wrap"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"
+                                    Height="160"
+                                    MaxLength="300"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!--Action buttons-->
+                <StackPanel 
+                    Orientation="Horizontal" HorizontalAlignment="Right"
+                    Margin="0, 24, 0, 0">
+                    <Button 
+                        Click="BtnCancelClick"
+                        Style="{StaticResource SecondaryBtn}"
+                        Content="Cancelar"/>
+
+                    <Button 
+                        Click="BtnSaveChangesClick"
+                        Style="{StaticResource PrimaryBtn}"
+                        Content="Guardar cambios"
+                        Margin="24, 0, 0, 0"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
