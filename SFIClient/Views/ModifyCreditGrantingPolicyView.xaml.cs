@@ -29,7 +29,27 @@ namespace SFIClient.Views
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
         {
+            ShowReturnToPreviousPageConfirmationDialog();
+        }
 
+        private void ShowReturnToPreviousPageConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea regresar a la ventana previa ? Todos los cambios sin guardar se perderá",
+                "Regresar a ventana previa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToCreditGrantingPolicyList();
+            }
+        }
+
+        private void RedirectToCreditGrantingPolicyList()
+        {
+            NavigationService.Navigate(new CreditGrantingPolicyListController());
         }
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
