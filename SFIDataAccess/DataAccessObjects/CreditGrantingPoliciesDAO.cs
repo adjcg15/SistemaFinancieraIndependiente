@@ -120,9 +120,8 @@ namespace SFIDataAccess.DataAccessObjects
                     "por favor inténtelo más tarde")
                 );
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                Console.WriteLine(ex);
                 throw new FaultException<ServiceFault>(
                     new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
                     "por favor inténtelo más tarde")
