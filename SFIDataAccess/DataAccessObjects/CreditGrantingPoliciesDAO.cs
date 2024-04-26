@@ -61,6 +61,7 @@ namespace SFIDataAccess.DataAccessObjects
                         .ToList().ForEach(policyStored => {
                             CreditGrantingPolicy policy = new CreditGrantingPolicy
                             {
+                                Identifier = policyStored.id_credit_granting_policy,
                                 Title = policyStored.title,
                                 Description = policyStored.description,
                                 EffectiveDate = policyStored.effective_date,
@@ -100,7 +101,7 @@ namespace SFIDataAccess.DataAccessObjects
 
                     context.Database.ExecuteSqlCommand(
                         "EXEC UpdateCreditGrantingPolicy @id_credit_granting_policy, " +
-                        "@title, @is_active, @effective_date, @description",
+                        "@title, @is_active, @effective_date, @description, @updated OUTPUT",
                         new SqlParameter("@id_credit_granting_policy", policy.Identifier),
                         new SqlParameter("@title", policy.Title),
                         new SqlParameter("@is_active", policy.IsActive),
@@ -119,14 +120,7 @@ namespace SFIDataAccess.DataAccessObjects
                     "por favor inténtelo más tarde")
                 );
             }
-            catch (DbUpdateException)
-            {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
-                    "por favor inténtelo más tarde")
-                );
-            }
-            catch (DbEntityValidationException)
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(
                     new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
