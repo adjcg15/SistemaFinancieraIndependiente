@@ -1667,6 +1667,9 @@ namespace SFIClient.SFIServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeeNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime GenerationDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1682,6 +1685,19 @@ namespace SFIClient.SFIServices {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeeNumber {
+            get {
+                return this.EmployeeNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeNumberField, value) != true)) {
+                    this.EmployeeNumberField = value;
+                    this.RaisePropertyChanged("EmployeeNumber");
+                }
             }
         }
         
@@ -1821,6 +1837,9 @@ namespace SFIClient.SFIServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CreditApllicationInvoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1842,6 +1861,19 @@ namespace SFIClient.SFIServices {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreditApllicationInvoice {
+            get {
+                return this.CreditApllicationInvoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreditApllicationInvoiceField, value) != true)) {
+                    this.CreditApllicationInvoiceField = value;
+                    this.RaisePropertyChanged("CreditApllicationInvoice");
+                }
             }
         }
         
@@ -2192,6 +2224,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RecoverCreditApplication", ReplyAction="http://tempuri.org/ICreditsService/RecoverCreditApplicationResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication> RecoverCreditApplicationAsync(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GenerateApprovedDictum", ReplyAction="http://tempuri.org/ICreditsService/GenerateApprovedDictumResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GenerateApprovedDictumServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool GenerateApprovedDictum(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GenerateApprovedDictum", ReplyAction="http://tempuri.org/ICreditsService/GenerateApprovedDictumResponse")]
+        System.Threading.Tasks.Task<bool> GenerateApprovedDictumAsync(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2259,6 +2298,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditApplication> RecoverCreditApplicationAsync(string invoice) {
             return base.Channel.RecoverCreditApplicationAsync(invoice);
+        }
+        
+        public bool GenerateApprovedDictum(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved) {
+            return base.Channel.GenerateApprovedDictum(allPolicies, policesThatApply, dictum, creditApplication, amountApproved);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GenerateApprovedDictumAsync(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved) {
+            return base.Channel.GenerateApprovedDictumAsync(allPolicies, policesThatApply, dictum, creditApplication, amountApproved);
         }
     }
     
@@ -2433,6 +2480,16 @@ namespace SFIClient.SFIServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPolicies", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/GetAllCreditGrantingPoliciesResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> GetAllCreditGrantingPoliciesAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/RecoverActivesCreditGrantingPolicies", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/RecoverActivesCreditGrantingPoliciesRe" +
+            "sponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditGrantingPolicies/RecoverActivesCreditGrantingPoliciesSe" +
+            "rviceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditGrantingPolicy[] RecoverActivesCreditGrantingPolicies();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/RecoverActivesCreditGrantingPolicies", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/RecoverActivesCreditGrantingPoliciesRe" +
+            "sponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> RecoverActivesCreditGrantingPoliciesAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicy", ReplyAction="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicyResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditGrantingPolicies/UpdateCreditGrantingPolicyServiceFault" +
             "Fault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
@@ -2483,6 +2540,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> GetAllCreditGrantingPoliciesAsync() {
             return base.Channel.GetAllCreditGrantingPoliciesAsync();
+        }
+        
+        public SFIClient.SFIServices.CreditGrantingPolicy[] RecoverActivesCreditGrantingPolicies() {
+            return base.Channel.RecoverActivesCreditGrantingPolicies();
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditGrantingPolicy[]> RecoverActivesCreditGrantingPoliciesAsync() {
+            return base.Channel.RecoverActivesCreditGrantingPoliciesAsync();
         }
         
         public bool UpdateCreditGrantingPolicy(SFIClient.SFIServices.CreditGrantingPolicy policy) {

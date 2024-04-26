@@ -86,6 +86,51 @@ namespace SFIDataAccess.DataAccessObjects
             }
 
             return policies;
+        }
+
+        public static List<CreditGrantingPolicy> RecoverActivesCreditGrantingPolicies()
+        {
+            List<CreditGrantingPolicy> policiesList = new List<CreditGrantingPolicy>();
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var polices = (from creditGrantingPolices in context.credit_granting_polices
+                                   where creditGrantingPolices.is_active == true
+                                   select creditGrantingPolices).ToList();
+                    if (polices != null)
+                    {
+                        foreach (var policy in polices)
+                        {
+                            CreditGrantingPolicy creditGrantingPolicy = new CreditGrantingPolicy
+                            {
+                                Identifier = policy.id_credit_granting_policy,
+                                Title = policy.title,
+                                Description = policy.description,
+                                EffectiveDate = policy.effective_date,
+                                IsActive = policy.is_active
+                            };
+                            policiesList.Add(creditGrantingPolicy);
+                        }
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+
+            return policiesList;
+        }
         } 
 
         public static bool UpdateCreditGrantingPolicy(CreditGrantingPolicy policy)

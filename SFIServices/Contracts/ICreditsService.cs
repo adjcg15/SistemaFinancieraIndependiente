@@ -31,5 +31,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         CreditApplication RecoverCreditApplication(string invoice);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool GenerateApprovedDictum(List<CreditGrantingPolicy> allPolicies, List<CreditGrantingPolicy> policesThatApply, Dictum dictum, CreditApplication creditApplication, float amountApproved);
     }
 }

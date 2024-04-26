@@ -18,5 +18,8 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public string Justification { get; set; }
+
+        [DataMember]
+        public string EmployeeNumber { get; set; }
     }
 }

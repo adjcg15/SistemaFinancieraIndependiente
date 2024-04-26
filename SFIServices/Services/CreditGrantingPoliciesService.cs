@@ -17,6 +17,11 @@ namespace SFIServices
             return CreditGrantingPoliciesDAO.GetAllCreditGrantingPolicies();
         }
 
+        public List<CreditGrantingPolicy> RecoverActivesCreditGrantingPolicies()
+        {
+            return CreditGrantingPoliciesDAO.RecoverActivesCreditGrantingPolicies();
+        }
+
         public bool UpdateCreditGrantingPolicy(CreditGrantingPolicy policy)
         {
             return CreditGrantingPoliciesDAO.UpdateCreditGrantingPolicy(policy);

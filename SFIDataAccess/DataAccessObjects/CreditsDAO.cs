@@ -387,5 +387,93 @@ namespace SFIDataAccess.DataAccessObjects
 
             return fullCreditApplication;
         }
+
+        public static bool GenerateApprovedDictum(List<CreditGrantingPolicy> allPolicies, List<CreditGrantingPolicy> policesThatApply, Dictum dictum, CreditApplication creditApplication, float amountApproved)
+        {
+            bool success = false;
+
+            DataTable Dictum = new DataTable();
+            Dictum.Columns.Add("CreditApplicationInvoice", typeof(string));
+            Dictum.Columns.Add("IsApproved", typeof(bool));
+            Dictum.Columns.Add("Justification", typeof(string));
+            Dictum.Columns.Add("GenerationDate", typeof(DateTime));
+            Dictum.Columns.Add("EmployeeNumber", typeof(string));
+
+            Dictum.Rows.Add(creditApplication.Invoice, dictum.IsApproved, dictum.Justification, dictum.GenerationDate, dictum.EmployeeNumber);
+
+            DataTable CreditGrantingPolices = new DataTable();
+            CreditGrantingPolices.Columns.Add("IdCreditGrantingPolices", typeof(int));
+            CreditGrantingPolices.Columns.Add("IsApplying", typeof(bool));
+
+            foreach (var policy in allPolicies)
+            {
+                foreach (var policySelected in policesThatApply)
+                {
+                    if (policy.Title == policySelected.Title)
+                    {
+                        CreditGrantingPolices.Rows.Add(policy.Identifier, true);
+                    }
+                    else
+                    {
+                        CreditGrantingPolices.Rows.Add(policy.Identifier, false);
+                    }
+                }
+            }
+
+            DataTable CreditCondition = new DataTable();
+            CreditCondition.Columns.Add("InterestRate", typeof(float));
+            CreditCondition.Columns.Add("IsIvaApplied", typeof(bool));
+            CreditCondition.Columns.Add("InterestOnArrears", typeof(float));
+            CreditCondition.Columns.Add("AdvancePaymentReduction", typeof(float));
+            CreditCondition.Columns.Add("PaymentMonths", typeof(int));
+            CreditCondition.Columns.Add("Identifier", typeof(string));
+
+            try
+            {
+                using (var dbContext = new SFIDatabaseContext())
+                {
+                    var dictumTable = new SqlParameter("@Dictum", SqlDbType.Structured)
+                    {
+                        Value = Dictum,
+                        TypeName = "Dictum"
+                    };
+                    var policesTable = new SqlParameter("@CreditGrantingPolices", SqlDbType.Structured)
+                    {
+                        Value = CreditGrantingPolices,
+                        TypeName = "CreditGrantingPolices"
+                    };
+                    var creditConditionTable = new SqlParameter("@CreditCondition", SqlDbType.Structured)
+                    {
+                        Value = CreditCondition,
+                        TypeName = "CreditCondition"
+                    };
+                    var amountApprovedValue = new SqlParameter("@AmountApproved", amountApproved);
+
+                    var successParam = new SqlParameter("@Success", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+
+                    dbContext.Database.ExecuteSqlCommand("EXEC GenerateApprovedDictum @Dictum, @CreditGrantingPolices, " +
+                        "@CreditCondition, @AmountApproved, @Success OUTPUT", dictumTable, policesTable, creditConditionTable, amountApprovedValue, successParam);
+
+                    success = (bool)successParam.Value;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+
+            return success;
+        }
     }
 }

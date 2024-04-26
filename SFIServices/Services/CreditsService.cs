@@ -66,5 +66,10 @@ namespace SFIServices
         {
             return CreditsDAO.RecoverCreditApplication(invoice);
         }
+
+        public bool GenerateApprovedDictum(List<CreditGrantingPolicy> allPolicies, List<CreditGrantingPolicy> policesThatApply, Dictum dictum, CreditApplication creditApplication, float amountApproved)
+        {
+            return CreditsDAO.GenerateApprovedDictum(allPolicies, policesThatApply, dictum, creditApplication, amountApproved);
+        }
     }
 }

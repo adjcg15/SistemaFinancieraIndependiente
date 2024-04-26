@@ -12,9 +12,11 @@
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
             <CheckBox 
-                x:Name="CkbCreditApplicationsWaitingDictum"
+                Name="ckbSelectCreditGrantingPolicy"
                 Grid.Column="0"
-                Style="{StaticResource CheckBox}"/>
+                Style="{StaticResource CheckBox}" 
+                Checked="CkbSelectCreditGrantingPolicyChecked"
+                Unchecked="CkbSelectCreditGrantingPolicyUnchecked"/>
             <TextBlock
                 Name="tbkPolicyName" 
                 Margin="0,2,0,6" 
