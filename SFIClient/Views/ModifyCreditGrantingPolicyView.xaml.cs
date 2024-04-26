@@ -100,6 +100,11 @@ namespace SFIClient.Views
             {
                 HighlightInvalidFields();
                 ShowInvalidFieldsErrors();
+                ShowInvalidFieldsAlertDialog();
+            }
+            else
+            {
+                ShowSaveChangesConfirmationDialog();
             }
         }
 
@@ -170,6 +175,36 @@ namespace SFIClient.Views
             {
                 TbkDescriptionError.Visibility = Visibility.Visible;
             }
+        }
+
+        private void ShowInvalidFieldsAlertDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "Por favor corrija los campos marcados en rojo para guardar los cambios",
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+        }
+        private void ShowSaveChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea guardar los cambios realizados a la " +
+                "política de otorgamiento de crédito?",
+                "Confirmación de actualización",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if(buttonClicked == MessageBoxResult.Yes)
+            {
+                UpdateCreditGrantingPolicy();
+            }
+        }
+
+        private void UpdateCreditGrantingPolicy()
+        {
+
         }
     }
 }
