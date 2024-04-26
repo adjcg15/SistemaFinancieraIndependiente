@@ -101,7 +101,7 @@ namespace SFIDataAccess.DataAccessObjects
 
                     context.Database.ExecuteSqlCommand(
                         "EXEC UpdateCreditGrantingPolicy @id_credit_granting_policy, " +
-                        "@title, @is_active, @effective_date, @description",
+                        "@title, @is_active, @effective_date, @description, @updated OUTPUT",
                         new SqlParameter("@id_credit_granting_policy", policy.Identifier),
                         new SqlParameter("@title", policy.Title),
                         new SqlParameter("@is_active", policy.IsActive),
@@ -120,15 +120,9 @@ namespace SFIDataAccess.DataAccessObjects
                     "por favor inténtelo más tarde")
                 );
             }
-            catch (DbUpdateException)
+            catch (SqlException ex)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
-                    "por favor inténtelo más tarde")
-                );
-            }
-            catch (DbEntityValidationException)
-            {
+                Console.WriteLine(ex);
                 throw new FaultException<ServiceFault>(
                     new ServiceFault("Servidor no disponible. No fue posible actualizar la información de la política, " +
                     "por favor inténtelo más tarde")

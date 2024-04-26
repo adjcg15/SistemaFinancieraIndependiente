@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,7 +97,7 @@ namespace SFIClient.Views
             HideFieldsErrors();
 
             bool isValidPolicyInformation = ValidateCreditGrantingPolicyInformation();
-            if(!isValidPolicyInformation)
+            if (!isValidPolicyInformation)
             {
                 HighlightInvalidFields();
                 ShowInvalidFieldsErrors();
@@ -124,29 +125,29 @@ namespace SFIClient.Views
 
         private bool ValidateCreditGrantingPolicyInformation()
         {
-            bool isValidPolicy = !string.IsNullOrEmpty(TbPolicyTitle.Text)
+            bool isValidPolicy = !string.IsNullOrWhiteSpace(TbPolicyTitle.Text)
                 && (DpkEffectiveDate.SelectedDate.HasValue && DpkEffectiveDate.SelectedDate.Value > DateTime.Now)
-                && ((RbActiveStatus.IsChecked.HasValue && RbActiveStatus.IsChecked.Value) 
+                && ((RbActiveStatus.IsChecked.HasValue && RbActiveStatus.IsChecked.Value)
                 || (RbInactiveStatus.IsChecked.HasValue && RbInactiveStatus.IsChecked.Value))
-                && !string.IsNullOrEmpty(TbPolicyDescription.Text);
+                && !string.IsNullOrWhiteSpace(TbPolicyDescription.Text);
 
             return isValidPolicy;
         }
 
         private void HighlightInvalidFields()
         {
-            if(string.IsNullOrEmpty(TbPolicyTitle.Text))
+            if (string.IsNullOrWhiteSpace(TbPolicyTitle.Text))
             {
                 TbPolicyTitle.Style = (Style)FindResource("TextInputError");
             }
 
-            if(!DpkEffectiveDate.SelectedDate.HasValue 
+            if (!DpkEffectiveDate.SelectedDate.HasValue
                 || DpkEffectiveDate.SelectedDate.Value <= DateTime.Now)
             {
                 BdrEffectiveDate.BorderBrush = (Brush)FindResource("Red");
             }
 
-            if (string.IsNullOrEmpty(TbPolicyDescription.Text))
+            if (string.IsNullOrWhiteSpace(TbPolicyDescription.Text))
             {
                 TbPolicyDescription.Style = (Style)FindResource("TextInputError");
             }
@@ -154,12 +155,13 @@ namespace SFIClient.Views
 
         private void ShowInvalidFieldsErrors()
         {
-            if (string.IsNullOrEmpty(TbPolicyTitle.Text))
+            if (string.IsNullOrWhiteSpace(TbPolicyTitle.Text))
             {
+                TbkTitleError.Text = "El título de la política de otorgamiento de crédito es obligatorio";
                 TbkTitleError.Visibility = Visibility.Visible;
             }
 
-            if((!RbActiveStatus.IsChecked.HasValue || !RbActiveStatus.IsChecked.Value)
+            if ((!RbActiveStatus.IsChecked.HasValue || !RbActiveStatus.IsChecked.Value)
                 && (!RbInactiveStatus.IsChecked.HasValue || !RbInactiveStatus.IsChecked.Value))
             {
                 TbkStatusError.Visibility = Visibility.Visible;
@@ -171,7 +173,7 @@ namespace SFIClient.Views
                 TbkEffectiveDateError.Visibility = Visibility.Visible;
             }
 
-            if (string.IsNullOrEmpty(TbPolicyDescription.Text))
+            if (string.IsNullOrWhiteSpace(TbPolicyDescription.Text))
             {
                 TbkDescriptionError.Visibility = Visibility.Visible;
             }
@@ -196,15 +198,109 @@ namespace SFIClient.Views
                 MessageBoxImage.Question
             );
 
-            if(buttonClicked == MessageBoxResult.Yes)
+            if (buttonClicked == MessageBoxResult.Yes)
             {
+                editedPolicy.Title = TbPolicyTitle.Text.Trim();
+                editedPolicy.Description = TbPolicyDescription.Text.Trim();
+                editedPolicy.EffectiveDate = DpkEffectiveDate.SelectedDate.Value;
+                if(RbActiveStatus.IsChecked.Value)
+                {
+                    editedPolicy.IsActive = true;
+                } else if(RbInactiveStatus.IsChecked.Value)
+                {
+                    editedPolicy.IsActive = false;
+                }
+
                 UpdateCreditGrantingPolicy();
             }
         }
 
         private void UpdateCreditGrantingPolicy()
         {
+            CreditGrantingPoliciesClient policiesService = new CreditGrantingPoliciesClient();
 
+            try
+            {
+                bool successfulUpdate = policiesService.UpdateCreditGrantingPolicy(editedPolicy);
+                if (successfulUpdate)
+                {
+                    ShowSuccessfulUpdateInformationDialog();
+                }
+                else
+                {
+                    MarkTitleFieldAsDuplicated();
+                    ShowDuplicatedTitleAlertDialog();
+                }
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorSavingChangesDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "Servidor no disponible. Por el momento el servidor no se encuentra " +
+                    "disponible, intente más tarde";
+                ShowErrorSavingChangesDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "Error de conexión. Ocurrió un error de conexión, " +
+                    "por favor compruebe su conexión de Internet e intente de nuevo";
+                ShowErrorSavingChangesDialog(errorMessage);
+            }
+        }
+
+        private void ShowErrorSavingChangesDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "No fue posible actualizar la política",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToMainMenu();
+            }
+        }
+
+        private void RedirectToMainMenu() {
+            NavigationService.Navigate(new MainMenuController());
+        }
+
+        private void ShowSuccessfulUpdateInformationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "La información de la política de otorgamiento de crédito ha sido actualizada correctamente",
+                "Actualización exitosa",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToCreditGrantingPolicyList();
+            }
+        }
+
+        private void MarkTitleFieldAsDuplicated()
+        {
+            TbPolicyTitle.Style = (Style)FindResource("TextInputError");
+
+            TbkTitleError.Text = "Título en uso";
+            TbkTitleError.Visibility = Visibility.Visible;
+        }
+
+        private void ShowDuplicatedTitleAlertDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "El título que intenta utilizar para esta política ya se encuentra siendo " +
+                "utilizado por alguna otra, por favor intente con uno diferente",
+                "Título duplicado",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
     }
 }
