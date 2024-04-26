@@ -131,7 +131,6 @@ namespace SFIDataAccess.DataAccessObjects
 
             return policiesList;
         }
-        } 
 
         public static bool UpdateCreditGrantingPolicy(CreditGrantingPolicy policy)
         {

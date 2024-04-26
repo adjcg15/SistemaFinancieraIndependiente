@@ -230,7 +230,7 @@
   <xs:element name="UpdateCreditGrantingPolicy">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="policy" nillable="true" type="q14:CreditGrantingPolicy" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="policy" nillable="true" type="q19:CreditGrantingPolicy" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -252,8 +252,7 @@
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="LoginResult" nillable="true" type="q19:Employee" />
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="LoginResult" nillable="true" type="q15:Employee" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="LoginResult" nillable="true" type="q20:Employee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -265,8 +264,7 @@
   <xs:element name="RecoverClientsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientsResult" nillable="true" type="q20:ArrayOfClient" />
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientsResult" nillable="true" type="q16:ArrayOfClient" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientsResult" nillable="true" type="q21:ArrayOfClient" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -280,16 +278,14 @@
   <xs:element name="RecoverBankDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverBankDetailsResult" nillable="true" type="q21:BankAccount" />
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverBankDetailsResult" nillable="true" type="q17:BankAccount" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverBankDetailsResult" nillable="true" type="q22:BankAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateBankAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="bankAccount" nillable="true" type="q22:BankAccount" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="bankAccount" nillable="true" type="q18:BankAccount" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="bankAccount" nillable="true" type="q23:BankAccount" />
         <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -304,8 +300,7 @@
   <xs:element name="RegisterClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="client" nillable="true" type="q23:Client" />
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="client" nillable="true" type="q19:Client" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="client" nillable="true" type="q24:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -326,16 +321,14 @@
   <xs:element name="RecoverPersonalReferencesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverPersonalReferencesResult" nillable="true" type="q24:ArrayOfPersonalReference" />
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverPersonalReferencesResult" nillable="true" type="q20:ArrayOfPersonalReference" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverPersonalReferencesResult" nillable="true" type="q25:ArrayOfPersonalReference" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePersonalReference">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="personalReference" nillable="true" type="q25:PersonalReference" />
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="personalReference" nillable="true" type="q21:PersonalReference" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="personalReference" nillable="true" type="q26:PersonalReference" />
         <xs:element minOccurs="0" name="currentIneKey" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -357,8 +350,7 @@
   <xs:element name="RecoverClientResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientResult" nillable="true" type="q26:Client" />
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientResult" nillable="true" type="q22:Client" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="RecoverClientResult" nillable="true" type="q27:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
