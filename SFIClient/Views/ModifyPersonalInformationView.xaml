@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:SFIClient.Views"
     mc:Ignorable="d" 
-    d:Width="1280" d:Height="900"
+    d:Width="1280" d:Height="1300"
     Title="Modificar información personal de cliente">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -44,13 +44,170 @@
                         Foreground="{StaticResource DarkGray}"
                         Style="{StaticResource Paragraph}">
                         <Bold>Nota</Bold>: debe ingresar información en los campos 
-                        marcados con un asterisco (<Span Foreground="{StaticResource PrimaryColor}">*</Span>)
+                        marcados con un asterisco <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                     </TextBlock>
                     <Border 
                         Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
                         BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
                         <TextBlock Style="{StaticResource Title}" Text="Información del cliente"/>
                     </Border>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!--First row left column (personal data title)-->
+                        <StackPanel Grid.Column="0" Grid.Row="0">
+                            <TextBlock 
+                                TextWrapping="Wrap"
+                                Style="{StaticResource Subtitle}" 
+                                Foreground="{StaticResource DarkGray}"
+                                Margin="0, 0, 0, 8">
+                                Datos personales
+                            </TextBlock>
+                        </StackPanel>
+
+                        <!--First row right column (personal data fields)-->
+                        <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 12, 0, 0">
+                            <!--Name field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Nombre <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Nombre (o nombres) del cliente" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbClientName}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbClientName" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--First name field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Primer apellido <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Primer apellido del cliente" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbClientLastName}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbClientLastName" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Surname field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Segundo apellido
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Segundo apellido del cliente (opcional)" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbClientSurname}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbClientSurname" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Birth date field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Fecha de nacimiento <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <Border x:Name="BdrClientBirthDate" Style="{StaticResource RoundedBorder}">
+                                        <DatePicker 
+                                            x:Name="DpkClientBirthDate"
+                                            Style="{StaticResource DatePicker}"/>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--CURP field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    CURP
+                                </TextBlock>
+                                <Grid>
+                                    <TextBox 
+                                        IsEnabled="False"
+                                        Name="TbClientCURP" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--RFC field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    RFC
+                                </TextBlock>
+                                <Grid>
+                                    <TextBox 
+                                        IsEnabled="False"
+                                        Name="TbClientRFC" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
