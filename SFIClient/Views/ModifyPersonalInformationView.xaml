@@ -25,6 +25,34 @@
                         VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
+            
+            <!--Main content-->
+            <StackPanel Margin="40">
+                <!--Clien information-->
+                <TextBlock
+                    Style="{StaticResource Subtitle}"
+                    Text="Cliente"/>
+                <TextBlock
+                    x:Name="TbkClientName"
+                    Style="{StaticResource Title}"
+                    Foreground="{StaticResource DarkPrimaryColor}"
+                    Text="Andrés Manuel López Obrador"/>
+                
+                <!--Personal information Form-->
+                <StackPanel Margin="0, 48, 0, 0">
+                    <TextBlock
+                        Foreground="{StaticResource DarkGray}"
+                        Style="{StaticResource Paragraph}">
+                        <Bold>Nota</Bold>: debe ingresar información en los campos 
+                        marcados con un asterisco (<Span Foreground="{StaticResource PrimaryColor}">*</Span>)
+                    </TextBlock>
+                    <Border 
+                        Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                        <TextBlock Style="{StaticResource Title}" Text="Información del cliente"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>
