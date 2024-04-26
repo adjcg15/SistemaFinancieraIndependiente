@@ -30,11 +30,11 @@ namespace SFIClient.Views
 
         private void ShowCreditGrantingPolicyInformation()
         {
-            TbPoliticTitle.Text = editedPolicy.Title;
+            TbPolicyTitle.Text = editedPolicy.Title;
             DpkEffectiveDate.SelectedDate = editedPolicy.EffectiveDate;
             TbPolicyDescription.Text = editedPolicy.Description;
 
-            if(editedPolicy.IsActive)
+            if (editedPolicy.IsActive)
             {
                 RbActiveStatus.IsChecked = true;
             }
@@ -93,7 +93,83 @@ namespace SFIClient.Views
 
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
         {
+            HideFieldsErrors();
 
+            bool isValidPolicyInformation = ValidateCreditGrantingPolicyInformation();
+            if(!isValidPolicyInformation)
+            {
+                HighlightInvalidFields();
+                ShowInvalidFieldsErrors();
+            }
+        }
+
+        private void HideFieldsErrors()
+        {
+            TbPolicyTitle.Style = (Style)FindResource("TextInput");
+            TbkTitleError.Visibility = Visibility.Collapsed;
+
+            TbPolicyDescription.Style = (Style)FindResource("TextInput");
+            TbkDescriptionError.Visibility = Visibility.Collapsed;
+
+            BdrEffectiveDate.BorderBrush = (Brush)FindResource("MediumGray");
+            TbkEffectiveDateError.Visibility = Visibility.Collapsed;
+
+            TbkStatusError.Visibility = Visibility.Collapsed;
+        }
+
+        private bool ValidateCreditGrantingPolicyInformation()
+        {
+            bool isValidPolicy = !string.IsNullOrEmpty(TbPolicyTitle.Text)
+                && (DpkEffectiveDate.SelectedDate.HasValue && DpkEffectiveDate.SelectedDate.Value > DateTime.Now)
+                && ((RbActiveStatus.IsChecked.HasValue && RbActiveStatus.IsChecked.Value) 
+                || (RbInactiveStatus.IsChecked.HasValue && RbInactiveStatus.IsChecked.Value))
+                && !string.IsNullOrEmpty(TbPolicyDescription.Text);
+
+            return isValidPolicy;
+        }
+
+        private void HighlightInvalidFields()
+        {
+            if(string.IsNullOrEmpty(TbPolicyTitle.Text))
+            {
+                TbPolicyTitle.Style = (Style)FindResource("TextInputError");
+            }
+
+            if(!DpkEffectiveDate.SelectedDate.HasValue 
+                || DpkEffectiveDate.SelectedDate.Value <= DateTime.Now)
+            {
+                BdrEffectiveDate.BorderBrush = (Brush)FindResource("Red");
+            }
+
+            if (string.IsNullOrEmpty(TbPolicyDescription.Text))
+            {
+                TbPolicyDescription.Style = (Style)FindResource("TextInputError");
+            }
+        }
+
+        private void ShowInvalidFieldsErrors()
+        {
+            if (string.IsNullOrEmpty(TbPolicyTitle.Text))
+            {
+                TbkTitleError.Visibility = Visibility.Visible;
+            }
+
+            if((!RbActiveStatus.IsChecked.HasValue || !RbActiveStatus.IsChecked.Value)
+                && (!RbInactiveStatus.IsChecked.HasValue || !RbInactiveStatus.IsChecked.Value))
+            {
+                TbkStatusError.Visibility = Visibility.Visible;
+            }
+
+            if (!DpkEffectiveDate.SelectedDate.HasValue
+                || DpkEffectiveDate.SelectedDate.Value <= DateTime.Now)
+            {
+                TbkEffectiveDateError.Visibility = Visibility.Visible;
+            }
+
+            if (string.IsNullOrEmpty(TbPolicyDescription.Text))
+            {
+                TbkDescriptionError.Visibility = Visibility.Visible;
+            }
         }
     }
 }

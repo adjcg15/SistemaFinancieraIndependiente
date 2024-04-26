@@ -73,7 +73,7 @@
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=TbPoliticTitle}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=TbPolicyTitle}" Value="">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -81,7 +81,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
                                 <TextBox 
-                                    Name="TbPoliticTitle" 
+                                    Name="TbPolicyTitle" 
                                     Style="{StaticResource TextInput}"
                                     TextWrapping="Wrap"
                                     AcceptsReturn="True"
@@ -120,7 +120,7 @@
                                 Fecha de vigencia <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                             </TextBlock>
                             <Grid>
-                                <Border Style="{StaticResource RoundedBorder}">
+                                <Border x:Name="BdrEffectiveDate" Style="{StaticResource RoundedBorder}">
                                     <DatePicker 
                                         x:Name="DpkEffectiveDate"
                                         Style="{StaticResource DatePicker}"/>
@@ -173,7 +173,7 @@
                 <!--Action buttons-->
                 <StackPanel 
                     Orientation="Horizontal" HorizontalAlignment="Right"
-                    Margin="0, 24, 0, 0">
+                    Margin="0, 40, 0, 0">
                     <Button 
                         Click="BtnCancelClick"
                         Style="{StaticResource SecondaryBtn}"
