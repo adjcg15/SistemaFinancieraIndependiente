@@ -11,6 +11,8 @@ namespace SFIDataAccess.Model
     public class CreditGrantingPolicy
     {
         [DataMember]
+        public int Identifier { get; set; }
+        [DataMember]
         public string Title { get; set; }
         [DataMember]
         public string Description { get; set; }
@@ -18,5 +20,8 @@ namespace SFIDataAccess.Model
         public DateTime EffectiveDate { get; set; }
         [DataMember]
         public Boolean IsActive { get; set; }
+
+        [DataMember]
+        public string CreditApllicationInvoice {  get; set; }
     }
 }

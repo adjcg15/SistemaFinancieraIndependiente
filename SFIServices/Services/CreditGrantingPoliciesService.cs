@@ -20,5 +20,10 @@ namespace SFIServices
         {
             return CreditGrantingPoliciesDAO.GetAllCreditGrantingPolicies();
         }
+
+        public List<CreditGrantingPolicy> RecoverActivesCreditGrantingPolicies()
+        {
+            return CreditGrantingPoliciesDAO.RecoverActivesCreditGrantingPolicies();
+        }
     }
 }

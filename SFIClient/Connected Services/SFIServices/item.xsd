@@ -161,6 +161,7 @@
   <xs:element name="CreditCondition" nillable="true" type="tns:CreditCondition" />
   <xs:complexType name="Dictum">
     <xs:sequence>
+      <xs:element minOccurs="0" name="EmployeeNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GenerationDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="IsApproved" type="xs:boolean" />
       <xs:element minOccurs="0" name="Justification" nillable="true" type="xs:string" />
@@ -187,27 +188,29 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCreditApplication" nillable="true" type="tns:ArrayOfCreditApplication" />
-  <xs:complexType name="ArrayOfCreditCondition">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCreditCondition" nillable="true" type="tns:ArrayOfCreditCondition" />
-  <xs:complexType name="CreditGrantingPolicy">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
   <xs:complexType name="ArrayOfCreditGrantingPolicy">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCreditGrantingPolicy" nillable="true" type="tns:ArrayOfCreditGrantingPolicy" />
+  <xs:complexType name="CreditGrantingPolicy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreditApllicationInvoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Identifier" type="xs:int" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
+  <xs:complexType name="ArrayOfCreditCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCreditCondition" nillable="true" type="tns:ArrayOfCreditCondition" />
   <xs:complexType name="Employee">
     <xs:sequence>
       <xs:element minOccurs="0" name="EmployeeNumber" nillable="true" type="xs:string" />

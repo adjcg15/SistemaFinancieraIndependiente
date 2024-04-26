@@ -45,7 +45,7 @@ namespace SFIClient.Views
         {
             try
             {
-                creditGrantingPolicesList = creditGrantingPoliciesClient.GetAllCreditGrantingPolicies();
+                creditGrantingPolicesList = creditGrantingPoliciesClient.RecoverActivesCreditGrantingPolicies();
                 if (creditGrantingPolicesList.Length != 0)
                 {
                     LoadCreditApplicationContent();
@@ -253,6 +253,7 @@ namespace SFIClient.Views
                 CreditAuthorizationDictumPolicyControl policyControl = new CreditAuthorizationDictumPolicyControl();
                 policyControl.tbkPolicyName.Text = polices.Title;
                 policyControl.CheckCreditGrantingPolicy += CkbSelectCreditGrantingPolicyChecked;
+                policyControl.UncheckCreditGrantingPolicy += CkbSelectCreditGrantingPolicyUnchecked;
                 policyControl.tbkPolicyName.ToolTip = polices.Description;
                 skpCreditGrantingPolices.Children.Add(policyControl);
             }
@@ -278,8 +279,21 @@ namespace SFIClient.Views
                 if (policy.Title == policyControl.tbkPolicyName.Text)
                 {
                     creditGrantingPolicesListThatApply.Add(policy);
+                    break;
                 }
-                break;
+            }
+        }
+
+        private void CkbSelectCreditGrantingPolicyUnchecked(object sender, EventArgs e)
+        {
+            CreditAuthorizationDictumPolicyControl policyControl = (CreditAuthorizationDictumPolicyControl)sender;
+            foreach (var policy in creditGrantingPolicesListThatApply)
+            {
+                if (policy.Title == policyControl.tbkPolicyName.Text)
+                {
+                    creditGrantingPolicesListThatApply.Remove(policy);
+                    break;
+                }
             }
         }
 
@@ -319,7 +333,14 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                GenerateDictum();
+                if (dictumIsApproved)
+                {
+                    GenerateApprovalDictum();
+                }
+                else
+                {
+                    GenerateRejectedDictum();
+                }
             }
         }
 
@@ -397,9 +418,47 @@ namespace SFIClient.Views
             );
         }
 
-        private void GenerateDictum()
+        private void GenerateApprovalDictum()
         {
+            Dictum dictum = new Dictum
+            {
+                EmployeeNumber = Session.SystemSession.Employee.EmployeeNumber,
+                Justification = tbJustification.Text.Trim(),
+                GenerationDate = DateTime.Now,
+                IsApproved = true
+            };
 
+            try
+            {
+                bool dictumGeneration = credititsServiceClient.GenerateApprovedDictum(creditGrantingPolicesList, creditGrantingPolicesListThatApply.ToArray(), dictum, creditApplication, (float)creditApplication.RequestedAmount);
+            }
+            catch (FaultException<ServiceFault> fe)
+            {
+                //TODO
+                ShowErrorRecoveringCreditApplicationContent(fe.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditApplicationContent(errorMessage);
+                RedirectToCreditApplicationsListView();
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditApplicationContent(errorMessage);
+                RedirectToCreditApplicationsListView();
+            }
+        }
+
+        private void GenerateRejectedDictum()
+        {
+            Dictum dictum = new Dictum
+            {
+                Justification = tbJustification.Text.Trim(),
+                GenerationDate = DateTime.Now,
+                IsApproved = false
+            };
         }
 
         private void TbJustificationTextChanged(object sender, TextChangedEventArgs e)

@@ -14,7 +14,9 @@
             <CheckBox 
                 Name="ckbSelectCreditGrantingPolicy"
                 Grid.Column="0"
-                Style="{StaticResource CheckBox}" Checked="CkbSelectCreditGrantingPolicyChecked"/>
+                Style="{StaticResource CheckBox}" 
+                Checked="CkbSelectCreditGrantingPolicyChecked"
+                Unchecked="CkbSelectCreditGrantingPolicyUnchecked"/>
             <TextBlock
                 Name="tbkPolicyName" 
                 Margin="0,2,0,6" 
