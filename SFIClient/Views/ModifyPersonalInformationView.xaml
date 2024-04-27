@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:SFIClient.Views"
     mc:Ignorable="d" 
-    d:Width="1280" d:Height="1300"
+    d:Width="1280" d:Height="2050"
     Title="Modificar información personal de cliente">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
@@ -44,7 +44,7 @@
                         Foreground="{StaticResource DarkGray}"
                         Style="{StaticResource Paragraph}">
                         <Bold>Nota</Bold>: debe ingresar información en los campos 
-                        marcados con un asterisco <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        marcados con un asterisco (<Span Foreground="{StaticResource PrimaryColor}">*</Span>)
                     </TextBlock>
                     <Border 
                         Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
@@ -70,8 +70,7 @@
                             <TextBlock 
                                 TextWrapping="Wrap"
                                 Style="{StaticResource Subtitle}" 
-                                Foreground="{StaticResource DarkGray}"
-                                Margin="0, 0, 0, 8">
+                                Foreground="{StaticResource DarkGray}">
                                 Datos personales
                             </TextBlock>
                         </StackPanel>
@@ -191,7 +190,7 @@
                             </StackPanel>
 
                             <!--RFC field-->
-                            <StackPanel Margin="0, 0, 0, 24">
+                            <StackPanel>
                                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
                                     RFC
                                 </TextBlock>
@@ -207,7 +206,261 @@
                                 </Grid>
                             </StackPanel>
                         </StackPanel>
+
+                        <!--Second row-->
+                        <Border 
+                            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                            BorderThickness="0, 2, 0, 0" BorderBrush="{StaticResource Gray}"
+                            Margin="0, 40, 0, 24"/>
+
+                        <!--Third row left column (address title)-->
+                        <StackPanel Grid.Column="0" Grid.Row="2">
+                            <TextBlock 
+                                TextWrapping="Wrap"
+                                Style="{StaticResource Subtitle}" 
+                                Foreground="{StaticResource DarkGray}">
+                                Dirección
+                            </TextBlock>
+                        </StackPanel>
+
+                        <!--Third row right column (address fields)-->
+                        <StackPanel Grid.Column="1" Grid.Row="2" Margin="16, 12, 0, 0">
+                            <!--Street field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Calle <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Nombre de la calle" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressStreet}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressStreet" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Neighborhood field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Colonia <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Nombre de la colonia" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressNeighborhood}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressNeighborhood" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Interior number field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Número interior <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Ej. 27" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressInteriorNumber}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressInteriorNumber" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Outdoor number field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Número exterior <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Ej. 27" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressOutdoorNumber}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressOutdoorNumber" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+                            
+                            <!--Post code field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Código postal <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="91000" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressPostCode}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressPostCode" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--City field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Ciudad <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Nombre de la ciudad" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressCity}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressCity" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--Municipality field-->
+                            <StackPanel Margin="0, 0, 0, 24">
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Municipio <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Nombre del municipio" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressMunicipality}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressMunicipality" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!--State field-->
+                            <StackPanel>
+                                <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                                    Estado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                                </TextBlock>
+                                <Grid>
+                                    <TextBlock Margin="5,2" Text="Nombre del Estado" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=TbAddressState}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBox 
+                                        Name="TbAddressState" 
+                                        Style="{StaticResource TextInput}"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        MaxLength="60"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!--Fourth row-->
+                        <Border 
+                            Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                            BorderThickness="0, 2, 0, 0" BorderBrush="{StaticResource Gray}"
+                            Margin="0, 40"/>
                     </Grid>
+                </StackPanel>
+
+                <!--Form buttons-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button
+                        Click="BtnCancelClick"
+                        Style="{StaticResource SecondaryBtn}"
+                        Content="Cancelar"
+                        Margin="0, 0, 24, 0"/>
+                    <Button
+                        Click="BtnSaveChangesClick"
+                        Style="{StaticResource PrimaryBtn}"
+                        Content="Guardar cambios"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
