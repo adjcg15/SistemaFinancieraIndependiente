@@ -119,6 +119,15 @@
   <wsdl:message name="ICreditsService_GenerateApprovedDictum_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q7:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ICreditsService_GenerateRejectedDictum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateRejectedDictum" />
+  </wsdl:message>
+  <wsdl:message name="ICreditsService_GenerateRejectedDictum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateRejectedDictumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICreditsService_GenerateRejectedDictum_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q8:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="ICreditsService_GetCreditTypeIdByCreditInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCreditTypeIdByCreditInvoice" />
   </wsdl:message>
@@ -298,6 +307,7 @@
   </wsdl:message>
   <wsdl:message name="IClientsService_RecoverClient_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q27="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q27:ServiceFault" />
+    <wsdl:part xmlns:q27="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q27:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IClientsService_GetClientPersonalInformation_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientPersonalInformation" />
@@ -345,6 +355,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/GenerateApprovedDictum" message="tns:ICreditsService_GenerateApprovedDictum_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/GenerateApprovedDictumResponse" message="tns:ICreditsService_GenerateApprovedDictum_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/GenerateApprovedDictumServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_GenerateApprovedDictum_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateRejectedDictum">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/GenerateRejectedDictum" message="tns:ICreditsService_GenerateRejectedDictum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/GenerateRejectedDictumResponse" message="tns:ICreditsService_GenerateRejectedDictum_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/GenerateRejectedDictumServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_GenerateRejectedDictum_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCreditTypeIdByCreditInvoice">
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoice" message="tns:ICreditsService_GetCreditTypeIdByCreditInvoice_InputMessage" />
@@ -541,6 +556,18 @@
     </wsdl:operation>
     <wsdl:operation name="GenerateApprovedDictum">
       <soap12:operation soapAction="http://tempuri.org/ICreditsService/GenerateApprovedDictum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateRejectedDictum">
+      <soap12:operation soapAction="http://tempuri.org/ICreditsService/GenerateRejectedDictum" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

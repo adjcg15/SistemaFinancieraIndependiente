@@ -282,9 +282,9 @@
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Comprobante de domicilio"/>
                         <Grid Margin="0, 0, 0, 24">
                             <Button 
-                            x:Name="BtnDownloadProofOfAddressS"
+                            x:Name="BtnDownloadProofOfAddress"
                             Content="copia_domicilio_amlo.pdf" 
-                            Style="{StaticResource FileDownloader}" Click="BtnDownloadProofOfAddressSClick"/>
+                            Style="{StaticResource FileDownloader}" Click="BtnDownloadProofOfAddressClick"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Comprobante de ingresos"/>
@@ -366,6 +366,41 @@
                         </TextBlock>
                         <StackPanel Name="skpCreditGrantingPolices" Visibility="Collapsed"/>
 
+                        <TextBlock Name="TbkAmountApproved" FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8" Visibility="Collapsed">
+                            Monto aprobado <Span Foreground="{StaticResource PrimaryColor}">*</Span>
+                        </TextBlock>
+                        <Grid Name="GrdAmountApproved" Margin="0, 0, 0, 0" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <TextBlock Margin="5,2" Text="El monto no debe pasar los límites del monto aspirado y el mínimo aceptado">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=tbAmountApproved}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBox 
+                                    Name="tbAmountApproved" 
+                                    Style="{StaticResource TextInput}"
+                                    TextChanged="TbAmountApprovedTextChanged"/>
+                            </Grid>
+                            <TextBlock 
+                                Grid.Column="1" Grid.Row="0" 
+                                Style="{StaticResource Subtitle}" 
+                                Text="MXN" 
+                                VerticalAlignment="Center" Margin="24px, 0, 0, 0"/>
+                        </Grid>
+
                         <TextBlock Name="tbkJustification" FontSize="16" FontWeight="bold" Margin="0, 24, 0, 8" Visibility="Collapsed">
                             Dictamen <Span Foreground="{StaticResource PrimaryColor}">*</Span>
                         </TextBlock>
@@ -374,7 +409,7 @@
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TbCreditPurpose}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=tbJustification}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>

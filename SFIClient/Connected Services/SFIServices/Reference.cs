@@ -2232,6 +2232,13 @@ namespace SFIClient.SFIServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GenerateApprovedDictum", ReplyAction="http://tempuri.org/ICreditsService/GenerateApprovedDictumResponse")]
         System.Threading.Tasks.Task<bool> GenerateApprovedDictumAsync(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GenerateRejectedDictum", ReplyAction="http://tempuri.org/ICreditsService/GenerateRejectedDictumResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GenerateRejectedDictumServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool GenerateRejectedDictum(SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GenerateRejectedDictum", ReplyAction="http://tempuri.org/ICreditsService/GenerateRejectedDictumResponse")]
+        System.Threading.Tasks.Task<bool> GenerateRejectedDictumAsync(SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceServiceFaultFaul" +
             "t", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
@@ -2314,6 +2321,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> GenerateApprovedDictumAsync(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved) {
             return base.Channel.GenerateApprovedDictumAsync(allPolicies, policesThatApply, dictum, creditApplication, amountApproved);
+        }
+        
+        public bool GenerateRejectedDictum(SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication) {
+            return base.Channel.GenerateRejectedDictum(dictum, creditApplication);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GenerateRejectedDictumAsync(SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication) {
+            return base.Channel.GenerateRejectedDictumAsync(dictum, creditApplication);
         }
         
         public int GetCreditTypeIdByCreditInvoice(string creditInvoice) {

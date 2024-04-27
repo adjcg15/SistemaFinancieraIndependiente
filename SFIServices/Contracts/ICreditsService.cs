@@ -35,6 +35,10 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         bool GenerateApprovedDictum(List<CreditGrantingPolicy> allPolicies, List<CreditGrantingPolicy> policesThatApply, Dictum dictum, CreditApplication creditApplication, float amountApproved);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool GenerateRejectedDictum(Dictum dictum, CreditApplication creditApplication);
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         int GetCreditTypeIdByCreditInvoice(string creditInvoice);
