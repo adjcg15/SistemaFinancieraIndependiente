@@ -207,7 +207,6 @@ namespace SFIClient.Views
             bool isValidInformation =
                 !string.IsNullOrWhiteSpace(TbClientName.Text)
                 && !string.IsNullOrWhiteSpace(TbClientLastName.Text)
-                && !string.IsNullOrWhiteSpace(TbClientSurname.Text)
                 && DpkClientBirthDate.SelectedDate.HasValue 
                 && DpkClientBirthDate.SelectedDate.Value <= DateTime.Now.AddYears(-18)
                 && !string.IsNullOrWhiteSpace(TbAddressStreet.Text)
@@ -232,11 +231,6 @@ namespace SFIClient.Views
             if (string.IsNullOrWhiteSpace(TbClientLastName.Text))
             {
                 TbClientLastName.Style = (Style)FindResource("TextInputError");
-            }
-
-            if (string.IsNullOrWhiteSpace(TbClientSurname.Text))
-            {
-                TbClientSurname.Style = (Style)FindResource("TextInputError");
             }
 
             if (!DpkClientBirthDate.SelectedDate.HasValue
