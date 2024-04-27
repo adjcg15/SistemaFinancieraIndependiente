@@ -130,7 +130,23 @@ namespace SFIClient.Views
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
+            ShowDiscardChangesConfirmationDialog();
+        }
 
+        private void ShowDiscardChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea cancelar la actualización del cliente? Todos los cambios " +
+                "sin guardar se perderán",
+                "Descartar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToSearchClientByRFC();
+            }
         }
 
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
