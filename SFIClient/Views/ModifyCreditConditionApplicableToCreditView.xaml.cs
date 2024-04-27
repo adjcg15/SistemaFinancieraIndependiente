@@ -1,6 +1,5 @@
 ﻿using SFIClient.Controlls;
 using SFIClient.SFIServices;
-using SFIDataAccess.DataAccessObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
