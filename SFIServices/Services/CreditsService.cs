@@ -71,5 +71,9 @@ namespace SFIServices
         {
             return CreditsDAO.GenerateApprovedDictum(allPolicies, policesThatApply, dictum, creditApplication, amountApproved);
         }
+        public int GetCreditTypeIdByCreditInvoice(string creditInvoice)
+        {
+            return CreditsDAO.GetCreditTypeIdByCreditInvoice(creditInvoice);
+        }
     }
 }

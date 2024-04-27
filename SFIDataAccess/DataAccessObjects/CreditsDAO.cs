@@ -475,5 +475,34 @@ namespace SFIDataAccess.DataAccessObjects
 
             return success;
         }
+        public static int GetCreditTypeIdByCreditInvoice(string creditInvoice)
+        {
+            int creditTypeId = 0;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var result = context.credits
+                        .Where(credit => credit.invoice == creditInvoice)
+                        .Select(credit => credit.id_credit_type)
+                        .FirstOrDefault();
+
+                    if (result != 0)
+                    {
+                        creditTypeId = result;
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return creditTypeId;
+        }
     }
 }
