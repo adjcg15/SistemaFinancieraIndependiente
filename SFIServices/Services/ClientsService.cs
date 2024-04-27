@@ -48,5 +48,10 @@ namespace SFIServices
         {
             return ClientsDAO.RecoverClient(clientRfc);
         }
+
+        public Client GetClientPersonalInformation(string clientRFC)
+        {
+            return ClientsDAO.GetClientPersonalInformation(clientRFC);
+        }
     }
 }

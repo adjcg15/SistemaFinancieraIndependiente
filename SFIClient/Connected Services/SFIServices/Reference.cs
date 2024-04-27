@@ -2659,6 +2659,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverClient", ReplyAction="http://tempuri.org/IClientsService/RecoverClientResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Client> RecoverClientAsync(string clientRfc);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/GetClientPersonalInformation", ReplyAction="http://tempuri.org/IClientsService/GetClientPersonalInformationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/GetClientPersonalInformationServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Client GetClientPersonalInformation(string clientRFC);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/GetClientPersonalInformation", ReplyAction="http://tempuri.org/IClientsService/GetClientPersonalInformationResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetClientPersonalInformationAsync(string clientRFC);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2742,6 +2749,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> RecoverClientAsync(string clientRfc) {
             return base.Channel.RecoverClientAsync(clientRfc);
+        }
+        
+        public SFIClient.SFIServices.Client GetClientPersonalInformation(string clientRFC) {
+            return base.Channel.GetClientPersonalInformation(clientRFC);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetClientPersonalInformationAsync(string clientRFC) {
+            return base.Channel.GetClientPersonalInformationAsync(clientRFC);
         }
     }
 }

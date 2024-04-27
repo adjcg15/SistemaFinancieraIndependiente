@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:SFIClient.Views"
     mc:Ignorable="d" 
     d:Width="1280" d:Height="2050"
-    Title="Modificar información personal de cliente">
+    Title="Modificar información personal de cliente"
+    Loaded="PageLoaded">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <!--Navigation bar-->
@@ -302,7 +303,7 @@
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
                                         VerticalScrollBarVisibility="Auto"
-                                        MaxLength="60"/>
+                                        MaxLength="10"/>
                                 </Grid>
                             </StackPanel>
 
@@ -329,7 +330,7 @@
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
                                         VerticalScrollBarVisibility="Auto"
-                                        MaxLength="60"/>
+                                        MaxLength="10"/>
                                 </Grid>
                             </StackPanel>
                             
@@ -356,7 +357,7 @@
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
                                         VerticalScrollBarVisibility="Auto"
-                                        MaxLength="60"/>
+                                        MaxLength="5"/>
                                 </Grid>
                             </StackPanel>
 

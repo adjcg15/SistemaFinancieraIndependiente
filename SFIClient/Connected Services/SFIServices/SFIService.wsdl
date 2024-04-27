@@ -290,6 +290,15 @@
   <wsdl:message name="IClientsService_RecoverClient_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q26="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q26:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IClientsService_GetClientPersonalInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientPersonalInformation" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_GetClientPersonalInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientPersonalInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClientsService_GetClientPersonalInformation_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q27:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IServiceExample">
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceExample/GetDataUsingDataContract" message="tns:IServiceExample_GetDataUsingDataContract_InputMessage" />
@@ -430,6 +439,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/RecoverClient" message="tns:IClientsService_RecoverClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/RecoverClientResponse" message="tns:IClientsService_RecoverClient_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/RecoverClientServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_RecoverClient_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientPersonalInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientsService/GetClientPersonalInformation" message="tns:IClientsService_GetClientPersonalInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientsService/GetClientPersonalInformationResponse" message="tns:IClientsService_GetClientPersonalInformation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IClientsService/GetClientPersonalInformationServiceFaultFault" name="ServiceFaultFault" message="tns:IClientsService_GetClientPersonalInformation_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceExample" type="tns:IServiceExample">
@@ -757,6 +771,18 @@
     </wsdl:operation>
     <wsdl:operation name="RecoverClient">
       <soap12:operation soapAction="http://tempuri.org/IClientsService/RecoverClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientPersonalInformation">
+      <soap12:operation soapAction="http://tempuri.org/IClientsService/GetClientPersonalInformation" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
