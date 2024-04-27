@@ -2697,6 +2697,14 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/GetClientPersonalInformation", ReplyAction="http://tempuri.org/IClientsService/GetClientPersonalInformationResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetClientPersonalInformationAsync(string clientRFC);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateClientPersonalInformation", ReplyAction="http://tempuri.org/IClientsService/UpdateClientPersonalInformationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/UpdateClientPersonalInformationServiceFaultFau" +
+            "lt", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool UpdateClientPersonalInformation(SFIClient.SFIServices.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateClientPersonalInformation", ReplyAction="http://tempuri.org/IClientsService/UpdateClientPersonalInformationResponse")]
+        System.Threading.Tasks.Task<bool> UpdateClientPersonalInformationAsync(SFIClient.SFIServices.Client client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2788,6 +2796,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetClientPersonalInformationAsync(string clientRFC) {
             return base.Channel.GetClientPersonalInformationAsync(clientRFC);
+        }
+        
+        public bool UpdateClientPersonalInformation(SFIClient.SFIServices.Client client) {
+            return base.Channel.UpdateClientPersonalInformation(client);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateClientPersonalInformationAsync(SFIClient.SFIServices.Client client) {
+            return base.Channel.UpdateClientPersonalInformationAsync(client);
         }
     }
 }
