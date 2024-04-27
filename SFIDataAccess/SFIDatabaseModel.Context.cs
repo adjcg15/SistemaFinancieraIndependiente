@@ -682,5 +682,62 @@ namespace SFIDataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCreditGrantingPolicy", id_credit_granting_policyParameter, titleParameter, is_activeParameter, effective_dateParameter, descriptionParameter, updated);
         }
+    
+        public virtual int UpdateClientPersonalInformation(string client_rfc, string client_name, string client_last_name, string client_surname, Nullable<System.DateTime> client_birthdate, string address_street, string address_neighborhood, string address_interior_number, string address_outdoor_number, string address_post_code, string address_city, string address_municipality, string address_state)
+        {
+            var client_rfcParameter = client_rfc != null ?
+                new ObjectParameter("client_rfc", client_rfc) :
+                new ObjectParameter("client_rfc", typeof(string));
+    
+            var client_nameParameter = client_name != null ?
+                new ObjectParameter("client_name", client_name) :
+                new ObjectParameter("client_name", typeof(string));
+    
+            var client_last_nameParameter = client_last_name != null ?
+                new ObjectParameter("client_last_name", client_last_name) :
+                new ObjectParameter("client_last_name", typeof(string));
+    
+            var client_surnameParameter = client_surname != null ?
+                new ObjectParameter("client_surname", client_surname) :
+                new ObjectParameter("client_surname", typeof(string));
+    
+            var client_birthdateParameter = client_birthdate.HasValue ?
+                new ObjectParameter("client_birthdate", client_birthdate) :
+                new ObjectParameter("client_birthdate", typeof(System.DateTime));
+    
+            var address_streetParameter = address_street != null ?
+                new ObjectParameter("address_street", address_street) :
+                new ObjectParameter("address_street", typeof(string));
+    
+            var address_neighborhoodParameter = address_neighborhood != null ?
+                new ObjectParameter("address_neighborhood", address_neighborhood) :
+                new ObjectParameter("address_neighborhood", typeof(string));
+    
+            var address_interior_numberParameter = address_interior_number != null ?
+                new ObjectParameter("address_interior_number", address_interior_number) :
+                new ObjectParameter("address_interior_number", typeof(string));
+    
+            var address_outdoor_numberParameter = address_outdoor_number != null ?
+                new ObjectParameter("address_outdoor_number", address_outdoor_number) :
+                new ObjectParameter("address_outdoor_number", typeof(string));
+    
+            var address_post_codeParameter = address_post_code != null ?
+                new ObjectParameter("address_post_code", address_post_code) :
+                new ObjectParameter("address_post_code", typeof(string));
+    
+            var address_cityParameter = address_city != null ?
+                new ObjectParameter("address_city", address_city) :
+                new ObjectParameter("address_city", typeof(string));
+    
+            var address_municipalityParameter = address_municipality != null ?
+                new ObjectParameter("address_municipality", address_municipality) :
+                new ObjectParameter("address_municipality", typeof(string));
+    
+            var address_stateParameter = address_state != null ?
+                new ObjectParameter("address_state", address_state) :
+                new ObjectParameter("address_state", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClientPersonalInformation", client_rfcParameter, client_nameParameter, client_last_nameParameter, client_surnameParameter, client_birthdateParameter, address_streetParameter, address_neighborhoodParameter, address_interior_numberParameter, address_outdoor_numberParameter, address_post_codeParameter, address_cityParameter, address_municipalityParameter, address_stateParameter);
+        }
     }
 }

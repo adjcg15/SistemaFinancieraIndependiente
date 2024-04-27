@@ -666,6 +666,21 @@
           <Parameter Name="NewCardNumber" Type="varchar" Mode="In" />
           <Parameter Name="Success" Type="bit" Mode="InOut" />
         </Function>
+        <Function Name="UpdateClientPersonalInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="client_rfc" Type="varchar" Mode="In" />
+          <Parameter Name="client_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="client_last_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="client_surname" Type="nvarchar" Mode="In" />
+          <Parameter Name="client_birthdate" Type="date" Mode="In" />
+          <Parameter Name="address_street" Type="nvarchar" Mode="In" />
+          <Parameter Name="address_neighborhood" Type="nvarchar" Mode="In" />
+          <Parameter Name="address_interior_number" Type="char" Mode="In" />
+          <Parameter Name="address_outdoor_number" Type="char" Mode="In" />
+          <Parameter Name="address_post_code" Type="char" Mode="In" />
+          <Parameter Name="address_city" Type="nvarchar" Mode="In" />
+          <Parameter Name="address_municipality" Type="nvarchar" Mode="In" />
+          <Parameter Name="address_state" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="UpdateCreditGrantingPolicy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_credit_granting_policy" Type="int" Mode="In" />
           <Parameter Name="title" Type="nvarchar" Mode="In" />
@@ -1134,6 +1149,21 @@
             <Parameter Name="effective_date" Mode="In" Type="DateTime" />
             <Parameter Name="description" Mode="In" Type="String" />
             <Parameter Name="updated" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateClientPersonalInformation">
+            <Parameter Name="client_rfc" Mode="In" Type="String" />
+            <Parameter Name="client_name" Mode="In" Type="String" />
+            <Parameter Name="client_last_name" Mode="In" Type="String" />
+            <Parameter Name="client_surname" Mode="In" Type="String" />
+            <Parameter Name="client_birthdate" Mode="In" Type="DateTime" />
+            <Parameter Name="address_street" Mode="In" Type="String" />
+            <Parameter Name="address_neighborhood" Mode="In" Type="String" />
+            <Parameter Name="address_interior_number" Mode="In" Type="String" />
+            <Parameter Name="address_outdoor_number" Mode="In" Type="String" />
+            <Parameter Name="address_post_code" Mode="In" Type="String" />
+            <Parameter Name="address_city" Mode="In" Type="String" />
+            <Parameter Name="address_municipality" Mode="In" Type="String" />
+            <Parameter Name="address_state" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -2005,6 +2035,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdateCreditGrantingPolicy" FunctionName="SFIDatabaseModel.Store.UpdateCreditGrantingPolicy" />
+          <FunctionImportMapping FunctionImportName="UpdateClientPersonalInformation" FunctionName="SFIDatabaseModel.Store.UpdateClientPersonalInformation" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
