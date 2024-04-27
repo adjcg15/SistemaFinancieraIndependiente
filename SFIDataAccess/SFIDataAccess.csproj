@@ -170,6 +170,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SFIDatabaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="SFIDataAccess.Model.BankAccount.datasource" />
+    <None Include="SFIDataAccess.Model.Client.datasource" />
+    <None Include="SFIDataAccess.Model.Credit.datasource" />
+    <None Include="SFIDataAccess.Model.CreditApplication.datasource" />
+    <None Include="SFIDataAccess.Model.CreditCondition.datasource" />
+    <None Include="SFIDataAccess.Model.CreditGrantingPolicy.datasource" />
+    <None Include="SFIDataAccess.Model.CreditType.datasource" />
+    <None Include="SFIDataAccess.Model.DataTypeExample.datasource" />
+    <None Include="SFIDataAccess.Model.Employee.datasource" />
+    <None Include="SFIDataAccess.Model.PersonalReference.datasource" />
     <None Include="SFIDatabaseModel.edmx.diagram">
       <DependentUpon>SFIDatabaseModel.edmx</DependentUpon>
     </None>
