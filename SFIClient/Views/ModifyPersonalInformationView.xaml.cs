@@ -209,7 +209,7 @@ namespace SFIClient.Views
                 && !string.IsNullOrWhiteSpace(TbClientLastName.Text)
                 && !string.IsNullOrWhiteSpace(TbClientSurname.Text)
                 && DpkClientBirthDate.SelectedDate.HasValue 
-                && DpkClientBirthDate.SelectedDate.Value < DateTime.Now.AddYears(-18)
+                && DpkClientBirthDate.SelectedDate.Value <= DateTime.Now.AddYears(-18)
                 && !string.IsNullOrWhiteSpace(TbAddressStreet.Text)
                 && !string.IsNullOrWhiteSpace(TbAddressNeighborhood.Text)
                 && !string.IsNullOrWhiteSpace(TbAddressInteriorNumber.Text)
@@ -240,7 +240,7 @@ namespace SFIClient.Views
             }
 
             if (!DpkClientBirthDate.SelectedDate.HasValue
-                || DpkClientBirthDate.SelectedDate.Value < DateTime.Now.AddYears(-18))
+                || DpkClientBirthDate.SelectedDate.Value > DateTime.Now.AddYears(-18))
             {
                 BdrClientBirthDate.BorderBrush = (Brush)FindResource("Red");
             }
