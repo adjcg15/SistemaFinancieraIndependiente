@@ -114,8 +114,8 @@ namespace SFIClient.Views
             {
                 TbAddressStreet.Text = client.Address.Street;
                 TbAddressNeighborhood.Text = client.Address.Neighborhod;
-                TbAddressInteriorNumber.Text = client.Address.InteriorNumber;
-                TbAddressOutdoorNumber.Text = client.Address.OutdoorNumber;
+                TbAddressInteriorNumber.Text = client.Address.InteriorNumber.Trim();
+                TbAddressOutdoorNumber.Text = client.Address.OutdoorNumber.Trim();
                 TbAddressPostCode.Text = client.Address.PostCode;
                 TbAddressCity.Text = client.Address.City;
                 TbAddressMunicipality.Text = client.Address.Municipality;
