@@ -393,5 +393,11 @@
   <ItemGroup>
     <Resource Include="Assets\DownloadIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFIDataAccess\SFIDataAccess.csproj">
+      <Project>{4337D2D1-E52A-425E-8A6B-A3D844BBF274}</Project>
+      <Name>SFIDataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
