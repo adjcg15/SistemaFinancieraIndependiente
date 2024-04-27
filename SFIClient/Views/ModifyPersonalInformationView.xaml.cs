@@ -174,11 +174,12 @@ namespace SFIClient.Views
             bool isValidClientInformation = ValidateClientPersonalInformation();
             if(isValidClientInformation)
             {
+
             }
             else
             {
                 HighlightInvalidFields();
-
+                ShowInvalidFieldsAlertDialog();
             }
         }
 
@@ -281,6 +282,17 @@ namespace SFIClient.Views
             {
                 TbAddressState.Style = (Style)FindResource("TextInputError");
             }
+        }
+        
+        private void ShowInvalidFieldsAlertDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "Verifique que la información ingresada en los campos marcados " +
+                "en rojo sea correcta. Recuerde que el cliente debe ser mayor de edad",
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
 
         private void RestrictToPlainText(TextBox textBox)
