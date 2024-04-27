@@ -1,8 +1,11 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
+using SFIDataAccess.DataAccessObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace SFIClient.Views
@@ -25,13 +29,15 @@ namespace SFIClient.Views
     public partial class ModifyCreditConditionApplicableToCreditController : Page
     {
         private Credit credit;
+        private int creditTypeId;
+        CreditsServiceClient creditsService = new CreditsServiceClient();
         public ModifyCreditConditionApplicableToCreditController(Credit credit)
         {
             InitializeComponent();
             this.credit = credit;
-            //TODO recuperar salario del cliente, actualmente manda excepcion
-            //this.clientSalary = clientSalary;
+            this.creditTypeId = creditsService.GetCreditTypeIdByCreditInvoice(credit.Invoice);
             ShowCreditAndClientInformation();
+            LoadCreditConditionsByCreditType(this.creditTypeId);
         }
         private void ShowCreditAndClientInformation()
         {
@@ -43,7 +49,6 @@ namespace SFIClient.Views
             BldApprovedAmountCredit.Inlines.Add(new Run($"{credit.AmountApproved} MXN"));
 
             SpnClientSalaryAmmount.Inlines.Clear();
-            //SpnClientSalaryAmmount.Inlines.Add(new Run($"{clientSalary} MXN"));
         }
         private void ShowReturnPreviousPageConfirmationDialog()
         {
@@ -58,7 +63,92 @@ namespace SFIClient.Views
                 RedirectToConsultCreditsList();
             }
         }
+        private void LoadCreditConditionsByCreditType(int creditConditionId)
+        {
+            CreditConditionsServiceClient creditConditionsService = new CreditConditionsServiceClient();
+            try
+            {
+                List<CreditCondition> applicableCreditConditions = creditConditionsService
+                    .RecoverCreditConditionsByCreditType(creditConditionId).ToList();
+                ShowApplicableCreditConditions(applicableCreditConditions);
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorRecoveringCreditConditionsDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringCreditConditionsDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringCreditConditionsDialog(errorMessage);
+            }
+        }
+
+        private void ShowApplicableCreditConditions(List<CreditCondition> applicableCreditConditions)
+        {
+            GrdEmptyConditionsMessage.Visibility = applicableCreditConditions.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            SkpCreditConditions.Visibility = applicableCreditConditions.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            SkpCreditConditions.Children.Clear();
+
+            foreach (var condition in applicableCreditConditions)
+            {
+                var creditConditionCard = new CreditApplicationCreditConditionControl(condition);
+                creditConditionCard.CardClick += (sender, e) => HighlightCreditConditionCard(sender as CreditApplicationCreditConditionControl);
+
+                // TODO resaltar condicion de credito asociada actualmente, posible solucion
+                /*if (condition == currentAssociatedCondition)
+                {
+                    HighlightCreditConditionCard(creditConditionCard);
+                }*/
+
+                SkpCreditConditions.Children.Add(creditConditionCard);
+            }
+        }
+        private void HighlightCreditConditionCard(CreditApplicationCreditConditionControl creditConditionCard)
+        {
+            SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+            SolidColorBrush lightGray = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ECECEC"));
+            SolidColorBrush defaultBorderColor = (SolidColorBrush)Application.Current.Resources["LightGray"];
+            SolidColorBrush defaultBgColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FAFAFA"));
+
+            foreach (var child in SkpCreditConditions.Children)
+            {
+                if (child is CreditApplicationCreditConditionControl conditionControl && conditionControl != creditConditionCard)
+                {
+                    conditionControl.BdrCreditConditionCard.BorderBrush = defaultBorderColor;
+                    conditionControl.BdrCreditConditionCard.Background = defaultBgColor;
+                }
+            }
+
+            creditConditionCard.BdrCreditConditionCard.BorderBrush = primaryColor;
+            creditConditionCard.BdrCreditConditionCard.Background = lightGray;
+
+            // Aquí puedes realizar cualquier otra lógica necesaria después de resaltar la condición de crédito
+        }
+        private CreditCondition GetCurrentAssociatedCondition()
+        {
+            //TODO
+            return new CreditCondition { /* Datos de la condición de crédito asociada actualmente */ };
+        }
         private void ShowDiscardChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                $"¿Está seguro de que desea cancelar modificacion de la condición de crédito aplicable a crédito? " +
+                $"Todos los cambios sin guardar se perderán",
+                "Descartar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToConsultCreditsList();
+            }
+        }
+        private void ShowErrorRecoveringCreditConditionsDialog(string message)
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
                 $"¿Está seguro de que desea cancelar modificacion de la condición de crédito aplicable a crédito? " +

@@ -2231,6 +2231,14 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GenerateApprovedDictum", ReplyAction="http://tempuri.org/ICreditsService/GenerateApprovedDictumResponse")]
         System.Threading.Tasks.Task<bool> GenerateApprovedDictumAsync(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceServiceFaultFaul" +
+            "t", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        int GetCreditTypeIdByCreditInvoice(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceResponse")]
+        System.Threading.Tasks.Task<int> GetCreditTypeIdByCreditInvoiceAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2306,6 +2314,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> GenerateApprovedDictumAsync(SFIClient.SFIServices.CreditGrantingPolicy[] allPolicies, SFIClient.SFIServices.CreditGrantingPolicy[] policesThatApply, SFIClient.SFIServices.Dictum dictum, SFIClient.SFIServices.CreditApplication creditApplication, float amountApproved) {
             return base.Channel.GenerateApprovedDictumAsync(allPolicies, policesThatApply, dictum, creditApplication, amountApproved);
+        }
+        
+        public int GetCreditTypeIdByCreditInvoice(string creditInvoice) {
+            return base.Channel.GetCreditTypeIdByCreditInvoice(creditInvoice);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetCreditTypeIdByCreditInvoiceAsync(string creditInvoice) {
+            return base.Channel.GetCreditTypeIdByCreditInvoiceAsync(creditInvoice);
         }
     }
     
