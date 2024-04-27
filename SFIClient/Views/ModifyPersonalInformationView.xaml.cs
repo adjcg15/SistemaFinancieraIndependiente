@@ -105,7 +105,27 @@ namespace SFIClient.Views
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
         {
+            ShowReturnToPreviousPageConfirmationDialog();
+        }
 
+        private void ShowReturnToPreviousPageConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea regresar a la ventana previa? Todos los cambios sin guardar se perderán",
+                "Regresar a ventana previa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToSearchClientByRFC();
+            }
+        }
+
+        private void RedirectToSearchClientByRFC()
+        {
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
