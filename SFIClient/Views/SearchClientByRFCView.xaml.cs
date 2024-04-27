@@ -294,7 +294,7 @@ namespace SFIClient.Views
 
         private void BtnSearchClientClick(object sender, RoutedEventArgs e)
         {
-            bool clientExists = false;
+            bool clientExists = true;
             string rfcWanted = TbRFCClient.Text.ToUpper().Trim();
 
             ItcClients.Items.Clear();
@@ -302,13 +302,13 @@ namespace SFIClient.Views
             {
                 if (clientsList[i].Rfc.Contains(rfcWanted))
                 {
-                    clientExists = true;
                     AddSearchedClientToClientList(clientsList[i]);
                 }
-                else
-                {
-                    clientExists = false;
-                }
+            }
+
+            if (ItcClients.Items.Count == 0)
+            {
+                clientExists = false;
             }
 
             if (!clientExists)

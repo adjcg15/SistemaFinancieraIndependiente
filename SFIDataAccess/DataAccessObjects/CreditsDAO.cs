@@ -368,7 +368,8 @@ namespace SFIDataAccess.DataAccessObjects
                         Purpose = creditApplicationInformation.purpose,
                         Client = clientInfo,
                         CreditCondition = creditConditionInfo,
-                        CreditType = creditTypeInfo
+                        CreditType = creditTypeInfo,
+                        DigitalDocuments = digitalDocuments
                     };
                 }
             }
@@ -393,17 +394,17 @@ namespace SFIDataAccess.DataAccessObjects
             bool success = false;
 
             DataTable Dictum = new DataTable();
-            Dictum.Columns.Add("CreditApplicationInvoice", typeof(string));
-            Dictum.Columns.Add("IsApproved", typeof(bool));
-            Dictum.Columns.Add("Justification", typeof(string));
-            Dictum.Columns.Add("GenerationDate", typeof(DateTime));
-            Dictum.Columns.Add("EmployeeNumber", typeof(string));
+            Dictum.Columns.Add("credit_application_invoice", typeof(string));
+            Dictum.Columns.Add("is_approved", typeof(bool));
+            Dictum.Columns.Add("justification", typeof(string));
+            Dictum.Columns.Add("generation_date", typeof(DateTime));
+            Dictum.Columns.Add("employee_number", typeof(string));
 
             Dictum.Rows.Add(creditApplication.Invoice, dictum.IsApproved, dictum.Justification, dictum.GenerationDate, dictum.EmployeeNumber);
 
             DataTable CreditGrantingPolices = new DataTable();
-            CreditGrantingPolices.Columns.Add("IdCreditGrantingPolices", typeof(int));
-            CreditGrantingPolices.Columns.Add("IsApplying", typeof(bool));
+            CreditGrantingPolices.Columns.Add("id_credit_granting_policy", typeof(int));
+            CreditGrantingPolices.Columns.Add("is_applied", typeof(bool));
 
             foreach (var policy in allPolicies)
             {
@@ -421,12 +422,20 @@ namespace SFIDataAccess.DataAccessObjects
             }
 
             DataTable CreditCondition = new DataTable();
-            CreditCondition.Columns.Add("InterestRate", typeof(float));
-            CreditCondition.Columns.Add("IsIvaApplied", typeof(bool));
-            CreditCondition.Columns.Add("InterestOnArrears", typeof(float));
-            CreditCondition.Columns.Add("AdvancePaymentReduction", typeof(float));
-            CreditCondition.Columns.Add("PaymentMonths", typeof(int));
-            CreditCondition.Columns.Add("Identifier", typeof(string));
+            CreditCondition.Columns.Add("interest_rate", typeof(float));
+            CreditCondition.Columns.Add("is_iva_applied", typeof(bool));
+            CreditCondition.Columns.Add("interest_on_arrears", typeof(float));
+            CreditCondition.Columns.Add("advance_payment_reduction", typeof(float));
+            CreditCondition.Columns.Add("payment_months", typeof(int));
+            CreditCondition.Columns.Add("identifier", typeof(string));
+
+            CreditCondition.Rows.Add(
+                creditApplication.CreditCondition.InterestRate,
+                creditApplication.CreditCondition.IsIvaApplied,
+                creditApplication.CreditCondition.InterestOnArrears,
+                creditApplication.CreditCondition.AdvancePaymentReduction,
+                creditApplication.CreditCondition.PaymentMonths,
+                creditApplication.CreditCondition.Identifier);
 
             try
             {
@@ -456,6 +465,55 @@ namespace SFIDataAccess.DataAccessObjects
 
                     dbContext.Database.ExecuteSqlCommand("EXEC GenerateApprovedDictum @Dictum, @CreditGrantingPolices, " +
                         "@CreditCondition, @AmountApproved, @Success OUTPUT", dictumTable, policesTable, creditConditionTable, amountApprovedValue, successParam);
+
+                    success = (bool)successParam.Value;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+
+            return success;
+        }
+
+        public static bool GenerateRejectedDictum(Dictum dictum, CreditApplication creditApplication)
+        {
+            bool success = false;
+
+            try
+            {
+                DataTable Dictum = new DataTable();
+                Dictum.Columns.Add("credit_application_invoice", typeof(string));
+                Dictum.Columns.Add("is_approved", typeof(bool));
+                Dictum.Columns.Add("justification", typeof(string));
+                Dictum.Columns.Add("generation_date", typeof(DateTime));
+                Dictum.Columns.Add("employee_number", typeof(string));
+
+                Dictum.Rows.Add(creditApplication.Invoice, dictum.IsApproved, dictum.Justification, dictum.GenerationDate, dictum.EmployeeNumber);
+
+                using (var dbContext = new SFIDatabaseContext())
+                {
+                    var dictumTable = new SqlParameter("@Dictum", SqlDbType.Structured)
+                    {
+                        Value = Dictum,
+                        TypeName = "Dictum"
+                    };
+
+                    var successParam = new SqlParameter("@Success", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+
+                    dbContext.Database.ExecuteSqlCommand("EXEC GenerateRejectedDictum @Dictum, @Success OUTPUT", dictumTable, successParam);
 
                     success = (bool)successParam.Value;
                 }
