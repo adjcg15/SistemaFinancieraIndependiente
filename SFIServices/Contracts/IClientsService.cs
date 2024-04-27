@@ -40,5 +40,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         Client RecoverClient(string clientRfc);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        Client GetClientPersonalInformation(string clientRFC);
     }
 }
