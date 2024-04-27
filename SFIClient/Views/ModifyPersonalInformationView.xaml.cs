@@ -17,9 +17,12 @@ namespace SFIClient.Views
 {
     public partial class ModifyPersonalInformationController : Page
     {
-        public ModifyPersonalInformationController()
+        private readonly string clientRFC;
+
+        public ModifyPersonalInformationController(string clientRFC)
         {
             InitializeComponent();
+            this.clientRFC = clientRFC;
         }
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
