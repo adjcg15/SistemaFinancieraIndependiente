@@ -303,7 +303,7 @@
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
                                         VerticalScrollBarVisibility="Auto"
-                                        MaxLength="60"/>
+                                        MaxLength="10"/>
                                 </Grid>
                             </StackPanel>
 
@@ -330,7 +330,7 @@
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
                                         VerticalScrollBarVisibility="Auto"
-                                        MaxLength="60"/>
+                                        MaxLength="10"/>
                                 </Grid>
                             </StackPanel>
                             
@@ -357,7 +357,7 @@
                                         TextWrapping="Wrap"
                                         AcceptsReturn="True"
                                         VerticalScrollBarVisibility="Auto"
-                                        MaxLength="60"/>
+                                        MaxLength="5"/>
                                 </Grid>
                             </StackPanel>
 
