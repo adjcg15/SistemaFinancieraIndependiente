@@ -68,10 +68,17 @@ namespace SFIDataAccess.DataAccessObjects
                                 Rfc = storedCredit.client.rfc
                             };
 
-                            credit_conditions storedApplicableCondition = storedCredit.regimes
+                            regime applicableRegime =
+                                storedCredit.regimes
                                 .Where(regime => regime.application_end_date == null)
-                                .FirstOrDefault()
-                                .credit_conditions;
+                                .FirstOrDefault() ??
+                                storedCredit.regimes
+                                .Where(regime => regime.application_end_date != null)
+                                .OrderByDescending(regime => regime.application_end_date)
+                                .FirstOrDefault();
+
+                            credit_conditions storedApplicableCondition = applicableRegime.credit_conditions;
+
                             CreditCondition appliedCreditCondition = new CreditCondition
                             {
                                 Identifier = storedApplicableCondition.identifier,
