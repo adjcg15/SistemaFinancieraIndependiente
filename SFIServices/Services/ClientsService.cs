@@ -53,5 +53,10 @@ namespace SFIServices
         {
             return ClientsDAO.GetClientPersonalInformation(clientRFC);
         }
+
+        public bool UpdateClientPersonalInformation(Client client)
+        {
+            return ClientsDAO.UpdateClientPersonalInformation(client);
+        }
     }
 }
