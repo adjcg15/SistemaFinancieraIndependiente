@@ -174,10 +174,10 @@ namespace SFIClient.Views
             bool isValidClientInformation = ValidateClientPersonalInformation();
             if(isValidClientInformation)
             {
-
             }
             else
             {
+                HighlightInvalidFields();
 
             }
         }
@@ -217,6 +217,70 @@ namespace SFIClient.Views
                 && !string.IsNullOrWhiteSpace(TbAddressState.Text);
 
             return isValidInformation;
+        }
+
+        private void HighlightInvalidFields()
+        {
+            if (string.IsNullOrWhiteSpace(TbClientName.Text))
+            {
+                TbClientName.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbClientLastName.Text))
+            {
+                TbClientLastName.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbClientSurname.Text))
+            {
+                TbClientSurname.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (!DpkClientBirthDate.SelectedDate.HasValue
+                || DpkClientBirthDate.SelectedDate.Value < DateTime.Now.AddYears(-18))
+            {
+                BdrClientBirthDate.BorderBrush = (Brush)FindResource("Red");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressStreet.Text))
+            {
+                TbAddressStreet.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressNeighborhood.Text))
+            {
+                TbAddressNeighborhood.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressInteriorNumber.Text))
+            {
+                TbAddressInteriorNumber.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressOutdoorNumber.Text))
+            {
+                TbAddressOutdoorNumber.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressPostCode.Text))
+            {
+                TbAddressPostCode.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressCity.Text))
+            {
+                TbAddressCity.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressMunicipality.Text))
+            {
+                TbAddressMunicipality.Style = (Style)FindResource("TextInputError");
+            }
+
+            if (string.IsNullOrWhiteSpace(TbAddressState.Text))
+            {
+                TbAddressState.Style = (Style)FindResource("TextInputError");
+            }
         }
 
         private void RestrictToPlainText(TextBox textBox)
