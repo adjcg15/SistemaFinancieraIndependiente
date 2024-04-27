@@ -4,6 +4,7 @@ using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
@@ -640,6 +641,67 @@ namespace SFIDataAccess.DataAccessObjects
             }
 
             return fullClient;
+        }
+
+        public static Client GetClientPersonalInformation(string clientRFC)
+        {
+            Client client = null;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    client storedClient = context.clients
+                        .Where(dbClient => dbClient.rfc == clientRFC)
+                        .FirstOrDefault();
+
+                    if(storedClient != null)
+                    {
+                        client = new Client
+                        {
+                            Rfc = storedClient.rfc,
+                            Curp = storedClient.curp,
+                            Name = storedClient.name,
+                            LastName = storedClient.last_name,
+                            Surname = storedClient.surname,
+                            Birthdate = storedClient.birthdate
+                        };
+
+                        if(storedClient.address != null)
+                        {
+                            client.Address = new Address
+                            {
+                                Street = storedClient.address.street,
+                                Neighborhod = storedClient.address.neighborhod,
+                                InteriorNumber = storedClient.address.inteior_number,
+                                OutdoorNumber = storedClient.address.outdoor_number,
+                                PostCode = storedClient.address.post_code,
+                                City = storedClient.address.city,
+                                Municipality = storedClient.address.municipality,
+                                State = storedClient.address.state
+                            };
+                        }
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar la información del cliente, " +
+                    "por favor inténtelo más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch(SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar la información del cliente, " +
+                    "por favor inténtelo más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return client;
         }
     }
 }

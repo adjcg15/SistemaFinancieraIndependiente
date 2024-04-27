@@ -198,7 +198,10 @@ namespace SFIClient.Views
 
         private void BtnModifyPersonalInformationClick(object sender, EventArgs e)
         {
-            ClientControll clientControll = (ClientControll)sender;
+            ClientControll clientCard = (ClientControll)sender;
+            string clientRFC = clientCard.LblClientRFC.Content.ToString();
+
+            NavigationService.Navigate(new ModifyPersonalInformationController(clientRFC));
         }
 
         private void BtnModifyWorkCenterClick(object sender, EventArgs e)

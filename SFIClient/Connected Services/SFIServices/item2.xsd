@@ -368,4 +368,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetClientPersonalInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientRFC" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClientPersonalInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="GetClientPersonalInformationResult" nillable="true" type="q28:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

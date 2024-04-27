@@ -70,6 +70,11 @@
                             <Trigger Property="IsFocused" Value="False">
                                 <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MediumGray}"/>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Gray}"/>
+                                <Setter TargetName="border" Property="Background" Value="#EAEAEA"/>
+                                <Setter Property="Foreground" Value="{StaticResource Gray}"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
