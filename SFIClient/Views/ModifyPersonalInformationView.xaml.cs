@@ -1,4 +1,5 @@
 ﻿using SFIClient.SFIServices;
+using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace SFIClient.Views
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
             LoadClientPersonalInformation();
+            ApplyFieldsRestrictions();
         }
 
         private void LoadClientPersonalInformation()
@@ -57,6 +59,22 @@ namespace SFIClient.Views
                     "su conexión de Internet e intente de nuevo";
                 ShowErrorRecoveringClientPersonalInformationDialog(errorMessage);
             }
+        }
+
+        private void ApplyFieldsRestrictions()
+        {
+            RestrictToPlainText(TbClientName);
+            RestrictToPlainText(TbClientLastName);
+            RestrictToPlainText(TbClientSurname);
+            RestrictToPlainText(TbAddressStreet);
+            RestrictToPlainText(TbAddressNeighborhood);
+            RestrictToPlainText(TbAddressCity);
+            RestrictToPlainText(TbAddressMunicipality);
+            RestrictToPlainText(TbAddressState);
+
+            RestrictToNumeric(TbAddressInteriorNumber);
+            RestrictToNumeric(TbAddressOutdoorNumber);
+            RestrictToNumeric(TbAddressPostCode);
         }
 
         private void ShowErrorRecoveringClientPersonalInformationDialog(string message)
@@ -151,7 +169,83 @@ namespace SFIClient.Views
 
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
         {
+            HideFieldsErrors();
 
+            bool isValidClientInformation = ValidateClientPersonalInformation();
+            if(isValidClientInformation)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void HideFieldsErrors()
+        {
+            TbClientName.Style = (Style)FindResource("TextInput");
+            TbClientLastName.Style = (Style)FindResource("TextInput");
+            TbClientSurname.Style = (Style)FindResource("TextInput");
+            BdrClientBirthDate.BorderBrush = (Brush)FindResource("MediumGray");
+
+            TbAddressStreet.Style = (Style)FindResource("TextInput");
+            TbAddressNeighborhood.Style = (Style)FindResource("TextInput");
+            TbAddressInteriorNumber.Style = (Style)FindResource("TextInput");
+            TbAddressOutdoorNumber.Style = (Style)FindResource("TextInput");
+            TbAddressPostCode.Style = (Style)FindResource("TextInput");
+            TbAddressCity.Style = (Style)FindResource("TextInput");
+            TbAddressMunicipality.Style = (Style)FindResource("TextInput");
+            TbAddressState.Style = (Style)FindResource("TextInput");
+        }
+
+        private bool ValidateClientPersonalInformation()
+        {
+            bool isValidInformation =
+                !string.IsNullOrWhiteSpace(TbClientName.Text)
+                && !string.IsNullOrWhiteSpace(TbClientLastName.Text)
+                && !string.IsNullOrWhiteSpace(TbClientSurname.Text)
+                && DpkClientBirthDate.SelectedDate.HasValue 
+                && DpkClientBirthDate.SelectedDate.Value < DateTime.Now.AddYears(-18)
+                && !string.IsNullOrWhiteSpace(TbAddressStreet.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressNeighborhood.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressInteriorNumber.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressOutdoorNumber.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressPostCode.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressCity.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressMunicipality.Text)
+                && !string.IsNullOrWhiteSpace(TbAddressState.Text);
+
+            return isValidInformation;
+        }
+
+        private void RestrictToPlainText(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (!DataValidator.IsPlainText(new string(e.Text[e.Text.Length - 1], 1)))
+                {
+                    e.Handled = true;
+                }
+            };
+        }
+
+        private void RestrictToNumeric(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                }
+            };
+            textBox.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Space)
+                {
+                    e.Handled = true;
+                }
+            };
         }
     }
 }
