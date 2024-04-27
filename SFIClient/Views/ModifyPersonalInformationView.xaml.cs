@@ -21,6 +21,7 @@ namespace SFIClient.Views
     public partial class ModifyPersonalInformationController : Page
     {
         private readonly string clientRFC;
+        private Client client;
 
         public ModifyPersonalInformationController(string clientRFC)
         {
@@ -41,6 +42,7 @@ namespace SFIClient.Views
             try
             {
                 Client client = clientsService.GetClientPersonalInformation(clientRFC);
+                this.client = client;
                 ShowClientPersonalInformation(client);
             }
             catch (FaultException<ServiceFault> fault)
@@ -174,7 +176,7 @@ namespace SFIClient.Views
             bool isValidClientInformation = ValidateClientPersonalInformation();
             if(isValidClientInformation)
             {
-
+                ShowSaveChangesConfirmationDialog();
             }
             else
             {
@@ -286,13 +288,35 @@ namespace SFIClient.Views
         
         private void ShowInvalidFieldsAlertDialog()
         {
-            MessageBoxResult buttonClicked = MessageBox.Show(
+            MessageBox.Show(
                 "Verifique que la información ingresada en los campos marcados " +
                 "en rojo sea correcta. Recuerde que el cliente debe ser mayor de edad",
                 "Campos inválidos",
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning
             );
+        }
+
+        private void ShowSaveChangesConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea guardar los cambios realizados al cliente" 
+                + client.Name + " " + client.LastName,
+                "Confirmación de actualización",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+
+            if ( buttonClicked == MessageBoxResult.Yes )
+            {
+                UpdateClientPersonalInformation();
+            }
+        }
+
+        private void UpdateClientPersonalInformation()
+        {
+
         }
 
         private void RestrictToPlainText(TextBox textBox)
