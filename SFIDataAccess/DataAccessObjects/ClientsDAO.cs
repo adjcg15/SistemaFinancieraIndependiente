@@ -703,5 +703,55 @@ namespace SFIDataAccess.DataAccessObjects
 
             return client;
         }
+
+        public static bool UpdateClientPersonalInformation(Client client)
+        {
+            bool updated = false;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    context.Database.ExecuteSqlCommand(
+                        "EXEC UpdateClientPersonalInformation @client_rfc, @client_name, " +
+                        "@client_last_name, @client_surname, @client_birthdate, " +
+                        "@address_street, @address_neighborhood, @address_interior_number, " +
+                        "@address_outdoor_number, @address_post_code, @address_city, " +
+                        "@address_municipality, @address_state",
+                        new SqlParameter("@client_rfc", client.Rfc),
+                        new SqlParameter("@client_name", client.Name),
+                        new SqlParameter("@client_last_name", client.LastName),
+                        new SqlParameter("@client_surname", client.Surname),
+                        new SqlParameter("@client_birthdate", client.Birthdate),
+                        new SqlParameter("@address_street", client.Address.Street),
+                        new SqlParameter("@address_neighborhood", client.Address.Neighborhod),
+                        new SqlParameter("@address_interior_number", client.Address.InteriorNumber),
+                        new SqlParameter("@address_outdoor_number", client.Address.OutdoorNumber),
+                        new SqlParameter("@address_post_code", client.Address.PostCode),
+                        new SqlParameter("@address_city", client.Address.City),
+                        new SqlParameter("@address_municipality", client.Address.Municipality),
+                        new SqlParameter("@address_state", client.Address.State)
+                    );
+
+                    updated = true;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información del cliente, " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información del cliente, " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+
+            return updated;
+        }
     }
 }
