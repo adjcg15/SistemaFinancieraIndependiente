@@ -231,10 +231,8 @@ namespace SFIClient.Views
             );
         }
 
-        private bool UpdatePersonalReference()
+        private void UpdatePersonalReference()
         {
-            bool updatedPersonalReference = false;
-
             Address newAddress = new Address
             {
                 IdAddress = personalReference.Address.IdAddress,
@@ -264,7 +262,7 @@ namespace SFIClient.Views
 
             try
             {
-                updatedPersonalReference = clientsServiceClient.UpdatePersonalReference(newPersonalReference, currentIneKey);
+                bool updatedPersonalReference = clientsServiceClient.UpdatePersonalReference(newPersonalReference, currentIneKey);
                 if (updatedPersonalReference)
                 {
                     ShowPersonalReferenceSuccessfulUpdateMessageDialog();
@@ -291,8 +289,6 @@ namespace SFIClient.Views
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClientByRFCView();
             }
-
-            return updatedPersonalReference;
         }
 
         private void ShowPersonalReferenceUpdateError(string message)
