@@ -2405,6 +2405,18 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimen", ReplyAction="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimenResponse")]
         System.Threading.Tasks.Task<bool> VerifyUsageInRegimenAsync(string conditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "ice", ReplyAction="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "iceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "iceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "ice", ReplyAction="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "iceResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition> GetCurrentCreditConditionByCreditInvoiceAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2488,6 +2500,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> VerifyUsageInRegimenAsync(string conditionIdentifier) {
             return base.Channel.VerifyUsageInRegimenAsync(conditionIdentifier);
+        }
+        
+        public SFIClient.SFIServices.CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice) {
+            return base.Channel.GetCurrentCreditConditionByCreditInvoice(creditInvoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition> GetCurrentCreditConditionByCreditInvoiceAsync(string creditInvoice) {
+            return base.Channel.GetCurrentCreditConditionByCreditInvoiceAsync(creditInvoice);
         }
     }
     

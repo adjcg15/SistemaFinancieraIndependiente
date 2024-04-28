@@ -86,29 +86,28 @@ namespace SFIClient.Views
                 ShowErrorRecoveringCreditConditionsDialog(errorMessage);
             }
         }
-
         private void ShowApplicableCreditConditions(List<CreditCondition> applicableCreditConditions)
         {
             GrdEmptyConditionsMessage.Visibility = applicableCreditConditions.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             SkpCreditConditions.Visibility = applicableCreditConditions.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             SkpCreditConditions.Children.Clear();
+            CreditCondition currentAssociatedCondition = GetCurrentAssociatedCondition();
 
             foreach (var condition in applicableCreditConditions)
             {
                 var creditConditionCard = new CreditApplicationCreditConditionControl(condition);
                 creditConditionCard.CardClick += (sender, e) => HighlightCreditConditionCard(sender as CreditApplicationCreditConditionControl);
-
-                // TODO resaltar condicion de credito asociada actualmente, posible solucion
-                /*if (condition == currentAssociatedCondition)
+                if (currentAssociatedCondition != null && creditConditionCard.BindedCondition.Identifier == currentAssociatedCondition.Identifier)
                 {
                     HighlightCreditConditionCard(creditConditionCard);
-                }*/
+                }
 
                 SkpCreditConditions.Children.Add(creditConditionCard);
             }
         }
         private void HighlightCreditConditionCard(CreditApplicationCreditConditionControl creditConditionCard)
         {
+            Console.WriteLine("Highlighting credit condition card");
             SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
             SolidColorBrush lightGray = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ECECEC"));
             SolidColorBrush defaultBorderColor = (SolidColorBrush)Application.Current.Resources["LightGray"];
@@ -125,13 +124,13 @@ namespace SFIClient.Views
 
             creditConditionCard.BdrCreditConditionCard.BorderBrush = primaryColor;
             creditConditionCard.BdrCreditConditionCard.Background = lightGray;
-
-            // Aquí puedes realizar cualquier otra lógica necesaria después de resaltar la condición de crédito
         }
         private CreditCondition GetCurrentAssociatedCondition()
         {
-            //TODO
-            return new CreditCondition { /* Datos de la condición de crédito asociada actualmente */ };
+            CreditConditionsServiceClient creditConditionsService = new CreditConditionsServiceClient();
+            CreditCondition currentAssociatedCondition = creditConditionsService.GetCurrentCreditConditionByCreditInvoice(credit.Invoice);
+            Console.WriteLine($"Current associated condition: {currentAssociatedCondition?.Identifier}");
+            return currentAssociatedCondition;
         }
         private void ShowDiscardChangesConfirmationDialog()
         {

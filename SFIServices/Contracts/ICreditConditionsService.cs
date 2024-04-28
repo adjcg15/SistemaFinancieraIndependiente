@@ -33,6 +33,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         bool VerifyUsageInRegimen(string conditionIdentifier);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice);
     }
 }
 

@@ -39,5 +39,9 @@ namespace SFIServices
         {
             return CreditConditionsDAO.VerifyUsageInRegimen(conditionIdentifier);
         }
+        public CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice)
+        {
+            return CreditConditionsDAO.GetCurrentCreditConditionByCreditInvoice(creditInvoice);
+        }
     }
 }
