@@ -118,6 +118,7 @@
     <Compile Include="Model\CreditGrantingPolicy.cs" />
     <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\PersonalReference.cs" />
+    <Compile Include="Model\Regime.cs" />
     <Compile Include="Model\WorkCenter.cs" />
     <Compile Include="payment.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>

@@ -122,6 +122,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AssociateNewCreditCondition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="creditInvoice" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newCreditConditionIdentifier" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AssociateNewCreditConditionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RecoverCreditConditionsByCreditType">
     <xs:complexType>
       <xs:sequence>

@@ -30,6 +30,7 @@ namespace SFIClient.Views
         private Credit credit;
         private int creditTypeId;
         CreditsServiceClient creditsService = new CreditsServiceClient();
+        private CreditApplicationCreditConditionControl selectedConditionControl;
         public ModifyCreditConditionApplicableToCreditController(Credit credit)
         {
             InitializeComponent();
@@ -96,7 +97,12 @@ namespace SFIClient.Views
             foreach (var condition in applicableCreditConditions)
             {
                 var creditConditionCard = new CreditApplicationCreditConditionControl(condition);
-                creditConditionCard.CardClick += (sender, e) => HighlightCreditConditionCard(sender as CreditApplicationCreditConditionControl);
+                creditConditionCard.CardClick += (sender, e) =>
+                {
+                    HighlightCreditConditionCard(creditConditionCard);
+                    selectedConditionControl = creditConditionCard;
+                };
+
                 if (currentAssociatedCondition != null && creditConditionCard.BindedCondition.Identifier == currentAssociatedCondition.Identifier)
                 {
                     HighlightCreditConditionCard(creditConditionCard);
@@ -107,7 +113,6 @@ namespace SFIClient.Views
         }
         private void HighlightCreditConditionCard(CreditApplicationCreditConditionControl creditConditionCard)
         {
-            Console.WriteLine("Highlighting credit condition card");
             SolidColorBrush primaryColor = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
             SolidColorBrush lightGray = (SolidColorBrush)(new BrushConverter().ConvertFrom("#ECECEC"));
             SolidColorBrush defaultBorderColor = (SolidColorBrush)Application.Current.Resources["LightGray"];
@@ -207,10 +212,63 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
+                ChangeCreditCondition();
+            }
+        }
+        private void ChangeCreditCondition()
+        {
+            CreditsServiceClient creditService = new CreditsServiceClient();
+
+            try
+            {
+                creditService.AssociateNewCreditCondition(credit.Invoice, selectedConditionControl.BindedCondition.Identifier);
+                ShowSuccessChangeCreditConditionDialog();
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorChangeCreditConditionDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorChangeCreditConditionDialog(errorMessage);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex.Message);
+                string errorMessage = "No fue posible guardar la información debido a un error de conexión";
+                ShowErrorChangeCreditConditionDialog(errorMessage);
+            }
+        }
+        private void ShowErrorChangeCreditConditionDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Error al cambiar la condición de crédito",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
                 RedirectToConsultCreditsList();
             }
         }
 
+        private void ShowSuccessChangeCreditConditionDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "La nueva condición de crédito ha sido asociada correctamente",
+                "Modiciación de condición de crédito",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToConsultCreditsList();
+            }
+        }
         private void BtnCancelChangesClick(object sender, RoutedEventArgs e)
         {
             ShowDiscardChangesConfirmationDialog();

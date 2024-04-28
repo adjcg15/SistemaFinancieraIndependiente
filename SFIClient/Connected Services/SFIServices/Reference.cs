@@ -2246,6 +2246,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceResponse")]
         System.Threading.Tasks.Task<int> GetCreditTypeIdByCreditInvoiceAsync(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/AssociateNewCreditConditionServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
+        System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2337,6 +2344,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<int> GetCreditTypeIdByCreditInvoiceAsync(string creditInvoice) {
             return base.Channel.GetCreditTypeIdByCreditInvoiceAsync(creditInvoice);
+        }
+        
+        public void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier) {
+            base.Channel.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
+        }
+        
+        public System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
+            return base.Channel.AssociateNewCreditConditionAsync(creditInvoice, newCreditConditionIdentifier);
         }
     }
     

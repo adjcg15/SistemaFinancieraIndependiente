@@ -569,5 +569,43 @@ namespace SFIDataAccess.DataAccessObjects
 
             return creditTypeId;
         }
+        public static void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var currentRegime = context.regimes
+                        .Where(regime => regime.credit_invoice == creditInvoice && regime.application_end_date == null)
+                        .FirstOrDefault();
+
+                    if (currentRegime != null)
+                    {
+                        currentRegime.application_end_date = DateTime.Today;
+                        var newRegime = new regime
+                        {
+                            application_start_date = DateTime.Today,
+                            credit_condition_identifier = newCreditConditionIdentifier,
+                            credit_invoice = creditInvoice
+                        };
+                        context.regimes.Add(newRegime);
+
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("No se encontró un régimen activo para la factura de crédito dada.");
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible asociar la nueva condición de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+        }
+
     }
 }
