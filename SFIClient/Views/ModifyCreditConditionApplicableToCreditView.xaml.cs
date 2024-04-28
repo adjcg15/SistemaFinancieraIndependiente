@@ -149,16 +149,25 @@ namespace SFIClient.Views
         private void ShowErrorRecoveringCreditConditionsDialog(string message)
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                $"¿Está seguro de que desea cancelar modificacion de la condición de crédito aplicable a crédito? " +
-                $"Todos los cambios sin guardar se perderán",
-                "Descartar cambios",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question
+                message,
+                "Condiciones de crédito no disponibles",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
             );
-            if (buttonClicked == MessageBoxResult.Yes)
+
+            if (buttonClicked == MessageBoxResult.OK)
             {
-                RedirectToConsultCreditsList();
+                    RedirectToConsultCreditsList();
             }
+        }
+        private void ShowErrorSameConditionSelectedDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+               "Avertencia",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
         }
         private void RedirectToConsultCreditsList()
         {
@@ -168,8 +177,40 @@ namespace SFIClient.Views
         }
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
         {
-
+            CreditApplicationCreditConditionControl selectedConditionControl = SkpCreditConditions.Children.OfType<CreditApplicationCreditConditionControl>()
+                                                                        .FirstOrDefault(ccc => ccc.IsSelected);
+            if (selectedConditionControl != null)
+            {
+                CreditCondition currentAssociatedCondition = GetCurrentAssociatedCondition();
+                if (selectedConditionControl.BindedCondition.Identifier != currentAssociatedCondition?.Identifier)
+                {
+                    ShowModifyCreditConditionDialog();
+                }
+                else
+                {
+                    ShowErrorSameConditionSelectedDialog("Por favor, seleccione una condición de crédito diferente a la actual.");
+                }
+            }
+            else
+            {
+                ShowErrorSameConditionSelectedDialog("Por favor, seleccione una condición de crédito diferente a la actual.");
+            }
         }
+        private void ShowModifyCreditConditionDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                $"¿Esta seguro de cambiar la condición aplicable al crédito?",
+                "Confirmación",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToConsultCreditsList();
+            }
+        }
+
         private void BtnCancelChangesClick(object sender, RoutedEventArgs e)
         {
             ShowDiscardChangesConfirmationDialog();

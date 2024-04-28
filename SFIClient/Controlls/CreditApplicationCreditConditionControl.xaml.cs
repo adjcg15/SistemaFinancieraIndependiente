@@ -20,7 +20,7 @@ namespace SFIClient.Controlls
     {
         public CreditCondition BindedCondition { get; }
         public event EventHandler<CreditCondition> CardClick;
-
+        public bool IsSelected { get; private set; }
         public CreditApplicationCreditConditionControl(CreditCondition applicableCondition)
         {
             InitializeComponent();
@@ -60,11 +60,11 @@ namespace SFIClient.Controlls
             TbkInterestRate.Foreground = Brushes.Black;
             TbkPaymentMonths.Foreground = Brushes.Black;
         }
-
         private void BdrCreditConditionCardMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if(BindedCondition.IsActive)
+            if (BindedCondition.IsActive)
             {
+                IsSelected = true;
                 CardClick?.Invoke(this, BindedCondition);
             }
         }
