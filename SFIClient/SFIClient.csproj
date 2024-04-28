@@ -99,6 +99,9 @@
     <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
       <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ConsultPaytableView.xaml.cs">
+      <DependentUpon>ConsultPaytableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditApplicationsListView.xaml.cs">
       <DependentUpon>CreditApplicationsListView.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ConsultConditionsCreditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConsultPaytableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
