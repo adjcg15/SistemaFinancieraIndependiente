@@ -2246,6 +2246,20 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetCreditTypeIdByCreditInvoiceResponse")]
         System.Threading.Tasks.Task<int> GetCreditTypeIdByCreditInvoiceAsync(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/AssociateNewCreditConditionServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
+        System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool IsFirstPaymentReconciled(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse")]
+        System.Threading.Tasks.Task<bool> IsFirstPaymentReconciledAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2338,6 +2352,22 @@ namespace SFIClient.SFIServices {
         public System.Threading.Tasks.Task<int> GetCreditTypeIdByCreditInvoiceAsync(string creditInvoice) {
             return base.Channel.GetCreditTypeIdByCreditInvoiceAsync(creditInvoice);
         }
+        
+        public void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier) {
+            base.Channel.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
+        }
+        
+        public System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
+            return base.Channel.AssociateNewCreditConditionAsync(creditInvoice, newCreditConditionIdentifier);
+        }
+        
+        public bool IsFirstPaymentReconciled(string creditInvoice) {
+            return base.Channel.IsFirstPaymentReconciled(creditInvoice);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsFirstPaymentReconciledAsync(string creditInvoice) {
+            return base.Channel.IsFirstPaymentReconciledAsync(creditInvoice);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2405,6 +2435,18 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimen", ReplyAction="http://tempuri.org/ICreditConditionsService/VerifyUsageInRegimenResponse")]
         System.Threading.Tasks.Task<bool> VerifyUsageInRegimenAsync(string conditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "ice", ReplyAction="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "iceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "iceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "ice", ReplyAction="http://tempuri.org/ICreditConditionsService/GetCurrentCreditConditionByCreditInvo" +
+            "iceResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition> GetCurrentCreditConditionByCreditInvoiceAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2488,6 +2530,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> VerifyUsageInRegimenAsync(string conditionIdentifier) {
             return base.Channel.VerifyUsageInRegimenAsync(conditionIdentifier);
+        }
+        
+        public SFIClient.SFIServices.CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice) {
+            return base.Channel.GetCurrentCreditConditionByCreditInvoice(creditInvoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.CreditCondition> GetCurrentCreditConditionByCreditInvoiceAsync(string creditInvoice) {
+            return base.Channel.GetCurrentCreditConditionByCreditInvoiceAsync(creditInvoice);
         }
     }
     

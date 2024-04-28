@@ -4,11 +4,13 @@ using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -258,6 +260,42 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
+        }
+        public static CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice)
+        {
+            CreditCondition currentCreditCondition = null;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var applicableRegime = context.regimes
+                        .Where(regime => regime.credit.invoice == creditInvoice && regime.application_end_date == null)
+                        .FirstOrDefault();
+                    if (applicableRegime != null)
+                    {
+                        var storedApplicableCondition = applicableRegime.credit_conditions;
+                        currentCreditCondition = new CreditCondition
+                        {
+                            Identifier = storedApplicableCondition.identifier,
+                            AdvancePaymentReduction = storedApplicableCondition.advance_payment_reduction,
+                            InterestOnArrears = storedApplicableCondition.interest_on_arrears,
+                            InterestRate = storedApplicableCondition.interest_rate,
+                            IsActive = storedApplicableCondition.is_active,
+                            IsIvaApplied = storedApplicableCondition.is_iva_applied,
+                            PaymentMonths = storedApplicableCondition.payment_months
+                        };
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar la condición de crédito actual, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            return currentCreditCondition;
         }
     }
 }

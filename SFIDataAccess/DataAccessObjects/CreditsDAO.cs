@@ -561,13 +561,86 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
-                    new FaultReason("Error")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
-
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
             return creditTypeId;
         }
+        public static void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var currentRegime = context.regimes
+                        .Where(regime => regime.credit_invoice == creditInvoice && regime.application_end_date == null)
+                        .FirstOrDefault();
+
+                    if (currentRegime != null)
+                    {
+                        currentRegime.application_end_date = DateTime.Today;
+                        var newRegime = new regime
+                        {
+                            application_start_date = DateTime.Today,
+                            credit_condition_identifier = newCreditConditionIdentifier,
+                            credit_invoice = creditInvoice
+                        };
+                        context.regimes.Add(newRegime);
+
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("No se encontró un régimen activo para la factura de crédito dada.");
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+        public static bool VerifyFirstPaymentReconciled(string creditInvoice)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var firstPayment = context.payments
+                        .Where(p => p.credit_invoice == creditInvoice)
+                        .OrderBy(p => p.planned_date)
+                        .FirstOrDefault();
+                    return firstPayment != null && firstPayment.reconciliation_date != null;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+
     }
 }
