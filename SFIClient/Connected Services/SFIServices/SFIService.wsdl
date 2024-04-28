@@ -146,13 +146,13 @@
   <wsdl:message name="ICreditsService_AssociateNewCreditCondition_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q10:ServiceFault" />
   </wsdl:message>
-  <wsdl:message name="ICreditsService_IsFirstPaymentReconciled_InputMessage">
-    <wsdl:part name="parameters" element="tns:IsFirstPaymentReconciled" />
+  <wsdl:message name="ICreditsService_VerifyFirstPaymentReconciled_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyFirstPaymentReconciled" />
   </wsdl:message>
-  <wsdl:message name="ICreditsService_IsFirstPaymentReconciled_OutputMessage">
-    <wsdl:part name="parameters" element="tns:IsFirstPaymentReconciledResponse" />
+  <wsdl:message name="ICreditsService_VerifyFirstPaymentReconciled_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyFirstPaymentReconciledResponse" />
   </wsdl:message>
-  <wsdl:message name="ICreditsService_IsFirstPaymentReconciled_ServiceFaultFault_FaultMessage">
+  <wsdl:message name="ICreditsService_VerifyFirstPaymentReconciled_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q11:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ICreditConditionsService_RecoverCreditConditionsByCreditType_InputMessage">
@@ -406,10 +406,10 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse" message="tns:ICreditsService_AssociateNewCreditCondition_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/AssociateNewCreditConditionServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_AssociateNewCreditCondition_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="IsFirstPaymentReconciled">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled" message="tns:ICreditsService_IsFirstPaymentReconciled_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse" message="tns:ICreditsService_IsFirstPaymentReconciled_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_IsFirstPaymentReconciled_ServiceFaultFault_FaultMessage" />
+    <wsdl:operation name="VerifyFirstPaymentReconciled">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled" message="tns:ICreditsService_VerifyFirstPaymentReconciled_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledResponse" message="tns:ICreditsService_VerifyFirstPaymentReconciled_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_VerifyFirstPaymentReconciled_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICreditConditionsService">
@@ -657,8 +657,8 @@
         <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="IsFirstPaymentReconciled">
-      <soap12:operation soapAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled" style="document" />
+    <wsdl:operation name="VerifyFirstPaymentReconciled">
+      <soap12:operation soapAction="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

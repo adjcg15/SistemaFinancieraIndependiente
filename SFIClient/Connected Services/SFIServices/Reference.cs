@@ -2254,12 +2254,12 @@ namespace SFIClient.SFIServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
         System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        bool IsFirstPaymentReconciled(string creditInvoice);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool VerifyFirstPaymentReconciled(string creditInvoice);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse")]
-        System.Threading.Tasks.Task<bool> IsFirstPaymentReconciledAsync(string creditInvoice);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledResponse")]
+        System.Threading.Tasks.Task<bool> VerifyFirstPaymentReconciledAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2361,12 +2361,12 @@ namespace SFIClient.SFIServices {
             return base.Channel.AssociateNewCreditConditionAsync(creditInvoice, newCreditConditionIdentifier);
         }
         
-        public bool IsFirstPaymentReconciled(string creditInvoice) {
-            return base.Channel.IsFirstPaymentReconciled(creditInvoice);
+        public bool VerifyFirstPaymentReconciled(string creditInvoice) {
+            return base.Channel.VerifyFirstPaymentReconciled(creditInvoice);
         }
         
-        public System.Threading.Tasks.Task<bool> IsFirstPaymentReconciledAsync(string creditInvoice) {
-            return base.Channel.IsFirstPaymentReconciledAsync(creditInvoice);
+        public System.Threading.Tasks.Task<bool> VerifyFirstPaymentReconciledAsync(string creditInvoice) {
+            return base.Channel.VerifyFirstPaymentReconciledAsync(creditInvoice);
         }
     }
     

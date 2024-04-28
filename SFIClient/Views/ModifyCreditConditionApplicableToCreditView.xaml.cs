@@ -214,7 +214,7 @@ namespace SFIClient.Views
             {
                 try
                 {
-                    bool isFirstPaymentReconciled = creditsService.IsFirstPaymentReconciled(credit.Invoice);
+                    bool isFirstPaymentReconciled = creditsService.VerifyFirstPaymentReconciled(credit.Invoice);
 
                     if (!isFirstPaymentReconciled)
                     {
