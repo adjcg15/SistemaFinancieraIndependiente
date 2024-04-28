@@ -44,5 +44,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         Client GetClientPersonalInformation(string clientRFC);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool UpdateClientPersonalInformation(Client client);
     }
 }
