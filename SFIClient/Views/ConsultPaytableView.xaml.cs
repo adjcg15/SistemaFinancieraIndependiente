@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFIClient.SFIServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,11 @@ namespace SFIClient.Views
     /// </summary>
     public partial class ConsultPaytableView : Page
     {
+        private Credit credit;
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
         }
-        public ConsultPaytableView()
+        public ConsultPaytableView(Credit credit)
         {
             InitializeComponent();
         }
