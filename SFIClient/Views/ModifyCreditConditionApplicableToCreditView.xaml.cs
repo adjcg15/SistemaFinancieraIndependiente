@@ -204,7 +204,7 @@ namespace SFIClient.Views
         private void ShowModifyCreditConditionDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                $"¿Esta seguro de cambiar la condición aplicable al crédito?",
+                $"¿Está seguro de cambiar la condición aplicable al crédito?",
                 "Confirmación",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
@@ -212,9 +212,27 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.Yes)
             {
-                ChangeCreditCondition();
+                try
+                {
+                    bool isFirstPaymentReconciled = creditsService.IsFirstPaymentReconciled(credit.Invoice);
+
+                    if (!isFirstPaymentReconciled)
+                    {
+                        ChangeCreditCondition();
+                        ShowSuccessChangeCreditConditionDialog();
+                    }
+                    else
+                    {
+                        ShowErrorChangeCreditConditionDialog("El primer pago de esta factura de crédito ya ha sido reconciliado.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorChangeCreditConditionDialog(ex.Message);
+                }
             }
         }
+
         private void ChangeCreditCondition()
         {
             CreditsServiceClient creditService = new CreditsServiceClient();

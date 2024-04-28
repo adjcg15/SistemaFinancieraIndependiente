@@ -561,12 +561,16 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
-                    new FaultReason("Error")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
-
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
             return creditTypeId;
         }
         public static void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
@@ -600,10 +604,41 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible asociar la nueva condición de crédito, intente más tarde"),
-                    new FaultReason("Error")
-                );
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+        public static bool VerifyFirstPaymentReconciled(string creditInvoice)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var firstPayment = context.payments
+                        .Where(p => p.credit_invoice == creditInvoice)
+                        .OrderBy(p => p.planned_date)
+                        .FirstOrDefault();
+                    return firstPayment != null && firstPayment.reconciliation_date != null;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
         }
 

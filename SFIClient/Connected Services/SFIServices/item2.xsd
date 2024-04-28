@@ -135,6 +135,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="IsFirstPaymentReconciled">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="creditInvoice" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsFirstPaymentReconciledResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsFirstPaymentReconciledResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RecoverCreditConditionsByCreditType">
     <xs:complexType>
       <xs:sequence>
@@ -427,7 +441,7 @@
   <xs:element name="UpdateClientPersonalInformation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="client" nillable="true" type="q31:Client" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model" minOccurs="0" name="client" nillable="true" type="q32:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

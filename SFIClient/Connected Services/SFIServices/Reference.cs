@@ -2253,6 +2253,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
         System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool IsFirstPaymentReconciled(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/IsFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/IsFirstPaymentReconciledResponse")]
+        System.Threading.Tasks.Task<bool> IsFirstPaymentReconciledAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2352,6 +2359,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
             return base.Channel.AssociateNewCreditConditionAsync(creditInvoice, newCreditConditionIdentifier);
+        }
+        
+        public bool IsFirstPaymentReconciled(string creditInvoice) {
+            return base.Channel.IsFirstPaymentReconciled(creditInvoice);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsFirstPaymentReconciledAsync(string creditInvoice) {
+            return base.Channel.IsFirstPaymentReconciledAsync(creditInvoice);
         }
     }
     

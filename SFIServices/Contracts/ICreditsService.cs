@@ -45,5 +45,8 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool VerifyFirstPaymentReconciled(string creditInvoice);
     }
  }
