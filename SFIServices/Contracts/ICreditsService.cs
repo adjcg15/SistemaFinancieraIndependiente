@@ -48,5 +48,8 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         bool VerifyFirstPaymentReconciled(string creditInvoice);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        List<Payments> GetPaymentsByCreditInvoice(string creditInvoice);
     }
  }
