@@ -275,17 +275,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowPersonalReferenceUpdateError(fe.Message);
+                ShowPersonalReferenceUpdateError(fe.Detail.Message);
+                RedirectToSearchClientByRFCView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClientByRFCView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClientByRFCView();
             }

@@ -72,23 +72,21 @@ namespace SFIDataAccess.DataAccessObjects
                     }
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los clientes, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los clientes, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los clientes, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los clientes, inténtelo de nuevo más tarde"));
             }
 
             return clientsList;
@@ -113,17 +111,21 @@ namespace SFIDataAccess.DataAccessObjects
                     }
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
             }
 
             return bankAccount;
@@ -151,17 +153,21 @@ namespace SFIDataAccess.DataAccessObjects
                     success = (bool)successParam.Value;
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde"));
             }
 
             return success;
@@ -302,6 +308,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible registrar al cliente, inténtelo de nuevo más tarde"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible registrar al cliente, inténtelo de nuevo más tarde"));
+            }
 
             return success;
         }
@@ -357,23 +367,21 @@ namespace SFIDataAccess.DataAccessObjects
                     }
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar las referencias personales del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar las referencias personales del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar las referencias personales del cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar las referencias personales del cliente, inténtelo de nuevo más tarde"));
             }
 
             return personalReferencesList;
@@ -420,23 +428,21 @@ namespace SFIDataAccess.DataAccessObjects
                     success = (bool)successParam.Value;
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde"));
             }
 
             return success;
@@ -490,10 +496,6 @@ namespace SFIDataAccess.DataAccessObjects
                     var personalReferenceAddresSecond = (from referenceAddressSecond in context.addresses
                                                          where referenceAddressSecond.id_address == personalReferenceSecond.id_address
                                                         select referenceAddressSecond).FirstOrDefault();
-                    //var addressIds = personalReferencesInformation.Select(pr => pr.id_address).ToList();
-                    //var personalReferenceAddresses = (from address in context.addresses
-                    //                                  where addressIds.Contains(address.id_address)
-                    //                                  select address).ToList();
                     Address addressWorkCenter = new Address
                     {
                         Street = workCenterAddress.street,
@@ -621,23 +623,21 @@ namespace SFIDataAccess.DataAccessObjects
                     };
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible establecer una conexión con la base de datos, " +
-                    "por favor inténtelo más tarde"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde"));
             }
 
             return fullClient;

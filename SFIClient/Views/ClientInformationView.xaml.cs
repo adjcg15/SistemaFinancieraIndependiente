@@ -44,17 +44,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowErrorRecoveringClient(fe.Message);
+                ShowErrorRecoveringClient(fe.Detail.Message);
+                RedirectToSearchClientByRFCView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringClient(errorMessage);
                 RedirectToSearchClientByRFCView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringClient(errorMessage);
                 RedirectToSearchClientByRFCView();
             }
@@ -165,7 +166,7 @@ namespace SFIClient.Views
         {
             MessageBox.Show(
                 message,
-                "Sistema no disponible",
+                "Servicio no disponible",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );

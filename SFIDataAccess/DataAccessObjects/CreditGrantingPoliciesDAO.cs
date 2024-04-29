@@ -118,15 +118,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde"));
+            } 
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde"));
             }
 
             return policiesList;

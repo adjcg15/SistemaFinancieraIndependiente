@@ -52,17 +52,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                MessageBox.Show(fe.Message, "Error en la base de datos");
+                MessageBox.Show(fe.Detail.Message, "Error en la base de datos");
+                RedirectToSearchClientByRfcView();
             }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToSearchClientByRfcView();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                //TODO Redirect To Main Menu
+                RedirectToSearchClientByRfcView();
             }
         }
 
@@ -171,7 +172,8 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                MessageBox.Show(fe.Message, "Error en la base de datos");
+                MessageBox.Show(fe.Detail.Message, "Error en la base de datos");
+                RedirectToSearchClientByRfcView();
             }
             catch (EndpointNotFoundException)
             {
