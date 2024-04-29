@@ -641,6 +641,45 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
         }
+        public static List<Payments> GetPaymentsByCreditInvoice(string creditInvoice)
+        {
+            List<Payments> payments = new List<Payments>();
 
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var results = context.payments
+                        .Where(payment => payment.credit_invoice == creditInvoice)
+                        .OrderBy(payment => payment.planned_date)
+                        .ToList();
+
+                    foreach (var result in results)
+                    {
+                        payments.Add(new Payments
+                        {
+                            amount = (double)result.amount,
+                            invoice = result.invoice,
+                            planned_date = result.planned_date,
+                            credit_invoice = result.credit_invoice,
+                            reconciliation_date = result.reconciliation_date
+                        });
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            return payments;
+        }
     }
 }
