@@ -822,7 +822,8 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowErrorRegisteringClientDialog(fe.Message);
+                ShowErrorRegisteringClientDialog(fe.Detail.Message);
+                RedirectToSearchClientByRfcView();
             }
             catch (EndpointNotFoundException)
             {

@@ -19,6 +19,7 @@ using SFIClient.Session;
 using System.ServiceModel.Channels;
 using System.Windows.Markup;
 using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace SFIClient.Views
 {
@@ -231,17 +232,18 @@ namespace SFIClient.Views
                 }
                 catch (FaultException<ServiceFault> fe)
                 {
-                    ShowErrorRecoveringPersonalReferences(fe.Message);
+                    ShowErrorRecoveringPersonalReferences(fe.Detail.Message);
+                    RedirectToLoginView();
                 }
                 catch (EndpointNotFoundException)
                 {
-                    string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                    string errorMessage = "No fue posible recuperar las referencias personales del cliente, inténtelo de nuevo más tarde";
                     ShowErrorRecoveringPersonalReferences(errorMessage);
                     RedirectToLoginView();
                 }
                 catch (CommunicationException)
                 {
-                    string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                    string errorMessage = "No fue posible recuperar las referencias personales del cliente, inténtelo de nuevo más tarde";
                     ShowErrorRecoveringPersonalReferences(errorMessage);
                     RedirectToLoginView();
                 }
@@ -250,7 +252,7 @@ namespace SFIClient.Views
 
         private void ShowErrorRecoveringPersonalReferences(string message)
         {
-            System.Windows.MessageBox.Show(
+            MessageBox.Show(
                 message,
                 "Sistema no disponible",
                 MessageBoxButton.OK,
@@ -322,14 +324,18 @@ namespace SFIClient.Views
 
         private void ShowGoToRegisterClientConfirmationMessage()
         {
-            DialogResult resultado = System.Windows.Forms.MessageBox.Show("¿Deseas registrar al cliente?", "El cliente no existe", MessageBoxButtons.YesNo);
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Deseas registrar al cliente?", 
+                "El cliente no existe", 
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
 
-            if (resultado == DialogResult.OK)
+            if (buttonClicked == MessageBoxResult.Yes)
             {
                 ClientRegisterController clientRegisterView = new ClientRegisterController();
                 this.NavigationService.Navigate(clientRegisterView);
             }
-            else if (resultado == DialogResult.Cancel)
+            else if (buttonClicked == MessageBoxResult.No)
             {
                 AddClientsToClientsList();
                 TbRFCClient.Text = string.Empty;
