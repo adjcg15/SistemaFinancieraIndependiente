@@ -12,7 +12,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,7 +19,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using MessageBox = System.Windows.Forms.MessageBox;
 using Page = System.Windows.Controls.Page;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -69,10 +67,12 @@ namespace SFIClient.Views
             RestrictOnlyNumbers(TbClientPhoneNumberSecond);
             RestrictOnlyNumbers(TbClientPhoneNumberThird);
             RestrictOnlyNumbers(TbClientPhoneNumberFourth);
+            RestrictOnlyNumbers(TbReferenceRelationshipFirst);
             RestrictOnlyNumbers(TbReferencePhoneNumberFirst);
             RestrictOnlyNumbers(TbReferenceInteriorNumberFirst);
             RestrictOnlyNumbers(TbReferenceOutdoorNumberFirst);
             RestrictOnlyNumbers(TbReferencePostCodeFirst);
+            RestrictOnlyNumbers(TbReferenceRelationshipSecond);
             RestrictOnlyNumbers(TbReferencePhoneNumberSecond);
             RestrictOnlyNumbers(TbReferenceInteriorNumberSecond);
             RestrictOnlyNumbers(TbReferenceOutdoorNumberSecond);
@@ -91,18 +91,25 @@ namespace SFIClient.Views
             RestrictOnlyLetters(TbReferenceNameFirst);
             RestrictOnlyLetters(TbReferenceSurnameFirst);
             RestrictOnlyLetters(TbReferenceLastNameFirst);
+            RestrictOnlyLetters(TbReferenceKinshipFirst);
             RestrictOnlyLetters(TbReferenceCityFirst);
             RestrictOnlyLetters(TbReferenceMunicipalityFirst);
             RestrictOnlyLetters(TbReferenceStateFirst);
             RestrictOnlyLetters(TbReferenceNameSecond);
             RestrictOnlyLetters(TbReferenceSurnameSecond);
             RestrictOnlyLetters(TbReferenceLastNameSecond);
+            RestrictOnlyLetters(TbReferenceKinshipSecond);
             RestrictOnlyLetters(TbReferenceCitySecond);
             RestrictOnlyLetters(TbReferenceMunicipalitySecond);
             RestrictOnlyLetters(TbReferenceStateSecond);
         }
 
         private void BtnNewPhoneNumberClick(object sender, RoutedEventArgs e)
+        {
+            CreateAndShowNewPhoneNumberField();
+        }
+
+        private void CreateAndShowNewPhoneNumberField()
         {
             if (TbkClientPhoneNumberThird.Visibility == Visibility.Collapsed)
             {
@@ -123,6 +130,11 @@ namespace SFIClient.Views
         }
 
         private void BtnNewEmailClick(object sender, RoutedEventArgs e)
+        {
+            CreateAndShowNewEmailField();
+        }
+
+        private void CreateAndShowNewEmailField()
         {
             if (TbkClientEmailSecond.Visibility == Visibility.Collapsed)
             {
@@ -568,24 +580,41 @@ namespace SFIClient.Views
             };
         }
 
-        private void BtnGoBackClick(object sender, RoutedEventArgs e)
+        private void BtnDiscardRegisterClientCLick(object sender, RoutedEventArgs e)
         {
-            ShowCancelRegisterClientConfirmationMessage();
+            ShowDiscardRegisterClientConfirmationDialog();
         }
 
-        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        private void BtnCancelRegisterClientClick(object sender, RoutedEventArgs e)
         {
-            ShowCancelRegisterClientConfirmationMessage();
+            ShowCancelRegisterClientConfirmationDialog();
         }
 
-        private void ShowCancelRegisterClientConfirmationMessage()
+        private void ShowCancelRegisterClientConfirmationDialog()
         {
-            DialogResult resultado = MessageBox.Show(
+            MessageBoxResult buttonClicked = MessageBox.Show(
                 "¿Deseas cancelar el registro del cliente?",
                 "Confirmación de cancelación",
-                MessageBoxButtons.OKCancel);
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                );
 
-            if (resultado == DialogResult.OK)
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToSearchClientByRfcView();
+            }
+        }
+
+        private void ShowDiscardRegisterClientConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea descartar el registro del cliente? Todos los cambios sin guardar se perderán",
+                "Descartar cambios",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                );
+
+            if (buttonClicked == MessageBoxResult.Yes)
             {
                 RedirectToSearchClientByRfcView();
             }
@@ -593,46 +622,35 @@ namespace SFIClient.Views
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
-            bool registerClient;
-
             if (VerifyTextFields() && !textFieldsSame)
             {
-                DialogResult resultado = MessageBox.Show("¿Deseas registrar la información del cliente " 
-                    + TbClientName.Text + " " + TbClientSurname.Text + " " + TbClientLastName.Text + "?",
-                    "Confirmación de registro",
-                    MessageBoxButtons.OKCancel);
-
-                if (resultado == DialogResult.OK)
-                {
-                    registerClient = RegisterClient();
-                    if (registerClient)
-                    {
-                        MessageBox.Show("Se registró el cliente "
-                            + TbClientName.Text + " "
-                            + TbClientSurname.Text + " "
-                            + TbClientLastName.Text + " correctamente",
-                            "Registro exitoso");
-                        SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController();
-                        this.NavigationService.Navigate(searchClientByRFCView);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No fue posible registrar al cliente "
-                            + TbClientName.Text + " "
-                            + TbClientSurname.Text + " "
-                            + TbClientLastName.Text + ", alguna información ya se encuentra registrada, " +
-                            "rectifique los campos marcados posibles a duplicación de información",
-                            "Error de registro");
-                        TbClientRfc.Style = textInputErrorStyle;
-                        TbClientCurp.Style = textInputErrorStyle;
-                        TbCardNumber.Style = textInputErrorStyle;
-                    }
-                }
+                ShowClientRegisterConfirmationDialog();
             }
             else
             {
-                MessageBox.Show("Verifique que la información ingresada sea correcta", "Campos inválidos");
+                ShowInvalidFieldsAlertDialog();
+            }
+        }
+
+        private void ShowInvalidFieldsAlertDialog()
+        {
+            MessageBox.Show("Verifique que la información ingresada sea correcta", 
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
+
+        private void ShowClientRegisterConfirmationDialog()
+        {
+            MessageBoxResult resultado = MessageBox.Show("¿Deseas registrar la información del cliente "
+                    + TbClientName.Text + " " + TbClientSurname.Text + " " + TbClientLastName.Text + "?",
+                    "Confirmación de registro",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+            if (resultado == MessageBoxResult.Yes)
+            {
+                RegisterClient();
             }
         }
 
@@ -641,9 +659,8 @@ namespace SFIClient.Views
             NavigationService.Navigate(new SearchClientByRFCController());
         }
 
-        private bool RegisterClient()
+        private void RegisterClient()
         {
-            bool registerClient = false;
             Address addressWorkCenter = new Address
             {
                 Street = TbWorkCenterStreet.Text.Trim(),
@@ -776,8 +793,8 @@ namespace SFIClient.Views
 
             Client client = new Client
             {
-                Rfc = TbClientRfc.Text.Trim(),
-                Curp = TbClientCurp.Text.Trim(),
+                Rfc = TbClientRfc.Text.Trim().ToUpper(),
+                Curp = TbClientCurp.Text.Trim().ToUpper(),
                 Birthdate = DpkClientBirthdate.SelectedDate.Value,
                 Name = TbClientName.Text.Trim(),
                 LastName = TbClientLastName.Text.Trim(),
@@ -791,29 +808,71 @@ namespace SFIClient.Views
 
             try
             {
-                registerClient = ClientsServiceClient.RegisterClient(client);
+                bool registerClient = ClientsServiceClient.RegisterClient(client);
+                if (registerClient)
+                {
+                    ShowClientSuccessfulRegisterMessageDialog();
+                    RedirectToSearchClientByRfcView();
+                }
+                else
+                {
+                    ShowClientExistsMessageDialog();
+                }
 
             }
             catch (FaultException<ServiceFault> fe)
             {
-                MessageBox.Show(fe.Message, "Error en la base de datos");
+                ShowErrorRegisteringClientDialog(fe.Message);
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show(
-                    "No fue posible establecer la conexión con el servicio, intente más tarde", 
-                    "Error en el servicio");
+                string message = "No fue posible registrar al cliente, inténtelo de nuevo más tarde";
+                ShowErrorRegisteringClientDialog(message);
                 RedirectToSearchClientByRfcView();
             }
             catch (CommunicationException)
             {
-                MessageBox.Show(
-                    "No fue posible establecer la conexión con el servicio, intente más tarde", 
-                    "Error en el servicio");
+                string message = "No fue posible registrar al cliente, inténtelo de nuevo más tarde";
+                ShowErrorRegisteringClientDialog(message);
                 RedirectToSearchClientByRfcView();
             }
+        }
 
-            return registerClient;
+        private void ShowClientSuccessfulRegisterMessageDialog()
+        {
+            MessageBox.Show("Se registró el cliente "
+                + TbClientName.Text + " "
+                + TbClientSurname.Text + " "
+                + TbClientLastName.Text + " correctamente",
+                "Registro exitoso",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+
+        private void ShowClientExistsMessageDialog()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            MessageBox.Show("No fue posible registrar al cliente "
+                + TbClientName.Text + " "
+                + TbClientSurname.Text + " "
+                + TbClientLastName.Text + ", alguna información ya se encuentra registrada, " +
+                "rectifique los campos marcados posibles a duplicación de información",
+                "Error de registro",
+                MessageBoxButton.OK,
+                MessageBoxImage.Exclamation);
+            TbClientRfc.Style = textInputErrorStyle;
+            TbClientCurp.Style = textInputErrorStyle;
+            TbCardNumber.Style = textInputErrorStyle;
+        }
+
+        private void ShowErrorRegisteringClientDialog(string message)
+        {
+            MessageBox.Show(
+                message,
+                "Servicio no disponible",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
 
         private void VerifyPhoneNumbersAreNotSame()
@@ -966,11 +1025,6 @@ namespace SFIClient.Views
         private void TbClientNameTextChanged(object sender, TextChangedEventArgs e)
         {
             ListenAndVerifyEmptyTextFields(sender);
-        }
-
-        private void TbClientSurnameTextChanged(object sender, TextChangedEventArgs e)
-        {
-            //ListenAndVerifyEmptyTextFields(sender);
         }
 
         private void TbClientLastNameTextChanged(object sender, TextChangedEventArgs e)
@@ -1351,11 +1405,6 @@ namespace SFIClient.Views
             ListenAndVerifyEmptyTextFields(sender);
         }
 
-        private void TbReferenceSurnameFirstTextChanged(object sender, TextChangedEventArgs e)
-        {
-            //ListenAndVerifyEmptyTextFields(sender);
-        }
-
         private void TbReferenceLastNameFirstTextChanged(object sender, TextChangedEventArgs e)
         {
             ListenAndVerifyEmptyTextFields(sender);
@@ -1447,11 +1496,6 @@ namespace SFIClient.Views
         private void TbReferenceNameSecondTextChanged(object sender, TextChangedEventArgs e)
         {
             ListenAndVerifyEmptyTextFields(sender);
-        }
-
-        private void TbReferenceSurnameSecondTextChanged(object sender, TextChangedEventArgs e)
-        {
-            //ListenAndVerifyEmptyTextFields(sender);
         }
 
         private void TbReferenceLastNameSecondTextChanged(object sender, TextChangedEventArgs e)

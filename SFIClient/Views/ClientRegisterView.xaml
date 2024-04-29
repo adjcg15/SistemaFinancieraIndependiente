@@ -13,7 +13,7 @@
             <!--Navigation bar-->
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnGoBack" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnGoBackClick">
+                    <Button Name="BtnDiscardRegisterClient" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnDiscardRegisterClientCLick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -120,7 +120,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbClientSurname" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbClientSurnameTextChanged"/>
+                            <TextBox Name="TbClientSurname" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -905,7 +905,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSurnameFirst" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSurnameFirstTextChanged"/>
+                            <TextBox Name="TbReferenceSurnameFirst" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1202,7 +1202,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Name="TbReferenceSurnameSecond" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbReferenceSurnameSecondTextChanged"/>
+                            <TextBox Name="TbReferenceSurnameSecond" Style="{StaticResource TextInput}" MaxLength="60"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -1448,7 +1448,7 @@
             </StackPanel>
             <!--Buttons section-->
             <StackPanel Margin="40, 100, 40, 100" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnCancel" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelClick"/>
+                <Button Name="BtnCancelRegisterClient" Style="{StaticResource SecondaryBtn}" Margin="0, 0, 24, 0" Content="Cancelar" Click="BtnCancelRegisterClientClick"/>
                 <Button Name="BtnRegisterClient" Style="{StaticResource PrimaryBtn}" Content="Registrar cliente" Click="BtnRegisterClientClick"/>
             </StackPanel>
         </StackPanel>

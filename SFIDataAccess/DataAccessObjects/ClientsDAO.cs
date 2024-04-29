@@ -290,17 +290,17 @@ namespace SFIDataAccess.DataAccessObjects
                     success = (bool)successParam.Value;
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible registrar al cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible registrar al cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible registrar al cliente, inténtelo de nuevo más tarde"));
             }
 
             return success;
