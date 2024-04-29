@@ -62,17 +62,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowErrorRecoveringCreditGrantingPolices(fe.Message);
+                ShowErrorRecoveringCreditGrantingPolices(fe.Detail.Message);
+                RedirectToCreditApplicationsListView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditGrantingPolices(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditGrantingPolices(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
@@ -90,7 +91,12 @@ namespace SFIClient.Views
 
         private void ShowErrorRecoveringCreditGrantingPolices(string message)
         {
-
+            MessageBox.Show(
+                message,
+                "Sistema no disponible",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
 
         private void RedirectToCreditApplicationsListView()
@@ -110,17 +116,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowErrorRecoveringCreditApplicationContent(fe.Message);
+                ShowErrorRecoveringCreditApplicationContent(fe.Detail.Message);
+                RedirectToCreditApplicationsListView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditApplicationContent(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditApplicationContent(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
@@ -541,17 +548,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowErrorDictumGeneration(fe.Message);
+                ShowErrorDictumGeneration(fe.Detail.Message);
+                RedirectToCreditApplicationsListView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
@@ -615,17 +623,18 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowErrorDictumGeneration(fe.Message);
+                ShowErrorDictumGeneration(fe.Detail.Message);
+                RedirectToCreditApplicationsListView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
                 RedirectToCreditApplicationsListView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
                 RedirectToCreditApplicationsListView();
             }

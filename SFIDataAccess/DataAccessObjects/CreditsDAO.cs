@@ -8,6 +8,7 @@ using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -382,15 +383,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde"));
             }
 
             return fullCreditApplication;
@@ -478,15 +483,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
 
             return success;
@@ -561,16 +570,21 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+            }
+
             return creditTypeId;
         }
         public static void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)

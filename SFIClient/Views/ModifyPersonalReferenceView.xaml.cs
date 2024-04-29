@@ -231,10 +231,8 @@ namespace SFIClient.Views
             );
         }
 
-        private bool UpdatePersonalReference()
+        private void UpdatePersonalReference()
         {
-            bool updatedPersonalReference = false;
-
             Address newAddress = new Address
             {
                 IdAddress = personalReference.Address.IdAddress,
@@ -264,7 +262,7 @@ namespace SFIClient.Views
 
             try
             {
-                updatedPersonalReference = clientsServiceClient.UpdatePersonalReference(newPersonalReference, currentIneKey);
+                bool updatedPersonalReference = clientsServiceClient.UpdatePersonalReference(newPersonalReference, currentIneKey);
                 if (updatedPersonalReference)
                 {
                     ShowPersonalReferenceSuccessfulUpdateMessageDialog();
@@ -277,22 +275,21 @@ namespace SFIClient.Views
             }
             catch (FaultException<ServiceFault> fe)
             {
-                ShowPersonalReferenceUpdateError(fe.Message);
+                ShowPersonalReferenceUpdateError(fe.Detail.Message);
+                RedirectToSearchClientByRFCView();
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClientByRFCView();
             }
             catch (CommunicationException)
             {
-                string errorMessage = "Por el momento el servidor no se encuentra disponible, intente más tarde";
+                string errorMessage = "No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
                 RedirectToSearchClientByRFCView();
             }
-
-            return updatedPersonalReference;
         }
 
         private void ShowPersonalReferenceUpdateError(string message)
