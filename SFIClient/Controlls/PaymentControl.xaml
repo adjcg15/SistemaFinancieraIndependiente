@@ -25,7 +25,7 @@
             <TextBlock Grid.Column="1" x:Name="TbkPaymentInvoice" Style="{StaticResource TinyText}" Text="AGCJAJHBHA2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="2" x:Name="TbkPlannedDate" Style="{StaticResource TinyText}" Text="20-04-2022" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="3" x:Name="TbkAmount"  Style="{StaticResource TinyText}" Text="$896MXN" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="4" x:Name="BtnModifyPersonalReferences" 
+            <Button Grid.Column="4" x:Name="BtnDownloadLayout" 
             Style="{StaticResource NoHoverStyle}" Width="34" Height="25" 
             Background="Transparent" Cursor="Hand" Margin="0" 
             Click="BtnDownloadLayoutClick">

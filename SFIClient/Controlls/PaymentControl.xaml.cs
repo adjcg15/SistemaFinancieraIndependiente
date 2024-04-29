@@ -23,6 +23,7 @@ namespace SFIClient.Controlls
     public partial class PaymentControl : UserControl
     {
         public  Payments BindedPayment { get; }
+        public Credit BindedCredit { get; }
         public event EventHandler<Payments> CardClick;
         public bool IsSelected { get; private set; }
         public PaymentControl(Payments payment)
@@ -48,7 +49,12 @@ namespace SFIClient.Controlls
 
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
         {
-
+            string captureLine = "SF1032512445MXN";
+            string client = "Andres Manuel López Obrador";
+            string creditInvoice = BindedPayment.invoice;
+            string plannedDate = BindedPayment.planned_date.ToString("dd-MM-yyyy");
+            double amount = BindedPayment.amount;
+            Utilities.GeneratorPDFLayout.GeneratePDF(client, creditInvoice, plannedDate, amount, captureLine);
         }
     }
 }
