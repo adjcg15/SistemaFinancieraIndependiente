@@ -205,6 +205,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
+  <xs:complexType name="ArrayOfPayments">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Payments" nillable="true" type="tns:Payments" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPayments" nillable="true" type="tns:ArrayOfPayments" />
+  <xs:complexType name="Payments">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:double" />
+      <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="planned_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="reconciliation_date" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Payments" nillable="true" type="tns:Payments" />
   <xs:complexType name="ArrayOfCreditCondition">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />

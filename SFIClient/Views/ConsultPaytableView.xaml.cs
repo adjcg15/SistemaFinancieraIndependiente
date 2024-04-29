@@ -1,8 +1,10 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Controlls;
+using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,9 @@ namespace SFIClient.Views
     public partial class ConsultPaytableController : Page
     {
         private Credit credit;
+        private PaymentControl selectedPayment;
+        private Payments payment;
+        private string invoice;
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
         }
@@ -31,10 +36,10 @@ namespace SFIClient.Views
             this.credit = credit;
             InitializeComponent();
             ShowCreditInformation();
+            LoadPayments(this.credit.Invoice);
         }
         private void ShowCreditInformation()
         {
-
             TbkCreditInvoice.Text = credit.Invoice;
             TbkClientName.Text = $"{credit.Client.Name} {credit.Client.Surname} {credit.Client.LastName}";
 
@@ -56,7 +61,64 @@ namespace SFIClient.Views
             SpnAdvancePaymentReduction.Inlines.Clear();
             SpnAdvancePaymentReduction.Inlines.Add(new Run((credit.CreditCondition.AdvancePaymentReduction * 100).ToString()));
         }
+        private void LoadPayments(string creditInvoice)
+        {
+            CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
+            try
+            {
+                List<Payments> applicablePayments = creditsServiceClient.GetPaymentsByCreditInvoice(creditInvoice).ToList();
+                ShowPayments(applicablePayments);
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorRecoveringEstablishedPaymentsDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+            }
+        }
+        private void ShowPayments(List<Payments> establishedPayments)
+        {
+            GrdEmptyPaymentsMessage.Visibility = establishedPayments.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            SkpApplicablePayments.Visibility = establishedPayments.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            SkpApplicablePayments.Children.Clear();
+            foreach (var payment in establishedPayments)
+            {
+                var establishedPaymentCard = new PaymentControl(payment);
+                establishedPaymentCard.CardClick += (sender, e) =>
+                {
+                    selectedPayment = establishedPaymentCard;
+                };
+                SkpApplicablePayments.Children.Add(establishedPaymentCard);
+            }
+        }
+        private void ShowErrorRecoveringEstablishedPaymentsDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Condiciones de crédito no disponibles",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
 
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToConsultCreditsList();
+            }
+        }
+        private void RedirectToConsultCreditsList()
+        {
+            CreditsListController creditList = new CreditsListController();
+            this.NavigationService.Navigate(creditList);
+            NavigationService.RemoveBackEntry();
+        }
         private void BtnRegisterPaymentClick(object sender, RoutedEventArgs e)
         {
 

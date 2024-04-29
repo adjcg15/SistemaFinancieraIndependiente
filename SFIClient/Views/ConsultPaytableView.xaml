@@ -40,11 +40,13 @@
                 Style="{StaticResource Subtitle}"
                 Text="Andrés Manuel López Obrador"/>
                 <TextBlock
-                    Style="{StaticResource Subtitle}"
+                    Style="{StaticResource Subtitle}" 
                     FontWeight="Normal"
                     Foreground="{StaticResource DarkGray}">
                     Efectivo por <Span x:Name="SpnCredirAmountApproved">14,000</Span>MXN
                 </TextBlock>
+                
+                <!--Credit condition -->
                 <TextBlock 
                     Style="{StaticResource TinyText}"
                     Foreground="{StaticResource DarkGray}"
@@ -64,14 +66,37 @@
                 </TextBlock>
             </StackPanel>
 
-            <!--Form-->
+            <!--Header table-->
             <StackPanel Margin="40, 0, 40, 0" >
                 <TextBlock Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkPrimaryColor}" Text="Tabla de pagos"/>
             </StackPanel>
             
-            <StackPanel Margin="40, 20, 40, 0" Height="629">
-                <StackPanel>
-                    <Grid x:Name="GrdEmptyConditionsMessage" Grid.Row="1" Margin="40, 10, 40, 0">
+            <StackPanel Margin="40, 40, 40, 0" Background="{StaticResource BackgroundGray}" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Número de pago" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Folio" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Importe" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Layout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="5" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha de pago" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="6" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Intereses" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+            
+            <!--Payments-->
+            <StackPanel Margin="40, 5, 40, 0" Height="629">
+                <Grid>
+                    <Grid x:Name="GrdEmptyPaymentsMessage" Grid.Row="1" Margin="40, 10, 40, 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="8*"/>
@@ -88,7 +113,13 @@
                           Foreground="{StaticResource DarkGray}"
                           Text="No existen pagos relacionados al crédito"/>
                     </Grid>
-                </StackPanel>
+                    <StackPanel 
+                        x:Name="SkpApplicablePayments" 
+                        Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                        <!--<usercontrols:CreditApplicationCreditConditionControl/>
+                        <usercontrols:CreditApplicationCreditConditionControl/>-->
+                    </StackPanel>
+                </Grid>
             </StackPanel>
 
             <!--Buttons section-->
