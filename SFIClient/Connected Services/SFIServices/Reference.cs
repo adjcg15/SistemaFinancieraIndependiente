@@ -1954,6 +1954,115 @@ namespace SFIClient.SFIServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Payments", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class Payments : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double amountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string credit_invoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime planned_dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime reconciliation_dateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                if ((this.amountField.Equals(value) != true)) {
+                    this.amountField = value;
+                    this.RaisePropertyChanged("amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string credit_invoice {
+            get {
+                return this.credit_invoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.credit_invoiceField, value) != true)) {
+                    this.credit_invoiceField = value;
+                    this.RaisePropertyChanged("credit_invoice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoice {
+            get {
+                return this.invoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoiceField, value) != true)) {
+                    this.invoiceField = value;
+                    this.RaisePropertyChanged("invoice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime planned_date {
+            get {
+                return this.planned_dateField;
+            }
+            set {
+                if ((this.planned_dateField.Equals(value) != true)) {
+                    this.planned_dateField = value;
+                    this.RaisePropertyChanged("planned_date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime reconciliation_date {
+            get {
+                return this.reconciliation_dateField;
+            }
+            set {
+                if ((this.reconciliation_dateField.Equals(value) != true)) {
+                    this.reconciliation_dateField = value;
+                    this.RaisePropertyChanged("reconciliation_date");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Employee", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
     [System.SerializableAttribute()]
     public partial class Employee : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2260,6 +2369,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledResponse")]
         System.Threading.Tasks.Task<bool> VerifyFirstPaymentReconciledAsync(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Payments[] GetPaymentsByCreditInvoice(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Payments[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2367,6 +2483,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> VerifyFirstPaymentReconciledAsync(string creditInvoice) {
             return base.Channel.VerifyFirstPaymentReconciledAsync(creditInvoice);
+        }
+        
+        public SFIClient.SFIServices.Payments[] GetPaymentsByCreditInvoice(string creditInvoice) {
+            return base.Channel.GetPaymentsByCreditInvoice(creditInvoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Payments[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice) {
+            return base.Channel.GetPaymentsByCreditInvoiceAsync(creditInvoice);
         }
     }
     

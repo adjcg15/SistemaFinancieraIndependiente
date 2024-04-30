@@ -1,0 +1,134 @@
+﻿<Page x:Class="SFIClient.Views.ConsultPaytableController"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+  xmlns:local="clr-namespace:SFIClient.Views"
+  xmlns:usercontrols="clr-namespace:SFIClient.Controlls"
+  mc:Ignorable="d" 
+  d:Width="1280" d:Height="1200"
+  Title="Solicitud de crédito para cliente"
+  Loaded="PageLoaded">
+<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button 
+                    Click="BtnReturnCreditsListClick" 
+                    Style="{StaticResource NoHoverStyle}" 
+                    Width="40" Height="40" Margin="0, 0, 16, 0" 
+                    Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                    Foreground="White" Style="{StaticResource Title}"
+                    Text="Tabla de pagos" 
+                    VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!--Client data-->
+            <StackPanel Margin="40, 30">
+                <TextBlock 
+                 x:Name="TbkCreditInvoice"
+                Style="{StaticResource Title}" Margin="0, 0, 0, 8"
+                 Foreground="{StaticResource DarkPrimaryColor}"
+                Text="A2B3C4D5E6"/>
+                <TextBlock 
+                x:Name="TbkClientName"
+                Style="{StaticResource Subtitle}"
+                Text="Andrés Manuel López Obrador"/>
+                <TextBlock
+                    Style="{StaticResource Subtitle}" 
+                    FontWeight="Normal"
+                    Foreground="{StaticResource DarkGray}">
+                    Efectivo por <Span x:Name="SpnCredirAmountApproved">14,000</Span>MXN
+                </TextBlock>
+                
+                <!--Credit condition -->
+                <TextBlock 
+                    Style="{StaticResource TinyText}"
+                    Foreground="{StaticResource DarkGray}"
+                    FontWeight="Bold" Margin="0, 0, 0, 4"
+                    Text="Condiciones de crédito"
+                    TextWrapping="Wrap"/>
+
+                <TextBlock 
+                    Style="{StaticResource TinyText}"
+                    Foreground="{StaticResource DarkGray}"
+                    TextWrapping="Wrap">
+                    Crédito a <Span x:Name="SpnPaymentMonths">6</Span> meses, 
+                    con <Span x:Name="SpnInterestRate">5</Span>% de interés
+                    <Span x:Name="SpnIsIvaApplied"> y aplicando IVA</Span>. 
+                    Interés moratorio de <Span x:Name="SpnInterestOnArrears">4</Span>% 
+                    y descuento de pago por adelantado de <Span x:Name="SpnAdvancePaymentReduction">5</Span>%.
+                </TextBlock>
+            </StackPanel>
+
+            <!--Header table-->
+            <StackPanel Margin="40, 0, 40, 0" >
+                <TextBlock Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkPrimaryColor}" Text="Tabla de pagos"/>
+            </StackPanel>
+            
+            <StackPanel Margin="40, 40, 40, 0" Background="{StaticResource BackgroundGray}" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Número de pago" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Folio" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Importe" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Layout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="5" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha de pago" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="6" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Intereses" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+            
+            <!--Payments-->
+            <StackPanel Margin="40, 5, 40, 0" Height="629">
+                <Grid>
+                    <Grid x:Name="GrdEmptyPaymentsMessage" Grid.Row="1" Margin="40, 10, 40, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image
+                          Margin="0, 0, 24, 0"
+                          Width="80" Height="80"
+                          Source="/Assets/GrayInfoIcon.png"/>
+                         <TextBlock
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          Style="{StaticResource Subtitle}" FontWeight="Normal" TextWrapping="Wrap"
+                          Foreground="{StaticResource DarkGray}"
+                          Text="No existen pagos relacionados al crédito"/>
+                    </Grid>
+                    <StackPanel 
+                        x:Name="SkpApplicablePayments" 
+                        Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                        <!--<usercontrols:CreditApplicationCreditConditionControl/>
+                        <usercontrols:CreditApplicationCreditConditionControl/>-->
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <!--Buttons section-->
+            <StackPanel Margin="40, 20, 40, 40" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button 
+                    Click="BtnRegisterPaymentClick" 
+                    Style="{StaticResource PrimaryBtn}" 
+                    Content="Registrar pago"/>
+                </StackPanel>
+            </StackPanel>
+    </ScrollViewer>
+</Page>

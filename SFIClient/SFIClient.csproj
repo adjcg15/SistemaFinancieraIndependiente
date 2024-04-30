@@ -85,6 +85,9 @@
     <Compile Include="Controlls\GrantingPoliciesListPolicyControl.xaml.cs">
       <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\PaymentControl.xaml.cs">
+      <DependentUpon>PaymentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Session\SystemSession.cs" />
     <Compile Include="Utilities\AddressToolkit.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
@@ -98,6 +101,9 @@
     </Compile>
     <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
       <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConsultPaytableView.xaml.cs">
+      <DependentUpon>ConsultPaytableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreditApplicationsListView.xaml.cs">
       <DependentUpon>CreditApplicationsListView.xaml</DependentUpon>
@@ -180,6 +186,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controlls\PaymentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -201,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ConsultConditionsCreditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConsultPaytableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,6 +344,9 @@
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Payments.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.PersonalReference.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -399,6 +416,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\DownloadIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\DownloadLayout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\DisableDownloadLayout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

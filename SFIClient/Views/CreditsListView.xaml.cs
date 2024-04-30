@@ -126,7 +126,8 @@ namespace SFIClient.Views
 
         private void RedirectToPaymentsTable(object sender, Credit selectedCredit)
         {
-            //TODO: implementar redirección
+            ConsultPaytableController consultPaytableView = new ConsultPaytableController(selectedCredit);
+            NavigationService.Navigate(consultPaytableView);
         }
 
         private void RedirectToCreditMonthlyEfficiency(object sender, Credit selectedCredit)
