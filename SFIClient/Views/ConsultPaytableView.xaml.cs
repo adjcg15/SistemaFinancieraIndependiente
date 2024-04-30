@@ -1,4 +1,5 @@
-﻿using SFIClient.Controlls;
+﻿using Microsoft.Win32;
+using SFIClient.Controlls;
 using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
@@ -121,9 +122,32 @@ namespace SFIClient.Views
         }
         private void BtnRegisterPaymentClick(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos CSV (*.csv)|*.csv|Todos los archivos (*.*)|*.*";
+            bool? result = openFileDialog.ShowDialog();
 
+            if (result == true)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+
+                // Aquí puedes realizar las operaciones necesarias con la ruta del archivo seleccionado
+                // Por ejemplo, puedes iniciar el proceso de carga y procesamiento del archivo CSV
+            }
+            else
+            {
+                string errorMessage = "No fue seleccionado algun archivo, intente nuevamente";
+                ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+            }
         }
-
+        private void ShowErrorUploadCsvDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Archivo no seleccionado",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
             CreditsListController creditList = new CreditsListController();

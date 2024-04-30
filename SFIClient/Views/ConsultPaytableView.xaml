@@ -94,7 +94,7 @@
             </StackPanel>
             
             <!--Payments-->
-            <StackPanel Margin="40, 5, 40, 0" Height="629">
+            <StackPanel Margin="40, 5, 40, 0" >
                 <Grid>
                     <Grid x:Name="GrdEmptyPaymentsMessage" Grid.Row="1" Margin="40, 10, 40, 0">
                         <Grid.ColumnDefinitions>

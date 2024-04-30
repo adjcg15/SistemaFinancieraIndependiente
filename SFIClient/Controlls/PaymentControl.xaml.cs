@@ -34,6 +34,7 @@ namespace SFIClient.Controlls
         }
         private void ShowCreditConditionInformation()
         {
+            CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             TbkPaymentInvoice.Text = BindedPayment.invoice;
             TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
             TbkAmount.Text = BindedPayment.amount.ToString("C");
@@ -41,6 +42,9 @@ namespace SFIClient.Controlls
             TbkAmount.Inlines.Add(new Run(BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
             TbkPlannedDate.Text = BindedPayment.reconciliation_date.ToString("dd-MM-yyyy");
         }
+
+
+
         private void BdrCreditConditionCardMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
                 IsSelected = true;
