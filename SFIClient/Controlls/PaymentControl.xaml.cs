@@ -40,17 +40,9 @@ namespace SFIClient.Controlls
             TbkAmount.Text = BindedPayment.amount.ToString("C");
             TbkAmount.Inlines.Clear();
             TbkAmount.Inlines.Add(new Run(BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
-            TbkPlannedDate.Text = BindedPayment.reconciliation_date.ToString("dd-MM-yyyy");
+            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.ToString("dd-MM-yyyy");
+            BtnDownloadLayout.IsEnabled = BindedPayment.reconciliation_date == null;
         }
-
-
-
-        private void BdrCreditConditionCardMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-                IsSelected = true;
-                CardClick?.Invoke(this, BindedPayment);
-        }
-
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
         {
             string captureLine = "SF1032512445MXN";

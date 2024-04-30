@@ -25,7 +25,7 @@ namespace SFIDataAccess
         public string invoice { get; set; }
         public System.DateTime planned_date { get; set; }
         public string credit_invoice { get; set; }
-        public System.DateTime reconciliation_date { get; set; }
+        public Nullable<System.DateTime> reconciliation_date { get; set; }
     
         public virtual credit credit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

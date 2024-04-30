@@ -51,5 +51,11 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<Payments> GetPaymentsByCreditInvoice(string creditInvoice);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        Payments GetPaymentByInvoice(string invoice);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        void UpdatePayment(Payments payment);
     }
  }

@@ -93,5 +93,13 @@ namespace SFIServices
         {
             return CreditsDAO.GetPaymentsByCreditInvoice(creditInvoice);
         }
+        public Payments GetPaymentByInvoice(string invoice)
+        {
+            return CreditsDAO.GetPaymentByInvoice(invoice);
+        }
+        public void UpdatePayment(Payments payment)
+        {
+            CreditsDAO.UpdatePayment(payment);
+        }
     }
 }

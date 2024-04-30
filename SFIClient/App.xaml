@@ -989,6 +989,22 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="DownloadButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <Image x:Name="ImageControl" Source="/Assets/DownloadLayout.png" Width="34" Height="25" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ImageControl" Property="Source" Value="/Assets/DisableDownloadLayout.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <!--===================VARIOUS STYLES===================-->
         <!--Rounded border-->

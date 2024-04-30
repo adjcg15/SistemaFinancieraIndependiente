@@ -4,6 +4,7 @@ using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -68,6 +69,13 @@ namespace SFIClient.Views
             try
             {
                 List<Payments> applicablePayments = creditsServiceClient.GetPaymentsByCreditInvoice(creditInvoice).ToList();
+                foreach (var payment in applicablePayments)
+                {
+                    if (payment.reconciliation_date == null)
+                    {
+                        payment.reconciliation_date = DateTime.MinValue;
+                    }
+                }
                 ShowPayments(applicablePayments);
             }
             catch (FaultException<ServiceFault> fault)
@@ -116,9 +124,29 @@ namespace SFIClient.Views
         }
         private void RedirectToConsultCreditsList()
         {
-            CreditsListController creditList = new CreditsListController();
-            this.NavigationService.Navigate(creditList);
-            NavigationService.RemoveBackEntry();
+            try
+            {
+                if (NavigationService != null)
+                {
+                    CreditsListController creditList = new CreditsListController();
+                    NavigationService.Navigate(creditList);
+                    NavigationService.RemoveBackEntry();
+                }
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorRecoveringEstablishedPaymentsDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+            }
         }
         private void BtnRegisterPaymentClick(object sender, RoutedEventArgs e)
         {
@@ -130,20 +158,97 @@ namespace SFIClient.Views
             {
                 string selectedFilePath = openFileDialog.FileName;
 
-                // Aquí puedes realizar las operaciones necesarias con la ruta del archivo seleccionado
-                // Por ejemplo, puedes iniciar el proceso de carga y procesamiento del archivo CSV
-            }
-            else
-            {
-                string errorMessage = "No fue seleccionado algun archivo, intente nuevamente";
-                ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+                try
+                {
+                    ValidateFileSize(selectedFilePath);
+
+                    string[] expectedColumns = { "amount", "invoice", "planned_date", "credit_invoice", "reconciliation_date" };
+                    using (var reader = new StreamReader(selectedFilePath))
+                    {
+                        ValidateFileFormat(reader, expectedColumns);
+                        ProcessPaymentData(reader);
+                    }
+
+                    MessageBox.Show("El procesamiento del archivo CSV se completó con éxito.", "Procesamiento completado", 
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
+
+        private void ValidateFileSize(string filePath)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            long fileSizeInBytes = fileInfo.Length;
+            const long maxSizeInBytes = 524288;
+
+            if (fileSizeInBytes > maxSizeInBytes)
+            {
+                throw new Exception("El archivo seleccionado es demasiado grande. Por favor seleccione un archivo más pequeño.");
+            }
+        }
+
+        private void ValidateFileFormat(StreamReader reader, string[] expectedColumns)
+        {
+            string[] columns = reader.ReadLine()?.Split(',');
+
+            if (columns == null || !columns.SequenceEqual(expectedColumns))
+            {
+                throw new Exception("El archivo seleccionado no tiene el formato esperado. " +
+                    "Por favor, asegúrese de que el archivo tenga las columnas 'amount', 'invoice', 'planned_date', 'credit_invoice' y 'reconciliation_date'.");
+            }
+        }
+
+        private void ProcessPaymentData(StreamReader reader)
+        {
+            CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
+
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] values = line.Split(',');
+                string invoice = values[1].Trim().Replace("\"", "");
+                Payments payment = creditsServiceClient.GetPaymentByInvoice(invoice);
+
+                if (payment != null)
+                {
+                    double amountFromDB = payment.amount;
+                    double amountFromFile = Convert.ToDouble(values[0]);
+                    double tolerance = 0.01;
+                    if (Math.Abs(amountFromDB - amountFromFile) <= tolerance)
+                    {
+                        UpdatePayment(payment, values);
+                    }
+                    else
+                    {
+                        MessageBox.Show("El monto del pago realizado no corresponde con el pago planeado," +
+                            " por lo que no será considerado. Por favor, realice el pago nuevamente.", "Cantidad incorrecta", 
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró información de pago para la factura especificada.", 
+                        "Error de búsqueda de pago", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private void UpdatePayment(Payments payment, string[] values)
+        {
+            CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
+
+            payment.reconciliation_date = DateTime.Parse(values[4]);
+            creditsServiceClient.UpdatePayment(payment);
+        }
+
         private void ShowErrorUploadCsvDialog(string message)
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
                 message,
-                "Archivo no seleccionado",
+                "Error con el pago",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );

@@ -2376,6 +2376,20 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Payments[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentByInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentByInvoiceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetPaymentByInvoiceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Payments GetPaymentByInvoice(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentByInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentByInvoiceResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Payments> GetPaymentByInvoiceAsync(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/UpdatePayment", ReplyAction="http://tempuri.org/ICreditsService/UpdatePaymentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/UpdatePaymentServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        void UpdatePayment(SFIClient.SFIServices.Payments payment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/UpdatePayment", ReplyAction="http://tempuri.org/ICreditsService/UpdatePaymentResponse")]
+        System.Threading.Tasks.Task UpdatePaymentAsync(SFIClient.SFIServices.Payments payment);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2491,6 +2505,22 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Payments[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice) {
             return base.Channel.GetPaymentsByCreditInvoiceAsync(creditInvoice);
+        }
+        
+        public SFIClient.SFIServices.Payments GetPaymentByInvoice(string invoice) {
+            return base.Channel.GetPaymentByInvoice(invoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Payments> GetPaymentByInvoiceAsync(string invoice) {
+            return base.Channel.GetPaymentByInvoiceAsync(invoice);
+        }
+        
+        public void UpdatePayment(SFIClient.SFIServices.Payments payment) {
+            base.Channel.UpdatePayment(payment);
+        }
+        
+        public System.Threading.Tasks.Task UpdatePaymentAsync(SFIClient.SFIServices.Payments payment) {
+            return base.Channel.UpdatePaymentAsync(payment);
         }
     }
     

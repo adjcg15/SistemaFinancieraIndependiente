@@ -695,5 +695,80 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return payments;
         }
+        public static Payments GetPaymentByInvoice(string invoice)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var paymentEntity = context.payments.FirstOrDefault(p => p.invoice == invoice);
+
+                    if (paymentEntity != null)
+                    {
+                        var payment = new Payments
+                        {
+                            amount = (double)paymentEntity.amount,
+                            invoice = paymentEntity.invoice,
+                            planned_date = paymentEntity.planned_date,
+                            credit_invoice = paymentEntity.credit_invoice,
+                            reconciliation_date = (DateTime)paymentEntity.reconciliation_date
+                        };
+
+                        return payment;
+                    }
+                    else
+                    {
+                        return null; 
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+        public static void UpdatePayment(Payments payment)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var existingPayment = context.payments.FirstOrDefault(p => p.invoice == payment.invoice);
+
+                    if (existingPayment != null)
+                    {
+                        existingPayment.amount = (decimal)payment.amount;
+                        existingPayment.planned_date = payment.planned_date;
+                        existingPayment.credit_invoice = payment.credit_invoice;
+                        existingPayment.reconciliation_date = payment.reconciliation_date;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("No se encontró el pago en la base de datos.");
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
     }
 }
