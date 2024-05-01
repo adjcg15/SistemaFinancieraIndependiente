@@ -676,7 +676,7 @@ namespace SFIDataAccess.DataAccessObjects
                             invoice = result.invoice,
                             planned_date = result.planned_date,
                             credit_invoice = result.credit_invoice,
-                            reconciliation_date = result.reconciliation_date
+                            reconciliation_date = result.reconciliation_date ?? DateTime.MinValue
                         });
                     }
                 }
@@ -711,7 +711,7 @@ namespace SFIDataAccess.DataAccessObjects
                             invoice = paymentEntity.invoice,
                             planned_date = paymentEntity.planned_date,
                             credit_invoice = paymentEntity.credit_invoice,
-                            reconciliation_date = (DateTime)paymentEntity.reconciliation_date
+                            reconciliation_date = paymentEntity.reconciliation_date ?? DateTime.MinValue
                         };
 
                         return payment;
@@ -745,6 +745,7 @@ namespace SFIDataAccess.DataAccessObjects
 
                     if (existingPayment != null)
                     {
+                        existingPayment.id_payment = payment.idpayment;
                         existingPayment.amount = (decimal)payment.amount;
                         existingPayment.planned_date = payment.planned_date;
                         existingPayment.credit_invoice = payment.credit_invoice;
@@ -755,6 +756,118 @@ namespace SFIDataAccess.DataAccessObjects
                     {
                         throw new InvalidOperationException("No se encontró el pago en la base de datos.");
                     }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+        public static void InsertIntoPaymentLayouts(string captureLine, Payments payment)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var paymentRecord = context.payments.FirstOrDefault(p => p.invoice == payment.invoice);
+
+                    if (paymentRecord != null)
+                    {
+                        var existingLayout = context.payment_layouts.FirstOrDefault(l => l.id_payment == paymentRecord.id_payment);
+                        if (existingLayout != null)
+                        {
+                            return;
+                        }
+                        var newLayout = new payment_layouts
+                        {
+                            capture_line = captureLine,
+                            generation_date = DateTime.Now,
+                            id_payment = paymentRecord.id_payment
+                        };
+                        context.payment_layouts.Add(newLayout);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("No se encontró el pago en la base de datos.");
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+        public static PaymentLayout GetPaymentLayoutByPaymentId(int paymentId)
+        {
+            SFIDatabaseContext context = new SFIDatabaseContext();
+            try
+            {
+                var paymentLayout = context.payment_layouts
+                    .Where(p => p.id_payment == paymentId)
+                    .FirstOrDefault();
+
+                if (paymentLayout != null)
+                {
+                    return new PaymentLayout
+                    {
+                        capture_line = paymentLayout.capture_line,
+                        generation_date = paymentLayout.generation_date,
+                        id_payment = paymentLayout.id_payment
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
+        public static List<Payments> GetAllPaymentsSortedByPlannedDate()
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var payments = context.payments
+                        .OrderBy(p => p.planned_date)
+                        .ToList();
+                    return payments.Select(p => new Payments
+                    {
+                        idpayment = p.id_payment,
+                        amount = (double)p.amount,
+                        invoice = p.invoice,
+                        planned_date = p.planned_date,
+                        credit_invoice = p.credit_invoice,
+                        reconciliation_date = p.reconciliation_date
+                    }).ToList();
                 }
             }
             catch (EntityException)
