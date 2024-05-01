@@ -249,21 +249,49 @@ namespace SFIClient.Views
 
         private void BtnGenerateCreditApplicationClick(object sender, RoutedEventArgs e)
         {
+            HideFieldsErrors();
+
             bool isValidApplication = VerifyCreditApplicationInformation();
             if(isValidApplication)
             {
-                newApplication.DigitalDocuments = attachedDocuments.ToArray();
-                newApplication.RequestedAmount = decimal.Parse(TbRequestedAmount.Text);
-                newApplication.MinimumAmountAccepted = decimal.Parse(TbMinimumAcceptedAmount.Text);
-                newApplication.Purpose = TbCreditPurpose.Text.Trim();
+                bool areValidRequestedAmounts = VerifyRequestedAmounts();
 
-                ShowApplicationGenerationConfirmationDialog();
+                if(areValidRequestedAmounts)
+                {
+                    newApplication.DigitalDocuments = attachedDocuments.ToArray();
+                    newApplication.RequestedAmount = decimal.Parse(TbRequestedAmount.Text);
+                    newApplication.MinimumAmountAccepted = decimal.Parse(TbMinimumAcceptedAmount.Text);
+                    newApplication.Purpose = TbCreditPurpose.Text.Trim();
+
+                    ShowApplicationGenerationConfirmationDialog();
+                }
+                else
+                {
+                    HighlightAmountFields();
+                    ShowInvalidAmountsAlertDialog();
+                }
             }
             else
             {
                 HighlightInvalidFields();
                 ShowInvalidFieldsAlertDialog();
             }
+        }
+
+        private void HideFieldsErrors()
+        {
+            Style comboBoxDefaultStyle = (Style)FindResource("ComboBox");
+            Style textInputDefaultStyle = (Style)FindResource("TextInput");
+            Style fileUploaderDefaultStyle = (Style)FindResource("FileUploader");
+
+            CbCreditTypes.Style = comboBoxDefaultStyle;
+            TbRequestedAmount.Style = textInputDefaultStyle;
+            TbMinimumAcceptedAmount.Style = textInputDefaultStyle;
+            TbCreditPurpose.Style = textInputDefaultStyle;
+            BtnAttachIne.Style = fileUploaderDefaultStyle;
+            BtnAttachProofOfAddress.Style = fileUploaderDefaultStyle;
+            BtnAttachProofOfIncome.Style = fileUploaderDefaultStyle;
+            SpnCreditConditionLabel.Foreground = Brushes.Black;
         }
 
         private bool VerifyCreditApplicationInformation()
@@ -303,24 +331,36 @@ namespace SFIClient.Views
             return isValidApplication;
         }
 
+        private bool VerifyRequestedAmounts()
+        {
+            return decimal.TryParse(TbRequestedAmount.Text, out decimal requestedAmount)
+                && decimal.TryParse(TbMinimumAcceptedAmount.Text, out decimal minimumAcceptedAmount)
+                && minimumAcceptedAmount <= requestedAmount;
+        }
+
+        private void HighlightAmountFields()
+        {
+            Style textInputErrorStyle = (Style)FindResource("TextInputError");
+
+            TbRequestedAmount.Style = textInputErrorStyle;
+            TbMinimumAcceptedAmount.Style = textInputErrorStyle;
+        }
+
+        private void ShowInvalidAmountsAlertDialog()
+        {
+            MessageBox.Show(
+                "Por favor verifique que el monto mínimo aceptado sea menor al monto solicitado",
+                "Montos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+        }
+
         private void HighlightInvalidFields()
         {
-            Style comboBoxDefaultStyle = (Style)FindResource("ComboBox");
-            Style textInputDefaultStyle = (Style)FindResource("TextInput");
-            Style fileUploaderDefaultStyle = (Style)FindResource("FileUploader");
-
             Style comboBoxErrorStyle = (Style)FindResource("ComboBoxError");
             Style textInputErrorStyle = (Style)FindResource("TextInputError");
             Style fileUploadertErrorStyle = (Style)FindResource("FileUploaderError");
-
-            CbCreditTypes.Style = comboBoxDefaultStyle;
-            TbRequestedAmount.Style = textInputDefaultStyle;
-            TbMinimumAcceptedAmount.Style = textInputDefaultStyle;
-            TbCreditPurpose.Style = textInputDefaultStyle;
-            BtnAttachIne.Style = fileUploaderDefaultStyle;
-            BtnAttachProofOfAddress.Style = fileUploaderDefaultStyle;
-            BtnAttachProofOfIncome.Style = fileUploaderDefaultStyle;
-            SpnCreditConditionLabel.Foreground = Brushes.Black;
 
             if (newApplication.CreditType == null)
             {

@@ -173,9 +173,19 @@ namespace SFIClient.Views
                     MessageBox.Show("El procesamiento del archivo CSV se completó con éxito.", "Procesamiento completado", 
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception ex)
+                    catch (FaultException<ServiceFault> fault)
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ShowErrorRecoveringEstablishedPaymentsDialog(fault.Detail.Message);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                    ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
+                }
+                catch (CommunicationException)
+                {
+                    string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                    ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
                 }
             }
         }
