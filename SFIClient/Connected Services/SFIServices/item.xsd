@@ -215,12 +215,21 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="amount" type="xs:double" />
       <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idpayment" type="xs:int" />
       <xs:element minOccurs="0" name="invoice" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="planned_date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="reconciliation_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="reconciliation_date" nillable="true" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Payments" nillable="true" type="tns:Payments" />
+  <xs:complexType name="PaymentLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="capture_line" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="generation_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id_payment" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentLayout" nillable="true" type="tns:PaymentLayout" />
   <xs:complexType name="ArrayOfCreditCondition">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />

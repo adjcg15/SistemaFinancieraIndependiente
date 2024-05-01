@@ -11,6 +11,8 @@ namespace SFIDataAccess.Model
     public class Payments
     {
         [DataMember]
+        public int  idpayment { get; set; }
+        [DataMember]
         public double amount { get; set; }
 
         [DataMember]

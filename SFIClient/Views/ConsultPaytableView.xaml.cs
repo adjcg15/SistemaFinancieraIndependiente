@@ -32,6 +32,7 @@ namespace SFIClient.Views
         private string invoice;
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
+            LoadPayments(this.credit.Invoice);
         }
         public ConsultPaytableController(Credit credit)
         {
@@ -169,7 +170,7 @@ namespace SFIClient.Views
                         ProcessPaymentData(reader);
                     }
 
-                    MessageBox.Show("El procesamiento del archivo CSV se completó con éxito.", "Procesamiento completado", 
+                    MessageBox.Show("El procesamiento del archivo CSV se completó con éxito.", "Procesamiento completado",
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
@@ -201,7 +202,6 @@ namespace SFIClient.Views
                     "Por favor, asegúrese de que el archivo tenga las columnas 'amount', 'invoice', 'planned_date', 'credit_invoice' y 'reconciliation_date'.");
             }
         }
-
         private void ProcessPaymentData(StreamReader reader)
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
@@ -211,6 +211,15 @@ namespace SFIClient.Views
             {
                 string[] values = line.Split(',');
                 string invoice = values[1].Trim().Replace("\"", "");
+                Payments existingPayment = creditsServiceClient.GetPaymentByInvoice(invoice);
+                if (existingPayment != null &&
+                    (existingPayment.reconciliation_date != null && existingPayment.reconciliation_date != DateTime.MinValue))
+                {
+                    MessageBox.Show("El pago para la factura especificada ya ha sido conciliado. No se puede actualizar.",
+                        "Pago ya conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    continue;
+                }
+
                 Payments payment = creditsServiceClient.GetPaymentByInvoice(invoice);
 
                 if (payment != null)
@@ -225,13 +234,13 @@ namespace SFIClient.Views
                     else
                     {
                         MessageBox.Show("El monto del pago realizado no corresponde con el pago planeado," +
-                            " por lo que no será considerado. Por favor, realice el pago nuevamente.", "Cantidad incorrecta", 
+                            " por lo que no será considerado. Por favor, realice el pago nuevamente.", "Cantidad incorrecta",
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No se encontró información de pago para la factura especificada.", 
+                    MessageBox.Show("No se encontró información de pago para la factura especificada.",
                         "Error de búsqueda de pago", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

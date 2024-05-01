@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -351,6 +352,9 @@
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.PaymentLayout.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Payments.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -372,24 +376,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\SFIServices\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SFIServices\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\PlusIcon.png" />
@@ -430,6 +416,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\DisableDownloadLayout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SFIServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIServices\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SFIServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
