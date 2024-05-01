@@ -51,26 +51,44 @@ namespace SFIClient.Views
                 }
                 else
                 {
-                    SkpRegisterClient.Children.Clear();
-                    SkpRegisterClient.Visibility = Visibility.Collapsed;
-                    SkpSearchClient.Visibility = Visibility.Collapsed;
-                    SkpRegisterClientNow.Children.Add(BtnRegisterClient);
+                    ShowUnregisteredClientsMessage();
                 }
             }
             catch (FaultException<ServiceFault> fe)
             {
-                System.Windows.Forms.MessageBox.Show(fe.Detail.Message, "Error en la base de datos");
+                ShowErrorRecoveringClients(fe.Detail.Message);
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
-                System.Windows.Forms.MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                string message = "No fue posible recuperar los clientes, inténtelo de nuevo más tarde";
+                ShowErrorRecoveringClients(message);
                 RedirectToLoginView();
             }
             catch (CommunicationException)
             {
-                System.Windows.Forms.MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                string message = "No fue posible recuperar los clientes, inténtelo de nuevo más tarde";
+                ShowErrorRecoveringClients(message); 
                 RedirectToLoginView();
             }
+        }
+
+        private void ShowUnregisteredClientsMessage()
+        {
+            SkpRegisterClient.Children.Clear();
+            SkpRegisterClient.Visibility = Visibility.Collapsed;
+            SkpSearchClient.Visibility = Visibility.Collapsed;
+            SkpRegisterClientNow.Children.Add(BtnRegisterClient);
+        }
+
+        private void ShowErrorRecoveringClients(string message)
+        {
+            MessageBox.Show(
+                message,
+                "Servicio no disponible",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
 
         private void RedirectToLoginView()
@@ -318,11 +336,11 @@ namespace SFIClient.Views
 
             if (!clientExists)
             {
-                ShowGoToRegisterClientConfirmationMessage();
+                ShowNonExistingClientAndRegisterNewClientMessage();
             }
         }
 
-        private void ShowGoToRegisterClientConfirmationMessage()
+        private void ShowNonExistingClientAndRegisterNewClientMessage()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
                 "¿Deseas registrar al cliente?", 
