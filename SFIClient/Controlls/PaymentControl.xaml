@@ -6,10 +6,7 @@
       xmlns:local="clr-namespace:SFIClient.Controlls"
       mc:Ignorable="d" 
       d:Width="1280" d:Height="100">
-    <Border
-        Background="White" CornerRadius="0" 
-         Margin="0,0,0,10" Padding="0, 0, 0, 8" 
-        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+    <Border Background="White" CornerRadius="0" Margin="0,0,0,10" Padding="0, 0, 0, 8" BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -25,23 +22,18 @@
             <TextBlock Grid.Column="1" x:Name="TbkPaymentInvoice" Style="{StaticResource TinyText}" Text="AGCJAJHBHA2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="2" x:Name="TbkPlannedDate" Style="{StaticResource TinyText}" Text="20-04-2022" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="3" x:Name="TbkAmount"  Style="{StaticResource TinyText}" Text="$896MXN" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="4" x:Name="BtnDownloadLayout" 
-                Style="{StaticResource DownloadButtonStyle}" 
-                Width="34" Height="25" 
-                Background="Transparent" Cursor="Hand" Margin="0" 
-                Click="BtnDownloadLayoutClick">
+            <Button Grid.Column="4" x:Name="BtnDownloadLayout" Style="{StaticResource DownloadButtonStyle}" Width="34" Height="25" Background="Transparent" Cursor="Hand" Margin="0" Click="BtnDownloadLayoutClick">
                 <Button.ToolTip>
                     <ToolTip>
                         <TextBlock Text="Descargar layout de pago" />
                     </ToolTip>
                 </Button.ToolTip>
-            </Button>
-            <TextBlock Grid.Column="5" x:Name="TbkReconciliationDate" Style="{StaticResource TinyText}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="6" x:Name="TbkInterest" Style="{StaticResource TinyText}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Image Source="/Assets/DownloadLayout.png" Width="34" Height="25" />
             </Button>
-            <TextBlock Grid.Column="5" x:Name="TbkPaymentDate" Style="{StaticResource TinyText}" Text="21-05-2023" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="6" x:Name="TbkInterest" Style="{StaticResource TinyText}" Text="+25%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="5" x:Name="TbkReconciliationDate" Style="{StaticResource TinyText}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="6" x:Name="TbkPaymentDate" Style="{StaticResource TinyText}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="7" x:Name="TbkInterest" Style="{StaticResource TinyText}" Text="" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Border>
 </UserControl>
+
