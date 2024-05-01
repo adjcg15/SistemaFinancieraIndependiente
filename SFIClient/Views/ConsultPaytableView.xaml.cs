@@ -32,6 +32,7 @@ namespace SFIClient.Views
         private string invoice;
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
+            LoadPayments(this.credit.Invoice);
         }
         public ConsultPaytableController(Credit credit)
         {
@@ -211,8 +212,14 @@ namespace SFIClient.Views
             {
                 string[] values = line.Split(',');
                 string invoice = values[1].Trim().Replace("\"", "");
-                Payments payment = creditsServiceClient.GetPaymentByInvoice(invoice);
-
+                Payments existingPayment = creditsServiceClient.GetPaymentByInvoice(invoice);
+                if (existingPayment != null &&
+                    (existingPayment.reconciliation_date != null && existingPayment.reconciliation_date != DateTime.MinValue))
+                {
+                    MessageBox.Show("El pago para la factura especificada ya ha sido conciliado. No se puede actualizar.",
+                        "Pago ya conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    continue;
+                }
                 if (payment != null)
                 {
                     double amountFromDB = payment.amount;
