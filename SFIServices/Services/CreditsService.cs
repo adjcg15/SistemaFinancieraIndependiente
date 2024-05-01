@@ -101,17 +101,5 @@ namespace SFIServices
         {
             CreditsDAO.UpdatePayment(payment);
         }
-        public void InsertIntoPaymentLayouts(string captureLine, Payments payment)
-        {
-            CreditsDAO.InsertIntoPaymentLayouts(captureLine, payment);
-        }
-        public PaymentLayout GetPaymentLayoutByPaymentId(int paymentId)
-        {
-            return CreditsDAO.GetPaymentLayoutByPaymentId(paymentId);
-        }
-        public List<Payments> GetAllPaymentsSortedByPlannedDate()
-        {
-            return CreditsDAO.GetAllPaymentsSortedByPlannedDate();
-        }
     }
 }

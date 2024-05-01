@@ -272,6 +272,7 @@ namespace SFIClient.Views
                 RedirectToConsultCreditsList();
             }
         }
+
         private void ShowSuccessChangeCreditConditionDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(

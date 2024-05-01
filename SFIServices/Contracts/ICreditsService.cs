@@ -57,14 +57,5 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         void UpdatePayment(Payments payment);
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        void  InsertIntoPaymentLayouts(string captureLine, Payments payment);
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        PaymentLayout GetPaymentLayoutByPaymentId(int paymentId);
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        List<Payments> GetAllPaymentsSortedByPlannedDate();
     }
  }

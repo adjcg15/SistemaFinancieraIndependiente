@@ -58,8 +58,7 @@ namespace SFIDataAccess.DataAccessObjects
                     context.credits
                         .OrderByDescending(credit => credit.approval_date)
                         .ToList()
-                        .ForEach(storedCredit =>
-                        {
+                        .ForEach(storedCredit => {
                             Client creditOwner = new Client
                             {
                                 Birthdate = storedCredit.client.birthdate,
@@ -136,8 +135,7 @@ namespace SFIDataAccess.DataAccessObjects
                     context.credit_applications
                         .OrderByDescending(creditApplication => creditApplication.expedition_date)
                         .ToList()
-                        .ForEach(storedCreditApplication =>
-                        {
+                        .ForEach(storedCreditApplication => {
                             CreditType creditType = new CreditType
                             {
                                 Identifier = storedCreditApplication.credit_types.id_credit_type,
@@ -196,7 +194,7 @@ namespace SFIDataAccess.DataAccessObjects
             const string INVOICE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
             Random rnd = new Random();
-            string newApplicationInvoice = applicationInformation.Client.Rfc
+            string newApplicationInvoice = applicationInformation.Client.Rfc 
                 + new string(Enumerable.Repeat(INVOICE_CHARACTERS, 5)
                     .Select(s => s[rnd.Next(s.Length)])
                     .ToArray());
@@ -260,8 +258,8 @@ namespace SFIDataAccess.DataAccessObjects
                                                         where creditApplication.invoice == invoice
                                                         select creditApplication).FirstOrDefault();
                     var digitalDocumentsList = (from digitalDocument in context.digital_documents
-                                                where digitalDocument.credit_application_invoice == invoice
-                                                select digitalDocument).ToList();
+                                               where digitalDocument.credit_application_invoice == invoice
+                                               select digitalDocument).ToList();
                     var clientInformation = (from client in context.clients
                                              where client.rfc == creditApplicationInformation.client_rfc
                                              select client).FirstOrDefault();
@@ -289,8 +287,8 @@ namespace SFIDataAccess.DataAccessObjects
                                                       where creditCondition.identifier == creditApplicationInformation.credit_condition_identifier
                                                       select creditCondition).FirstOrDefault();
                     var creditTypeInformation = (from creditType in context.credit_types
-                                                 where creditType.id_credit_type == creditConditionInformation.id_credit_type
-                                                 select creditType).FirstOrDefault();
+                                          where creditType.id_credit_type == creditConditionInformation.id_credit_type
+                                          select creditType).FirstOrDefault();
                     Address addressClient = new Address
                     {
                         Street = clientAddress.street,
@@ -344,7 +342,7 @@ namespace SFIDataAccess.DataAccessObjects
                         WorkCenter = clientWorkCenter,
                         ContacMethods = contactMethods
                     };
-                    List<DigitalDocument> digitalDocuments = new List<DigitalDocument>();
+                    List<DigitalDocument> digitalDocuments = new List<DigitalDocument> ();
                     foreach (var document in digitalDocumentsList)
                     {
                         DigitalDocument digitalDocument = new DigitalDocument
@@ -678,7 +676,7 @@ namespace SFIDataAccess.DataAccessObjects
                             invoice = result.invoice,
                             planned_date = result.planned_date,
                             credit_invoice = result.credit_invoice,
-                            reconciliation_date = result.reconciliation_date ?? DateTime.MinValue
+                            reconciliation_date = result.reconciliation_date
                         });
                     }
                 }
@@ -709,19 +707,18 @@ namespace SFIDataAccess.DataAccessObjects
                     {
                         var payment = new Payments
                         {
-                            idpayment = paymentEntity.id_payment,
                             amount = (double)paymentEntity.amount,
                             invoice = paymentEntity.invoice,
                             planned_date = paymentEntity.planned_date,
                             credit_invoice = paymentEntity.credit_invoice,
-                            reconciliation_date = paymentEntity.reconciliation_date ?? DateTime.MinValue
+                            reconciliation_date = (DateTime)paymentEntity.reconciliation_date
                         };
 
                         return payment;
                     }
                     else
                     {
-                        return null;
+                        return null; 
                     }
                 }
             }
@@ -748,7 +745,6 @@ namespace SFIDataAccess.DataAccessObjects
 
                     if (existingPayment != null)
                     {
-                        existingPayment.id_payment = payment.idpayment;
                         existingPayment.amount = (decimal)payment.amount;
                         existingPayment.planned_date = payment.planned_date;
                         existingPayment.credit_invoice = payment.credit_invoice;
@@ -774,118 +770,5 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
         }
-        public static void InsertIntoPaymentLayouts(string captureLine, Payments payment)
-        {
-            try
-            {
-                using (var context = new SFIDatabaseContext())
-                {
-                    var paymentRecord = context.payments.FirstOrDefault(p => p.invoice == payment.invoice);
-
-                    if (paymentRecord != null)
-                    {
-                        var existingLayout = context.payment_layouts.FirstOrDefault(l => l.id_payment == paymentRecord.id_payment);
-                        if (existingLayout != null)
-                        {
-                            return;
-                        }
-                        var newLayout = new payment_layouts
-                        {
-                            capture_line = captureLine,
-                            generation_date = DateTime.Now,
-                            id_payment = paymentRecord.id_payment
-                        };
-                        context.payment_layouts.Add(newLayout);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("No se encontró el pago en la base de datos.");
-                    }
-                }
-            }
-            catch (EntityException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-            catch (DbUpdateException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-            catch (DbEntityValidationException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-        }
-        public static PaymentLayout GetPaymentLayoutByPaymentId(int paymentId)
-        {
-            SFIDatabaseContext context = new SFIDatabaseContext();
-            try
-            {
-                var paymentLayout = context.payment_layouts
-                    .Where(p => p.id_payment == paymentId)
-                    .FirstOrDefault();
-
-                if (paymentLayout != null)
-                {
-                    return new PaymentLayout
-                    {
-                        capture_line = paymentLayout.capture_line,
-                        generation_date = paymentLayout.generation_date,
-                        id_payment = paymentLayout.id_payment
-                    };
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (EntityException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-            catch (DbUpdateException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-            catch (DbEntityValidationException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-        }
-        public static List<Payments> GetAllPaymentsSortedByPlannedDate()
-        {
-            try
-            {
-                using (var context = new SFIDatabaseContext())
-                {
-                    var payments = context.payments
-                        .OrderBy(p => p.planned_date)
-                        .ToList();
-                    return payments.Select(p => new Payments
-                    {
-                        idpayment = p.id_payment,
-                        amount = (double)p.amount,
-                        invoice = p.invoice,
-                        planned_date = p.planned_date,
-                        credit_invoice = p.credit_invoice,
-                        reconciliation_date = p.reconciliation_date
-                    }).ToList();
-                }
-            }
-            catch (EntityException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-            catch (DbUpdateException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-            catch (DbEntityValidationException)
-            {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
-            }
-        }
-      }
+    }
 }
-
