@@ -61,21 +61,24 @@ namespace SFIClient.Controlls
         private string GenerateCaptureLine(string invoice, DateTime plannedDate)
         {
             Random random = new Random();
-            StringBuilder capturaBuilder = new StringBuilder();
-            capturaBuilder.Append(invoice.Substring(0, 6));
-            capturaBuilder.Append(plannedDate.Day.ToString("D2"));
-            capturaBuilder.Append(plannedDate.Month.ToString("D2"));
+            StringBuilder captureBuilder = new StringBuilder();
+
+            captureBuilder.Append(invoice.Substring(0, 6));
+            captureBuilder.Append(plannedDate.Day.ToString("D2"));
+            captureBuilder.Append(plannedDate.Month.ToString("D2"));
+
             for (int i = 0; i < 6; i++)
             {
-                capturaBuilder.Append(random.Next(0, 10));
+                captureBuilder.Append(random.Next(0, 10));
             }
 
             for (int i = 0; i < 2; i++)
             {
                 char randomChar = (char)random.Next('A', 'Z' + 1);
-                capturaBuilder.Append(randomChar);
+                captureBuilder.Append(randomChar);
             }
-            return capturaBuilder.ToString();
+
+            return captureBuilder.ToString();
         }
 
         private void HandleDownloadLayoutRequest(
