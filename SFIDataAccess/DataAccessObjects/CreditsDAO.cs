@@ -724,5 +724,49 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return interest;
         }
+
+        public static void InsertIntoPaymentLayouts(string captureLine, Payments payment)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var paymentRecord = context.payments.FirstOrDefault(p => p.invoice == payment.invoice);
+
+                    if (paymentRecord != null)
+                    {
+                        var existingLayout = context.payment_layouts.FirstOrDefault(l => l.id_payment == paymentRecord.id_payment);
+                        if (existingLayout != null)
+                        {
+                            return;
+                        }
+                        var newLayout = new payment_layouts
+                        {
+                            capture_line = captureLine,
+                            generation_date = DateTime.Now,
+                            id_payment = paymentRecord.id_payment
+                        };
+                        context.payment_layouts.Add(newLayout);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("No se encontró el pago en la base de datos.");
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+        }
     }
 }
