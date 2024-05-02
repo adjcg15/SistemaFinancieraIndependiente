@@ -53,9 +53,8 @@ namespace SFIClient.Controlls
             string creditInvoice = BindedPayment.invoice;
             string plannedDate = BindedPayment.planned_date.ToString("dd-MM-yyyy");
             double amount = BindedPayment.amount;
+
             HandleDownloadLayoutRequest(BindedPayment, captureLine, client, creditInvoice, plannedDate, amount);
-            //Utilities.GeneratorPDFLayout.GeneratePDF(client, creditInvoice, plannedDate,
-            //    amount, captureLine);
         }
 
         private string GenerateCaptureLine(string invoice, DateTime plannedDate)
@@ -93,20 +92,17 @@ namespace SFIClient.Controlls
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.id);
 
-            if (existingLayout != null)
+            if (existingLayout == null)
             {
-                //Utilities.GeneratorPDFLayout.GeneratePDF(client, existingLayout.capture_line, plannedDate, amount, captureLine);
+                PDFLayoutGenerator.GeneratePDF(client, existingLayout.capture_line, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
-                return;
-            }
-            if (string.IsNullOrEmpty(captureLine))
+            } 
+            else
             {
-                captureLine = GenerateCaptureLine(payment.invoice, payment.planned_date);
+                creditsServiceClient.InsertIntoPaymentLayouts(captureLine, payment);
+                PDFLayoutGenerator.GeneratePDF(client, creditInvoice, plannedDate, amount, captureLine);
+                ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
             }
-            creditsServiceClient.InsertIntoPaymentLayouts(captureLine, payment);
-            //Utilities.GeneratorPDFLayout.GeneratePDF(client, creditInvoice, plannedDate, amount, captureLine);
-            ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
-
         }
 
         private void ShowSuccessMessage(string message)
