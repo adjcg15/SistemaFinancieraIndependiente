@@ -192,7 +192,7 @@ namespace SFIClient.Views
                     correctFields = false;
                 }
             }
-            if (DpkClientBirthdate.SelectedDate.ToString().Length == 0)
+            if (!DpkClientBirthdate.SelectedDate.HasValue || DpkClientBirthdate.SelectedDate.Value > DateTime.Now.AddYears(-18))
             {
                 correctFields = false;
                 BdrClientBirthdate.Style = borderErrorStyle;
@@ -1041,7 +1041,7 @@ namespace SFIClient.Views
             if (sender is DatePicker datePicker)
             {
                 DateTime selectedDate = datePicker.SelectedDate ?? DateTime.MinValue;
-                if (selectedDate.ToShortDateString().Length == 0)
+                if (!DpkClientBirthdate.SelectedDate.HasValue || DpkClientBirthdate.SelectedDate.Value > DateTime.Now.AddYears(-18))
                 {
                     BdrClientBirthdate.Style = roundedBorderError;
                 }

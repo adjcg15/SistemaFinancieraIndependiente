@@ -23,6 +23,6 @@ namespace SFIDataAccess.Model
         public string credit_invoice { get; set; }
 
         [DataMember]
-        public DateTime reconciliation_date { get; set; }
+        public DateTime? reconciliation_date { get; set; }
     }
 }
