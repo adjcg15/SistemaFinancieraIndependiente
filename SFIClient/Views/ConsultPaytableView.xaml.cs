@@ -260,6 +260,10 @@ namespace SFIClient.Views
             updatedPayment.Interest = interestPercentage;
             updatedPayment.reconciliation_date = DateTime.Now;
 
+            Payment lastPayment = paymentsList.Last();
+            double interestDecimal = (double) interestPercentage / 100;
+            lastPayment.amount = Math.Max((1 + interestDecimal) * lastPayment.amount, 0);
+
             ShowPayments();
         }
 
