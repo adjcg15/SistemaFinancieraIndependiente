@@ -315,7 +315,6 @@ namespace SFIClient.Views
 
         private void ShowExistingPersonalReferenceMessageDialog()
         {
-
             Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
             MessageBox.Show(
                 "Verifique que la información ingresada para la clave del elector sea la correcta",

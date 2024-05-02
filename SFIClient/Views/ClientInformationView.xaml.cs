@@ -92,14 +92,14 @@ namespace SFIClient.Views
                 tbkFirstPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[0]);
                 tbkSecondPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[1]);
             }
-            else if (phoneNumbers.Count >= 3)
+            if (phoneNumbers.Count >= 3)
             {
                 brdThirdPhoneNumber.Visibility = Visibility.Visible;
                 tbkThirdPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[2]);
             }
-            else if (phoneNumbers.Count == 4)
+            if (phoneNumbers.Count == 4)
             {
-                brdThirdPhoneNumber.Visibility = Visibility.Visible;
+                brdFourthPhoneNumber.Visibility = Visibility.Visible;
                 tbkFourthPhoneNumber.Text = Utilities.NumberFormatToolkit.FormatAsTenDigits(phoneNumbers[3]);
             }
 
@@ -108,15 +108,15 @@ namespace SFIClient.Views
                 brdFirstEmail.Visibility = Visibility.Visible;
                 tbkFirstEmail.Text = emails[0];
             }
-            else if (phoneNumbers.Count >= 2)
+            if (emails.Count >= 2)
             {
                 brdSecondEmail.Visibility = Visibility.Visible;
                 tbkSecondEmail.Text = emails[1];
             }
-            else if (phoneNumbers.Count == 3)
+            if (emails.Count == 3)
             {   
                 brdThirdEmail.Visibility = Visibility.Visible;
-                tbkThirdEmail.Text = emails[3];
+                tbkThirdEmail.Text = emails[2];
             }
 
             TbkCardNumber.Text = 

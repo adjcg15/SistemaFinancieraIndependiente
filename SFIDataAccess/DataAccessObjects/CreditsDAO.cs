@@ -420,16 +420,13 @@ namespace SFIDataAccess.DataAccessObjects
 
             foreach (var policy in allPolicies)
             {
-                foreach (var policySelected in policesThatApply)
+                if (policesThatApply.Find(appliedPolicy => appliedPolicy.Title == policy.Title) != null)
                 {
-                    if (policy.Title == policySelected.Title)
-                    {
-                        CreditGrantingPolices.Rows.Add(policy.Identifier, true);
-                    }
-                    else
-                    {
-                        CreditGrantingPolices.Rows.Add(policy.Identifier, false);
-                    }
+                    CreditGrantingPolices.Rows.Add(policy.Identifier, true);
+                }
+                else
+                {
+                    CreditGrantingPolices.Rows.Add(policy.Identifier, false);
                 }
             }
 

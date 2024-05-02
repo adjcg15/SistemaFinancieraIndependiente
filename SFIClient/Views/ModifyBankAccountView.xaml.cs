@@ -10,13 +10,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MessageBox = System.Windows.Forms.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 
 namespace SFIClient.Views
@@ -28,12 +26,13 @@ namespace SFIClient.Views
     {
         readonly ClientsServiceClient clientsServiceClient = new ClientsServiceClient();
         BankAccount bankAccount = new BankAccount();
-        private readonly string cardNumber;
+        private readonly Client client;
         public ModifyBankAccountController(Client client)
         {
             InitializeComponent();
             TbkClientName.Text = client.Name + " " + client.Surname + " " + client.LastName;
-            cardNumber = client.Card_number;
+            this.client = client;
+            ApplyRestApplyRestrictionsOnFields();
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -41,49 +40,113 @@ namespace SFIClient.Views
             LoadBankAccount();
         }
 
+        private void ApplyRestApplyRestrictionsOnFields()
+        {
+            RestrictOnlyNumbers(TbCardNumber);
+            RestrictOnlyLetters(TbHolder);
+        }
+
         private void LoadBankAccount()
         {
             try
             {
-                bankAccount = clientsServiceClient.RecoverBankDetails(cardNumber);
+                bankAccount = clientsServiceClient.RecoverBankDetails(client.Card_number);
                 TbCardNumber.Text = bankAccount.CardNumber.Trim();
                 TbHolder.Text = bankAccount.Holder.Trim();
                 TbBank.Text = bankAccount.Bank.Trim();
             }
             catch (FaultException<ServiceFault> fe)
             {
-                MessageBox.Show(fe.Detail.Message, "Error en la base de datos");
+                ShowErrorRecoveringBankAccount(fe.Detail.Message);
                 RedirectToSearchClientByRfcView();
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                string message = "No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
+                ShowErrorRecoveringBankAccount(message);
                 RedirectToSearchClientByRfcView();
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                string message = "No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
+                ShowErrorRecoveringBankAccount(message);
                 RedirectToSearchClientByRfcView();
             }
         }
 
-        private void BtnGoBackClick(object sender, RoutedEventArgs e)
+        private void RestrictOnlyLetters(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                }
+            };
+        }
+
+        private void RestrictOnlyNumbers(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                }
+            };
+            textBox.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Space)
+                {
+                    e.Handled = true;
+                }
+            };
+        }
+
+        private void ShowErrorRecoveringBankAccount(string message)
+        {
+            MessageBox.Show(
+                message,
+                "Servicio no disponible",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
+
+        private void BtnDiscardUpdateBankAccountClick(object sender, RoutedEventArgs e)
+        {
+            ShowDiscardUpdateBankAccountConfirmationMessage();
+        }
+
+        private void BtnCancelUpdateBankAccountClick(object sender, RoutedEventArgs e)
         {
             ShowCancelUpdateBankAccountConfirmationMessage();
         }
 
-        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        private void ShowDiscardUpdateBankAccountConfirmationMessage()
         {
-            ShowCancelUpdateBankAccountConfirmationMessage();
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                "¿Está seguro que desea regresar a la ventana previa? Todos los cambios sin guardar se perderán",
+                "Regresar a ventana previa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                RedirectToSearchClientByRfcView();
+            }
         }
+
         private void ShowCancelUpdateBankAccountConfirmationMessage()
         {
-            DialogResult resultado = MessageBox.Show(
+            MessageBoxResult buttonClicked = MessageBox.Show(
                 "¿Deseas cancelar la actualización de la cuenta bancaria del cliente?",
                 "Confirmación de cancelación",
-                MessageBoxButtons.OKCancel);
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
 
-            if (resultado == DialogResult.OK)
+            if (buttonClicked == MessageBoxResult.Yes)
             {
                 RedirectToSearchClientByRfcView();
             }
@@ -91,42 +154,54 @@ namespace SFIClient.Views
 
         private void BtnUpdateBankAccountClick(object sender, RoutedEventArgs e)
         {
-            bool updateData;
+            bool isValidInformation = VerifyTextFields();
 
-            if (VerifyTextFields())
+            if (isValidInformation)
             {
-                DialogResult resultado = MessageBox.Show(
-                    "¿Deseas actualizar la cuenta bancaria del cliente?",
-                    "Confirmación de actualización",
-                    MessageBoxButtons.OKCancel);
-
-                if (resultado == DialogResult.OK)
-                {
-                    BankAccount newBankAccount = new BankAccount();
-                    newBankAccount.CardNumber = TbCardNumber.Text.Trim();
-                    newBankAccount.Bank = TbBank.Text.Trim();
-                    newBankAccount.Holder = TbHolder.Text.Trim();
-
-                    updateData = UpdateBankAccount(newBankAccount);
-                    if (updateData)
-                    {
-                        MessageBox.Show(
-                            "Se actualizaron los datos bancarios de " + TbkClientName.Text + " correctamente",
-                            "Actualización exitosa");
-                        SearchClientByRFCController searchClientByRFCView = new SearchClientByRFCController();
-                        this.NavigationService.Navigate(searchClientByRFCView);
-                    }
-                    else
-                    {
-                        MessageBox.Show(
-                            "No fue posible actualizar los datos bancarios de " + TbkClientName.Text + ", ya se encuentra registrada esa información",
-                            "Error de actualización");
-                    }
-                }
+                ShowClientUpdateConfirmationDialog();
             }
             else
             {
-                MessageBox.Show("Verifique que la información ingresada sea correcta", "Campos inválidos");
+                HighLightInvalidFields();
+                ShowInvalidFieldsAlertDialog();
+            }
+        }
+
+        private void HighLightInvalidFields()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            if (TbCardNumber.Text.Trim().Length < 16) TbCardNumber.Style = textInputErrorStyle;
+            if (TbBank.Text.Trim().Length == 0) TbCardNumber.Style = textInputErrorStyle;
+            if (TbHolder.Text.Trim().Length == 0) TbCardNumber.Style = textInputErrorStyle;
+        }
+
+        private void ShowInvalidFieldsAlertDialog()
+        {
+            MessageBox.Show(
+                "Verifique que la información ingresada sea correcta y no existan campos vacíos",
+                "Campos inválidos",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+        }
+
+        private void ShowClientUpdateConfirmationDialog()
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                    "¿Deseas actualizar la cuenta bancaria del cliente" + 
+                    $"{client.Name} {client.Surname} {client.LastName}" + " ?",
+                    "Confirmación de actualización",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+            if (buttonClicked == MessageBoxResult.Yes)
+            {
+                BankAccount newBankAccount = new BankAccount();
+                newBankAccount.CardNumber = TbCardNumber.Text.Trim();
+                newBankAccount.Bank = TbBank.Text.Trim();
+                newBankAccount.Holder = TbHolder.Text.Trim();
+
+                UpdateBankAccount(newBankAccount);
             }
         }
 
@@ -139,55 +214,81 @@ namespace SFIClient.Views
         {
             bool correctFields = true;
 
-            if (!VerifyCardNumberFormat(TbCardNumber.Text.Trim())) correctFields = false;
+            if (TbCardNumber.Text.Trim().Length < 16) correctFields = false;
             if (TbBank.Text.Trim().Length == 0) correctFields = false;
             if (TbHolder.Text.Trim().Length == 0) correctFields = false;
 
             return correctFields;
         }
 
-        private bool VerifyCardNumberFormat(string cardNumber)
+        private void UpdateBankAccount(BankAccount bankAccount)
         {
-            bool cardNumberIsCorrect;
-            long number;
-            if (long.TryParse(cardNumber, out number) && cardNumber.Length == 16)
-            {
-                cardNumberIsCorrect = true;
-            }
-            else
-            {
-                cardNumberIsCorrect = false;
-            }
-
-            return cardNumberIsCorrect;
-        }
-
-        private bool UpdateBankAccount(BankAccount bankAccount)
-        {
-            bool updateBankAccount = false;
             try
             {
-                updateBankAccount = clientsServiceClient.UpdateBankAccount(bankAccount, cardNumber);
+                bool statusUpdate = clientsServiceClient.UpdateBankAccount(bankAccount, client.Card_number);
+                if (statusUpdate)
+                {
+                    ShowBankAccountSuccessfulUpdateMessageDialog();
+                    RedirectToSearchClientByRfcView();
+                }
+                else
+                {
+                    ShowExistingBankAccountMessageDialog();
+                }
 
             }
             catch (FaultException<ServiceFault> fe)
             {
-                MessageBox.Show(fe.Detail.Message, "Error en la base de datos");
+                ShowErrorUpdateBankAccount(fe.Detail.Message);
                 RedirectToSearchClientByRfcView();
             }
             catch (EndpointNotFoundException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                string message = "No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
+                ShowErrorUpdateBankAccount(message);
                 RedirectToSearchClientByRfcView();
             }
             catch (CommunicationException)
             {
-                MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
+                string message = "No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
+                ShowErrorUpdateBankAccount(message);
                 RedirectToSearchClientByRfcView();
             }
-
-            return updateBankAccount;
         }
+
+        private void ShowBankAccountSuccessfulUpdateMessageDialog()
+        {
+            MessageBox.Show(
+                "La cuenta bancaria del cliente " + $"{client.Name} {client.Surname} {client.LastName}" + 
+                " ha sido actualizada correctamente",
+                "Actualización existosa",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+        }
+
+        private void ShowExistingBankAccountMessageDialog()
+        {
+            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            MessageBox.Show(
+                "Verifique que la información ingresada para el número de tarjeta sea la correcta",
+                "Cuenta bancaria ya registrada en el sistema",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+            TbCardNumber.Style = textInputErrorStyle;
+        }
+
+        private void ShowErrorUpdateBankAccount(string message)
+        {
+            MessageBox.Show(
+                message,
+                "Sistema no disponible",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
+
         private void ListenAndVerifyEmptyTextFields(object sender)
         {
             TextBox tbKey = sender as TextBox;
@@ -216,7 +317,7 @@ namespace SFIClient.Views
 
             string cardNumber = tbCardNumber.Text.Trim();
 
-            if (!VerifyCardNumberFormat(cardNumber))
+            if (cardNumber.Length < 16)
             {
                 tbCardNumber.Style = textInputErrorStyle;
             }

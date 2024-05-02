@@ -80,6 +80,7 @@ namespace SFIClient.Controlls
                 {
                     BdrDecorator.Background = Brushes.White;
                     TbkCreditStatus.Text = "Pendiente por liberar";
+                    SkpCreditActions.Visibility = Visibility.Collapsed;
                 }
             }
             else

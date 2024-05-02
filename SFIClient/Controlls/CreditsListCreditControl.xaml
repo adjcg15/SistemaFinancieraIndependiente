@@ -78,7 +78,7 @@
                     </TextBlock>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0, 28">
+                <StackPanel x:Name="SkpCreditActions" Orientation="Horizontal" Margin="0, 28">
                     <Button 
                         Click="BtnOpenCreditPaymentsTableClick"
                         Style="{StaticResource PrimaryBtn}" 
