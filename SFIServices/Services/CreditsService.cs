@@ -81,9 +81,9 @@ namespace SFIServices
         {
             return CreditsDAO.GetCreditTypeIdByCreditInvoice(creditInvoice);
         }
-        public void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
+        public bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
         {
-            CreditsDAO.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
+            return CreditsDAO.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
         }
 
         public bool VerifyFirstPaymentReconciled(string creditInvoice)

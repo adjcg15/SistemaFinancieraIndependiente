@@ -2451,10 +2451,10 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/AssociateNewCreditConditionServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
+        bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
-        System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
+        System.Threading.Tasks.Task<bool> AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
@@ -2598,11 +2598,11 @@ namespace SFIClient.SFIServices {
             return base.Channel.GetCreditTypeIdByCreditInvoiceAsync(creditInvoice);
         }
         
-        public void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier) {
-            base.Channel.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
+        public bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier) {
+            return base.Channel.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
         }
         
-        public System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
+        public System.Threading.Tasks.Task<bool> AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
             return base.Channel.AssociateNewCreditConditionAsync(creditInvoice, newCreditConditionIdentifier);
         }
         
