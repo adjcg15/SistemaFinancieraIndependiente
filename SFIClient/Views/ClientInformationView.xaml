@@ -221,7 +221,7 @@
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Salario neto"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkSalary" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
+                            <TextBlock Name="TbkSalary" TextWrapping="Wrap" Margin="0,0,0,8" Text="" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Antigüedad en la empresa"/>
