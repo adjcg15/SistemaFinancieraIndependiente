@@ -33,13 +33,11 @@ namespace SFIClient.Controlls
         {
             TbkPaymentInvoice.Text = BindedPayment.invoice;
             TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
-            TbkAmount.Text = BindedPayment.amount.ToString("C");
-            TbkAmount.Inlines.Clear();
-            TbkAmount.Inlines.Add(new Run(BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
-            TbkPlannedDate.Text = BindedPayment.reconciliation_date.HasValue 
+            TbkAmount.Text = BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"));
+            TbkInterest.Text = BindedPayment.Interest.ToString();
+            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue 
                 ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") 
                 : "-";
-            TbkInterest.Text = BindedPayment.Interest.ToString();
             BtnDownloadLayout.IsEnabled = !BindedPayment.reconciliation_date.HasValue;
         }
 
