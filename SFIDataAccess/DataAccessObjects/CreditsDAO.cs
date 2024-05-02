@@ -692,5 +692,37 @@ namespace SFIDataAccess.DataAccessObjects
             }
             return payments;
         }
+
+        public static decimal ClosePayment(string invoice)
+        {
+            decimal interest;
+            try
+            {
+                using (var dbContext = new SFIDatabaseContext())
+                {
+                    var interestPercentage = new SqlParameter("@interest_percentage", SqlDbType.Decimal);
+                    interestPercentage.Direction = ParameterDirection.Output;
+
+                    dbContext.Database.ExecuteSqlCommand("EXEC ClosePayment @payment_invoice, @interest_percentage OUTPUT",
+                        new SqlParameter("@payment_invoice", invoice),
+                        interestPercentage)
+                    ;
+                    interest = (decimal)interestPercentage.Value;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de entidad"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de actualización de base de datos"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de validación de entidad"));
+            }
+            return interest;
+        }
     }
 }
