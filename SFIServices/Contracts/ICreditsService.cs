@@ -50,6 +50,26 @@ namespace SFIServices.Contracts
         bool VerifyFirstPaymentReconciled(string creditInvoice);
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
-        List<Payments> GetPaymentsByCreditInvoice(string creditInvoice);
+        List<Payment> GetPaymentsByCreditInvoice(string creditInvoice);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        Payment GetPaymentByInvoice(string invoice);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        decimal ClosePayment(string invoice);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        void InsertIntoPaymentLayouts(string captureLine, Payment payment);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        PaymentLayout GetPaymentLayoutByPaymentId(int paymentId);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        List<Payment> GetAllPaymentsSortedByPlannedDate();
     }
  }

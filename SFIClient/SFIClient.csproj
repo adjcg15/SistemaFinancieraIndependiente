@@ -344,7 +344,10 @@
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Payments.datasource">
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Payment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.PaymentLayout.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.PersonalReference.datasource">

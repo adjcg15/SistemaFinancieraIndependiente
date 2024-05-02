@@ -22,10 +22,10 @@ namespace SFIClient.Controlls
     /// </summary>
     public partial class PaymentControl : UserControl
     {
-        public  Payments BindedPayment { get; }
-        public event EventHandler<Payments> CardClick;
+        public  Payment BindedPayment { get; }
+        public event EventHandler<Payment> CardClick;
         public bool IsSelected { get; private set; }
-        public PaymentControl(Payments payment)
+        public PaymentControl(Payment payment)
         {
             InitializeComponent();
             BindedPayment = payment;
@@ -38,7 +38,9 @@ namespace SFIClient.Controlls
             TbkAmount.Text = BindedPayment.amount.ToString("C");
             TbkAmount.Inlines.Clear();
             TbkAmount.Inlines.Add(new Run(BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
-            //TbkPlannedDate.Text = BindedPayment.reconciliation_date.ToString("dd-MM-yyyy");
+            TbkPlannedDate.Text = BindedPayment.reconciliation_date.HasValue 
+                ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") 
+                : "-";
         }
         private void BdrCreditConditionCardMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

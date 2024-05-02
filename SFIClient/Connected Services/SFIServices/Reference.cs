@@ -1954,9 +1954,9 @@ namespace SFIClient.SFIServices {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Payments", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Payment", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
     [System.SerializableAttribute()]
-    public partial class Payments : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Payment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1966,6 +1966,9 @@ namespace SFIClient.SFIServices {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string credit_invoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string invoiceField;
@@ -2013,6 +2016,19 @@ namespace SFIClient.SFIServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string invoice {
             get {
                 return this.invoiceField;
@@ -2047,6 +2063,83 @@ namespace SFIClient.SFIServices {
                 if ((this.reconciliation_dateField.Equals(value) != true)) {
                     this.reconciliation_dateField = value;
                     this.RaisePropertyChanged("reconciliation_date");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PaymentLayout", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class PaymentLayout : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string capture_lineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime generation_dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_paymentField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string capture_line {
+            get {
+                return this.capture_lineField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.capture_lineField, value) != true)) {
+                    this.capture_lineField = value;
+                    this.RaisePropertyChanged("capture_line");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime generation_date {
+            get {
+                return this.generation_dateField;
+            }
+            set {
+                if ((this.generation_dateField.Equals(value) != true)) {
+                    this.generation_dateField = value;
+                    this.RaisePropertyChanged("generation_date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_payment {
+            get {
+                return this.id_paymentField;
+            }
+            set {
+                if ((this.id_paymentField.Equals(value) != true)) {
+                    this.id_paymentField = value;
+                    this.RaisePropertyChanged("id_payment");
                 }
             }
         }
@@ -2372,10 +2465,46 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        SFIClient.SFIServices.Payments[] GetPaymentsByCreditInvoice(string creditInvoice);
+        SFIClient.SFIServices.Payment[] GetPaymentsByCreditInvoice(string creditInvoice);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentsByCreditInvoiceResponse")]
-        System.Threading.Tasks.Task<SFIClient.SFIServices.Payments[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice);
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Payment[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentByInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentByInvoiceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetPaymentByInvoiceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Payment GetPaymentByInvoice(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentByInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentByInvoiceResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Payment> GetPaymentByInvoiceAsync(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/ClosePayment", ReplyAction="http://tempuri.org/ICreditsService/ClosePaymentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/ClosePaymentServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        decimal ClosePayment(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/ClosePayment", ReplyAction="http://tempuri.org/ICreditsService/ClosePaymentResponse")]
+        System.Threading.Tasks.Task<decimal> ClosePaymentAsync(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/InsertIntoPaymentLayouts", ReplyAction="http://tempuri.org/ICreditsService/InsertIntoPaymentLayoutsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/InsertIntoPaymentLayoutsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        void InsertIntoPaymentLayouts(string captureLine, SFIClient.SFIServices.Payment payment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/InsertIntoPaymentLayouts", ReplyAction="http://tempuri.org/ICreditsService/InsertIntoPaymentLayoutsResponse")]
+        System.Threading.Tasks.Task InsertIntoPaymentLayoutsAsync(string captureLine, SFIClient.SFIServices.Payment payment);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentLayoutByPaymentId", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentLayoutByPaymentIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetPaymentLayoutByPaymentIdServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.PaymentLayout GetPaymentLayoutByPaymentId(int paymentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentLayoutByPaymentId", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentLayoutByPaymentIdResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.PaymentLayout> GetPaymentLayoutByPaymentIdAsync(int paymentId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDate", ReplyAction="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDateServiceFaultF" +
+            "ault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Payment[] GetAllPaymentsSortedByPlannedDate();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDate", ReplyAction="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDateResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Payment[]> GetAllPaymentsSortedByPlannedDateAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2485,12 +2614,52 @@ namespace SFIClient.SFIServices {
             return base.Channel.VerifyFirstPaymentReconciledAsync(creditInvoice);
         }
         
-        public SFIClient.SFIServices.Payments[] GetPaymentsByCreditInvoice(string creditInvoice) {
+        public SFIClient.SFIServices.Payment[] GetPaymentsByCreditInvoice(string creditInvoice) {
             return base.Channel.GetPaymentsByCreditInvoice(creditInvoice);
         }
         
-        public System.Threading.Tasks.Task<SFIClient.SFIServices.Payments[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice) {
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Payment[]> GetPaymentsByCreditInvoiceAsync(string creditInvoice) {
             return base.Channel.GetPaymentsByCreditInvoiceAsync(creditInvoice);
+        }
+        
+        public SFIClient.SFIServices.Payment GetPaymentByInvoice(string invoice) {
+            return base.Channel.GetPaymentByInvoice(invoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Payment> GetPaymentByInvoiceAsync(string invoice) {
+            return base.Channel.GetPaymentByInvoiceAsync(invoice);
+        }
+        
+        public decimal ClosePayment(string invoice) {
+            return base.Channel.ClosePayment(invoice);
+        }
+        
+        public System.Threading.Tasks.Task<decimal> ClosePaymentAsync(string invoice) {
+            return base.Channel.ClosePaymentAsync(invoice);
+        }
+        
+        public void InsertIntoPaymentLayouts(string captureLine, SFIClient.SFIServices.Payment payment) {
+            base.Channel.InsertIntoPaymentLayouts(captureLine, payment);
+        }
+        
+        public System.Threading.Tasks.Task InsertIntoPaymentLayoutsAsync(string captureLine, SFIClient.SFIServices.Payment payment) {
+            return base.Channel.InsertIntoPaymentLayoutsAsync(captureLine, payment);
+        }
+        
+        public SFIClient.SFIServices.PaymentLayout GetPaymentLayoutByPaymentId(int paymentId) {
+            return base.Channel.GetPaymentLayoutByPaymentId(paymentId);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.PaymentLayout> GetPaymentLayoutByPaymentIdAsync(int paymentId) {
+            return base.Channel.GetPaymentLayoutByPaymentIdAsync(paymentId);
+        }
+        
+        public SFIClient.SFIServices.Payment[] GetAllPaymentsSortedByPlannedDate() {
+            return base.Channel.GetAllPaymentsSortedByPlannedDate();
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Payment[]> GetAllPaymentsSortedByPlannedDateAsync() {
+            return base.Channel.GetAllPaymentsSortedByPlannedDateAsync();
         }
     }
     

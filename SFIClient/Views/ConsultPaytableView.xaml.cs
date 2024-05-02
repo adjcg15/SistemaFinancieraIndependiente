@@ -26,7 +26,7 @@ namespace SFIClient.Views
     {
         private Credit credit;
         private PaymentControl selectedPayment;
-        private Payments payment;
+        private Payment payment;
         private string invoice;
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
@@ -66,7 +66,7 @@ namespace SFIClient.Views
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             try
             {
-                List<Payments> applicablePayments = creditsServiceClient.GetPaymentsByCreditInvoice(creditInvoice).ToList();
+                List<Payment> applicablePayments = creditsServiceClient.GetPaymentsByCreditInvoice(creditInvoice).ToList();
                 ShowPayments(applicablePayments);
             }
             catch (FaultException<ServiceFault> fault)
@@ -84,7 +84,7 @@ namespace SFIClient.Views
                 ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
             }
         }
-        private void ShowPayments(List<Payments> establishedPayments)
+        private void ShowPayments(List<Payment> establishedPayments)
         {
             GrdEmptyPaymentsMessage.Visibility = establishedPayments.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             SkpApplicablePayments.Visibility = establishedPayments.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
