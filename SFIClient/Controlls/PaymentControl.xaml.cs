@@ -31,8 +31,6 @@ namespace SFIClient.Controlls
         }
         private void ShowCreditConditionInformation()
         {
-            CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
-
             TbkPaymentInvoice.Text = BindedPayment.invoice;
             TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
             TbkAmount.Text = BindedPayment.amount.ToString("C");
@@ -41,6 +39,7 @@ namespace SFIClient.Controlls
             TbkPlannedDate.Text = BindedPayment.reconciliation_date.HasValue 
                 ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") 
                 : "-";
+            TbkInterest.Text = BindedPayment.Interest.ToString();
             BtnDownloadLayout.IsEnabled = !BindedPayment.reconciliation_date.HasValue;
         }
 

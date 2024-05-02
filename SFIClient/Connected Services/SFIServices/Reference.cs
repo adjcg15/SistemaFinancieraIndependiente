@@ -1962,6 +1962,9 @@ namespace SFIClient.SFIServices {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal InterestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double amountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1986,6 +1989,19 @@ namespace SFIClient.SFIServices {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Interest {
+            get {
+                return this.InterestField;
+            }
+            set {
+                if ((this.InterestField.Equals(value) != true)) {
+                    this.InterestField = value;
+                    this.RaisePropertyChanged("Interest");
+                }
             }
         }
         

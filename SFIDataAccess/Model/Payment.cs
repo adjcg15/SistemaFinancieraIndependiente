@@ -27,5 +27,8 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public DateTime? reconciliation_date { get; set; }
+
+        [DataMember]
+        public decimal Interest { get; set; }
     }
 }

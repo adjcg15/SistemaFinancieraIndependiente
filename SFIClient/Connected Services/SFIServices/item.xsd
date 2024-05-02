@@ -213,6 +213,7 @@
   <xs:element name="ArrayOfPayment" nillable="true" type="tns:ArrayOfPayment" />
   <xs:complexType name="Payment">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Interest" type="xs:decimal" />
       <xs:element minOccurs="0" name="amount" type="xs:double" />
       <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
