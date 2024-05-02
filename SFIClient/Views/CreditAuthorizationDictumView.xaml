@@ -174,27 +174,27 @@
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Puesto ocupado"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkEmployeePosition" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
+                            <TextBlock Name="TbkEmployeePosition" TextWrapping="Wrap" Margin="0,0,0,8" Text="" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Salario neto"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkSalary" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
+                            <TextBlock Name="TbkSalary" TextWrapping="Wrap" Margin="0,0,0,8" Text="" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Antigüedad en la empresa"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkEmployeeSeniority" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
+                            <TextBlock Name="TbkEmployeeSeniority" TextWrapping="Wrap" Margin="0,0,0,8" Text="" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Teléfono de contacto de la empresa"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkWorkCenterPhoneNumber" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
+                            <TextBlock Name="TbkWorkCenterPhoneNumber" TextWrapping="Wrap" Margin="0,0,0,8" Text="" FontSize="32"/>
                         </Grid>
 
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Teléfono de contacto de Recursos Humanos"/>
                         <Grid Margin="0, 0, 0, 0">
-                            <TextBlock Name="TbkHumanResourcesPhoneNumber" TextWrapping="Wrap" Margin="0,0,0,8" Text="Leona Vicario Zapata" FontSize="32"/>
+                            <TextBlock Name="TbkHumanResourcesPhoneNumber" TextWrapping="Wrap" Margin="0,0,0,8" Text="" FontSize="32"/>
                         </Grid>
                     </StackPanel>
 
