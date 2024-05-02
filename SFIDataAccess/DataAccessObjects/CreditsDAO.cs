@@ -663,20 +663,42 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var results = context.payments
+                    var dbPayments = context.payments
                         .Where(payment => payment.credit_invoice == creditInvoice)
                         .OrderBy(payment => payment.planned_date)
                         .ToList();
 
-                    foreach (var result in results)
+                    var dbAppliedCreditCondition = context.regimes
+                        .Where(regime => regime.credit_invoice == creditInvoice && regime.application_end_date == null)
+                        .FirstOrDefault()?
+                        .credit_conditions;
+
+                    foreach (var payment in dbPayments)
                     {
+                        decimal paymentInterest = 0;
+                        if(payment.reconciliation_date.HasValue)
+                        {
+                            TimeSpan paymentPeriod = payment.reconciliation_date.Value - payment.planned_date;
+                            int days = paymentPeriod.Days;
+
+                            if (days < 0)
+                            {
+                                paymentInterest = (decimal)(dbAppliedCreditCondition?.advance_payment_reduction * days);
+                            }
+                            else if (days > 0)
+                            {
+                                paymentInterest = (decimal)(dbAppliedCreditCondition?.interest_on_arrears * days);
+                            }
+                        }
+
                         payments.Add(new Payment
                         {
-                            amount = (double)result.amount,
-                            invoice = result.invoice,
-                            planned_date = result.planned_date,
-                            credit_invoice = result.credit_invoice,
-                            reconciliation_date = result.reconciliation_date
+                            amount = (double)payment.amount,
+                            invoice = payment.invoice,
+                            planned_date = payment.planned_date,
+                            credit_invoice = payment.credit_invoice,
+                            reconciliation_date = payment.reconciliation_date,
+                            Interest = paymentInterest
                         });
                     }
                 }

@@ -256,9 +256,7 @@ namespace SFIClient.Views
 
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
-            CreditsListController creditList = new CreditsListController();
-            this.NavigationService.Navigate(creditList);
-            NavigationService.RemoveBackEntry();
+            RedirectToConsultCreditsList();
         }
     }
 }
