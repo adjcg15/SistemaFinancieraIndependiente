@@ -652,6 +652,7 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
         }
+
         public static List<Payment> GetPaymentsByCreditInvoice(string creditInvoice)
         {
             List<Payment> payments = new List<Payment>();
@@ -691,6 +692,47 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
             return payments;
+        }
+
+        public static Payment GetPaymentByInvoice(string invoice)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var paymentEntity = context.payments.FirstOrDefault(p => p.invoice == invoice);
+
+                    if (paymentEntity != null)
+                    {
+                        var payment = new Payment
+                        {
+                            amount = (double)paymentEntity.amount,
+                            invoice = paymentEntity.invoice,
+                            planned_date = paymentEntity.planned_date,
+                            credit_invoice = paymentEntity.credit_invoice,
+                            reconciliation_date = paymentEntity.reconciliation_date ?? DateTime.MinValue
+                        };
+
+                        return payment;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
         }
 
         public static decimal ClosePayment(string invoice)

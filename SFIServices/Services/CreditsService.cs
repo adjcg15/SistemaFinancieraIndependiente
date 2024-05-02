@@ -1,4 +1,5 @@
-﻿using SFIDataAccess.CustomExceptions;
+﻿using SFIDataAccess;
+using SFIDataAccess.CustomExceptions;
 using SFIDataAccess.DataAccessObjects;
 using SFIDataAccess.Model;
 using SFIServices.Contracts;
@@ -89,9 +90,35 @@ namespace SFIServices
         {
             return CreditsDAO.VerifyFirstPaymentReconciled(creditInvoice);
         }
+
         public  List<Payment> GetPaymentsByCreditInvoice(string creditInvoice)
         {
             return CreditsDAO.GetPaymentsByCreditInvoice(creditInvoice);
+        }
+
+        public Payment GetPaymentByInvoice(string invoice)
+        {
+            return CreditsDAO.GetPaymentByInvoice(invoice);
+        }
+
+        public decimal ClosePayment(string invoice)
+        {
+            return CreditsDAO.ClosePayment(invoice);
+        }
+
+        public void InsertIntoPaymentLayouts(string captureLine, Payment payment)
+        {
+            CreditsDAO.InsertIntoPaymentLayouts(captureLine, payment);
+        }
+
+        public PaymentLayout GetPaymentLayoutByPaymentId(int paymentId)
+        {
+            return CreditsDAO.GetPaymentLayoutByPaymentId(paymentId);
+        }
+
+        public List<Payment> GetAllPaymentsSortedByPlannedDate()
+        {
+            return CreditsDAO.GetAllPaymentsSortedByPlannedDate();
         }
     }
 }
