@@ -734,7 +734,7 @@ namespace SFIDataAccess.DataAccessObjects
                             invoice = paymentEntity.invoice,
                             planned_date = paymentEntity.planned_date,
                             credit_invoice = paymentEntity.credit_invoice,
-                            reconciliation_date = paymentEntity.reconciliation_date ?? DateTime.MinValue
+                            reconciliation_date = paymentEntity.reconciliation_date
                         };
 
                         return payment;

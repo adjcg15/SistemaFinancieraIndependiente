@@ -141,17 +141,29 @@ namespace SFIClient.Views
 
                 try
                 {
-                    ValidateFileSize(selectedFilePath);
-
-                    string[] expectedColumns = { "amount", "invoice", "planned_date", "credit_invoice", "reconciliation_date" };
-                    using (var reader = new StreamReader(selectedFilePath))
+                    if(!IsSmallFile(selectedFilePath))
                     {
-                        ValidateFileFormat(reader, expectedColumns);
-                        ProcessPaymentData(reader);
+                        string errorMessage = "El archivo seleccionado es demasiado grande. " +
+                            "Por favor seleccione un archivo más pequeño.";
+                        ShowInvalidUploadCsvErrorDialog(errorMessage);
                     }
-
-                    MessageBox.Show("El procesamiento del archivo CSV se completó con éxito.", "Procesamiento completado",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    else
+                    {
+                        string[] expectedColumns = { "amount", "invoice", "planned_date", "credit_invoice", "reconciliation_date" };
+                        using (var reader = new StreamReader(selectedFilePath))
+                        {
+                            if(!validFileFormat(reader, expectedColumns))
+                            {
+                                string errorMessage = "Por favor, asegúrese de que el archivo tenga las columnas 'amount', " +
+                                    "'invoice', 'planned_date', 'credit_invoice' y 'reconciliation_date'.";
+                                ShowInvalidUploadCsvErrorDialog(errorMessage);
+                            }
+                            else
+                            {
+                                ProcessPaymentData(reader);
+                            }
+                        }
+                    }
                 }
                 catch (FaultException<ServiceFault> fault)
                 {
@@ -170,27 +182,30 @@ namespace SFIClient.Views
             }
         }
 
-        private void ValidateFileSize(string filePath)
+        private void ShowInvalidUploadCsvErrorDialog(string message)
         {
-            FileInfo fileInfo = new FileInfo(filePath);
-            long fileSizeInBytes = fileInfo.Length;
-            const long maxSizeInBytes = 524288;
-
-            if (fileSizeInBytes > maxSizeInBytes)
-            {
-                throw new Exception("El archivo seleccionado es demasiado grande. Por favor seleccione un archivo más pequeño.");
-            }
+            MessageBox.Show(
+                message,
+                "Archivo inválido",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
 
-        private void ValidateFileFormat(StreamReader reader, string[] expectedColumns)
+        private bool IsSmallFile(string filePath)
+        {
+            const long MAX_BYTES_ALLOWED = 524288;
+            FileInfo fileInfo = new FileInfo(filePath);
+            long fileSizeInBytes = fileInfo.Length;
+
+            return fileSizeInBytes < MAX_BYTES_ALLOWED;
+        }
+
+        private bool validFileFormat(StreamReader reader, string[] expectedColumns)
         {
             string[] columns = reader.ReadLine()?.Split(',');
 
-            if (columns == null || !columns.SequenceEqual(expectedColumns))
-            {
-                throw new Exception("El archivo seleccionado no tiene el formato esperado. " +
-                    "Por favor, asegúrese de que el archivo tenga las columnas 'amount', 'invoice', 'planned_date', 'credit_invoice' y 'reconciliation_date'.");
-            }
+            return columns != null && columns.SequenceEqual(expectedColumns);
         }
 
         private void ProcessPaymentData(StreamReader reader)
@@ -241,17 +256,11 @@ namespace SFIClient.Views
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
 
             decimal interestPercentage = creditsServiceClient.ClosePayment(paymentInvoice);
-            paymentsList.Find(payment => payment.invoice == paymentInvoice).Interest = interestPercentage;
-        }
+            Payment updatedPayment = paymentsList.Find(payment => payment.invoice == paymentInvoice);
+            updatedPayment.Interest = interestPercentage;
+            updatedPayment.reconciliation_date = DateTime.Now;
 
-        private void ShowErrorUploadCsvDialog(string message)
-        {
-            MessageBoxResult buttonClicked = MessageBox.Show(
-                message,
-                "Error con el pago",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error
-            );
+            ShowPayments();
         }
 
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)

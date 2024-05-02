@@ -38,7 +38,8 @@ namespace SFIClient.Controlls
             TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue 
                 ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") 
                 : "-";
-            BtnDownloadLayout.IsEnabled = !BindedPayment.reconciliation_date.HasValue;
+            BtnDownloadLayout.IsEnabled = !BindedPayment.reconciliation_date.HasValue 
+                && BindedPayment.amount != 0;
         }
 
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
