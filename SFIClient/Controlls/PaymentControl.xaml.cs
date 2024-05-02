@@ -90,7 +90,7 @@ namespace SFIClient.Controlls
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.id);
 
-            if (existingLayout == null)
+            if (existingLayout != null)
             {
                 PDFLayoutGenerator.GeneratePDF(client, existingLayout.capture_line, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");

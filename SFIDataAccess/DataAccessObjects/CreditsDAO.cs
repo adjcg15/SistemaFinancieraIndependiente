@@ -698,7 +698,7 @@ namespace SFIDataAccess.DataAccessObjects
                             planned_date = payment.planned_date,
                             credit_invoice = payment.credit_invoice,
                             reconciliation_date = payment.reconciliation_date,
-                            Interest = paymentInterest
+                            Interest = paymentInterest * 100
                         });
                     }
                 }
