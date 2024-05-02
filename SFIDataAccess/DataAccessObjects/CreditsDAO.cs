@@ -584,33 +584,33 @@ namespace SFIDataAccess.DataAccessObjects
 
             return creditTypeId;
         }
-        public static void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
+        public static bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
         {
+            bool success = false;
+
             try
             {
-                using (var context = new SFIDatabaseContext())
+                using (var dbContext = new SFIDatabaseContext())
                 {
-                    var currentRegime = context.regimes
-                        .Where(regime => regime.credit_invoice == creditInvoice && regime.application_end_date == null)
-                        .FirstOrDefault();
-
-                    if (currentRegime != null)
+                    var creditInvoiceParam = new SqlParameter("@CreditInvoice", SqlDbType.VarChar, 18)
                     {
-                        currentRegime.application_end_date = DateTime.Today;
-                        var newRegime = new regime
-                        {
-                            application_start_date = DateTime.Today,
-                            credit_condition_identifier = newCreditConditionIdentifier,
-                            credit_invoice = creditInvoice
-                        };
-                        context.regimes.Add(newRegime);
+                        Value = creditInvoice
+                    };
 
-                        context.SaveChanges();
-                    }
-                    else
+                    var newCreditConditionIdentifierParam = new SqlParameter("@NewCreditConditionIdentifier", SqlDbType.VarChar, 6)
                     {
-                        throw new Exception("No se encontró un régimen activo para la factura de crédito dada.");
-                    }
+                        Value = newCreditConditionIdentifier
+                    };
+
+                    var successParam = new SqlParameter("@Success", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+
+                    dbContext.Database.ExecuteSqlCommand("EXEC AssociateNewCreditCondition @CreditInvoice, @NewCreditConditionIdentifier, @Success OUTPUT",
+                                                         creditInvoiceParam, newCreditConditionIdentifierParam, successParam);
+
+                    success = (bool)successParam.Value;
                 }
             }
             catch (EntityException)
@@ -625,6 +625,8 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+
+            return success;
         }
         public static bool VerifyFirstPaymentReconciled(string creditInvoice)
         {

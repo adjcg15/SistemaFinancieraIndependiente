@@ -217,7 +217,7 @@
       <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="invoice" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="planned_date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="reconciliation_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="reconciliation_date" nillable="true" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Payments" nillable="true" type="tns:Payments" />
