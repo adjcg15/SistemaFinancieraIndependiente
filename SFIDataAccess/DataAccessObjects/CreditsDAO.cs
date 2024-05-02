@@ -587,33 +587,33 @@ namespace SFIDataAccess.DataAccessObjects
 
             return creditTypeId;
         }
-        public static void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
+        public static bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier)
         {
+            bool success = false;
+
             try
             {
-                using (var context = new SFIDatabaseContext())
+                using (var dbContext = new SFIDatabaseContext())
                 {
-                    var currentRegime = context.regimes
-                        .Where(regime => regime.credit_invoice == creditInvoice && regime.application_end_date == null)
-                        .FirstOrDefault();
-
-                    if (currentRegime != null)
+                    var creditInvoiceParam = new SqlParameter("@CreditInvoice", SqlDbType.VarChar, 18)
                     {
-                        currentRegime.application_end_date = DateTime.Today;
-                        var newRegime = new regime
-                        {
-                            application_start_date = DateTime.Today,
-                            credit_condition_identifier = newCreditConditionIdentifier,
-                            credit_invoice = creditInvoice
-                        };
-                        context.regimes.Add(newRegime);
+                        Value = creditInvoice
+                    };
 
-                        context.SaveChanges();
-                    }
-                    else
+                    var newCreditConditionIdentifierParam = new SqlParameter("@NewCreditConditionIdentifier", SqlDbType.VarChar, 6)
                     {
-                        throw new Exception("No se encontró un régimen activo para la factura de crédito dada.");
-                    }
+                        Value = newCreditConditionIdentifier
+                    };
+
+                    var successParam = new SqlParameter("@Success", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+
+                    dbContext.Database.ExecuteSqlCommand("EXEC AssociateNewCreditCondition @CreditInvoice, @NewCreditConditionIdentifier, @Success OUTPUT",
+                                                         creditInvoiceParam, newCreditConditionIdentifierParam, successParam);
+
+                    success = (bool)successParam.Value;
                 }
             }
             catch (EntityException)
@@ -628,7 +628,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+
+            return success;
         }
+
         public static bool VerifyFirstPaymentReconciled(string creditInvoice)
         {
             try
@@ -735,42 +738,38 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
         }
-        public static void UpdatePayment(Payments payment)
+        public static decimal ClosePayment(string invoice)
         {
+            decimal interest;
             try
             {
-                using (var context = new SFIDatabaseContext())
+                using (var dbContext = new SFIDatabaseContext())
                 {
-                    var existingPayment = context.payments.FirstOrDefault(p => p.invoice == payment.invoice);
+                    var interestPercentage = new SqlParameter("@interest_percentage", SqlDbType.Decimal);
+                        interestPercentage.Direction = ParameterDirection.Output;
 
-                    if (existingPayment != null)
-                    {
-                        existingPayment.id_payment = payment.idpayment;
-                        existingPayment.amount = (decimal)payment.amount;
-                        existingPayment.planned_date = payment.planned_date;
-                        existingPayment.credit_invoice = payment.credit_invoice;
-                        existingPayment.reconciliation_date = payment.reconciliation_date;
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("No se encontró el pago en la base de datos.");
-                    }
+                    dbContext.Database.ExecuteSqlCommand("EXEC ClosePayment @payment_invoice, @interest_percentage OUTPUT",
+                        new SqlParameter("@payment_invoice", invoice),
+                        interestPercentage)
+                    ;
+                    interest = (decimal)interestPercentage.Value;
                 }
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de entidad"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de actualización de base de datos"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de validación de entidad"));
             }
+            return interest;
         }
+
         public static void InsertIntoPaymentLayouts(string captureLine, Payments payment)
         {
             try

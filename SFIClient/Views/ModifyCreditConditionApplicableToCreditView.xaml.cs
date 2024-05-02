@@ -176,9 +176,29 @@ namespace SFIClient.Views
         }
         private void RedirectToConsultCreditsList()
         {
-            CreditsListController creditList = new CreditsListController();
-            this.NavigationService.Navigate(creditList);
-            NavigationService.RemoveBackEntry();
+            try
+            {
+                if (NavigationService != null)
+                {
+                    CreditsListController creditList = new CreditsListController();
+                    NavigationService.Navigate(creditList);
+                    NavigationService.RemoveBackEntry();
+                }
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                ShowErrorChangeCreditConditionDialog(fault.Detail.Message);
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde";
+                ShowErrorChangeCreditConditionDialog(errorMessage);
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
+                ShowErrorChangeCreditConditionDialog(errorMessage);
+            }
         }
         private void BtnSaveChangesClick(object sender, RoutedEventArgs e)
         {
@@ -233,14 +253,37 @@ namespace SFIClient.Views
             }
         }
 
+        
+        private void ShowErrorChangeCreditConditionDialog(string message)
+        {
+            MessageBoxResult buttonClicked = MessageBox.Show(
+                message,
+                "Error al cambiar la condición de crédito",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+
+            if (buttonClicked == MessageBoxResult.OK)
+            {
+                RedirectToConsultCreditsList();
+            }
+        }
         private void ChangeCreditCondition()
         {
             CreditsServiceClient creditService = new CreditsServiceClient();
 
             try
             {
-                creditService.AssociateNewCreditCondition(credit.Invoice, selectedConditionControl.BindedCondition.Identifier);
-                ShowSuccessChangeCreditConditionDialog();
+                bool success = creditService.AssociateNewCreditCondition(credit.Invoice, selectedConditionControl.BindedCondition.Identifier);
+
+                if (success)
+                {
+                    ShowSuccessChangeCreditConditionDialog();
+                }
+                else
+                {
+                    ShowErrorChangeCreditConditionDialog("No fue posible cambiar la condición de crédito.");
+                }
             }
             catch (FaultException<ServiceFault> fault)
             {
@@ -258,21 +301,6 @@ namespace SFIClient.Views
                 ShowErrorChangeCreditConditionDialog(errorMessage);
             }
         }
-        private void ShowErrorChangeCreditConditionDialog(string message)
-        {
-            MessageBoxResult buttonClicked = MessageBox.Show(
-                message,
-                "Error al cambiar la condición de crédito",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error
-            );
-
-            if (buttonClicked == MessageBoxResult.OK)
-            {
-                RedirectToConsultCreditsList();
-            }
-        }
-
         private void ShowSuccessChangeCreditConditionDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(

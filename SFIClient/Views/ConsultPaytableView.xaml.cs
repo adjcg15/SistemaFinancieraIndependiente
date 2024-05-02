@@ -230,35 +230,36 @@ namespace SFIClient.Views
                         "Pago ya conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
                     continue;
                 }
-                if (payment != null)
+                if (existingPayment != null)
                 {
-                    double amountFromDB = payment.amount;
+                    double amountFromDB = existingPayment.amount;
                     double amountFromFile = Convert.ToDouble(values[0]);
                     double tolerance = 0.01;
                     if (Math.Abs(amountFromDB - amountFromFile) <= tolerance)
                     {
-                        UpdatePayment(payment, values);
+                        ClosePayment(existingPayment.invoice);
                     }
                     else
                     {
                         MessageBox.Show("El monto del pago realizado no corresponde con el pago planeado," +
-                            " por lo que no será considerado. Por favor, realice el pago nuevamente.", "Cantidad incorrecta", 
+                            " por lo que no será considerado. Por favor, realice el pago nuevamente.", "Cantidad incorrecta",
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No se encontró información de pago para la factura especificada.", 
+                    MessageBox.Show("No se encontró información de pago para la factura especificada.",
                         "Error de búsqueda de pago", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
-        private void UpdatePayment(Payments payment, string[] values)
+
+        private void ClosePayment(string paymentInvoice)
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
 
-            payment.reconciliation_date = DateTime.Parse(values[4]);
-            creditsServiceClient.UpdatePayment(payment);
+            creditsServiceClient.ClosePayment(paymentInvoice);
+            LoadPayments(credit.Invoice);
         }
 
         private void ShowErrorUploadCsvDialog(string message)

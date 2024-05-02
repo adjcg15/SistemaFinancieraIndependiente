@@ -173,13 +173,13 @@
   <wsdl:message name="ICreditsService_GetPaymentByInvoice_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q13:ServiceFault" />
   </wsdl:message>
-  <wsdl:message name="ICreditsService_UpdatePayment_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePayment" />
+  <wsdl:message name="ICreditsService_ClosePayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClosePayment" />
   </wsdl:message>
-  <wsdl:message name="ICreditsService_UpdatePayment_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdatePaymentResponse" />
+  <wsdl:message name="ICreditsService_ClosePayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClosePaymentResponse" />
   </wsdl:message>
-  <wsdl:message name="ICreditsService_UpdatePayment_ServiceFaultFault_FaultMessage">
+  <wsdl:message name="ICreditsService_ClosePayment_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions" name="detail" element="q14:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ICreditsService_InsertIntoPaymentLayouts_InputMessage">
@@ -475,10 +475,10 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/GetPaymentByInvoiceResponse" message="tns:ICreditsService_GetPaymentByInvoice_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/GetPaymentByInvoiceServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_GetPaymentByInvoice_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdatePayment">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/UpdatePayment" message="tns:ICreditsService_UpdatePayment_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/UpdatePaymentResponse" message="tns:ICreditsService_UpdatePayment_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/UpdatePaymentServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_UpdatePayment_ServiceFaultFault_FaultMessage" />
+    <wsdl:operation name="ClosePayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/ClosePayment" message="tns:ICreditsService_ClosePayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICreditsService/ClosePaymentResponse" message="tns:ICreditsService_ClosePayment_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ICreditsService/ClosePaymentServiceFaultFault" name="ServiceFaultFault" message="tns:ICreditsService_ClosePayment_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertIntoPaymentLayouts">
       <wsdl:input wsaw:Action="http://tempuri.org/ICreditsService/InsertIntoPaymentLayouts" message="tns:ICreditsService_InsertIntoPaymentLayouts_InputMessage" />
@@ -777,8 +777,8 @@
         <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="UpdatePayment">
-      <soap12:operation soapAction="http://tempuri.org/ICreditsService/UpdatePayment" style="document" />
+    <wsdl:operation name="ClosePayment">
+      <soap12:operation soapAction="http://tempuri.org/ICreditsService/ClosePayment" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

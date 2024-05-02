@@ -37,9 +37,12 @@ namespace SFIClient.Controlls
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             TbkPaymentInvoice.Text = BindedPayment.invoice;
             TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
+            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") :  "-";
             TbkAmount.Text = BindedPayment.amount.ToString("C");
             TbkAmount.Inlines.Clear();
             TbkAmount.Inlines.Add(new Run(BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
+            decimal paymentInterest = creditsServiceClient.ClosePayment(BindedPayment.invoice);
+            TbkInterest.Text = paymentInterest.ToString();
             if (BindedPayment.reconciliation_date == null || BindedPayment.reconciliation_date == DateTime.MinValue)
             {
                 TbkReconciliationDate.Text = "";
@@ -48,9 +51,10 @@ namespace SFIClient.Controlls
             {
                 TbkReconciliationDate.Text = BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy");
             }
-            BtnDownloadLayout.IsEnabled = BindedPayment.reconciliation_date == null || 
+            BtnDownloadLayout.IsEnabled = BindedPayment.reconciliation_date == null ||
                 BindedPayment.reconciliation_date == DateTime.MinValue;
         }
+
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
         {
             string captureLine = GenerateCaptureLine(BindedPayment.invoice, BindedPayment.planned_date);

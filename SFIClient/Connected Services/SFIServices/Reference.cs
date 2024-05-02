@@ -2451,10 +2451,10 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/AssociateNewCreditConditionServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
+        bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/AssociateNewCreditCondition", ReplyAction="http://tempuri.org/ICreditsService/AssociateNewCreditConditionResponse")]
-        System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
+        System.Threading.Tasks.Task<bool> AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciled", ReplyAction="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/VerifyFirstPaymentReconciledServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
@@ -2477,12 +2477,12 @@ namespace SFIClient.SFIServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetPaymentByInvoice", ReplyAction="http://tempuri.org/ICreditsService/GetPaymentByInvoiceResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Payments> GetPaymentByInvoiceAsync(string invoice);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/UpdatePayment", ReplyAction="http://tempuri.org/ICreditsService/UpdatePaymentResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/UpdatePaymentServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        void UpdatePayment(SFIClient.SFIServices.Payments payment);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/ClosePayment", ReplyAction="http://tempuri.org/ICreditsService/ClosePaymentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/ClosePaymentServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        decimal ClosePayment(string invoice);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/UpdatePayment", ReplyAction="http://tempuri.org/ICreditsService/UpdatePaymentResponse")]
-        System.Threading.Tasks.Task UpdatePaymentAsync(SFIClient.SFIServices.Payments payment);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/ClosePayment", ReplyAction="http://tempuri.org/ICreditsService/ClosePaymentResponse")]
+        System.Threading.Tasks.Task<decimal> ClosePaymentAsync(string invoice);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/InsertIntoPaymentLayouts", ReplyAction="http://tempuri.org/ICreditsService/InsertIntoPaymentLayoutsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/InsertIntoPaymentLayoutsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
@@ -2598,11 +2598,11 @@ namespace SFIClient.SFIServices {
             return base.Channel.GetCreditTypeIdByCreditInvoiceAsync(creditInvoice);
         }
         
-        public void AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier) {
-            base.Channel.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
+        public bool AssociateNewCreditCondition(string creditInvoice, string newCreditConditionIdentifier) {
+            return base.Channel.AssociateNewCreditCondition(creditInvoice, newCreditConditionIdentifier);
         }
         
-        public System.Threading.Tasks.Task AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
+        public System.Threading.Tasks.Task<bool> AssociateNewCreditConditionAsync(string creditInvoice, string newCreditConditionIdentifier) {
             return base.Channel.AssociateNewCreditConditionAsync(creditInvoice, newCreditConditionIdentifier);
         }
         
@@ -2630,12 +2630,12 @@ namespace SFIClient.SFIServices {
             return base.Channel.GetPaymentByInvoiceAsync(invoice);
         }
         
-        public void UpdatePayment(SFIClient.SFIServices.Payments payment) {
-            base.Channel.UpdatePayment(payment);
+        public decimal ClosePayment(string invoice) {
+            return base.Channel.ClosePayment(invoice);
         }
         
-        public System.Threading.Tasks.Task UpdatePaymentAsync(SFIClient.SFIServices.Payments payment) {
-            return base.Channel.UpdatePaymentAsync(payment);
+        public System.Threading.Tasks.Task<decimal> ClosePaymentAsync(string invoice) {
+            return base.Channel.ClosePaymentAsync(invoice);
         }
         
         public void InsertIntoPaymentLayouts(string captureLine, SFIClient.SFIServices.Payments payment) {
