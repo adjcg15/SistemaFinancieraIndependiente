@@ -247,14 +247,14 @@ namespace SFIDataAccess.DataAccessObjects
                     var referenceCityFirst = new SqlParameter("@ReferenceCityFirst", client.PersonalReferences[0].Address.City);
                     var referenceMunicipalityFirst = new SqlParameter("@ReferenceMunicipalityFirst", client.PersonalReferences[0].Address.Municipality);
                     var referenceStateFirst = new SqlParameter("@ReferenceStateFirst", client.PersonalReferences[0].Address.State);
-                    var referenceStreetSecond = new SqlParameter("@ReferenceStreetSecond", client.PersonalReferences[0].Address.Street);
-                    var referenceNeighborhoodSecond = new SqlParameter("@ReferenceNeighborhoodSecond", client.PersonalReferences[0].Address.Neighborhod);
-                    var referenceInteriorNumberSecond = new SqlParameter("@ReferenceInteriorNumberSecond", client.PersonalReferences[0].Address.InteriorNumber);
-                    var referenceOutdoorNumberSecond = new SqlParameter("@ReferenceOutdoorNumberSecond", client.PersonalReferences[0].Address.OutdoorNumber);
-                    var referencePostCodeSecond = new SqlParameter("@ReferencePostCodeSecond", client.PersonalReferences[0].Address.PostCode);
-                    var referenceCitySecond = new SqlParameter("@ReferenceCitySecond", client.PersonalReferences[0].Address.City);
-                    var referenceMunicipalitySecond = new SqlParameter("@ReferenceMunicipalitySecond", client.PersonalReferences[0].Address.Municipality);
-                    var referenceStateSecond = new SqlParameter("@ReferenceStateSecond", client.PersonalReferences[0].Address.State);
+                    var referenceStreetSecond = new SqlParameter("@ReferenceStreetSecond", client.PersonalReferences[1].Address.Street);
+                    var referenceNeighborhoodSecond = new SqlParameter("@ReferenceNeighborhoodSecond", client.PersonalReferences[1].Address.Neighborhod);
+                    var referenceInteriorNumberSecond = new SqlParameter("@ReferenceInteriorNumberSecond", client.PersonalReferences[1].Address.InteriorNumber);
+                    var referenceOutdoorNumberSecond = new SqlParameter("@ReferenceOutdoorNumberSecond", client.PersonalReferences[1].Address.OutdoorNumber);
+                    var referencePostCodeSecond = new SqlParameter("@ReferencePostCodeSecond", client.PersonalReferences[1].Address.PostCode);
+                    var referenceCitySecond = new SqlParameter("@ReferenceCitySecond", client.PersonalReferences[1].Address.City);
+                    var referenceMunicipalitySecond = new SqlParameter("@ReferenceMunicipalitySecond", client.PersonalReferences[1].Address.Municipality);
+                    var referenceStateSecond = new SqlParameter("@ReferenceStateSecond", client.PersonalReferences[1].Address.State);
 
                     var successParam = new SqlParameter("@Success", SqlDbType.Bit);
                     successParam.Direction = ParameterDirection.Output;
