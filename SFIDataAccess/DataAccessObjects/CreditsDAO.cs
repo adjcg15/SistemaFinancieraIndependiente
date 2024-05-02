@@ -652,9 +652,9 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
         }
-        public static List<Payments> GetPaymentsByCreditInvoice(string creditInvoice)
+        public static List<Payment> GetPaymentsByCreditInvoice(string creditInvoice)
         {
-            List<Payments> payments = new List<Payments>();
+            List<Payment> payments = new List<Payment>();
 
             try
             {
@@ -667,7 +667,7 @@ namespace SFIDataAccess.DataAccessObjects
 
                     foreach (var result in results)
                     {
-                        payments.Add(new Payments
+                        payments.Add(new Payment
                         {
                             amount = (double)result.amount,
                             invoice = result.invoice,
@@ -725,7 +725,7 @@ namespace SFIDataAccess.DataAccessObjects
             return interest;
         }
 
-        public static void InsertIntoPaymentLayouts(string captureLine, Payments payment)
+        public static void InsertIntoPaymentLayouts(string captureLine, Payment payment)
         {
             try
             {

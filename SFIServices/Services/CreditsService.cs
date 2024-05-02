@@ -89,7 +89,7 @@ namespace SFIServices
         {
             return CreditsDAO.VerifyFirstPaymentReconciled(creditInvoice);
         }
-        public  List<Payments> GetPaymentsByCreditInvoice(string creditInvoice)
+        public  List<Payment> GetPaymentsByCreditInvoice(string creditInvoice)
         {
             return CreditsDAO.GetPaymentsByCreditInvoice(creditInvoice);
         }
