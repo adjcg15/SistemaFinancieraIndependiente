@@ -240,7 +240,7 @@ namespace SFIClient.Views
                 Neighborhod = TbNeighborhood.Text.Trim(),
                 InteriorNumber = TbInteriorNumber.Text.Trim(),
                 OutdoorNumber = TbOutdoorNumber.Text.Trim(),
-                PostCode = TbInteriorNumber.Text.Trim(),
+                PostCode = TbPostCode.Text.Trim(),
                 Municipality = TbMunicipality.Text.Trim(),
                 City = TbCity.Text.Trim(),
                 State = TbStreet.Text.Trim(),
