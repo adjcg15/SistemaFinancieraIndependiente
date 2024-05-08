@@ -80,21 +80,20 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Número de pago" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,5"/>
-                    <TextBlock Grid.Column="1" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Folio" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="2" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Importe" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="4" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Layout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="5" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha de pago" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="6" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Intereses" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <!--<TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Número de pago" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,5"/>-->
+                    <TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Folio" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Importe" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Layout" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="4" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha de pago" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="5" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Intereses" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </StackPanel>
             
             <!--Payments-->
-            <StackPanel Margin="40, 5, 40, 0" Height="629">
+            <StackPanel Margin="40, 5, 40, 0">
                 <Grid>
                     <Grid x:Name="GrdEmptyPaymentsMessage" Grid.Row="1" Margin="40, 10, 40, 0">
                         <Grid.ColumnDefinitions>

@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 namespace SFIDataAccess.Model
 {
     [DataContract]
-    public class Payments
+    public class Payment
     {
+        [DataMember]
+        public int id { get; set; }
+
         [DataMember]
         public double amount { get; set; }
 
@@ -24,5 +27,8 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public DateTime? reconciliation_date { get; set; }
+
+        [DataMember]
+        public decimal Interest { get; set; }
     }
 }

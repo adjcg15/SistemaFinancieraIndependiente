@@ -205,22 +205,32 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
-  <xs:complexType name="ArrayOfPayments">
+  <xs:complexType name="ArrayOfPayment">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Payments" nillable="true" type="tns:Payments" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Payment" nillable="true" type="tns:Payment" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfPayments" nillable="true" type="tns:ArrayOfPayments" />
-  <xs:complexType name="Payments">
+  <xs:element name="ArrayOfPayment" nillable="true" type="tns:ArrayOfPayment" />
+  <xs:complexType name="Payment">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Interest" type="xs:decimal" />
       <xs:element minOccurs="0" name="amount" type="xs:double" />
       <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="invoice" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="planned_date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="reconciliation_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="reconciliation_date" nillable="true" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Payments" nillable="true" type="tns:Payments" />
+  <xs:element name="Payment" nillable="true" type="tns:Payment" />
+  <xs:complexType name="PaymentLayout">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="capture_line" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="generation_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id_payment" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentLayout" nillable="true" type="tns:PaymentLayout" />
   <xs:complexType name="ArrayOfCreditCondition">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCondition" nillable="true" type="tns:CreditCondition" />

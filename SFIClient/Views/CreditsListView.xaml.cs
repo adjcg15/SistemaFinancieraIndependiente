@@ -93,6 +93,7 @@ namespace SFIClient.Views
         {
             BtnSearchCredits.IsEnabled = false;
             BtnRestartFilters.IsEnabled = false;
+            BtnApplyFilters.IsEnabled = false;
             DpkFromDate.IsEnabled = false;
             DpkToDate.IsEnabled = false;
             TbSearchbar.IsEnabled = false;
