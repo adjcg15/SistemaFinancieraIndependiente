@@ -813,7 +813,7 @@ namespace SFIDataAccess.DataAccessObjects
             catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("Servidor no disponible. No fue posible recuperar la información del cliente, " +
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar la nformación del centro de trabajo del cliente, " +
                     "por favor inténtelo más tarde"),
                     new FaultReason("Error")
                 );

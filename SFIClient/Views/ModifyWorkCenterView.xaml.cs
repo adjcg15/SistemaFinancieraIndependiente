@@ -29,6 +29,7 @@ namespace SFIClient.Views
         {
             InitializeComponent();
             this.clientRFC = clientRFC;
+            LoadClientWorkCenterInformation();
         }
         private void LoadClientWorkCenterInformation()
         {
@@ -107,6 +108,7 @@ namespace SFIClient.Views
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
         {
             ShowReturnToPreviousPageConfirmationDialog();
+
         }
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
