@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LiveCharts;
-using LiveCharts.Definitions.Series;
-using LiveCharts.Wpf;
 
 namespace SFIClient.Views
 {
@@ -31,28 +30,73 @@ namespace SFIClient.Views
 
         public void ShowChart()
         {
-            SeriesCollection pieSeries = new SeriesCollection();
-            // Agregar datos de ejemplo
-            pieSeries.Add(new PieSeries
+            SeriesCollection pieSeries = new SeriesCollection
             {
-                Title = "Category A",
-                Values = new ChartValues<double> { 10 }
-            });
+                // Agregar datos de ejemplo
+                new PieSeries
+                {
+                    Title = "Category A",
+                    Values = new ChartValues<double> { 10 }
+                },
 
-            pieSeries.Add(new PieSeries
-            {
-                Title = "Category B",
-                Values = new ChartValues<double> { 20 }
-            });
+                new PieSeries
+                {
+                    Title = "Category B",
+                    Values = new ChartValues<double> { 20 }
+                },
 
-            pieSeries.Add(new PieSeries
+                new PieSeries
+                {
+                    Title = "Category C",
+                    Values = new ChartValues<double> { 30 }
+                }
+            };
+
+            SeriesCollection pieSeries2 = new SeriesCollection
             {
-                Title = "Category C",
-                Values = new ChartValues<double> { 30 }
-            });
+                // Agregar datos de ejemplo
+                new PieSeries
+                {
+                    Title = "Category A",
+                    Values = new ChartValues<double> { 10 }
+                },
+
+                new PieSeries
+                {
+                    Title = "Category B",
+                    Values = new ChartValues<double> { 20 }
+                },
+
+                new PieSeries
+                {
+                    Title = "Category C",
+                    Values = new ChartValues<double> { 30 }
+                }
+            };
 
             // Asignar la colección de series al PieChart
-            pcChart.Series = pieSeries;
+            pcCredits.Series = pieSeries;
+            pcAmounts.Series = pieSeries2;
+        }
+
+        private void BtnGenerateEfficiencyClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRedirectToMainMenuViewClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RbUnsettledPaymentsChecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RbSettledPaymentsChecked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

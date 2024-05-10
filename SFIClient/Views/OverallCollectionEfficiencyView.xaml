@@ -13,7 +13,7 @@
         <StackPanel Background="White">
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnGoToSearchClientByRFCView" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand">
+                    <Button Name="BtnRedirectToMainMenuView" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnRedirectToMainMenuViewClick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -24,8 +24,180 @@
             </StackPanel>
 
             <StackPanel Margin="40, 40, 40, 0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox
+                            Margin="0, 0, 15, 0"
+                            Grid.Column="0"
+                            Name="CbYear" 
+                            DisplayMemberPath="Name"
+                            Style="{StaticResource ComboBox}"/>
+                        <ComboBox
+                            Margin="0, 0, 15, 0"
+                            Grid.Column="1"
+                            Name="CbMonth" 
+                            DisplayMemberPath="Name"
+                            Style="{StaticResource ComboBox}"/>
+                        <Button 
+                            Margin="10, 0, 0, 0"
+                            Grid.Column="2"
+                            Click="BtnGenerateEfficiencyClick" 
+                            Style="{StaticResource PrimaryBtn}">
+                            <TextBlock Text="Generar eficiencia" TextWrapping="Wrap" TextAlignment="Center"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+
+                <Border
+                    Margin="0, 10, 0, 25" Padding="0, 0, 0, 8"
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}"/>
+
                 <Grid>
-                    <lvc:PieChart Name="pcChart" Width="600" Height="600"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel 
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="0, 0, 0, 407">
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Créditos a cobrar sobre el total de ellos" 
+                            Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 40, 0, 8" Text="Total de créditos que debeían pagar"/>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Name="TbkAllCredits" TextWrapping="Wrap" Margin="0,0,0,0" Text="15" FontSize="32"/>
+                        </Grid>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Total de créditos que realizaron un pago este mes" TextWrapping="Wrap"/>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Name="TbkCreditsPaid" TextWrapping="Wrap" Margin="0,0,0,0" Text="15" FontSize="32"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <lvc:PieChart Name="pcCredits"/>
+                    </Grid>
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="0, 10, 0, 25" Padding="0, 0, 0, 8"
+                        BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}"/>
+
+                    <StackPanel 
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Margin="0, 0, 0, 300">
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                            Text="Importe cobrado en el mes sobre el que se debía cobrar" 
+                            Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 40, 0, 8" Text="Importe cobrado en el mes"/>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Name="TbkTotalAmount" TextWrapping="Wrap" Margin="0,0,0,0" Text="15" FontSize="32"/>
+                        </Grid>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Total del importe que se debía cobrar" TextWrapping="Wrap"/>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Name="TbkAmountPaid" TextWrapping="Wrap" Margin="0,0,0,0" Text="15" FontSize="32"/>
+                        </Grid>
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Eficiencia de cobro" TextWrapping="Wrap"/>
+                        <Grid Margin="0, 0, 0, 24">
+                            <TextBlock Name="TbkCollectionEfficiencyPercentage" TextWrapping="Wrap" Margin="0,0,0,0" Text="75%" FontSize="32"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <lvc:PieChart Name="pcAmounts"/>
+                    </Grid>
+
+                    <Border
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Margin="0, 10, 0, 25" Padding="0, 0, 0, 8"
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}"/>
+
+                    <StackPanel 
+                        Grid.Column="0"
+                        Grid.Row="4"
+                        Grid.ColumnSpan="3"
+                        Margin="0, 0, 0, 30">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Grid.Column="0"
+                                TextWrapping="Wrap"
+                                Text="Créditos con pago para el mes actual" 
+                                Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <RadioButton
+                                    IsChecked="True"
+                                    Margin="0, 0, 15, 0"
+                                    Name="RbUnsettledPayments" 
+                                    Style="{StaticResource RadioButtonStyle}" 
+                                    Content="No pagados" 
+                                    Checked="RbUnsettledPaymentsChecked"/>
+                                <RadioButton
+                                    Margin="0, 0, 0, 0"
+                                    Name="RbSettledPayments" 
+                                    Style="{StaticResource RadioButtonStyle}" 
+                                    Content="Pagados" 
+                                    Checked="RbSettledPaymentsChecked"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Margin="40, 00, 40, 0" Background="{StaticResource BackgroundGray}" Height="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Folio" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Crédito otorgado" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Pago" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+
+            <!--Payments-->
+            <StackPanel Margin="40, 5, 40, 0">
+                <Grid>
+                    <StackPanel 
+                        Name="SkpUnpaidCredits" 
+                        Visibility="Visible" Grid.Row="1" Margin="0, 8, 0, 32">
+                    </StackPanel>
+
+                    <StackPanel 
+                        Name="SkpPaidCredits" 
+                        Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                    </StackPanel>
                 </Grid>
             </StackPanel>
         </StackPanel>
