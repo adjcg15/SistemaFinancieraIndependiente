@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:usercontrols="clr-namespace:SFIClient.Controlls"
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
       d:Height="2550" d:Width="1280"
@@ -57,7 +58,7 @@
                     Margin="0, 10, 0, 25" Padding="0, 0, 0, 8"
                     BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}"/>
 
-                <Grid>
+                <Grid Name="GrdCollectionEfficiencyInformation" Visibility="Visible">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="11*"/>
@@ -171,7 +172,30 @@
                 </Grid>
             </StackPanel>
 
-            <StackPanel Margin="40, 00, 40, 0" Background="{StaticResource BackgroundGray}" Height="30">
+            <StackPanel Name="SkpEmptyCollectionEfficiencies" Margin="0, 220, 0, 100" Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="/Assets/EmptyCollectionEfficiencies.png"/>
+                    <TextBlock Grid.Row="1"
+                        Foreground="{StaticResource DarkGray}" FontSize="24"
+                        Text="No existen créditos con pagos para el mes solicitado" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel 
+                Name="SkpCreditsPaymentsTable"
+                Visibility="Visible"
+                Margin="40, 00, 40, 0" 
+                Background="{StaticResource BackgroundGray}" 
+                Height="30">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -192,11 +216,15 @@
                     <StackPanel 
                         Name="SkpUnpaidCredits" 
                         Visibility="Visible" Grid.Row="1" Margin="0, 8, 0, 32">
+                        <usercontrols:CreditPaymentControl/>
+                        <usercontrols:CreditPaymentControl/>
+                        <usercontrols:CreditPaymentControl/>
+                        <usercontrols:CreditPaymentControl/>
                     </StackPanel>
 
                     <StackPanel 
                         Name="SkpPaidCredits" 
-                        Visibility="Hidden" Grid.Row="1" Margin="0, 8, 0, 32">
+                        Visibility="Collapsed" Grid.Row="1" Margin="0, 8, 0, 32">
                     </StackPanel>
                 </Grid>
             </StackPanel>
