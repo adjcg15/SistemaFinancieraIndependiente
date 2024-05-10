@@ -3064,6 +3064,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateClientPersonalInformation", ReplyAction="http://tempuri.org/IClientsService/UpdateClientPersonalInformationResponse")]
         System.Threading.Tasks.Task<bool> UpdateClientPersonalInformationAsync(SFIClient.SFIServices.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/GetWorkCenterInformation", ReplyAction="http://tempuri.org/IClientsService/GetWorkCenterInformationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/GetWorkCenterInformationServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Client GetWorkCenterInformation(string clientRFC);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/GetWorkCenterInformation", ReplyAction="http://tempuri.org/IClientsService/GetWorkCenterInformationResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetWorkCenterInformationAsync(string clientRFC);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3163,6 +3170,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> UpdateClientPersonalInformationAsync(SFIClient.SFIServices.Client client) {
             return base.Channel.UpdateClientPersonalInformationAsync(client);
+        }
+        
+        public SFIClient.SFIServices.Client GetWorkCenterInformation(string clientRFC) {
+            return base.Channel.GetWorkCenterInformation(clientRFC);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetWorkCenterInformationAsync(string clientRFC) {
+            return base.Channel.GetWorkCenterInformationAsync(clientRFC);
         }
     }
 }

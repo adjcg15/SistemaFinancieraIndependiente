@@ -162,6 +162,9 @@
     <Compile Include="Views\ModifyPersonalReferenceView.xaml.cs">
       <DependentUpon>ModifyPersonalReferenceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyWorkCenterView.xaml.cs">
+      <DependentUpon>ModifyWorkCenterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OverallCollectionEfficiencyView.xaml.cs">
       <DependentUpon>OverallCollectionEfficiencyView.xaml</DependentUpon>
     </Compile>
@@ -290,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModifyPersonalReferenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyWorkCenterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
