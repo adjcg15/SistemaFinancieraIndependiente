@@ -93,7 +93,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBox Name="TbCompanyName" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbCompanyNameTextChanged"/>
+                                    <TextBox Name="TbCompanyName" Style="{StaticResource TextInput}" MaxLength="60" />
                                 </Grid>
 
                                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -111,7 +111,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBox Name="TbWorkCenterPhoneNumber" Style="{StaticResource TextInput}" MaxLength="15" TextChanged="TbWorkCenterPhoneNumberTextChanged"/>
+                                    <TextBox Name="TbWorkCenterPhoneNumber" Style="{StaticResource TextInput}" MaxLength="15" />
                                 </Grid>
 
                                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -129,7 +129,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBox Name="TbEmployeePosition" Style="{StaticResource TextInput}" MaxLength="60" TextChanged="TbEmployeePositionTextChanged"/>
+                                    <TextBox Name="TbEmployeePosition" Style="{StaticResource TextInput}" MaxLength="60" />
                                 </Grid>
 
                                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -147,7 +147,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBox Name="TbSalary" Style="{StaticResource TextInput}" MaxLength="10" TextChanged="TbSalaryTextChanged"/>
+                                    <TextBox Name="TbSalary" Style="{StaticResource TextInput}" MaxLength="10" />
                                 </Grid>
 
                                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -165,7 +165,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBox Name="TbEmployeeSeniority" Style="{StaticResource TextInput}" MaxLength="2" TextChanged="TbEmployeeSeniorityTextChanged"/>
+                                    <TextBox Name="TbEmployeeSeniority" Style="{StaticResource TextInput}" MaxLength="2" />
                                 </Grid>
 
                                 <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
@@ -183,7 +183,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBox Name="TbHumanResourcesPhone" Style="{StaticResource TextInput}" MaxLength="15" TextChanged="TbHumanResourcesPhoneTextChanged"/>
+                                    <TextBox Name="TbHumanResourcesPhone" Style="{StaticResource TextInput}" MaxLength="15" />
                                 </Grid>
                             </StackPanel>
 
