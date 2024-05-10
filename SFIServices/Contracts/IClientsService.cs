@@ -51,5 +51,8 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         Client GetWorkCenterInformation(string clientRFC);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        bool UpdateClientWorkCenterlInformation(Client client);
     }
 }

@@ -821,5 +821,56 @@ namespace SFIDataAccess.DataAccessObjects
 
             return clientWorkCenterInformation;
         }
+        public static bool UpdateClientWorkCenterlInformation(Client client)
+        {
+            bool updated = false;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    context.Database.ExecuteSqlCommand(
+                        "EXEC UpdateWorkCenterAndAddress @ClientRfc, @CompanyName, @PhoneNumber, " +
+                        "@EmployeePosition, @Salary, @EmployeeSeniority, @HumanResourcesPhone, " +
+                        "@Street, @Neighborhod, @InteriorNumber, @OutdoorNumber, @PostCode, " +
+                        "@City, @Municipality, @State",
+                        new SqlParameter("@ClientRfc", client.Rfc),
+                        new SqlParameter("@CompanyName", client.WorkCenter.CompanyName),
+                        new SqlParameter("@PhoneNumber", client.WorkCenter.PhoneNumber),
+                        new SqlParameter("@EmployeePosition", client.WorkCenter.EmployeePosition),
+                        new SqlParameter("@Salary", client.WorkCenter.Salary),
+                        new SqlParameter("@EmployeeSeniority", client.WorkCenter.EmployeeSeniority),
+                        new SqlParameter("@HumanResourcesPhone", client.WorkCenter.HumanResourcesPhone),
+                        new SqlParameter("@Street", client.WorkCenter.Address.Street),
+                        new SqlParameter("@Neighborhod", client.WorkCenter.Address.Neighborhod),
+                        new SqlParameter("@InteriorNumber", client.WorkCenter.Address.InteriorNumber),
+                        new SqlParameter("@OutdoorNumber", client.WorkCenter.Address.OutdoorNumber),
+                        new SqlParameter("@PostCode", client.WorkCenter.Address.PostCode),
+                        new SqlParameter("@City", client.WorkCenter.Address.City),
+                        new SqlParameter("@Municipality", client.WorkCenter.Address.Municipality),
+                        new SqlParameter("@State", client.WorkCenter.Address.State)
+                    );
+
+                    updated = true;
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información del centro de trabajo del cliente " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible actualizar la información del centro de trabajo del cliente, " +
+                    "por favor inténtelo más tarde")
+                );
+            }
+
+            return updated;
+        }
+
     }
 }
