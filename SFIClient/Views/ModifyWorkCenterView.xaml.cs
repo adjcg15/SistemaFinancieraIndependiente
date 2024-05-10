@@ -287,8 +287,6 @@ namespace SFIClient.Views
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
             );
-
-
             if (buttonClicked == MessageBoxResult.Yes)
             {
                 UpdateWorkCenterInformation();
@@ -321,7 +319,7 @@ namespace SFIClient.Views
                 client.WorkCenter.Address.Municipality = TbAddressMunicipality.Text.Trim();
                 client.WorkCenter.Address.State = TbAddressState.Text.Trim();
 
-                bool updated = clientsService.UpdateClientPersonalInformation(client);
+                bool updated = clientsService.UpdateClientWorkCenterlInformation(client);
                 if (updated)
                 {
                     ShowSuccessfulUpdateInformationDialog();
@@ -378,7 +376,6 @@ namespace SFIClient.Views
         private void ApplyFieldsRestrictions()
         {
             RestrictToPlainText(TbCompanyName);
-            RestrictToPlainText(TbWorkCenterPhoneNumber);
             RestrictToPlainText(TbEmployeePosition);
             RestrictToPlainText(TbAddressStreet);
             RestrictToPlainText(TbAddressNeighborhood);
@@ -392,6 +389,7 @@ namespace SFIClient.Views
             RestrictToNumeric(TbSalary);
             RestrictToNumeric(TbEmployeeSeniority);
             RestrictToNumeric(TbHumanResourcesPhone);
+            RestrictToNumeric(TbWorkCenterPhoneNumber);
         }
         private void RestrictToPlainText(TextBox textBox)
         {

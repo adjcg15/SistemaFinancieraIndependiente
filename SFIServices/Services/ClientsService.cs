@@ -62,5 +62,9 @@ namespace SFIServices
         {
             return ClientsDAO.GetWorkCenterInformation(clientRFC);
         }
+        public bool UpdateClientWorkCenterlInformation(Client client)
+        {
+            return ClientsDAO.UpdateClientWorkCenterlInformation(client);
+        }
     }
 }

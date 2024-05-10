@@ -3071,6 +3071,14 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/GetWorkCenterInformation", ReplyAction="http://tempuri.org/IClientsService/GetWorkCenterInformationResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetWorkCenterInformationAsync(string clientRFC);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateClientWorkCenterlInformation", ReplyAction="http://tempuri.org/IClientsService/UpdateClientWorkCenterlInformationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/UpdateClientWorkCenterlInformationServiceFault" +
+            "Fault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        bool UpdateClientWorkCenterlInformation(SFIClient.SFIServices.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdateClientWorkCenterlInformation", ReplyAction="http://tempuri.org/IClientsService/UpdateClientWorkCenterlInformationResponse")]
+        System.Threading.Tasks.Task<bool> UpdateClientWorkCenterlInformationAsync(SFIClient.SFIServices.Client client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3178,6 +3186,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> GetWorkCenterInformationAsync(string clientRFC) {
             return base.Channel.GetWorkCenterInformationAsync(clientRFC);
+        }
+        
+        public bool UpdateClientWorkCenterlInformation(SFIClient.SFIServices.Client client) {
+            return base.Channel.UpdateClientWorkCenterlInformation(client);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateClientWorkCenterlInformationAsync(SFIClient.SFIServices.Client client) {
+            return base.Channel.UpdateClientWorkCenterlInformationAsync(client);
         }
     }
 }
