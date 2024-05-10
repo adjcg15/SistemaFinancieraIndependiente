@@ -226,6 +226,9 @@ namespace SFIClient.Views
         private void BtnModifyWorkCenterClick(object sender, EventArgs e)
         {
             ClientControll clientControll = (ClientControll)sender;
+            string clientRFC = clientControll.LblClientRFC.Content.ToString();
+
+            NavigationService.Navigate(new ModifyWorkCenterController(clientRFC));
         }
 
         private void BtnModifyPersonalReferencesClick(object sender, EventArgs e)

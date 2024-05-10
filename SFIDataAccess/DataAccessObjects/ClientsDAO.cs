@@ -753,5 +753,73 @@ namespace SFIDataAccess.DataAccessObjects
 
             return updated;
         }
+        public static Client GetWorkCenterInformation(string clientRFC)
+        {
+            Client clientWorkCenterInformation = null;
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var clientInformation = (from client in context.clients
+                                             where client.rfc == clientRFC
+                                             select client).FirstOrDefault();
+                    var workCenterInformation = (from workCenter in context.work_centers
+                                                 where workCenter.id_work_center == clientInformation.id_work_center
+                                                 select workCenter).FirstOrDefault();
+                    var workCenterAddress = (from address in context.addresses
+                                             where address.id_address == workCenterInformation.id_address
+                                             select address).FirstOrDefault();
+                    Address addressWorkCenter = new Address
+                    {
+                        Street = workCenterAddress.street,
+                        City = workCenterAddress.city,
+                        Neighborhod = workCenterAddress.neighborhod,
+                        Municipality = workCenterAddress.municipality,
+                        InteriorNumber = workCenterAddress.inteior_number,
+                        OutdoorNumber = workCenterAddress.outdoor_number,
+                        PostCode = workCenterAddress.post_code,
+                        State = workCenterAddress.state
+                    };
+                    WorkCenter clientWorkCenter = new WorkCenter
+                    {
+                        CompanyName = workCenterInformation.company_name,
+                        PhoneNumber = workCenterInformation.phone_number,
+                        EmployeePosition = workCenterInformation.employee_position,
+                        Salary = workCenterInformation.salary,
+                        EmployeeSeniority = workCenterInformation.employee_seniority,
+                        HumanResourcesPhone = workCenterInformation.human_resources_phone,
+                        Address = addressWorkCenter
+                    };
+                    clientWorkCenterInformation = new Client
+                    {
+                        Rfc = clientInformation.rfc,
+                        Curp = clientInformation.curp,
+                        Birthdate = clientInformation.birthdate,
+                        Name = clientInformation.name,
+                        LastName = clientInformation.last_name,
+                        Surname = clientInformation.surname,
+                        WorkCenter = clientWorkCenter,
+                    };
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar la información del centro de trabajo del cliente, " +
+                    "por favor inténtelo más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("Servidor no disponible. No fue posible recuperar la nformación del centro de trabajo del cliente, " +
+                    "por favor inténtelo más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return clientWorkCenterInformation;
+        }
     }
 }
