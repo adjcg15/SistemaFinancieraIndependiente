@@ -91,6 +91,9 @@
     <Compile Include="Controlls\CreditConditionControl.xaml.cs">
       <DependentUpon>CreditConditionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlls\CreditPaymentControl.xaml.cs">
+      <DependentUpon>CreditPaymentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\CreditsListCreditControl.xaml.cs">
       <DependentUpon>CreditsListCreditControl.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlls\CreditConditionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\CreditPaymentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -446,6 +453,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\DisableDownloadLayout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\EmptyCollectionEfficiencies.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
