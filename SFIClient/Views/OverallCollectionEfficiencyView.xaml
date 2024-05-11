@@ -8,13 +8,14 @@
       xmlns:local="clr-namespace:SFIClient.Views"
       mc:Ignorable="d" 
       d:Height="2550" d:Width="1280"
-      Title="OverallCollectionEfficiencyView">
+      Title="OverallCollectionEfficiencyView"
+      Loaded="PageLoaded">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
-                    <Button Name="BtnRedirectToMainMenuView" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnRedirectToMainMenuViewClick">
+                    <Button Name="BtnRedirectToMainMenu" Style="{StaticResource NoHoverStyle}" Width="40" Height="40" Margin="0, 0, 16, 0" Background="Transparent" Cursor="Hand" Click="BtnRedirectToMainMenuClick">
                         <Image Source="/Assets/ArrowPreviousPage.png"/>
                     </Button>
                     <TextBlock 
@@ -206,7 +207,7 @@
                     <TextBlock Grid.Column="0" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Folio" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="1" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Crédito otorgado" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="2" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Pago" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Name="TbkPaymentDate" Grid.Column="3" Style="{StaticResource TinyText}" FontWeight="Bold" Text="Fecha planeada" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </StackPanel>
 

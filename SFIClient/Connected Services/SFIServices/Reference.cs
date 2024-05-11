@@ -211,6 +211,9 @@ namespace SFIClient.SFIServices {
         private string InvoiceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SFIClient.SFIServices.Payment[] PaymentsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> SettlementDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -313,6 +316,19 @@ namespace SFIClient.SFIServices {
                 if ((object.ReferenceEquals(this.InvoiceField, value) != true)) {
                     this.InvoiceField = value;
                     this.RaisePropertyChanged("Invoice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SFIClient.SFIServices.Payment[] Payments {
+            get {
+                return this.PaymentsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PaymentsField, value) != true)) {
+                    this.PaymentsField = value;
+                    this.RaisePropertyChanged("Payments");
                 }
             }
         }
@@ -1002,6 +1018,147 @@ namespace SFIClient.SFIServices {
                 if ((this.PaymentMonthsField.Equals(value) != true)) {
                     this.PaymentMonthsField = value;
                     this.RaisePropertyChanged("PaymentMonths");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Payment", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
+    [System.SerializableAttribute()]
+    public partial class Payment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal InterestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double amountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string credit_invoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string invoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime planned_dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> reconciliation_dateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Interest {
+            get {
+                return this.InterestField;
+            }
+            set {
+                if ((this.InterestField.Equals(value) != true)) {
+                    this.InterestField = value;
+                    this.RaisePropertyChanged("Interest");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                if ((this.amountField.Equals(value) != true)) {
+                    this.amountField = value;
+                    this.RaisePropertyChanged("amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string credit_invoice {
+            get {
+                return this.credit_invoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.credit_invoiceField, value) != true)) {
+                    this.credit_invoiceField = value;
+                    this.RaisePropertyChanged("credit_invoice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string invoice {
+            get {
+                return this.invoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.invoiceField, value) != true)) {
+                    this.invoiceField = value;
+                    this.RaisePropertyChanged("invoice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime planned_date {
+            get {
+                return this.planned_dateField;
+            }
+            set {
+                if ((this.planned_dateField.Equals(value) != true)) {
+                    this.planned_dateField = value;
+                    this.RaisePropertyChanged("planned_date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> reconciliation_date {
+            get {
+                return this.reconciliation_dateField;
+            }
+            set {
+                if ((this.reconciliation_dateField.Equals(value) != true)) {
+                    this.reconciliation_dateField = value;
+                    this.RaisePropertyChanged("reconciliation_date");
                 }
             }
         }
@@ -1938,147 +2095,6 @@ namespace SFIClient.SFIServices {
                 if ((object.ReferenceEquals(this.TitleField, value) != true)) {
                     this.TitleField = value;
                     this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Payment", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.Model")]
-    [System.SerializableAttribute()]
-    public partial class Payment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal InterestField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double amountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string credit_invoiceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string invoiceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime planned_dateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> reconciliation_dateField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Interest {
-            get {
-                return this.InterestField;
-            }
-            set {
-                if ((this.InterestField.Equals(value) != true)) {
-                    this.InterestField = value;
-                    this.RaisePropertyChanged("Interest");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                if ((this.amountField.Equals(value) != true)) {
-                    this.amountField = value;
-                    this.RaisePropertyChanged("amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string credit_invoice {
-            get {
-                return this.credit_invoiceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.credit_invoiceField, value) != true)) {
-                    this.credit_invoiceField = value;
-                    this.RaisePropertyChanged("credit_invoice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string invoice {
-            get {
-                return this.invoiceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.invoiceField, value) != true)) {
-                    this.invoiceField = value;
-                    this.RaisePropertyChanged("invoice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime planned_date {
-            get {
-                return this.planned_dateField;
-            }
-            set {
-                if ((this.planned_dateField.Equals(value) != true)) {
-                    this.planned_dateField = value;
-                    this.RaisePropertyChanged("planned_date");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> reconciliation_date {
-            get {
-                return this.reconciliation_dateField;
-            }
-            set {
-                if ((this.reconciliation_dateField.Equals(value) != true)) {
-                    this.reconciliation_dateField = value;
-                    this.RaisePropertyChanged("reconciliation_date");
                 }
             }
         }

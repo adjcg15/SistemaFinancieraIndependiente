@@ -35,6 +35,7 @@
       <xs:element minOccurs="0" name="CreditCondition" nillable="true" type="tns:CreditCondition" />
       <xs:element minOccurs="0" name="CreditType" nillable="true" type="tns:CreditType" />
       <xs:element minOccurs="0" name="Invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Payments" nillable="true" type="tns:ArrayOfPayment" />
       <xs:element minOccurs="0" name="SettlementDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="WithdrawalDate" type="xs:dateTime" />
     </xs:sequence>
@@ -182,6 +183,24 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DigitalDocument" nillable="true" type="tns:DigitalDocument" />
+  <xs:complexType name="ArrayOfPayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Payment" nillable="true" type="tns:Payment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPayment" nillable="true" type="tns:ArrayOfPayment" />
+  <xs:complexType name="Payment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Interest" type="xs:decimal" />
+      <xs:element minOccurs="0" name="amount" type="xs:double" />
+      <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="invoice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="planned_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="reconciliation_date" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Payment" nillable="true" type="tns:Payment" />
   <xs:complexType name="ArrayOfCreditApplication">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CreditApplication" nillable="true" type="tns:CreditApplication" />
@@ -205,24 +224,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CreditGrantingPolicy" nillable="true" type="tns:CreditGrantingPolicy" />
-  <xs:complexType name="ArrayOfPayment">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Payment" nillable="true" type="tns:Payment" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPayment" nillable="true" type="tns:ArrayOfPayment" />
-  <xs:complexType name="Payment">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Interest" type="xs:decimal" />
-      <xs:element minOccurs="0" name="amount" type="xs:double" />
-      <xs:element minOccurs="0" name="credit_invoice" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id" type="xs:int" />
-      <xs:element minOccurs="0" name="invoice" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="planned_date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="reconciliation_date" nillable="true" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Payment" nillable="true" type="tns:Payment" />
   <xs:complexType name="PaymentLayout">
     <xs:sequence>
       <xs:element minOccurs="0" name="capture_line" nillable="true" type="xs:string" />

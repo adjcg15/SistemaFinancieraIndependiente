@@ -36,5 +36,8 @@ namespace SFIDataAccess.Model
 
         [DataMember]
         public Client Client { get; set; }
+
+        [DataMember]
+        public Payment[] Payments { get; set; }
     }
 }
