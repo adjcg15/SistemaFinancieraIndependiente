@@ -71,5 +71,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<Payment> GetAllPaymentsSortedByPlannedDate();
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        List<Credit> RecoverCreditsWithPaymentsInTheMonthAndYear(int month, int year);
     }
  }

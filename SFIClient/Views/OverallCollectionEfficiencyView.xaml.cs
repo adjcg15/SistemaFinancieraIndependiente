@@ -27,7 +27,7 @@ namespace SFIClient.Views
     /// </summary>
     public partial class OverallCollectionEfficiencyController : Page
     {
-        private readonly Credit[] creditsWithPaymentsList;
+        private List<Credit> creditsWithPaymentsList = new List<Credit>();
         private readonly CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
         public OverallCollectionEfficiencyController()
         {
@@ -39,6 +39,10 @@ namespace SFIClient.Views
             DateTime dateTimeNow = DateTime.Now;
             int currentMonth = dateTimeNow.Month;
             int currentYear = dateTimeNow.Year;
+            ComboBoxItem defaultYear = CbMonth.Items.OfType<ComboBoxItem>().FirstOrDefault(item => item.Content.ToString() == currentYear.ToString());
+            CbMonth.SelectedIndex = currentMonth;
+            CbYear.SelectedItem = defaultYear;
+            RbUnsettledPayments.IsChecked = true;
             LoadCraditsWithPaymentsInTheMonthAndYear(currentMonth, currentYear);
         }
 
@@ -47,8 +51,8 @@ namespace SFIClient.Views
 
             try
             {
-                //creditsWithPaymentsList = creditsServiceClient.RecoverCreditsWithPaymentsInTheMonthAndYear(currentMonth, currentYear);
-                if (creditsWithPaymentsList.Length != 0)
+                creditsWithPaymentsList = creditsServiceClient.RecoverCreditsWithPaymentsInTheMonthAndYear(currentMonth, currentYear).ToList();
+                if (creditsWithPaymentsList.Count != 0)
                 {
                     CalculateAndShowTheAmountOfCredits();
                     CalculateAndShowTheAmountPaid();
@@ -85,6 +89,7 @@ namespace SFIClient.Views
             SkpCreditsPaymentsTable.Visibility = Visibility.Collapsed;
             SkpUnpaidCredits.Visibility = Visibility.Collapsed;
             SkpPaidCredits.Visibility = Visibility.Collapsed;
+            SkpEmptyCollectionEfficiencies.Visibility = Visibility.Visible;
         }
 
         private void ShowErrorRecoveringCreditsWithPayments(string message)
@@ -108,7 +113,7 @@ namespace SFIClient.Views
             int creditsDoesNotPaid = 0;
             int allCredits;
 
-            allCredits = creditsWithPaymentsList.Length;
+            allCredits = creditsWithPaymentsList.Count;
 
             foreach (var credit in creditsWithPaymentsList)
             {
@@ -236,7 +241,7 @@ namespace SFIClient.Views
         private void BtnGenerateEfficiencyClick(object sender, RoutedEventArgs e)
         {
             int selectedMonth = CbMonth.SelectedIndex;
-            int selectedYear = CbYear.SelectedIndex;
+            int selectedYear = (int)CbYear.SelectedValue;
             LoadCraditsWithPaymentsInTheMonthAndYear(selectedMonth, selectedYear);
         }
 
