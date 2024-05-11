@@ -2537,6 +2537,16 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDate", ReplyAction="http://tempuri.org/ICreditsService/GetAllPaymentsSortedByPlannedDateResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Payment[]> GetAllPaymentsSortedByPlannedDateAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYear", ReplyAction="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYearRes" +
+            "ponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYearSer" +
+            "viceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Credit[] RecoverCreditsWithPaymentsInTheMonthAndYear(int month, int year);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYear", ReplyAction="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYearRes" +
+            "ponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Credit[]> RecoverCreditsWithPaymentsInTheMonthAndYearAsync(int month, int year);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2692,6 +2702,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Payment[]> GetAllPaymentsSortedByPlannedDateAsync() {
             return base.Channel.GetAllPaymentsSortedByPlannedDateAsync();
+        }
+        
+        public SFIClient.SFIServices.Credit[] RecoverCreditsWithPaymentsInTheMonthAndYear(int month, int year) {
+            return base.Channel.RecoverCreditsWithPaymentsInTheMonthAndYear(month, year);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Credit[]> RecoverCreditsWithPaymentsInTheMonthAndYearAsync(int month, int year) {
+            return base.Channel.RecoverCreditsWithPaymentsInTheMonthAndYearAsync(month, year);
         }
     }
     

@@ -33,18 +33,67 @@
                             <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedItem, ElementName=CbYear}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <ComboBox
                             Margin="0, 0, 15, 0"
                             Grid.Column="0"
                             Name="CbYear" 
                             DisplayMemberPath="Name"
-                            Style="{StaticResource ComboBox}"/>
+                            Style="{StaticResource ComboBox}">
+                            <ComboBoxItem>2024</ComboBoxItem>
+                            <ComboBoxItem>2023</ComboBoxItem>
+                            <ComboBoxItem>2022</ComboBoxItem>
+                            <ComboBoxItem>2021</ComboBoxItem>
+                            <ComboBoxItem>2020</ComboBoxItem>
+                            <ComboBoxItem>2019</ComboBoxItem>
+                            <ComboBoxItem>2018</ComboBoxItem>
+                            <ComboBoxItem>2017</ComboBoxItem>
+                            <ComboBoxItem>2016</ComboBoxItem>
+                            <ComboBoxItem>2015</ComboBoxItem>
+                            <ComboBoxItem>2014</ComboBoxItem>
+                        </ComboBox>
+
+                        <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedItem, ElementName=CbMonth}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <ComboBox
                             Margin="0, 0, 15, 0"
                             Grid.Column="1"
                             Name="CbMonth" 
                             DisplayMemberPath="Name"
-                            Style="{StaticResource ComboBox}"/>
+                            Style="{StaticResource ComboBox}">
+                            <ComboBoxItem>Enero</ComboBoxItem>
+                            <ComboBoxItem>Febrero</ComboBoxItem>
+                            <ComboBoxItem>Marzo</ComboBoxItem>
+                            <ComboBoxItem>Abril</ComboBoxItem>
+                            <ComboBoxItem>Mayo</ComboBoxItem>
+                            <ComboBoxItem>Junio</ComboBoxItem>
+                            <ComboBoxItem>Julio</ComboBoxItem>
+                            <ComboBoxItem>Agosto</ComboBoxItem>
+                            <ComboBoxItem>Septiembre</ComboBoxItem>
+                            <ComboBoxItem>Octubre</ComboBoxItem>
+                            <ComboBoxItem>Noviembre</ComboBoxItem>
+                            <ComboBoxItem>Diciembre</ComboBoxItem>
+                        </ComboBox>
                         <Button 
                             Margin="10, 0, 0, 0"
                             Grid.Column="2"
@@ -155,7 +204,6 @@
                                 Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
                             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                                 <RadioButton
-                                    IsChecked="True"
                                     Margin="0, 0, 15, 0"
                                     Name="RbUnsettledPayments" 
                                     Style="{StaticResource RadioButtonStyle}" 
@@ -217,10 +265,6 @@
                     <StackPanel 
                         Name="SkpUnpaidCredits" 
                         Visibility="Visible" Grid.Row="1" Margin="0, 8, 0, 32">
-                        <usercontrols:CreditPaymentControl/>
-                        <usercontrols:CreditPaymentControl/>
-                        <usercontrols:CreditPaymentControl/>
-                        <usercontrols:CreditPaymentControl/>
                     </StackPanel>
 
                     <StackPanel 

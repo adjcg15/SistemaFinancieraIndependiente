@@ -120,5 +120,10 @@ namespace SFIServices
         {
             return CreditsDAO.GetAllPaymentsSortedByPlannedDate();
         }
+
+        public List<Credit> RecoverCreditsWithPaymentsInTheMonthAndYear(int month, int year)
+        {
+            return CreditsDAO.RecoverCreditsWithPaymentsInTheMonthAndYear(month, year);
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace SFIClient.Views
 
         private void BdrGeneralEfficiencyClick(object sender, MouseButtonEventArgs e)
         {
-            //TODO: redirect to generate general efficiency
+            NavigationService.Navigate(new OverallCollectionEfficiencyController());
         }
 
         private void BdrCreditsListClick(object sender, MouseButtonEventArgs e)

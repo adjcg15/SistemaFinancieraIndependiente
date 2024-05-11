@@ -10,6 +10,7 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -480,19 +481,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (SqlException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
 
             return success;
@@ -533,15 +534,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
 
             return success;
@@ -567,19 +572,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
             catch (SqlException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde"));
             }
 
             return creditTypeId;
@@ -904,6 +909,61 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+        }
+
+        public static List<Credit> RecoverCreditsWithPaymentsInTheMonthAndYear(int month, int year)
+        {
+            List<Credit> creditsWithPaymentsList = new List<Credit>();
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var credits = context.credits
+                        .Join(context.payments,
+                            credit => credit.invoice,
+                            payment => payment.credit_invoice,
+                            (credit, payment) => new { Credit = credit, Payment = payment })
+                        .Where(cp => cp.Payment.planned_date.Year == year && cp.Payment.planned_date.Month == month)
+                        .ToList();
+
+                    if (credits != null)
+                    {
+                        foreach (var credit in credits)
+                        {
+                            Credit creditWithPayment = new Credit
+                            {
+                                Invoice = credit.Credit.invoice,
+                                AmountApproved = credit.Credit.ammount_approved
+                            };
+
+                            Payment payment = new Payment
+                            {
+                                planned_date = credit.Payment.planned_date,
+                                reconciliation_date = credit.Payment.reconciliation_date,
+                                amount = (double)credit.Payment.amount
+                            };
+                        }
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información para la eficiencia de corbo, inténtelo de nuevo más tarde"));
+            }
+            catch (DbUpdateException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información para la eficiencia de corbo, inténtelo de nuevo más tarde"));
+            }
+            catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información para la eficiencia de corbo, inténtelo de nuevo más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar la información para la eficiencia de corbo, inténtelo de nuevo más tarde"));
+            }
+
+            return creditsWithPaymentsList;
         }
     }
 }
