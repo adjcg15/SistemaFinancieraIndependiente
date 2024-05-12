@@ -11,7 +11,7 @@
       Title="OverallCollectionEfficiencyView"
       Loaded="PageLoaded">
 
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer Name="ScvOverallCollectionEfficiency" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel Background="White">
             <StackPanel Background="{StaticResource DarkPrimaryColor}">
                 <StackPanel  Margin="40, 32" Orientation="Horizontal">
@@ -34,66 +34,42 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito" TextWrapping="Wrap">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SelectedItem, ElementName=CbYear}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <ComboBox
-                            Margin="0, 0, 15, 0"
-                            Grid.Column="0"
-                            Name="CbYear" 
-                            DisplayMemberPath="Name"
-                            Style="{StaticResource ComboBox}">
-                            <ComboBoxItem>2024</ComboBoxItem>
-                            <ComboBoxItem>2023</ComboBoxItem>
-                            <ComboBoxItem>2022</ComboBoxItem>
-                            <ComboBoxItem>2021</ComboBoxItem>
-                            <ComboBoxItem>2020</ComboBoxItem>
-                            <ComboBoxItem>2019</ComboBoxItem>
-                            <ComboBoxItem>2018</ComboBoxItem>
-                            <ComboBoxItem>2017</ComboBoxItem>
-                            <ComboBoxItem>2016</ComboBoxItem>
-                            <ComboBoxItem>2015</ComboBoxItem>
-                            <ComboBoxItem>2014</ComboBoxItem>
-                        </ComboBox>
+                        <Grid  Margin="5,2" Grid.Column="0">
+                            <TextBlock TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=CbYear}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ComboBox
+                                Margin="0, 0, 15, 0"
+                                Name="CbYear"
+                                Style="{StaticResource ComboBox}"/>
+                        </Grid>
 
-                        <TextBlock Margin="5,2" Text="Seleccione un tipo de crédito" TextWrapping="Wrap">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SelectedItem, ElementName=CbMonth}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <ComboBox
-                            Margin="0, 0, 15, 0"
-                            Grid.Column="1"
-                            Name="CbMonth" 
-                            DisplayMemberPath="Name"
-                            Style="{StaticResource ComboBox}">
-                            <ComboBoxItem>Enero</ComboBoxItem>
-                            <ComboBoxItem>Febrero</ComboBoxItem>
-                            <ComboBoxItem>Marzo</ComboBoxItem>
-                            <ComboBoxItem>Abril</ComboBoxItem>
-                            <ComboBoxItem>Mayo</ComboBoxItem>
-                            <ComboBoxItem>Junio</ComboBoxItem>
-                            <ComboBoxItem>Julio</ComboBoxItem>
-                            <ComboBoxItem>Agosto</ComboBoxItem>
-                            <ComboBoxItem>Septiembre</ComboBoxItem>
-                            <ComboBoxItem>Octubre</ComboBoxItem>
-                            <ComboBoxItem>Noviembre</ComboBoxItem>
-                            <ComboBoxItem>Diciembre</ComboBoxItem>
-                        </ComboBox>
+                        <Grid Margin="5,2" Grid.Column="1">
+                            <TextBlock TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TxtInputPlaceHolder}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=CbMonth}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ComboBox
+                                Margin="0, 0, 15, 0"
+                                Name="CbMonth"
+                                Style="{StaticResource ComboBox}"/>
+                        </Grid>
+                        
                         <Button 
                             Margin="10, 0, 0, 0"
                             Grid.Column="2"
@@ -164,15 +140,15 @@
                             Style="{StaticResource Subtitle}" Foreground="{StaticResource DarkGray}"/>
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 40, 0, 8" Text="Importe cobrado en el mes"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkTotalAmount" TextWrapping="Wrap" Margin="0,0,0,0" Text="15" FontSize="32"/>
+                            <TextBlock Name="TbkAmountPaid" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="32"/>
                         </Grid>
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Total del importe que se debía cobrar" TextWrapping="Wrap"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkAmountPaid" TextWrapping="Wrap" Margin="0,0,0,0" Text="15" FontSize="32"/>
+                            <TextBlock Name="TbkTotalAmount" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="32"/>
                         </Grid>
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8" Text="Eficiencia de cobro" TextWrapping="Wrap"/>
                         <Grid Margin="0, 0, 0, 24">
-                            <TextBlock Name="TbkCollectionEfficiencyPercentage" TextWrapping="Wrap" Margin="0,0,0,0" Text="75%" FontSize="32"/>
+                            <TextBlock Name="TbkCollectionEfficiencyPercentage" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="32"/>
                         </Grid>
                     </StackPanel>
 
