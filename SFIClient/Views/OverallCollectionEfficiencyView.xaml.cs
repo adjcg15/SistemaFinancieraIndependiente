@@ -5,6 +5,7 @@ using SFIClient.Controlls;
 using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.ServiceModel;
@@ -39,11 +40,53 @@ namespace SFIClient.Views
             DateTime dateTimeNow = DateTime.Now;
             int currentMonth = dateTimeNow.Month;
             int currentYear = dateTimeNow.Year;
-            ComboBoxItem defaultYear = CbMonth.Items.OfType<ComboBoxItem>().FirstOrDefault(item => item.Content.ToString() == currentYear.ToString());
-            CbMonth.SelectedIndex = currentMonth;
-            CbYear.SelectedItem = defaultYear;
+            FillYearsCombobox(currentYear);
+            FillMonthsCombobox(currentMonth);
             RbUnsettledPayments.IsChecked = true;
             LoadCraditsWithPaymentsInTheMonthAndYear(currentMonth, currentYear);
+        }
+
+        private void FillYearsCombobox(int currentYear)
+        {
+            ObservableCollection<int> years = new ObservableCollection<int>
+            {
+                2024,
+                2023,
+                2022,
+                2021,
+                2020,
+                2019,
+                2018,
+                2017,
+                2016,
+                2015,
+                2014
+            };
+
+            CbYear.ItemsSource = years;
+            CbYear.SelectedIndex = years.IndexOf(currentYear);
+        }
+
+        private void FillMonthsCombobox(int currentMonth)
+        {
+            ObservableCollection<string> months = new ObservableCollection<string>
+            {
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Septiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+            };
+
+            CbMonth.ItemsSource = months;
+            CbMonth.SelectedIndex = currentMonth - 1;
         }
 
         private void LoadCraditsWithPaymentsInTheMonthAndYear(int currentMonth, int currentYear)
@@ -54,6 +97,15 @@ namespace SFIClient.Views
                 creditsWithPaymentsList = creditsServiceClient.RecoverCreditsWithPaymentsInTheMonthAndYear(currentMonth, currentYear).ToList();
                 if (creditsWithPaymentsList.Count != 0)
                 {
+                    TbkAmountPaid.Text = "";
+                    TbkTotalAmount.Text = "";
+                    SkpPaidCredits.Children.Clear();
+                    SkpUnpaidCredits.Children.Clear();
+                    GrdCollectionEfficiencyInformation.Visibility = Visibility.Visible;
+                    SkpCreditsPaymentsTable.Visibility = Visibility.Visible;
+                    SkpUnpaidCredits.Visibility = Visibility.Visible;
+                    SkpPaidCredits.Visibility = Visibility.Visible;
+                    SkpEmptyCollectionEfficiencies.Visibility = Visibility.Collapsed;
                     CalculateAndShowTheAmountOfCredits();
                     CalculateAndShowTheAmountPaid();
                     AddInformationToTheCreditTableWithPyments();
@@ -178,9 +230,9 @@ namespace SFIClient.Views
             }
             collectionEfficiencyPercentage = (amountPaid / totalAmount) * 100;
 
-            TbkTotalAmount.Text = totalAmount.ToString();
-            TbkAmountPaid.Text = amountPaid.ToString();
-            TbkCollectionEfficiencyPercentage.Text = collectionEfficiencyPercentage.ToString();
+            TbkTotalAmount.Inlines.Add(new Run(totalAmount.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
+            TbkAmountPaid.Inlines.Add(new Run(amountPaid.ToString("C", new System.Globalization.CultureInfo("es-MX"))));
+            TbkCollectionEfficiencyPercentage.Text = collectionEfficiencyPercentage.ToString() + "%";
 
             ShowAmountPaidOnChart(amountPaid, amountDoesNotPaid);
 
@@ -192,7 +244,7 @@ namespace SFIClient.Views
             {
                 new PieSeries
                 {
-                    Title = "Créditos que realizaron pago",
+                    Title = "Cantidad pagada",
                     Values = new ChartValues<double> { amountPaid },
                     Fill = (SolidColorBrush)FindResource("PrimaryColor"),
                     DataLabels = true
@@ -200,7 +252,7 @@ namespace SFIClient.Views
 
                 new PieSeries
                 {
-                    Title = "Créditos que no realizaron pago",
+                    Title = "Cantidad pendiente",
                     Values = new ChartValues<double> { amountDoesNotPaid },
                     Fill = (SolidColorBrush)FindResource("DarkPrimaryColor"),
                     DataLabels = true
@@ -233,6 +285,7 @@ namespace SFIClient.Views
 
         private void ShowCreditTableWithUnsettledPayments()
         {
+            ScvOverallCollectionEfficiency.ScrollToBottom();
             TbkPaymentDate.Text = "Fecha planeada";
             SkpPaidCredits.Visibility = Visibility.Collapsed;
             SkpUnpaidCredits.Visibility = Visibility.Visible;
@@ -240,7 +293,7 @@ namespace SFIClient.Views
 
         private void BtnGenerateEfficiencyClick(object sender, RoutedEventArgs e)
         {
-            int selectedMonth = CbMonth.SelectedIndex;
+            int selectedMonth = CbMonth.SelectedIndex + 1;
             int selectedYear = (int)CbYear.SelectedValue;
             LoadCraditsWithPaymentsInTheMonthAndYear(selectedMonth, selectedYear);
         }
@@ -257,6 +310,7 @@ namespace SFIClient.Views
 
         private void ShowCreditTableWithSettledPayments()
         {
+            ScvOverallCollectionEfficiency.ScrollToBottom();
             TbkPaymentDate.Text = "Fecha de pago";
             SkpUnpaidCredits.Visibility = Visibility.Collapsed;
             SkpPaidCredits.Visibility = Visibility.Visible;

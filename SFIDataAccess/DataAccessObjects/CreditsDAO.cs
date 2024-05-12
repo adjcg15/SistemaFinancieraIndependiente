@@ -930,18 +930,21 @@ namespace SFIDataAccess.DataAccessObjects
                     {
                         foreach (var credit in credits)
                         {
-                            Credit creditWithPayment = new Credit
-                            {
-                                Invoice = credit.Credit.invoice,
-                                AmountApproved = credit.Credit.ammount_approved
-                            };
-
-                            Payment payment = new Payment
+                            Payment[] payment = new Payment[1];
+                            payment[0] = new Payment
                             {
                                 planned_date = credit.Payment.planned_date,
                                 reconciliation_date = credit.Payment.reconciliation_date,
                                 amount = (double)credit.Payment.amount
                             };
+
+                            Credit creditWithPayment = new Credit
+                            {
+                                Invoice = credit.Credit.invoice,
+                                AmountApproved = credit.Credit.ammount_approved,
+                                Payments = payment
+                            };
+                            creditsWithPaymentsList.Add(creditWithPayment);
                         }
                     }
                 }
