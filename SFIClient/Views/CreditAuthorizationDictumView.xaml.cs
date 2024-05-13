@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SFIClient.Controlls;
+using SFIClient.Session;
 using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
@@ -63,19 +64,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorRecoveringCreditGrantingPolices(fe.Detail.Message);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string errorMessage = "No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditGrantingPolices(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "No fue posble recuperar las políticas para generar el dictamen, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditGrantingPolices(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
         }
 
@@ -99,6 +100,12 @@ namespace SFIClient.Views
             );
         }
 
+        private void RedirectToLoginView()
+        {
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
+        }
+
         private void RedirectToCreditApplicationsListView()
         {
             NavigationService.Navigate(new CreditApplicationsListController());
@@ -117,19 +124,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorRecoveringCreditApplicationContent(fe.Detail.Message);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string errorMessage = "No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditApplicationContent(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "No fue posble recuperar la solicitud de crédito del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringCreditApplicationContent(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
         }
 
@@ -549,19 +556,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorDictumGeneration(fe.Detail.Message);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
         }
 
@@ -624,19 +631,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorDictumGeneration(fe.Detail.Message);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "No fue posble generar el dictamen de autorización de crédito para el cliente, inténtelo de nuevo más tarde";
                 ShowErrorDictumGeneration(errorMessage);
-                RedirectToCreditApplicationsListView();
+                RedirectToLoginView();
             }
         }
 

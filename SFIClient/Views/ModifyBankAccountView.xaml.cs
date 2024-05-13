@@ -1,4 +1,5 @@
 ﻿
+using SFIClient.Session;
 using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
@@ -58,19 +59,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorRecoveringBankAccount(fe.Detail.Message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string message = "No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringBankAccount(message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string message = "No fue posible recuperar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringBankAccount(message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
         }
 
@@ -210,6 +211,12 @@ namespace SFIClient.Views
             NavigationService.Navigate(new SearchClientByRFCController());
         }
 
+        private void RedirectToLoginView()
+        {
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
+        }
+
         private bool VerifyTextFields()
         {
             bool correctFields = true;
@@ -240,19 +247,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorUpdateBankAccount(fe.Detail.Message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string message = "No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
                 ShowErrorUpdateBankAccount(message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string message = "No fue posible actualizar la cuenta bancaria del cliente, inténtelo de nuevo más tarde";
                 ShowErrorUpdateBankAccount(message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
         }
 

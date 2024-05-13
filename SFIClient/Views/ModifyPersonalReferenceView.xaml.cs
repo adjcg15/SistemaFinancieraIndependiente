@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Session;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,6 +129,12 @@ namespace SFIClient.Views
         private void RedirectToSearchClientByRFCView()
         {
             NavigationService.Navigate(new SearchClientByRFCController());
+        }
+
+        private void RedirectToLoginView()
+        {
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
         }
 
         private void BtnCancelPersonalReferenceUpdateClick(object sender, RoutedEventArgs e)
@@ -276,19 +283,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowPersonalReferenceUpdateError(fe.Detail.Message);
-                RedirectToSearchClientByRFCView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string errorMessage = "No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
-                RedirectToSearchClientByRFCView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "No fue posible actualizar la referencia personal del cliente, inténtelo de nuevo más tarde";
                 ShowPersonalReferenceUpdateError(errorMessage);
-                RedirectToSearchClientByRFCView();
+                RedirectToLoginView();
             }
         }
 

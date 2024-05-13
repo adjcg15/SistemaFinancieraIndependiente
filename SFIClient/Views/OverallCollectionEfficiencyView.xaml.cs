@@ -2,6 +2,7 @@
 using LiveCharts.Definitions.Charts;
 using LiveCharts.Wpf;
 using SFIClient.Controlls;
+using SFIClient.Session;
 using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
@@ -157,6 +158,7 @@ namespace SFIClient.Views
         private void RediredtToLoginView()
         {
             NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
         }
 
         private void CalculateAndShowTheAmountOfCredits()
