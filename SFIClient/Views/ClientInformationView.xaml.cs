@@ -1,4 +1,5 @@
-﻿using SFIClient.SFIServices;
+﻿using SFIClient.Session;
+using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,19 +46,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorRecoveringClient(fe.Detail.Message);
-                RedirectToSearchClientByRFCView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string errorMessage = "No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringClient(errorMessage);
-                RedirectToSearchClientByRFCView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string errorMessage = "No fue posible recuperar la información del cliente, inténtelo de nuevo más tarde";
                 ShowErrorRecoveringClient(errorMessage);
-                RedirectToSearchClientByRFCView();
+                RedirectToLoginView();
             }
         }
 
@@ -154,12 +155,13 @@ namespace SFIClient.Views
 
         private void BtnGoToSearchClientByRFCViewClick(object sender, RoutedEventArgs e)
         {
-            RedirectToSearchClientByRFCView();
+            RedirectToLoginView();
         }
 
-        private void RedirectToSearchClientByRFCView()
+        private void RedirectToLoginView()
         {
-            NavigationService.Navigate(new SearchClientByRFCController());
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
         }
 
         private void ShowErrorRecoveringClient(string message)

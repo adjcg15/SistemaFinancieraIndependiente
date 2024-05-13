@@ -39,14 +39,27 @@ namespace SFIDataAccess.DataAccessObjects
                                    from credit_application in creditApplicationsGroup.DefaultIfEmpty()
                                    join work_center in context.work_centers
                                    on client.id_work_center equals work_center.id_work_center
-                                   where credit != null || credit_application != null || credit == null && credit_application == null
+                                   join credit_application_state in context.credit_applications_state
+                                   on credit_application.id_credit_application_state equals credit_application_state.id_credit_application_state into creditApplicationStateGroup
+                                   from credit_application_state in creditApplicationStateGroup.DefaultIfEmpty()
                                    select new
                                    {
                                        client,
-                                       has_active_credit = credit != null,
-                                       has_credit_application = credit_application != null,
-                                       work_center
-                                   }).Distinct().ToList();
+                                       credit,
+                                       work_center,
+                                       has_credit_application = creditApplicationStateGroup.Any(ca => ca.name == "CREADA"),
+                                       has_active_credit = credit != null && credit.settlement_date == null
+                                   })
+                                   .GroupBy(result => result.client.rfc)
+                                   .Select(group => new
+                                   {
+                                       group.FirstOrDefault().client,
+                                       has_credit_application = group.Any(g => g.has_credit_application),
+                                       has_active_credit = group.Any(g => g.has_active_credit),
+                                       WorkCenter = group.FirstOrDefault().work_center
+                                   })
+                                   .ToList();
+
 
 
                     foreach (var item in clients)

@@ -1,4 +1,5 @@
 ﻿
+using SFIClient.Session;
 using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
@@ -654,6 +655,12 @@ namespace SFIClient.Views
             }
         }
 
+        private void RedirectToLoginView()
+        {
+            NavigationService.Navigate(new LoginController());
+            SystemSession.Employee = null;
+        }
+
         private void RedirectToSearchClientByRfcView()
         {
             NavigationService.Navigate(new SearchClientByRFCController());
@@ -823,19 +830,19 @@ namespace SFIClient.Views
             catch (FaultException<ServiceFault> fe)
             {
                 ShowErrorRegisteringClientDialog(fe.Detail.Message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
             catch (EndpointNotFoundException)
             {
                 string message = "No fue posible registrar al cliente, inténtelo de nuevo más tarde";
                 ShowErrorRegisteringClientDialog(message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
             catch (CommunicationException)
             {
                 string message = "No fue posible registrar al cliente, inténtelo de nuevo más tarde";
                 ShowErrorRegisteringClientDialog(message);
-                RedirectToSearchClientByRfcView();
+                RedirectToLoginView();
             }
         }
 
@@ -870,7 +877,7 @@ namespace SFIClient.Views
         {
             MessageBox.Show(
                 message,
-                "Servicio no disponible",
+                "Sistema no disponible",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );
