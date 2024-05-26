@@ -232,7 +232,7 @@ namespace SFIClient.Views
 
         private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new CreditsListController());
         }
     }
 }
