@@ -853,9 +853,9 @@ namespace SFIDataAccess.DataAccessObjects
                 {
                     return new PaymentLayout
                     {
-                        capture_line = paymentLayout.capture_line,
-                        generation_date = paymentLayout.generation_date,
-                        id_payment = paymentLayout.id_payment
+                        CaptureLine = paymentLayout.capture_line,
+                        GenerationDate = paymentLayout.generation_date,
+                        IdPayment = paymentLayout.id_payment
                     };
                 }
                 else
