@@ -57,8 +57,8 @@ namespace SFIClient.Views
             }
             catch (EndpointNotFoundException)
             {
-                string errorMessage = "Servidor no disponible. No fue posible recuperar la información " +
-                    "del cliente, por favor inténtelo más tarde";
+                string errorMessage = "Servidor no disponible. Por el momento el servidor no se encuentra " +
+                    "disponible, intente más tarde";
                 ShowErrorRecoveringCreditDialog(errorMessage);
             }
             catch (CommunicationException)
