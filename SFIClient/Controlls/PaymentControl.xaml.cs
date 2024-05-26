@@ -25,12 +25,14 @@ namespace SFIClient.Controlls
         public bool IsSelected { get; private set; }
         private int index;
         private Action<int> disableButtonAction;
-        public PaymentControl(Payment payment, int index, Action<int> disableButtonAction, bool isEnabled)
+        private string clientName;
+        public PaymentControl(Payment payment, int index, Action<int> disableButtonAction, bool isEnabled, string clientName)
         {
             InitializeComponent();
             BindedPayment = payment;
             this.index = index;
             this.disableButtonAction = disableButtonAction;
+            this.clientName = clientName;
             ShowCreditConditionInformation();
             BtnDownloadLayout.IsEnabled = isEnabled;
         }
@@ -47,7 +49,7 @@ namespace SFIClient.Controlls
 
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
         {
-            string client = "Andres Manuel López Obrador";
+            string client = clientName;
 
             string captureLine = GenerateCaptureLine(BindedPayment.invoice, BindedPayment.planned_date);
             string creditInvoice = BindedPayment.invoice;
@@ -81,12 +83,13 @@ namespace SFIClient.Controlls
             return captureBuilder.ToString();
         }
 
+
         private void HandleDownloadLayoutRequest(
-            Payment payment, 
-            string captureLine, 
-            string client, 
-            string creditInvoice, 
-            string plannedDate, 
+            Payment payment,
+            string captureLine,
+            string client,
+            string creditInvoice,
+            string plannedDate,
             double amount
         )
         {
@@ -97,7 +100,7 @@ namespace SFIClient.Controlls
             {
                 PDFLayoutGenerator.GeneratePDF(client, existingLayout.capture_line, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
-            } 
+            }
             else
             {
                 creditsServiceClient.InsertIntoPaymentLayouts(captureLine, payment);
@@ -105,7 +108,6 @@ namespace SFIClient.Controlls
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
             }
         }
-
         private void ShowSuccessMessage(string message)
         {
             MessageBox.Show(message, "Descarga exitosa", MessageBoxButton.OK, MessageBoxImage.Information);

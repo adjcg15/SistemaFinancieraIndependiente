@@ -117,10 +117,12 @@ namespace SFIClient.Views
             SkpApplicablePayments.Visibility = paymentsList.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             SkpApplicablePayments.Children.Clear();
 
+            string clientName = $"{credit.Client.Name} {credit.Client.Surname} {credit.Client.LastName}";
+
             for (int i = 0; i < paymentsList.Count; i++)
             {
-                bool isEnabled = (i == 0); // Solo habilitar el primer botón
-                var paymentCard = new PaymentControl(paymentsList[i], i, DisableButton, isEnabled);
+                bool isEnabled = (i == 0); 
+                var paymentCard = new PaymentControl(paymentsList[i], i, DisableButton, isEnabled, clientName);
                 paymentCard.CardClick += (sender, e) =>
                 {
                     selectedPayment = paymentCard;
