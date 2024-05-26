@@ -968,5 +968,73 @@ namespace SFIDataAccess.DataAccessObjects
 
             return creditsWithPaymentsList;
         }
+
+        public static Credit GetCreditForCollectionEfficiency(string invoice)
+        {
+            Credit credit = null;
+
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var storedCredit = context.credits
+                        .FirstOrDefault(dbCredit => dbCredit.invoice == invoice);
+
+                    if(storedCredit != null)
+                    {
+                        var storedCreditClient = storedCredit.client;
+                        var storedCreditPayments = storedCredit.payments;
+
+                        credit = new Credit() { 
+                            Invoice = storedCredit.invoice,
+                            AmountApproved = storedCredit.ammount_approved
+                        };
+
+                        if(storedCreditClient != null)
+                        {
+                            credit.Client = new Client()
+                            {
+                                Rfc = storedCreditClient.rfc,
+                                Curp = storedCreditClient.curp,
+                                Name = storedCreditClient.name,
+                                LastName = storedCreditClient.last_name,
+                                Surname = storedCreditClient.surname
+                            };
+                        }
+
+                        if(storedCreditPayments != null)
+                        {
+                            credit.Payments = storedCreditPayments
+                                .Select(p => new Payment()
+                                    {
+                                        id = p.id_payment,
+                                        amount = (double)p.amount,
+                                        planned_date = p.planned_date,
+                                        reconciliation_date = p.reconciliation_date
+                                    })
+                                .ToArray();
+                        }
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar la información para " +
+                        "generar la eficiencia mensual, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar la información para " +
+                        "generar la eficiencia mensual, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+
+            return credit;
+        }
     }
 }
