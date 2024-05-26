@@ -698,11 +698,11 @@ namespace SFIDataAccess.DataAccessObjects
 
                         payments.Add(new Payment
                         {
-                            amount = (double)payment.amount,
-                            invoice = payment.invoice,
-                            planned_date = payment.planned_date,
-                            credit_invoice = payment.credit_invoice,
-                            reconciliation_date = payment.reconciliation_date,
+                            Amount = (double)payment.amount,
+                            Invoice = payment.invoice,
+                            PlannedDate = payment.planned_date,
+                            CreditInvoice = payment.credit_invoice,
+                            ReconciliationDate = payment.reconciliation_date,
                             Interest = paymentInterest * 100
                         });
                     }
@@ -735,11 +735,11 @@ namespace SFIDataAccess.DataAccessObjects
                     {
                         var payment = new Payment
                         {
-                            amount = (double)paymentEntity.amount,
-                            invoice = paymentEntity.invoice,
-                            planned_date = paymentEntity.planned_date,
-                            credit_invoice = paymentEntity.credit_invoice,
-                            reconciliation_date = paymentEntity.reconciliation_date
+                            Amount = (double)paymentEntity.amount,
+                            Invoice = paymentEntity.invoice,
+                            PlannedDate = paymentEntity.planned_date,
+                            CreditInvoice = paymentEntity.credit_invoice,
+                            ReconciliationDate = paymentEntity.reconciliation_date
                         };
 
                         return payment;
@@ -802,7 +802,7 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    var paymentRecord = context.payments.FirstOrDefault(p => p.invoice == payment.invoice);
+                    var paymentRecord = context.payments.FirstOrDefault(p => p.invoice == payment.Invoice);
 
                     if (paymentRecord != null)
                     {
@@ -888,12 +888,12 @@ namespace SFIDataAccess.DataAccessObjects
                         .ToList();
                     return payments.Select(p => new Payment
                     {
-                        id = p.id_payment,
-                        amount = (double)p.amount,
-                        invoice = p.invoice,
-                        planned_date = p.planned_date,
-                        credit_invoice = p.credit_invoice,
-                        reconciliation_date = p.reconciliation_date
+                        Id = p.id_payment,
+                        Amount = (double)p.amount,
+                        Invoice = p.invoice,
+                        PlannedDate = p.planned_date,
+                        CreditInvoice = p.credit_invoice,
+                        ReconciliationDate = p.reconciliation_date
                     }).ToList();
                 }
             }
@@ -933,9 +933,9 @@ namespace SFIDataAccess.DataAccessObjects
                             Payment[] payment = new Payment[1];
                             payment[0] = new Payment
                             {
-                                planned_date = credit.Payment.planned_date,
-                                reconciliation_date = credit.Payment.reconciliation_date,
-                                amount = (double)credit.Payment.amount
+                                PlannedDate = credit.Payment.planned_date,
+                                ReconciliationDate = credit.Payment.reconciliation_date,
+                                Amount = (double)credit.Payment.amount
                             };
 
                             Credit creditWithPayment = new Credit
@@ -1007,10 +1007,10 @@ namespace SFIDataAccess.DataAccessObjects
                             credit.Payments = storedCreditPayments
                                 .Select(p => new Payment()
                                 {
-                                    id = p.id_payment,
-                                    amount = (double)p.amount,
-                                    planned_date = p.planned_date,
-                                    reconciliation_date = p.reconciliation_date
+                                    Id = p.id_payment,
+                                    Amount = (double)p.amount,
+                                    PlannedDate = p.planned_date,
+                                    ReconciliationDate = p.reconciliation_date
                                 })
                                 .ToArray();
                         }

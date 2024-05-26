@@ -11,22 +11,22 @@ namespace SFIDataAccess.Model
     public class Payment
     {
         [DataMember]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
-        public double amount { get; set; }
+        public double Amount { get; set; }
 
         [DataMember]
-        public string invoice { get; set; }
+        public string Invoice { get; set; }
 
         [DataMember]
-        public DateTime planned_date { get; set; }
+        public DateTime PlannedDate { get; set; }
 
         [DataMember]
-        public string credit_invoice { get; set; }
+        public string CreditInvoice { get; set; }
 
         [DataMember]
-        public DateTime? reconciliation_date { get; set; }
+        public DateTime? ReconciliationDate { get; set; }
 
         [DataMember]
         public decimal Interest { get; set; }
