@@ -117,9 +117,10 @@ namespace SFIClient.Views
             SkpApplicablePayments.Visibility = paymentsList.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             SkpApplicablePayments.Children.Clear();
 
-            foreach (var payment in paymentsList)
+            for (int i = 0; i < paymentsList.Count; i++)
             {
-                var paymentCard = new PaymentControl(payment);
+                bool isEnabled = (i == 0); // Solo habilitar el primer botón
+                var paymentCard = new PaymentControl(paymentsList[i], i, DisableButton, isEnabled);
                 paymentCard.CardClick += (sender, e) =>
                 {
                     selectedPayment = paymentCard;
@@ -127,6 +128,18 @@ namespace SFIClient.Views
 
                 SkpApplicablePayments.Children.Add(paymentCard);
             }
+        }
+
+        private void DisableButton(int index)
+        {
+            if (index < SkpApplicablePayments.Children.Count - 1)
+            {
+                var nextPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index + 1];
+                nextPaymentCard.BtnDownloadLayout.IsEnabled = true;
+            }
+
+            var currentPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index];
+            currentPaymentCard.BtnDownloadLayout.IsEnabled = false;
         }
 
         private void BtnRegisterPaymentClick(object sender, RoutedEventArgs e)

@@ -23,11 +23,16 @@ namespace SFIClient.Controlls
         public Credit BindedCredit { get; }
         public event EventHandler<Payment> CardClick;
         public bool IsSelected { get; private set; }
-        public PaymentControl(Payment payment)
+        private int index;
+        private Action<int> disableButtonAction;
+        public PaymentControl(Payment payment, int index, Action<int> disableButtonAction, bool isEnabled)
         {
             InitializeComponent();
             BindedPayment = payment;
+            this.index = index;
+            this.disableButtonAction = disableButtonAction;
             ShowCreditConditionInformation();
+            BtnDownloadLayout.IsEnabled = isEnabled;
         }
         private void ShowCreditConditionInformation()
         {
@@ -35,11 +40,9 @@ namespace SFIClient.Controlls
             TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
             TbkAmount.Text = BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"));
             TbkInterest.Text = BindedPayment.Interest.ToString();
-            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue 
-                ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") 
+            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue
+                ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy")
                 : "-";
-            BtnDownloadLayout.IsEnabled = !BindedPayment.reconciliation_date.HasValue 
-                && BindedPayment.amount != 0;
         }
 
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
@@ -52,6 +55,7 @@ namespace SFIClient.Controlls
             double amount = BindedPayment.amount;
 
             HandleDownloadLayoutRequest(BindedPayment, captureLine, client, creditInvoice, plannedDate, amount);
+            disableButtonAction(index);
         }
 
         private string GenerateCaptureLine(string invoice, DateTime plannedDate)
