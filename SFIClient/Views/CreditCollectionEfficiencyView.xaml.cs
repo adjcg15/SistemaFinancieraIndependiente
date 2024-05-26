@@ -1,4 +1,6 @@
-﻿using SFIClient.SFIServices;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,7 @@ namespace SFIClient.Views
 {
     public partial class CreditCollectionEfficiencyController : Page
     {
-        private string creditInvoice;
+        private readonly string creditInvoice;
         private Credit credit;
 
         public CreditCollectionEfficiencyController(string creditInvoice)
@@ -47,6 +49,7 @@ namespace SFIClient.Views
                 ShowCreditInformation();
                 ShowClientInformation();
                 ShowEfficiencyInformation();
+                ShowEfficiencyOnChart();
             }
             catch (FaultException<ServiceFault> fault)
             {
@@ -84,20 +87,26 @@ namespace SFIClient.Views
             List<Payment> payments = credit.Payments.ToList();
             int totalPayments = payments.Count;
 
+            int totalPaidPayments = payments
+                .Where(payment => payment.reconciliation_date.HasValue)
+                .ToList()
+                .Count;
+
             List<Payment> paymentsPlannedToDate = payments
-                .Where(payment => payment.planned_date <= DateTime.Now)
+                .Where(payment => payment.planned_date.Date.CompareTo(DateTime.Now.Date) <= 0)
                 .ToList();
             int totalPaymentPlannedToDate = paymentsPlannedToDate.Count;
-            int totalPaidPayments = paymentsPlannedToDate
-                .Where(payment => payment.reconciliation_date != null)
+            int totalPaidPaymentsToDate = paymentsPlannedToDate
+                .Where(payment => payment.reconciliation_date.HasValue)
                 .ToList()
                 .Count;
 
             TbkTotalPayments.Text = totalPayments.ToString();
             TbkTotalPaymentPlannedToDate.Text = totalPaymentPlannedToDate.ToString();
+            TbkTotalPaidPayments.Text = totalPaidPayments.ToString();
 
-            if(totalPaymentPlannedToDate > 0) {
-                double efficiencyPercentage = (totalPaidPayments / totalPaymentPlannedToDate) * 100.0;
+            if (totalPaymentPlannedToDate > 0) {
+                double efficiencyPercentage = ((double)totalPaidPaymentsToDate / (double)totalPaymentPlannedToDate) * 100.0;
                 TbkEfficiency.Text = efficiencyPercentage.ToString("0.0") + "%";
             } else
             {
@@ -118,6 +127,102 @@ namespace SFIClient.Views
             {
                 RediectToLogin();
             }
+        }
+
+        private void ShowEfficiencyOnChart()
+        {
+            List<Payment> payments = credit.Payments.ToList();
+            int paidPayments = 0,
+                advancedPayments = 0,
+                pendingPayments = 0,
+                latePayments = 0,
+                unpdaidPayments = 0;
+
+            foreach (var payment in payments)
+            {
+                if(payment.planned_date.Date.CompareTo(DateTime.Now.Date) > 0)
+                {
+                    if (!payment.reconciliation_date.HasValue)
+                    {
+                        pendingPayments++;
+                    }
+                    else
+                    {
+                        advancedPayments++;
+                    }
+                } 
+                else
+                {
+                    if(!payment.reconciliation_date.HasValue)
+                    {
+                        unpdaidPayments++;
+                    }
+                    else
+                    {
+                        DateTime reconciliationDate = payment.reconciliation_date.Value;
+                        DateTime plannedDate = payment.planned_date;
+
+                        int comparisonResult = reconciliationDate.Date.CompareTo(plannedDate.Date);
+                        if (comparisonResult > 0)
+                        {
+                            latePayments++;
+                        }
+                        else if (comparisonResult < 0)
+                        {
+                            advancedPayments++;
+                        }
+                        else
+                        {
+                            paidPayments++;
+                        }
+                    }
+                }
+            }
+
+            SeriesCollection pieSeries = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Pagos realizados en tiempo",
+                    Values = new ChartValues<double> { paidPayments },
+                    Fill = (SolidColorBrush)FindResource("PrimaryColor"),
+                    DataLabels = true
+                },
+
+                new PieSeries
+                {
+                    Title = "Pagos tardíos",
+                    Values = new ChartValues<double> { latePayments },
+                    Fill = (SolidColorBrush)FindResource("DarkPrimaryColor"),
+                    DataLabels = true
+                },
+
+                new PieSeries
+                {
+                    Title = "Pagos pendientes",
+                    Values = new ChartValues<double> { pendingPayments },
+                    Fill = (SolidColorBrush)FindResource("Gray"),
+                    DataLabels = true
+                },
+
+                new PieSeries
+                {
+                    Title = "Pagos adelantados",
+                    Values = new ChartValues<double> { advancedPayments },
+                    Fill = (SolidColorBrush)FindResource("LightGreen"),
+                    DataLabels = true
+                },
+
+                new PieSeries
+                {
+                    Title = "Pagos no realizados",
+                    Values = new ChartValues<double> { unpdaidPayments },
+                    Fill = (SolidColorBrush)FindResource("LightRed"),
+                    DataLabels = true
+                }
+            };
+
+            pcCreditEfficiency.Series = pieSeries;
         }
 
         private void RediectToLogin()

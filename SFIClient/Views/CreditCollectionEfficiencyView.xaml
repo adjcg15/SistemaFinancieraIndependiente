@@ -130,7 +130,7 @@
                     <!--Data column-->
                     <StackPanel Grid.Column="0" Grid.Row="0">
                         <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            Total de pagos
+                            Total de pagos planeados
                         </TextBlock>
                         <TextBlock
                             Margin="0, 0, 0, 24"
@@ -140,8 +140,19 @@
                             Text="12"
                             x:Name="TbkTotalPayments"/>
 
-                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
-                            Pagos planeados hasta el día de hoy
+                        <TextBlock FontSize="16" TextWrapping="Wrap" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Total de pagos realizados
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0, 0, 0, 24"
+                            Style="{StaticResource Title}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="7"
+                            x:Name="TbkTotalPaidPayments"/>
+
+                        <TextBlock FontSize="16" TextWrapping="Wrap" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Pagos planeados previos a la fecha actual
                         </TextBlock>
                         <TextBlock
                             Margin="0, 0, 0, 24"
@@ -161,11 +172,15 @@
                             FontWeight="Normal"
                             Text="85%"
                             x:Name="TbkEfficiency"/>
+                        <TextBlock Style="{StaticResource Paragraph}" TextWrapping="Wrap" Margin="0, 0, 0, 8">
+                            Nota: la eficiencia de cobro se calcula sobre los pagos realizados previos a la
+                            fecha actual
+                        </TextBlock>
                     </StackPanel>
                     
                     <!--Graph column-->
                     <Grid Grid.Row="0" Grid.Column="1">
-                        <lvc:PieChart Name="pcAmounts"/>
+                        <lvc:PieChart Name="pcCreditEfficiency"/>
                     </Grid>
                 </Grid>
             </StackPanel>
