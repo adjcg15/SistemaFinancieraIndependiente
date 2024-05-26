@@ -75,5 +75,9 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         List<Credit> RecoverCreditsWithPaymentsInTheMonthAndYear(int month, int year);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        Credit GetCreditForCollectionEfficiency(string invoice);
     }
  }

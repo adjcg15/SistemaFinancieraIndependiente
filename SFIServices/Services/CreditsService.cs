@@ -125,5 +125,10 @@ namespace SFIServices
         {
             return CreditsDAO.RecoverCreditsWithPaymentsInTheMonthAndYear(month, year);
         }
+
+        public Credit GetCreditForCollectionEfficiency(string invoice)
+        {
+            return CreditsDAO.GetCreditForCollectionEfficiency(invoice);
+        }
     }
 }
