@@ -97,7 +97,7 @@ namespace SFIClient.Views
         }
         private void RedirectToMainMenu()
         {
-            NavigationService.Navigate(new MainMenuController());
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
