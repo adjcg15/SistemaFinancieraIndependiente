@@ -133,7 +133,7 @@ namespace SFIClient.Views
 
         private void RedirectToCreditMonthlyEfficiency(object sender, Credit selectedCredit)
         {
-            //TODO: implementar redirección
+            NavigationService.Navigate(new CreditCollectionEfficiencyController(selectedCredit.Invoice));
         }
 
         private void RedirectToChangeApplicableCreditCondition(object sender, Credit selectedCredit)

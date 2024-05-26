@@ -2547,6 +2547,14 @@ namespace SFIClient.SFIServices {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYear", ReplyAction="http://tempuri.org/ICreditsService/RecoverCreditsWithPaymentsInTheMonthAndYearRes" +
             "ponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Credit[]> RecoverCreditsWithPaymentsInTheMonthAndYearAsync(int month, int year);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiency", ReplyAction="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiencyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiencyServiceFaultFa" +
+            "ult", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        SFIClient.SFIServices.Credit GetCreditForCollectionEfficiency(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiency", ReplyAction="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiencyResponse")]
+        System.Threading.Tasks.Task<SFIClient.SFIServices.Credit> GetCreditForCollectionEfficiencyAsync(string invoice);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2710,6 +2718,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Credit[]> RecoverCreditsWithPaymentsInTheMonthAndYearAsync(int month, int year) {
             return base.Channel.RecoverCreditsWithPaymentsInTheMonthAndYearAsync(month, year);
+        }
+        
+        public SFIClient.SFIServices.Credit GetCreditForCollectionEfficiency(string invoice) {
+            return base.Channel.GetCreditForCollectionEfficiency(invoice);
+        }
+        
+        public System.Threading.Tasks.Task<SFIClient.SFIServices.Credit> GetCreditForCollectionEfficiencyAsync(string invoice) {
+            return base.Channel.GetCreditForCollectionEfficiencyAsync(invoice);
         }
     }
     

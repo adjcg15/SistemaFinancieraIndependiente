@@ -15,6 +15,8 @@
         <SolidColorBrush x:Key="LightGray">#BFB8B8</SolidColorBrush>
         <SolidColorBrush x:Key="Red">#ED0000</SolidColorBrush>
         <SolidColorBrush x:Key="BackgroundGray">#EAEAEA</SolidColorBrush>
+        <SolidColorBrush x:Key="LightRed">#FF3A3A</SolidColorBrush>
+        <SolidColorBrush x:Key="LightGreen">#54DD48</SolidColorBrush>
 
         <!--===============STYLES FOR TEXTS===============-->
         <!--Titles-->

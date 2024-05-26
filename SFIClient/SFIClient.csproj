@@ -132,6 +132,9 @@
     <Compile Include="Views\CreditAuthorizationDictumView.xaml.cs">
       <DependentUpon>CreditAuthorizationDictumView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CreditCollectionEfficiencyView.xaml.cs">
+      <DependentUpon>CreditCollectionEfficiencyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreditGrantingPolicyListView.xaml.cs">
       <DependentUpon>CreditGrantingPolicyListView.xaml</DependentUpon>
     </Compile>
@@ -253,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreditAuthorizationDictumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreditCollectionEfficiencyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

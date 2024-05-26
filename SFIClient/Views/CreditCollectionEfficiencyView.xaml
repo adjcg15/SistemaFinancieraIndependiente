@@ -1,0 +1,189 @@
+﻿<Page x:Class="SFIClient.Views.CreditCollectionEfficiencyController"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:local="clr-namespace:SFIClient.Views"
+    mc:Ignorable="d" 
+    d:Width="1280" d:Height="2000"
+    Title="Eficiencia de crédito"
+    Loaded="PageLoaded">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="White">
+            <!--Navigation bar-->
+            <StackPanel Background="{StaticResource DarkPrimaryColor}">
+                <StackPanel  Margin="40, 32" Orientation="Horizontal">
+                    <Button 
+                        Click="BtnReturnToPreviousPageClick" 
+                        Style="{StaticResource NoHoverStyle}" 
+                        Width="40" Height="40" Margin="0, 0, 16, 0" 
+                        Background="Transparent" Cursor="Hand">
+                        <Image Source="/Assets/ArrowPreviousPage.png"/>
+                    </Button>
+                    <TextBlock 
+                        Foreground="White" Style="{StaticResource Title}"
+                        Text="Eficiencia de cobro de crédito" 
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!--General information-->
+            <StackPanel Margin="40, 40, 40, 0">
+                <Border 
+                    Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    <TextBlock Style="{StaticResource Title}" Text="Información general de crédito"/>
+                </Border>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Credit information-->
+                    <TextBlock 
+                        TextWrapping="Wrap"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="Cliente" 
+                        Style="{StaticResource Subtitle}" 
+                        Foreground="{StaticResource DarkGray}"/>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="16, 12, 0, 0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Nombre completo
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource Title}"
+                            Margin="0, 0, 0, 8"
+                            Foreground="{StaticResource DarkPrimaryColor}"
+                            Text="Andrés Manuel López Obrador"
+                            x:Name="TbkClientName"/>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            RFC
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource Title}"
+                            Margin="0, 0, 0, 24"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="AULR031119DK0"
+                            x:Name="TbkClientRFC"/>
+                    </StackPanel>
+
+                    <TextBlock 
+                        TextWrapping="Wrap"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Text="Crédito" 
+                        Style="{StaticResource Subtitle}" 
+                        Foreground="{StaticResource DarkGray}"/>
+                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="16, 12, 0, 0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Folio
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource Title}"
+                            Margin="0, 0, 0, 8"
+                            Foreground="{StaticResource DarkPrimaryColor}"
+                            Text="A2B3C4D5E6"
+                            x:Name="TbkCreditInvoice"/>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Efectivo por
+                        </TextBlock>
+                        <TextBlock
+                            Style="{StaticResource Title}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="$15,000"
+                            x:Name="TbkCreditAmountApproved"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            
+            <!--Graphic information-->
+            <StackPanel Margin="40">
+                <Border 
+                    Margin="0, 0, 0, 32" Padding="0, 0, 0, 8" 
+                    BorderThickness="0, 0, 0, 2" BorderBrush="{StaticResource Gray}">
+                    <TextBlock Style="{StaticResource Title}" Text="Eficiencia de cobro"/>
+                </Border>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Data column-->
+                    <StackPanel Grid.Column="0" Grid.Row="0">
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Total de pagos planeados
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0, 0, 0, 24"
+                            Style="{StaticResource Title}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="12"
+                            x:Name="TbkTotalPayments"/>
+
+                        <TextBlock FontSize="16" TextWrapping="Wrap" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Total de pagos realizados
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0, 0, 0, 24"
+                            Style="{StaticResource Title}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="7"
+                            x:Name="TbkTotalPaidPayments"/>
+
+                        <TextBlock FontSize="16" TextWrapping="Wrap" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Pagos planeados previos a la fecha actual
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0, 0, 0, 24"
+                            Style="{StaticResource Title}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="7"
+                            x:Name="TbkTotalPaymentPlannedToDate"/>
+
+                        <TextBlock FontSize="16" FontWeight="bold" Margin="0, 0, 0, 8">
+                            Eficiencia de cobro
+                        </TextBlock>
+                        <TextBlock
+                            Margin="0, 0, 0, 24"
+                            Style="{StaticResource Title}"
+                            Foreground="{StaticResource DarkGray}"
+                            FontWeight="Normal"
+                            Text="85%"
+                            x:Name="TbkEfficiency"/>
+                        <TextBlock Style="{StaticResource Paragraph}" TextWrapping="Wrap" Margin="0, 0, 0, 8">
+                            Nota: la eficiencia de cobro se calcula sobre los pagos realizados previos a la
+                            fecha actual
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <!--Graph column-->
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <lvc:PieChart Name="pcCreditEfficiency"/>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
