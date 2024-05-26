@@ -44,6 +44,7 @@ namespace SFIClient.Controlls
 
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
         {
+            //TODO: change client name
             string client = "Andres Manuel López Obrador";
 
             string captureLine = GenerateCaptureLine(BindedPayment.invoice, BindedPayment.planned_date);

@@ -10,12 +10,12 @@ namespace SFIDataAccess.Model
     public class PaymentLayout
     {
         [DataMember]
-        public string CaptureLine { get; set; }
+        public string capture_line { get; set; }
 
         [DataMember]
-        public DateTime GenerationDate { get; set; }
+        public DateTime generation_date { get; set; }
 
         [DataMember]
-        public int IdPayment { get; set; }
+        public int id_payment { get; set; }
     }
 }
