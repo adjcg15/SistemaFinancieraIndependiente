@@ -21,5 +21,15 @@ namespace SFIClient.Views
         {
             InitializeComponent();
         }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnReturnToPreviousPageClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

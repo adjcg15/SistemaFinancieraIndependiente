@@ -1006,12 +1006,12 @@ namespace SFIDataAccess.DataAccessObjects
                         {
                             credit.Payments = storedCreditPayments
                                 .Select(p => new Payment()
-                                    {
-                                        id = p.id_payment,
-                                        amount = (double)p.amount,
-                                        planned_date = p.planned_date,
-                                        reconciliation_date = p.reconciliation_date
-                                    })
+                                {
+                                    id = p.id_payment,
+                                    amount = (double)p.amount,
+                                    planned_date = p.planned_date,
+                                    reconciliation_date = p.reconciliation_date
+                                })
                                 .ToArray();
                         }
                     }
