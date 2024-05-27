@@ -89,12 +89,13 @@ namespace SFIClient.Controlls
         }
 
         private void HandleDownloadLayoutRequest(
-     Payment payment,
-     string captureLine,
-     string client,
-     string creditInvoice,
-     string plannedDate,
-     double amount)
+             Payment payment,
+             string captureLine,
+             string client,
+             string creditInvoice,
+             string plannedDate,
+             double amount
+            )
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.id);

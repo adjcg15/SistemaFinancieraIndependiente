@@ -4,6 +4,7 @@ using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -276,7 +277,6 @@ namespace SFIClient.Views
                 }
             }
         }
-
         private void ClosePayment(string paymentInvoice)
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
@@ -285,10 +285,11 @@ namespace SFIClient.Views
             Payment updatedPayment = paymentsList.Find(payment => payment.invoice == paymentInvoice);
             updatedPayment.Interest = interestPercentage;
             updatedPayment.reconciliation_date = DateTime.Now;
-
-            Payment lastPayment = paymentsList.Last();
-            double interestDecimal = (double)interestPercentage / 100;
-            lastPayment.amount = Math.Max((1 + interestDecimal) * lastPayment.amount, 0);
+            if (paymentsList.All(payment => payment.reconciliation_date.HasValue))
+            {
+                DateTime lastPaymentDate = paymentsList.Max(payment => payment.reconciliation_date.Value);
+                creditsServiceClient.UpdateSettlementDate(credit.Invoice, lastPaymentDate);
+            }
 
             ShowPayments();
         }
