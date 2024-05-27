@@ -130,17 +130,18 @@ namespace SFIClient.Views
         {
             var textBoxes = new[]
             {
-            TbPaymentMonths,
-            TbInterestRate,
-            TbInterestOnArrears,
-            TbAdvancePaymentReduction
-        };
+                TbPaymentMonths,
+                TbInterestRate,
+                TbInterestOnArrears,
+                TbAdvancePaymentReduction
+             };
+
             foreach (var textBox in textBoxes)
             {
                 RestrictToNumericInput(textBox);
             }
         }
-        
+
         private bool VerifyCreditConditionInformationFields()
         {
             bool isValidCreditCondition = true;
@@ -294,7 +295,7 @@ namespace SFIClient.Views
         {
             textBox.PreviewTextInput += (sender, e) =>
             {
-                if (!char.IsDigit(e.Text, e.Text.Length - 1) && e.Text != ".")
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 {
                     e.Handled = true;
                 }
@@ -327,8 +328,9 @@ namespace SFIClient.Views
 
         private bool IsTextAllowed(string text)
         {
-            return text.All(c => char.IsDigit(c) || c == '.');
+            return text.All(c => char.IsDigit(c));
         }
+
 
         private void ShowSaveChangesConfirmationDialog()
         {
