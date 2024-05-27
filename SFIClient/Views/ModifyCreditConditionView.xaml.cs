@@ -22,12 +22,13 @@ namespace SFIClient.Views
         public ModifyCreditConditionController(CreditCondition creditCondition)
         {
             InitializeComponent();
+            this.DataContext = this;
             identifier = creditCondition.Identifier;
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            ShowCreditConditionInformation();
-            LoadCreditTypes();
+            LoadCreditTypes(); 
+            ShowCreditConditionInformation(); 
             ApplyNumericRestrictions();
         }
         private void ShowCreditConditionInformation()
@@ -40,7 +41,12 @@ namespace SFIClient.Views
                 RbInactivePolicy.IsChecked = !newCondition.IsActive;
                 RbApplyIVa.IsChecked = newCondition.IsIvaApplied;
                 RbDontApplyIVA.IsChecked = !newCondition.IsIvaApplied;
-                CbCreditTypes.SelectedItem = newCondition.CreditType;
+                var matchingCreditType = CbCreditTypes.Items.Cast<CreditType>()
+                    .FirstOrDefault(ct => ct.Identifier == newCondition.CreditType.Identifier); 
+                {
+                    CbCreditTypes.SelectedItem = matchingCreditType;
+                }
+
                 TbPaymentMonths.Text = newCondition.PaymentMonths.ToString();
                 TbInterestRate.Text = newCondition.InterestRate.ToString();
                 TbInterestOnArrears.Text = newCondition.InterestOnArrears.ToString();
@@ -61,6 +67,7 @@ namespace SFIClient.Views
                 RedirectToConsultConditionsCredit();
             }
         }
+
 
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -133,23 +140,7 @@ namespace SFIClient.Views
                 RestrictToNumericInput(textBox);
             }
         }
-        private void RestrictToNumericInput(TextBox textBox)
-        {
-            textBox.PreviewTextInput += (sender, e) =>
-            {
-                if (!char.IsDigit(e.Text, e.Text.Length - 1))
-                {
-                    e.Handled = true;
-                }
-            };
-            textBox.PreviewKeyDown += (sender, e) =>
-            {
-                if (e.Key == Key.Space)
-                {
-                    e.Handled = true;
-                }
-            };
-        }
+        
         private bool VerifyCreditConditionInformationFields()
         {
             bool isValidCreditCondition = true;
@@ -279,13 +270,66 @@ namespace SFIClient.Views
                 newCondition.IsIvaApplied = RbApplyIVa.IsChecked ?? false;
                 newCondition.CreditType = (CreditType)CbCreditTypes.SelectedItem;
                 newCondition.PaymentMonths = Convert.ToInt32(TbPaymentMonths.Text.Trim());
-                newCondition.InterestRate = Convert.ToDouble(TbInterestRate.Text.Trim());
-                newCondition.InterestOnArrears = Convert.ToDouble(TbInterestOnArrears.Text.Trim());
-                newCondition.AdvancePaymentReduction = Convert.ToDouble(TbAdvancePaymentReduction.Text.Trim());
+                try
+                {
+                    newCondition.InterestRate = (double)Convert.ToDecimal(TbInterestRate.Text.Trim());
+                    newCondition.InterestOnArrears = (double)Convert.ToDecimal(TbInterestOnArrears.Text.Trim());
+                    newCondition.AdvancePaymentReduction = (double)Convert.ToDecimal(TbAdvancePaymentReduction.Text.Trim());
 
-                ShowSaveChangesConfirmationDialog();
+                    ShowSaveChangesConfirmationDialog();
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Uno o más campos contienen un formato incorrecto. Asegúrese de que todos los campos numéricos tengan valores válidos.",
+                                    "Error de formato", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (OverflowException)
+                {
+                    MessageBox.Show("Uno o más campos contienen valores que son demasiado grandes o pequeños.",
+                                    "Error de desbordamiento", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
+        private void RestrictToNumericInput(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (!char.IsDigit(e.Text, e.Text.Length - 1) && e.Text != ".")
+                {
+                    e.Handled = true;
+                }
+            };
+
+            textBox.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Space)
+                {
+                    e.Handled = true;
+                }
+            };
+
+            DataObject.AddPastingHandler(textBox, (sender, e) =>
+            {
+                if (e.DataObject.GetDataPresent(typeof(string)))
+                {
+                    string text = e.DataObject.GetData(typeof(string)) as string;
+                    if (!IsTextAllowed(text))
+                    {
+                        e.CancelCommand();
+                    }
+                }
+                else
+                {
+                    e.CancelCommand();
+                }
+            });
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            return text.All(c => char.IsDigit(c) || c == '.');
+        }
+
         private void ShowSaveChangesConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
