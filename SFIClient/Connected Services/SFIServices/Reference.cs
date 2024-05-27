@@ -2555,6 +2555,13 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiency", ReplyAction="http://tempuri.org/ICreditsService/GetCreditForCollectionEfficiencyResponse")]
         System.Threading.Tasks.Task<SFIClient.SFIServices.Credit> GetCreditForCollectionEfficiencyAsync(string invoice);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/UpdateSettlementDate", ReplyAction="http://tempuri.org/ICreditsService/UpdateSettlementDateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/ICreditsService/UpdateSettlementDateServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
+        void UpdateSettlementDate(string creditInvoice, System.DateTime settlementDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICreditsService/UpdateSettlementDate", ReplyAction="http://tempuri.org/ICreditsService/UpdateSettlementDateResponse")]
+        System.Threading.Tasks.Task UpdateSettlementDateAsync(string creditInvoice, System.DateTime settlementDate);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2726,6 +2733,14 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<SFIClient.SFIServices.Credit> GetCreditForCollectionEfficiencyAsync(string invoice) {
             return base.Channel.GetCreditForCollectionEfficiencyAsync(invoice);
+        }
+        
+        public void UpdateSettlementDate(string creditInvoice, System.DateTime settlementDate) {
+            base.Channel.UpdateSettlementDate(creditInvoice, settlementDate);
+        }
+        
+        public System.Threading.Tasks.Task UpdateSettlementDateAsync(string creditInvoice, System.DateTime settlementDate) {
+            return base.Channel.UpdateSettlementDateAsync(creditInvoice, settlementDate);
         }
     }
     
