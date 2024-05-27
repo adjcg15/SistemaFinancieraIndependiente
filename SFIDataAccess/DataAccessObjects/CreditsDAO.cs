@@ -1036,5 +1036,39 @@ namespace SFIDataAccess.DataAccessObjects
 
             return credit;
         }
+        public static void UpdateSettlementDate(string creditInvoice, DateTime settlementDate)
+        {
+            try
+            {
+                using (var context = new SFIDatabaseContext())
+                {
+                    var creditToUpdate = context.credits.FirstOrDefault(dbCredit => dbCredit.invoice == creditInvoice);
+
+                    if (creditToUpdate != null)
+                    {
+                        creditToUpdate.settlement_date = settlementDate;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("No se encontró el crédito asociado a la factura especificada.");
+                    }
+                }
+            }
+            catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible actualizar la fecha de liquidación en la base de datos"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible actualizar la fecha de liquidación en la base de datos"),
+                    new FaultReason("Error")
+                );
+            }
+        }
     }
 }

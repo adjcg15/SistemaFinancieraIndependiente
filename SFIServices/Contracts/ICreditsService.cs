@@ -79,5 +79,8 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         Credit GetCreditForCollectionEfficiency(string invoice);
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        void UpdateSettlementDate(string creditInvoice, DateTime settlementDate);
     }
  }

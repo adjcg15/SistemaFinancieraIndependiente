@@ -135,11 +135,12 @@ namespace SFIClient.Views
         {
             var textBoxes = new[]
             {
-            TbPaymentMonths,
-            TbInterestRate,
-            TbInterestOnArrears,
-            TbAdvancePaymentReduction
-        };
+                TbPaymentMonths,
+                TbInterestRate,
+                TbInterestOnArrears,
+                TbAdvancePaymentReduction
+            };
+
             foreach (var textBox in textBoxes)
             {
                 RestrictToNumericInput(textBox);
@@ -196,6 +197,7 @@ namespace SFIClient.Views
                     e.Handled = true;
                 }
             };
+
             textBox.PreviewKeyDown += (sender, e) =>
             {
                 if (e.Key == Key.Space)
@@ -203,6 +205,26 @@ namespace SFIClient.Views
                     e.Handled = true;
                 }
             };
+
+            DataObject.AddPastingHandler(textBox, (sender, e) =>
+            {
+                if (e.DataObject.GetDataPresent(typeof(string)))
+                {
+                    string text = e.DataObject.GetData(typeof(string)) as string;
+                    if (!IsTextAllowed(text))
+                    {
+                        e.CancelCommand();
+                    }
+                }
+                else
+                {
+                    e.CancelCommand();
+                }
+            });
+        }
+        private bool IsTextAllowed(string text)
+        {
+            return text.All(c => char.IsDigit(c));
         }
         private void BtnSaveCreditConditionClick(object sender, RoutedEventArgs e)
         {

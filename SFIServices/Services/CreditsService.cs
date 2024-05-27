@@ -130,5 +130,9 @@ namespace SFIServices
         {
             return CreditsDAO.GetCreditForCollectionEfficiency(invoice);
         }
+        public void UpdateSettlementDate(string creditInvoice, DateTime settlementDate)
+        {
+            CreditsDAO.UpdateSettlementDate(creditInvoice, settlementDate);
+        }
     }
 }

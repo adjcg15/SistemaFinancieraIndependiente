@@ -22,12 +22,13 @@ namespace SFIClient.Views
         public ModifyCreditConditionController(CreditCondition creditCondition)
         {
             InitializeComponent();
+            this.DataContext = this;
             identifier = creditCondition.Identifier;
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            ShowCreditConditionInformation();
-            LoadCreditTypes();
+            LoadCreditTypes(); 
+            ShowCreditConditionInformation(); 
             ApplyNumericRestrictions();
         }
         private void ShowCreditConditionInformation()
@@ -40,7 +41,12 @@ namespace SFIClient.Views
                 RbInactivePolicy.IsChecked = !newCondition.IsActive;
                 RbApplyIVa.IsChecked = newCondition.IsIvaApplied;
                 RbDontApplyIVA.IsChecked = !newCondition.IsIvaApplied;
-                CbCreditTypes.SelectedItem = newCondition.CreditType;
+                var matchingCreditType = CbCreditTypes.Items.Cast<CreditType>()
+                    .FirstOrDefault(ct => ct.Identifier == newCondition.CreditType.Identifier); 
+                {
+                    CbCreditTypes.SelectedItem = matchingCreditType;
+                }
+
                 TbPaymentMonths.Text = newCondition.PaymentMonths.ToString();
                 TbInterestRate.Text = newCondition.InterestRate.ToString();
                 TbInterestOnArrears.Text = newCondition.InterestOnArrears.ToString();
@@ -61,6 +67,7 @@ namespace SFIClient.Views
                 RedirectToConsultConditionsCredit();
             }
         }
+
 
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -123,33 +130,18 @@ namespace SFIClient.Views
         {
             var textBoxes = new[]
             {
-            TbPaymentMonths,
-            TbInterestRate,
-            TbInterestOnArrears,
-            TbAdvancePaymentReduction
-        };
+                TbPaymentMonths,
+                TbInterestRate,
+                TbInterestOnArrears,
+                TbAdvancePaymentReduction
+             };
+
             foreach (var textBox in textBoxes)
             {
                 RestrictToNumericInput(textBox);
             }
         }
-        private void RestrictToNumericInput(TextBox textBox)
-        {
-            textBox.PreviewTextInput += (sender, e) =>
-            {
-                if (!char.IsDigit(e.Text, e.Text.Length - 1))
-                {
-                    e.Handled = true;
-                }
-            };
-            textBox.PreviewKeyDown += (sender, e) =>
-            {
-                if (e.Key == Key.Space)
-                {
-                    e.Handled = true;
-                }
-            };
-        }
+
         private bool VerifyCreditConditionInformationFields()
         {
             bool isValidCreditCondition = true;
@@ -286,6 +278,47 @@ namespace SFIClient.Views
                 ShowSaveChangesConfirmationDialog();
             }
         }
+        private void RestrictToNumericInput(TextBox textBox)
+        {
+            textBox.PreviewTextInput += (sender, e) =>
+            {
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                }
+            };
+
+            textBox.PreviewKeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Space)
+                {
+                    e.Handled = true;
+                }
+            };
+
+            DataObject.AddPastingHandler(textBox, (sender, e) =>
+            {
+                if (e.DataObject.GetDataPresent(typeof(string)))
+                {
+                    string text = e.DataObject.GetData(typeof(string)) as string;
+                    if (!IsTextAllowed(text))
+                    {
+                        e.CancelCommand();
+                    }
+                }
+                else
+                {
+                    e.CancelCommand();
+                }
+            });
+        }
+
+        private bool IsTextAllowed(string text)
+        {
+            return text.All(c => char.IsDigit(c));
+        }
+
+
         private void ShowSaveChangesConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
@@ -333,18 +366,18 @@ namespace SFIClient.Views
                 if (creditConditionClient.VerifyUsageInCreditApplications(newCondition.Identifier))
                 {
                     MessageBox.Show($"La condición de crédito {newCondition.Identifier} " +
-                        $"está siendo utilizada en al menos una solicitud de crédito por lo que no puede ser modificada, " +
-                        $"intente nuevamente más tarde.",
+                        $"está siendo utilizada en al menos una solicitud de crédito en estado 'CREADA' o 'APROBADA', " +
+                        $"por lo que no puede ser modificada, intente nuevamente más tarde.",
                                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return; 
+                    return;
                 }
                 if (creditConditionClient.VerifyUsageInRegimen(newCondition.Identifier))
                 {
                     MessageBox.Show($"La condición de crédito {newCondition.Identifier} " +
-                        $"está siendo utilizada en al menos un regimen por lo que no puede ser modificada, " +
+                        $"está siendo utilizada en al menos un régimen por lo que no puede ser modificada, " +
                         $"intente nuevamente más tarde.",
                                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return; 
+                    return;
                 }
                 bool isRegistered = creditConditionClient.UpdateCreditCondition(newCondition);
                 if (isRegistered)
@@ -369,6 +402,7 @@ namespace SFIClient.Views
                 ShowErrorRecoveringCreditTypesDialog(errorMessage);
             }
         }
+
         private void RedirectToConsultConditionsCredit()
         {
             ConsultConditionsCreditView consultCreditConditions = new ConsultConditionsCreditView();

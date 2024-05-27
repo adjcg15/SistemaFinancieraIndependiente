@@ -19,33 +19,39 @@ namespace SFIClient.Controlls
 {
     public partial class PaymentControl : UserControl
     {
-        public  Payment BindedPayment { get; }
+        public Payment BindedPayment { get; }
         public Credit BindedCredit { get; }
         public event EventHandler<Payment> CardClick;
         public bool IsSelected { get; private set; }
-        public PaymentControl(Payment payment)
+        private int index;
+        private Action<int> disableButtonAction;
+        private string clientName;
+
+        public PaymentControl(Payment payment, int index, Action<int> disableButtonAction, bool isEnabled, string clientName)
         {
             InitializeComponent();
             BindedPayment = payment;
+            this.index = index;
+            this.disableButtonAction = disableButtonAction;
+            this.clientName = clientName;
             ShowCreditConditionInformation();
+            BtnDownloadLayout.IsEnabled = isEnabled;
         }
+
         private void ShowCreditConditionInformation()
         {
             TbkPaymentInvoice.Text = BindedPayment.invoice;
             TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
             TbkAmount.Text = BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"));
             TbkInterest.Text = BindedPayment.Interest.ToString();
-            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue 
-                ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy") 
+            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue
+                ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy")
                 : "-";
-            BtnDownloadLayout.IsEnabled = !BindedPayment.reconciliation_date.HasValue 
-                && BindedPayment.amount != 0;
         }
 
         private void BtnDownloadLayoutClick(object sender, RoutedEventArgs e)
         {
-            //TODO: change client name
-            string client = "Andres Manuel López Obrador";
+            string client = clientName;
 
             string captureLine = GenerateCaptureLine(BindedPayment.invoice, BindedPayment.planned_date);
             string creditInvoice = BindedPayment.invoice;
@@ -53,6 +59,10 @@ namespace SFIClient.Controlls
             double amount = BindedPayment.amount;
 
             HandleDownloadLayoutRequest(BindedPayment, captureLine, client, creditInvoice, plannedDate, amount);
+            if (BindedPayment.reconciliation_date.HasValue)
+            {
+                disableButtonAction(index);
+            }
         }
 
         private string GenerateCaptureLine(string invoice, DateTime plannedDate)
@@ -79,13 +89,13 @@ namespace SFIClient.Controlls
         }
 
         private void HandleDownloadLayoutRequest(
-            Payment payment, 
-            string captureLine, 
-            string client, 
-            string creditInvoice, 
-            string plannedDate, 
-            double amount
-        )
+             Payment payment,
+             string captureLine,
+             string client,
+             string creditInvoice,
+             string plannedDate,
+             double amount
+            )
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.id);
@@ -94,12 +104,17 @@ namespace SFIClient.Controlls
             {
                 PDFLayoutGenerator.GeneratePDF(client, existingLayout.capture_line, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
-            } 
+            }
             else
             {
                 creditsServiceClient.InsertIntoPaymentLayouts(captureLine, payment);
                 PDFLayoutGenerator.GeneratePDF(client, creditInvoice, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
+            }
+
+            if (payment.reconciliation_date.HasValue)
+            {
+                disableButtonAction(index);
             }
         }
 
@@ -108,4 +123,5 @@ namespace SFIClient.Controlls
             MessageBox.Show(message, "Descarga exitosa", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
+
 }

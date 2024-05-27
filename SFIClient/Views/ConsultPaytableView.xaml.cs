@@ -4,6 +4,7 @@ using SFIClient.SFIServices;
 using SFIClient.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -117,17 +118,43 @@ namespace SFIClient.Views
             SkpApplicablePayments.Visibility = paymentsList.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             SkpApplicablePayments.Children.Clear();
 
-            foreach (var payment in paymentsList)
+            string clientName = $"{credit.Client.Name} {credit.Client.Surname} {credit.Client.LastName}";
+
+            bool enableNext = true;
+            for (int i = 0; i < paymentsList.Count; i++)
             {
-                var paymentCard = new PaymentControl(payment);
+                bool isEnabled = enableNext && !paymentsList[i].reconciliation_date.HasValue;
+                var paymentCard = new PaymentControl(paymentsList[i], i, DisableButton, isEnabled, clientName);
                 paymentCard.CardClick += (sender, e) =>
                 {
                     selectedPayment = paymentCard;
                 };
 
                 SkpApplicablePayments.Children.Add(paymentCard);
+
+                if (paymentsList[i].reconciliation_date.HasValue)
+                {
+                    enableNext = true;
+                }
+                else
+                {
+                    enableNext = false;
+                }
             }
         }
+
+        private void DisableButton(int index)
+        {
+            var currentPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index];
+            currentPaymentCard.BtnDownloadLayout.IsEnabled = false;
+
+            if (index < SkpApplicablePayments.Children.Count - 1)
+            {
+                var nextPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index + 1];
+                nextPaymentCard.BtnDownloadLayout.IsEnabled = true;
+            }
+        }
+
 
         private void BtnRegisterPaymentClick(object sender, RoutedEventArgs e)
         {
@@ -141,7 +168,7 @@ namespace SFIClient.Views
 
                 try
                 {
-                    if(!IsSmallFile(selectedFilePath))
+                    if (!IsSmallFile(selectedFilePath))
                     {
                         string errorMessage = "El archivo seleccionado es demasiado grande. " +
                             "Por favor seleccione un archivo más pequeño.";
@@ -152,7 +179,7 @@ namespace SFIClient.Views
                         string[] expectedColumns = { "amount", "invoice", "planned_date", "credit_invoice", "reconciliation_date" };
                         using (var reader = new StreamReader(selectedFilePath))
                         {
-                            if(!validFileFormat(reader, expectedColumns))
+                            if (!validFileFormat(reader, expectedColumns))
                             {
                                 string errorMessage = "Por favor, asegúrese de que el archivo tenga las columnas 'amount', " +
                                     "'invoice', 'planned_date', 'credit_invoice' y 'reconciliation_date'.";
@@ -250,7 +277,6 @@ namespace SFIClient.Views
                 }
             }
         }
-
         private void ClosePayment(string paymentInvoice)
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
@@ -259,14 +285,14 @@ namespace SFIClient.Views
             Payment updatedPayment = paymentsList.Find(payment => payment.invoice == paymentInvoice);
             updatedPayment.Interest = interestPercentage;
             updatedPayment.reconciliation_date = DateTime.Now;
-
-            Payment lastPayment = paymentsList.Last();
-            double interestDecimal = (double) interestPercentage / 100;
-            lastPayment.amount = Math.Max((1 + interestDecimal) * lastPayment.amount, 0);
+            if (paymentsList.All(payment => payment.reconciliation_date.HasValue))
+            {
+                DateTime lastPaymentDate = paymentsList.Max(payment => payment.reconciliation_date.Value);
+                creditsServiceClient.UpdateSettlementDate(credit.Invoice, lastPaymentDate);
+            }
 
             ShowPayments();
         }
-
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
             RedirectToConsultCreditsList();
