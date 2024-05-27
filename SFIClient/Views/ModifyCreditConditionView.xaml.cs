@@ -333,18 +333,18 @@ namespace SFIClient.Views
                 if (creditConditionClient.VerifyUsageInCreditApplications(newCondition.Identifier))
                 {
                     MessageBox.Show($"La condición de crédito {newCondition.Identifier} " +
-                        $"está siendo utilizada en al menos una solicitud de crédito por lo que no puede ser modificada, " +
-                        $"intente nuevamente más tarde.",
+                        $"está siendo utilizada en al menos una solicitud de crédito en estado 'CREADA' o 'APROBADA', " +
+                        $"por lo que no puede ser modificada, intente nuevamente más tarde.",
                                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return; 
+                    return;
                 }
                 if (creditConditionClient.VerifyUsageInRegimen(newCondition.Identifier))
                 {
                     MessageBox.Show($"La condición de crédito {newCondition.Identifier} " +
-                        $"está siendo utilizada en al menos un regimen por lo que no puede ser modificada, " +
+                        $"está siendo utilizada en al menos un régimen por lo que no puede ser modificada, " +
                         $"intente nuevamente más tarde.",
                                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return; 
+                    return;
                 }
                 bool isRegistered = creditConditionClient.UpdateCreditCondition(newCondition);
                 if (isRegistered)
@@ -369,6 +369,7 @@ namespace SFIClient.Views
                 ShowErrorRecoveringCreditTypesDialog(errorMessage);
             }
         }
+
         private void RedirectToConsultConditionsCredit()
         {
             ConsultConditionsCreditView consultCreditConditions = new ConsultConditionsCreditView();

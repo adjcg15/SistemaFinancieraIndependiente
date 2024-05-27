@@ -223,7 +223,9 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 using (var context = new SFIDatabaseContext())
                 {
-                    return context.credit_applications.Any(ca => ca.credit_conditions.identifier == conditionIdentifier);
+                    return context.credit_applications.Any(ca =>
+                        ca.credit_conditions.identifier == conditionIdentifier &&
+                        (ca.id_credit_application_state == 7 || ca.id_credit_application_state == 8));
                 }
             }
             catch (System.Data.Entity.Core.EntityException)
@@ -239,6 +241,7 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
         }
+
         public static bool VerifyUsageInRegimen(string conditionIdentifier)
         {
             try
