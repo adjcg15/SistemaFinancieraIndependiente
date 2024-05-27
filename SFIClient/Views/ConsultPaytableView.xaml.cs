@@ -119,9 +119,10 @@ namespace SFIClient.Views
 
             string clientName = $"{credit.Client.Name} {credit.Client.Surname} {credit.Client.LastName}";
 
+            bool enableNext = true;
             for (int i = 0; i < paymentsList.Count; i++)
             {
-                bool isEnabled = (i == 0); 
+                bool isEnabled = enableNext && !paymentsList[i].reconciliation_date.HasValue;
                 var paymentCard = new PaymentControl(paymentsList[i], i, DisableButton, isEnabled, clientName);
                 paymentCard.CardClick += (sender, e) =>
                 {
@@ -129,20 +130,30 @@ namespace SFIClient.Views
                 };
 
                 SkpApplicablePayments.Children.Add(paymentCard);
+
+                if (paymentsList[i].reconciliation_date.HasValue)
+                {
+                    enableNext = true;
+                }
+                else
+                {
+                    enableNext = false;
+                }
             }
         }
 
         private void DisableButton(int index)
         {
+            var currentPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index];
+            currentPaymentCard.BtnDownloadLayout.IsEnabled = false;
+
             if (index < SkpApplicablePayments.Children.Count - 1)
             {
                 var nextPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index + 1];
                 nextPaymentCard.BtnDownloadLayout.IsEnabled = true;
             }
-
-            var currentPaymentCard = (PaymentControl)SkpApplicablePayments.Children[index];
-            currentPaymentCard.BtnDownloadLayout.IsEnabled = false;
         }
+
 
         private void BtnRegisterPaymentClick(object sender, RoutedEventArgs e)
         {
@@ -156,7 +167,7 @@ namespace SFIClient.Views
 
                 try
                 {
-                    if(!IsSmallFile(selectedFilePath))
+                    if (!IsSmallFile(selectedFilePath))
                     {
                         string errorMessage = "El archivo seleccionado es demasiado grande. " +
                             "Por favor seleccione un archivo más pequeño.";
@@ -167,7 +178,7 @@ namespace SFIClient.Views
                         string[] expectedColumns = { "amount", "invoice", "planned_date", "credit_invoice", "reconciliation_date" };
                         using (var reader = new StreamReader(selectedFilePath))
                         {
-                            if(!validFileFormat(reader, expectedColumns))
+                            if (!validFileFormat(reader, expectedColumns))
                             {
                                 string errorMessage = "Por favor, asegúrese de que el archivo tenga las columnas 'amount', " +
                                     "'invoice', 'planned_date', 'credit_invoice' y 'reconciliation_date'.";
@@ -276,12 +287,11 @@ namespace SFIClient.Views
             updatedPayment.reconciliation_date = DateTime.Now;
 
             Payment lastPayment = paymentsList.Last();
-            double interestDecimal = (double) interestPercentage / 100;
+            double interestDecimal = (double)interestPercentage / 100;
             lastPayment.amount = Math.Max((1 + interestDecimal) * lastPayment.amount, 0);
 
             ShowPayments();
         }
-
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
             RedirectToConsultCreditsList();

@@ -19,13 +19,14 @@ namespace SFIClient.Controlls
 {
     public partial class PaymentControl : UserControl
     {
-        public  Payment BindedPayment { get; }
+        public Payment BindedPayment { get; }
         public Credit BindedCredit { get; }
         public event EventHandler<Payment> CardClick;
         public bool IsSelected { get; private set; }
         private int index;
         private Action<int> disableButtonAction;
         private string clientName;
+
         public PaymentControl(Payment payment, int index, Action<int> disableButtonAction, bool isEnabled, string clientName)
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace SFIClient.Controlls
             ShowCreditConditionInformation();
             BtnDownloadLayout.IsEnabled = isEnabled;
         }
+
         private void ShowCreditConditionInformation()
         {
             TbkPaymentInvoice.Text = BindedPayment.invoice;
@@ -57,7 +59,10 @@ namespace SFIClient.Controlls
             double amount = BindedPayment.amount;
 
             HandleDownloadLayoutRequest(BindedPayment, captureLine, client, creditInvoice, plannedDate, amount);
-            disableButtonAction(index);
+            if (BindedPayment.reconciliation_date.HasValue)
+            {
+                disableButtonAction(index);
+            }
         }
 
         private string GenerateCaptureLine(string invoice, DateTime plannedDate)
@@ -83,15 +88,13 @@ namespace SFIClient.Controlls
             return captureBuilder.ToString();
         }
 
-
         private void HandleDownloadLayoutRequest(
-            Payment payment,
-            string captureLine,
-            string client,
-            string creditInvoice,
-            string plannedDate,
-            double amount
-        )
+     Payment payment,
+     string captureLine,
+     string client,
+     string creditInvoice,
+     string plannedDate,
+     double amount)
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
             var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.id);
@@ -107,10 +110,17 @@ namespace SFIClient.Controlls
                 PDFLayoutGenerator.GeneratePDF(client, creditInvoice, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
             }
+
+            if (payment.reconciliation_date.HasValue)
+            {
+                disableButtonAction(index);
+            }
         }
+
         private void ShowSuccessMessage(string message)
         {
             MessageBox.Show(message, "Descarga exitosa", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
+
 }
