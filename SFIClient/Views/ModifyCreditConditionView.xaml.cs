@@ -271,24 +271,11 @@ namespace SFIClient.Views
                 newCondition.IsIvaApplied = RbApplyIVa.IsChecked ?? false;
                 newCondition.CreditType = (CreditType)CbCreditTypes.SelectedItem;
                 newCondition.PaymentMonths = Convert.ToInt32(TbPaymentMonths.Text.Trim());
-                try
-                {
-                    newCondition.InterestRate = (double)Convert.ToDecimal(TbInterestRate.Text.Trim());
-                    newCondition.InterestOnArrears = (double)Convert.ToDecimal(TbInterestOnArrears.Text.Trim());
-                    newCondition.AdvancePaymentReduction = (double)Convert.ToDecimal(TbAdvancePaymentReduction.Text.Trim());
+                newCondition.InterestRate = Convert.ToDouble(TbInterestRate.Text.Trim());
+                newCondition.InterestOnArrears = Convert.ToDouble(TbInterestOnArrears.Text.Trim());
+                newCondition.AdvancePaymentReduction = Convert.ToDouble(TbAdvancePaymentReduction.Text.Trim());
 
-                    ShowSaveChangesConfirmationDialog();
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Uno o más campos contienen un formato incorrecto. Asegúrese de que todos los campos numéricos tengan valores válidos.",
-                                    "Error de formato", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (OverflowException)
-                {
-                    MessageBox.Show("Uno o más campos contienen valores que son demasiado grandes o pequeños.",
-                                    "Error de desbordamiento", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                ShowSaveChangesConfirmationDialog();
             }
         }
         private void RestrictToNumericInput(TextBox textBox)
