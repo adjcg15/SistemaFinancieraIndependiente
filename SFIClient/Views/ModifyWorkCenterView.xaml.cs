@@ -97,7 +97,7 @@ namespace SFIClient.Views
         }
         private void RedirectToMainMenu()
         {
-            NavigationService.Navigate(new SearchClientByRFCController());
+            NavigationService.Navigate(new MainMenuController());
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
@@ -283,8 +283,8 @@ namespace SFIClient.Views
         private void ShowSaveChangesConfirmationDialog()
         {
             MessageBoxResult buttonClicked = MessageBox.Show(
-                "¿Está seguro que desea guardar los cambios realizados al centro de trabajo del cliente "
-                + client.Name + " " + client.LastName + "?",
+                "¿Está seguro que desea guardar los cambios realizados al centro de trabajo"
+                + client.Name + " " + client.LastName,
                 "Confirmación de actualización",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
