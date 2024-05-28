@@ -103,13 +103,13 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.OK)
             {
-                RedirectToConsultCreditsList();
+                RedirectToLogIn();
             }
         }
 
-        private void RedirectToConsultCreditsList()
+        private void RedirectToLogIn()
         {
-            NavigationService.Navigate(new CreditsListController());
+            NavigationService.Navigate(new LoginController());
         }
 
         private void ShowPayments()
@@ -249,8 +249,8 @@ namespace SFIClient.Views
                 if (existingPayment != null &&
                     existingPayment.ReconciliationDate.HasValue)
                 {
-                    MessageBox.Show("El pago para la factura especificada ya ha sido conciliado. No se puede actualizar.",
-                        "Pago ya conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("El pago ingresado para el crédito especificado ya ha sido conciliado. No se puede actualizar.",
+                        "Pago conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
                     continue;
                 }
 
@@ -272,7 +272,7 @@ namespace SFIClient.Views
                 }
                 else
                 {
-                    MessageBox.Show("No se encontró información de pago para la factura especificada.",
+                    MessageBox.Show("No se encontró información de pago para el crédito especificado.",
                         "Error de búsqueda de pago", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -295,7 +295,7 @@ namespace SFIClient.Views
         }
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
-            RedirectToConsultCreditsList();
+            RedirectToLogIn();
         }
     }
 }

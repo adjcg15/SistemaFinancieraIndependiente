@@ -630,6 +630,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
 
             return success;
         }
@@ -720,6 +724,11 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+
             return payments;
         }
 
@@ -762,6 +771,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
         }
 
         public static decimal ClosePayment(string invoice)
@@ -792,6 +805,10 @@ namespace SFIDataAccess.DataAccessObjects
             catch (DbEntityValidationException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible ejecutar el procedimiento"), new FaultReason("Error de validación de entidad"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar el procedimiento"), new FaultReason("Error de base de datos"));
             }
             return interest;
         }
@@ -838,6 +855,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar el procedimiento"), new FaultReason("Error de base de datos"));
+            }
         }
 
         public static PaymentLayout GetPaymentLayoutByPaymentId(int paymentId)
@@ -875,6 +896,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
         }
 
         public static List<Payment> GetAllPaymentsSortedByPlannedDate()
@@ -906,6 +931,10 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
             catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
@@ -1051,7 +1080,7 @@ namespace SFIDataAccess.DataAccessObjects
                     }
                     else
                     {
-                        throw new Exception("No se encontró el crédito asociado a la factura especificada.");
+                        throw new Exception("No se encontró el crédito asociado al crédito");
                     }
                 }
             }

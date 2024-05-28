@@ -81,15 +81,19 @@ namespace SFIDataAccess.DataAccessObjects
             }
             catch (System.Data.Entity.Core.EntityException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos, intente más tarde"));
             }
             catch (DbUpdateException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos, intente más tarde"));
             }
             catch (DbEntityValidationException)
             {
-                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos, intente más tarde"));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos, intente más tarde"));
             }
         }
         public static List<CreditCondition> RecoverAllCreditConditions()
@@ -125,6 +129,10 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
             catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
@@ -213,6 +221,10 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
             catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }

@@ -59,13 +59,17 @@ namespace SFIClient.Views
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                RedirectToConsultConditionsCredit();
+                RedirectToLogIn();
             }
             catch (CommunicationException)
             {
                 MessageBox.Show("No fue posible establecer la conexión con el servicio, intente más tarde", "Error en el servicio");
-                RedirectToConsultConditionsCredit();
+                RedirectToLogIn();
             }
+        }
+        private void RedirectToLogIn()
+        {
+            NavigationService.Navigate(new LoginController());
         }
 
 
