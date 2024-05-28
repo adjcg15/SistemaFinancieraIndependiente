@@ -103,13 +103,13 @@ namespace SFIClient.Views
 
             if (buttonClicked == MessageBoxResult.OK)
             {
-                RedirectToConsultCreditsList();
+                RedirectToLogIn();
             }
         }
 
-        private void RedirectToConsultCreditsList()
+        private void RedirectToLogIn()
         {
-            NavigationService.Navigate(new CreditsListController());
+            NavigationService.Navigate(new LoginController());
         }
 
         private void ShowPayments()
@@ -123,7 +123,7 @@ namespace SFIClient.Views
             bool enableNext = true;
             for (int i = 0; i < paymentsList.Count; i++)
             {
-                bool isEnabled = enableNext && !paymentsList[i].reconciliation_date.HasValue;
+                bool isEnabled = enableNext && !paymentsList[i].ReconciliationDate.HasValue;
                 var paymentCard = new PaymentControl(paymentsList[i], i, DisableButton, isEnabled, clientName);
                 paymentCard.CardClick += (sender, e) =>
                 {
@@ -132,7 +132,7 @@ namespace SFIClient.Views
 
                 SkpApplicablePayments.Children.Add(paymentCard);
 
-                if (paymentsList[i].reconciliation_date.HasValue)
+                if (paymentsList[i].ReconciliationDate.HasValue)
                 {
                     enableNext = true;
                 }
@@ -247,21 +247,21 @@ namespace SFIClient.Views
 
                 Payment existingPayment = creditsServiceClient.GetPaymentByInvoice(invoice);
                 if (existingPayment != null &&
-                    existingPayment.reconciliation_date.HasValue)
+                    existingPayment.ReconciliationDate.HasValue)
                 {
-                    MessageBox.Show("El pago para la factura especificada ya ha sido conciliado. No se puede actualizar.",
-                        "Pago ya conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("El pago ingresado para el crédito especificado ya ha sido conciliado. No se puede actualizar.",
+                        "Pago conciliado", MessageBoxButton.OK, MessageBoxImage.Warning);
                     continue;
                 }
 
                 if (existingPayment != null)
                 {
-                    double amountFromDB = existingPayment.amount;
+                    double amountFromDB = existingPayment.Amount;
                     double amountFromFile = Convert.ToDouble(values[0]);
                     double tolerance = 0.01;
                     if (Math.Abs(amountFromDB - amountFromFile) <= tolerance)
                     {
-                        ClosePayment(existingPayment.invoice);
+                        ClosePayment(existingPayment.Invoice);
                     }
                     else
                     {
@@ -272,7 +272,7 @@ namespace SFIClient.Views
                 }
                 else
                 {
-                    MessageBox.Show("No se encontró información de pago para la factura especificada.",
+                    MessageBox.Show("No se encontró información de pago para el crédito especificado.",
                         "Error de búsqueda de pago", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -282,12 +282,12 @@ namespace SFIClient.Views
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
 
             decimal interestPercentage = creditsServiceClient.ClosePayment(paymentInvoice);
-            Payment updatedPayment = paymentsList.Find(payment => payment.invoice == paymentInvoice);
+            Payment updatedPayment = paymentsList.Find(payment => payment.Invoice == paymentInvoice);
             updatedPayment.Interest = interestPercentage;
-            updatedPayment.reconciliation_date = DateTime.Now;
-            if (paymentsList.All(payment => payment.reconciliation_date.HasValue))
+            updatedPayment.ReconciliationDate = DateTime.Now;
+            if (paymentsList.All(payment => payment.ReconciliationDate.HasValue))
             {
-                DateTime lastPaymentDate = paymentsList.Max(payment => payment.reconciliation_date.Value);
+                DateTime lastPaymentDate = paymentsList.Max(payment => payment.ReconciliationDate.Value);
                 creditsServiceClient.UpdateSettlementDate(credit.Invoice, lastPaymentDate);
             }
 
@@ -295,7 +295,7 @@ namespace SFIClient.Views
         }
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
-            RedirectToConsultCreditsList();
+            RedirectToLogIn();
         }
     }
 }

@@ -40,12 +40,12 @@ namespace SFIClient.Controlls
 
         private void ShowCreditConditionInformation()
         {
-            TbkPaymentInvoice.Text = BindedPayment.invoice;
-            TbkPlannedDate.Text = BindedPayment.planned_date.ToString("dd-MM-yyyy");
-            TbkAmount.Text = BindedPayment.amount.ToString("C", new System.Globalization.CultureInfo("es-MX"));
+            TbkPaymentInvoice.Text = BindedPayment.Invoice;
+            TbkPlannedDate.Text = BindedPayment.PlannedDate.ToString("dd-MM-yyyy");
+            TbkAmount.Text = BindedPayment.Amount.ToString("C", new System.Globalization.CultureInfo("es-MX"));
             TbkInterest.Text = BindedPayment.Interest.ToString();
-            TbkReconciliationDate.Text = BindedPayment.reconciliation_date.HasValue
-                ? BindedPayment.reconciliation_date.Value.ToString("dd-MM-yyyy")
+            TbkReconciliationDate.Text = BindedPayment.ReconciliationDate.HasValue
+                ? BindedPayment.ReconciliationDate.Value.ToString("dd-MM-yyyy")
                 : "-";
         }
 
@@ -53,13 +53,13 @@ namespace SFIClient.Controlls
         {
             string client = clientName;
 
-            string captureLine = GenerateCaptureLine(BindedPayment.invoice, BindedPayment.planned_date);
-            string creditInvoice = BindedPayment.invoice;
-            string plannedDate = BindedPayment.planned_date.ToString("dd-MM-yyyy");
-            double amount = BindedPayment.amount;
+            string captureLine = GenerateCaptureLine(BindedPayment.Invoice, BindedPayment.PlannedDate);
+            string creditInvoice = BindedPayment.Invoice;
+            string plannedDate = BindedPayment.PlannedDate.ToString("dd-MM-yyyy");
+            double amount = BindedPayment.Amount;
 
             HandleDownloadLayoutRequest(BindedPayment, captureLine, client, creditInvoice, plannedDate, amount);
-            if (BindedPayment.reconciliation_date.HasValue)
+            if (BindedPayment.ReconciliationDate.HasValue)
             {
                 disableButtonAction(index);
             }
@@ -98,11 +98,11 @@ namespace SFIClient.Controlls
             )
         {
             CreditsServiceClient creditsServiceClient = new CreditsServiceClient();
-            var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.id);
+            var existingLayout = creditsServiceClient.GetPaymentLayoutByPaymentId(payment.Id);
 
             if (existingLayout != null)
             {
-                PDFLayoutGenerator.GeneratePDF(client, existingLayout.capture_line, plannedDate, amount, captureLine);
+                PDFLayoutGenerator.GeneratePDF(client, existingLayout.CaptureLine, plannedDate, amount, captureLine);
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
             }
             else
@@ -112,7 +112,7 @@ namespace SFIClient.Controlls
                 ShowSuccessMessage("El archivo se ha descargado correctamente en la carpeta Documentos con el nombre SFLayout.");
             }
 
-            if (payment.reconciliation_date.HasValue)
+            if (payment.ReconciliationDate.HasValue)
             {
                 disableButtonAction(index);
             }

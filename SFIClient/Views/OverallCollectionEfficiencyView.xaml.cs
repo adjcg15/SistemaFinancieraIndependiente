@@ -171,7 +171,7 @@ namespace SFIClient.Views
 
             foreach (var credit in creditsWithPaymentsList)
             {
-                if (credit.Payments[0].reconciliation_date != null)
+                if (credit.Payments[0].ReconciliationDate != null)
                 {
                     creditsPaid += 1;
                 }
@@ -220,14 +220,14 @@ namespace SFIClient.Views
 
             foreach (var credit in creditsWithPaymentsList)
             {
-                totalAmount += credit.Payments[0].amount;
-                if (credit.Payments[0].reconciliation_date != null)
+                totalAmount += credit.Payments[0].Amount;
+                if (credit.Payments[0].ReconciliationDate != null)
                 {
-                    amountPaid += credit.Payments[0].amount;
+                    amountPaid += credit.Payments[0].Amount;
                 }
                 else
                 {
-                    amountDoesNotPaid += credit.Payments[0].amount;
+                    amountDoesNotPaid += credit.Payments[0].Amount;
                 }
             }
             collectionEfficiencyPercentage = (amountPaid / totalAmount) * 100;
@@ -271,15 +271,15 @@ namespace SFIClient.Views
                 CreditPaymentControl creditPaymentControl = new CreditPaymentControl();
                 creditPaymentControl.TbkCreditInvoice.Text = credit.Invoice;
                 creditPaymentControl.TbkCreditGranted.Text = credit.AmountApproved.ToString();
-                creditPaymentControl.TbkPaidAmount.Text = credit.Payments[0].amount.ToString();
-                if (credit.Payments[0].reconciliation_date != null)
+                creditPaymentControl.TbkPaidAmount.Text = credit.Payments[0].Amount.ToString();
+                if (credit.Payments[0].ReconciliationDate != null)
                 {
-                    creditPaymentControl.TbkDate.Text = Utilities.DateToolkit.FormatAsDDMMYYY(credit.Payments[0].reconciliation_date.Value);
+                    creditPaymentControl.TbkDate.Text = Utilities.DateToolkit.FormatAsDDMMYYY(credit.Payments[0].ReconciliationDate.Value);
                     SkpPaidCredits.Children.Add(creditPaymentControl);
                 }
                 else
                 {
-                    creditPaymentControl.TbkDate.Text = Utilities.DateToolkit.FormatAsDDMMYYY(credit.Payments[0].planned_date);
+                    creditPaymentControl.TbkDate.Text = Utilities.DateToolkit.FormatAsDDMMYYY(credit.Payments[0].PlannedDate);
                     SkpUnpaidCredits.Children.Add(creditPaymentControl);
                 }
             }
