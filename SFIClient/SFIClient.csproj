@@ -79,8 +79,8 @@
     <Compile Include="Controlls\ApplicationsListCreditApplicationControl.xaml.cs">
       <DependentUpon>ApplicationsListCreditApplicationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlls\ClientControll.xaml.cs">
-      <DependentUpon>ClientControll.xaml</DependentUpon>
+    <Compile Include="Controlls\ClientControl.xaml.cs">
+      <DependentUpon>ClientControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
@@ -187,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlls\ClientControll.xaml">
+    <Page Include="Controlls\ClientControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

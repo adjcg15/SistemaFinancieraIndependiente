@@ -135,29 +135,29 @@ namespace SFIClient.Views
 
         private void ShowClientWithAllOptions(Client client)
         {
-            ClientControll clientControll = new ClientControll();
-            clientControll.ButtonSeePersonalInformation += BtnSeePersonalInformationClick;
-            clientControll.ButtonModifyPersonalInformation += BtnModifyPersonalInformationClick;
-            clientControll.ButtonModifyBankAccount += BtnModifyBankAccountClick;
-            clientControll.ButtonModifyWorkCenter += BtnModifyWorkCenterClick;
-            clientControll.ButtonModifyPersonalReferences += BtnModifyPersonalReferencesClick;
-            clientControll.ButtonApplyForCredit += BtnApplyForCreditClick;
-            clientControll.LblClientRFC.Content = client.Rfc;
-            clientControll.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
-            clientControll.LblClientCreditStatus.Content = "Cliente sin crédito y sin solicitud activa";
-            ItcClients.Items.Add(clientControll);
+            ClientControl clientControl = new ClientControl();
+            clientControl.ButtonSeePersonalInformation += BtnSeePersonalInformationClick;
+            clientControl.ButtonModifyPersonalInformation += BtnModifyPersonalInformationClick;
+            clientControl.ButtonModifyBankAccount += BtnModifyBankAccountClick;
+            clientControl.ButtonModifyWorkCenter += BtnModifyWorkCenterClick;
+            clientControl.ButtonModifyPersonalReferences += BtnModifyPersonalReferencesClick;
+            clientControl.ButtonApplyForCredit += BtnApplyForCreditClick;
+            clientControl.LblClientRFC.Content = client.Rfc;
+            clientControl.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
+            clientControl.LblClientCreditStatus.Content = "Cliente sin crédito y sin solicitud activa";
+            ItcClients.Items.Add(clientControl);
         }
 
         private void ShowClientWithAllOptionsWithoutCreditApplication(Client client)
         {
-            ClientControll clientControll = new ClientControll();
-            clientControll.ButtonSeePersonalInformation += BtnSeePersonalInformationClick;
-            clientControll.ButtonModifyPersonalInformation += BtnModifyPersonalInformationClick;
-            clientControll.ButtonModifyBankAccount += BtnModifyBankAccountClick;
-            clientControll.ButtonModifyWorkCenter += BtnModifyWorkCenterClick;
-            clientControll.ButtonModifyPersonalReferences += BtnModifyPersonalReferencesClick;
-            clientControll.LblClientRFC.Content = client.Rfc;
-            clientControll.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
+            ClientControl clientControl = new ClientControl();
+            clientControl.ButtonSeePersonalInformation += BtnSeePersonalInformationClick;
+            clientControl.ButtonModifyPersonalInformation += BtnModifyPersonalInformationClick;
+            clientControl.ButtonModifyBankAccount += BtnModifyBankAccountClick;
+            clientControl.ButtonModifyWorkCenter += BtnModifyWorkCenterClick;
+            clientControl.ButtonModifyPersonalReferences += BtnModifyPersonalReferencesClick;
+            clientControl.LblClientRFC.Content = client.Rfc;
+            clientControl.LblClientName.Content = client.LastName + " " + client.Surname + " " + client.Name;
             BitmapImage bitmap = new BitmapImage(new Uri("pack://application:,,,/Assets/ApplyForCreditDisabledIcon.png"));
             Image image = new Image
             {
@@ -165,27 +165,27 @@ namespace SFIClient.Views
                 Height = 25,
                 Width = 34,
             };
-            clientControll.BtnApplyForCredit.Content = image;
-            clientControll.BtnApplyForCredit.IsEnabled = false;
+            clientControl.BtnApplyForCredit.Content = image;
+            clientControl.BtnApplyForCredit.IsEnabled = false;
             if (client.HasActiveCredit)
             {
-                clientControll.LblClientCreditStatus.Content = "Cliente con crédito activo";
+                clientControl.LblClientCreditStatus.Content = "Cliente con crédito activo";
             }
             else if (client.HasCreditApplication)
             {
 
-                clientControll.LblClientCreditStatus.Content = "Cliente con solicitud de crédito activa";
+                clientControl.LblClientCreditStatus.Content = "Cliente con solicitud de crédito activa";
             }
-            ItcClients.Items.Add(clientControll);
+            ItcClients.Items.Add(clientControl);
         }
 
         private void BtnSeePersonalInformationClick(object sender, EventArgs e)
         {
-            ClientControll clientControll = (ClientControll)sender;
+            ClientControl clientControl = (ClientControl)sender;
             Client client = new Client();
             for (int i = 0; i < clientsList.Count; i++)
             {
-                if (clientsList[i].Rfc == clientControll.LblClientRFC.Content.ToString())
+                if (clientsList[i].Rfc == clientControl.LblClientRFC.Content.ToString())
                 {
                     client = clientsList[i];
                     break;
@@ -199,7 +199,7 @@ namespace SFIClient.Views
 
         private void BtnModifyBankAccountClick(object sender, EventArgs e)
         {
-            ClientControll clientControll = (ClientControll)sender;
+            ClientControl clientControll = (ClientControl)sender;
             Client client = new Client();
             for (int i = 0; i < clientsList.Count; i++)
             {
@@ -217,7 +217,7 @@ namespace SFIClient.Views
 
         private void BtnModifyPersonalInformationClick(object sender, EventArgs e)
         {
-            ClientControll clientCard = (ClientControll)sender;
+            ClientControl clientCard = (ClientControl)sender;
             string clientRFC = clientCard.LblClientRFC.Content.ToString();
 
             NavigationService.Navigate(new ModifyPersonalInformationController(clientRFC));
@@ -225,19 +225,19 @@ namespace SFIClient.Views
 
         private void BtnModifyWorkCenterClick(object sender, EventArgs e)
         {
-            ClientControll clientControll = (ClientControll)sender;
-            string clientRFC = clientControll.LblClientRFC.Content.ToString();
+            ClientControl clientControl = (ClientControl)sender;
+            string clientRFC = clientControl.LblClientRFC.Content.ToString();
 
             NavigationService.Navigate(new ModifyWorkCenterController(clientRFC));
         }
 
         private void BtnModifyPersonalReferencesClick(object sender, EventArgs e)
         {
-            ClientControll clientControll = (ClientControll)sender;
+            ClientControl clientControl = (ClientControl)sender;
             Client client = new Client();
             for (int i = 0; i < clientsList.Count; i++)
             {
-                if (clientsList[i].Rfc == clientControll.LblClientRFC.Content.ToString())
+                if (clientsList[i].Rfc == clientControl.LblClientRFC.Content.ToString())
                 {
                     client = clientsList[i];
                     break;
@@ -302,11 +302,11 @@ namespace SFIClient.Views
 
         private void BtnApplyForCreditClick(object sender, EventArgs e)
         {
-            ClientControll clientControll = (ClientControll)sender;
+            ClientControl clientControl = (ClientControl)sender;
             Client client = new Client();
             for (int i = 0; i < clientsList.Count; i++)
             {
-                if (clientsList[i].Rfc == clientControll.LblClientRFC.Content.ToString())
+                if (clientsList[i].Rfc == clientControl.LblClientRFC.Content.ToString())
                 {
                     client = clientsList[i];
                     break;

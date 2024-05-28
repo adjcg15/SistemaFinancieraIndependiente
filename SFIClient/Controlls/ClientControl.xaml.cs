@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace SFIClient.Controlls
 {
     /// <summary>
-    /// Lógica de interacción para ClientControll.xaml
+    /// Lógica de interacción para ClientControl.xaml
     /// </summary>
-    public partial class ClientControll : UserControl
+    public partial class ClientControl : UserControl
     {
         public event EventHandler ButtonSeePersonalInformation;
         public event EventHandler ButtonModifyBankAccount;
@@ -27,7 +27,7 @@ namespace SFIClient.Controlls
         public event EventHandler ButtonModifyWorkCenter;
         public event EventHandler ButtonModifyPersonalReferences;
         public event EventHandler ButtonApplyForCredit;
-        public ClientControll()
+        public ClientControl()
         {
             InitializeComponent();
         }
