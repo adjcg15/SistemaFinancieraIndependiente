@@ -88,16 +88,16 @@ namespace SFIClient.Views
             int totalPayments = payments.Count;
 
             int totalPaidPayments = payments
-                .Where(payment => payment.reconciliation_date.HasValue)
+                .Where(payment => payment.ReconciliationDate.HasValue)
                 .ToList()
                 .Count;
 
             List<Payment> paymentsPlannedToDate = payments
-                .Where(payment => payment.planned_date.Date.CompareTo(DateTime.Now.Date) <= 0)
+                .Where(payment => payment.PlannedDate.Date.CompareTo(DateTime.Now.Date) <= 0)
                 .ToList();
             int totalPaymentPlannedToDate = paymentsPlannedToDate.Count;
             int totalPaidPaymentsToDate = paymentsPlannedToDate
-                .Where(payment => payment.reconciliation_date.HasValue)
+                .Where(payment => payment.ReconciliationDate.HasValue)
                 .ToList()
                 .Count;
 
@@ -140,9 +140,9 @@ namespace SFIClient.Views
 
             foreach (var payment in payments)
             {
-                if(payment.planned_date.Date.CompareTo(DateTime.Now.Date) > 0)
+                if(payment.PlannedDate.Date.CompareTo(DateTime.Now.Date) > 0)
                 {
-                    if (!payment.reconciliation_date.HasValue)
+                    if (!payment.ReconciliationDate.HasValue)
                     {
                         pendingPayments++;
                     }
@@ -153,14 +153,14 @@ namespace SFIClient.Views
                 } 
                 else
                 {
-                    if(!payment.reconciliation_date.HasValue)
+                    if(!payment.ReconciliationDate.HasValue)
                     {
                         unpdaidPayments++;
                     }
                     else
                     {
-                        DateTime reconciliationDate = payment.reconciliation_date.Value;
-                        DateTime plannedDate = payment.planned_date;
+                        DateTime reconciliationDate = payment.ReconciliationDate.Value;
+                        DateTime plannedDate = payment.PlannedDate;
 
                         int comparisonResult = reconciliationDate.Date.CompareTo(plannedDate.Date);
                         if (comparisonResult > 0)
