@@ -51,7 +51,7 @@ namespace SFIClient.Views
         {
             try
             {
-                bankAccount = clientsServiceClient.RecoverBankDetails(client.Card_number);
+                bankAccount = clientsServiceClient.RecoverBankDetails(client.CardNumber);
                 TbCardNumber.Text = bankAccount.CardNumber.Trim();
                 TbHolder.Text = bankAccount.Holder.Trim();
                 TbBank.Text = bankAccount.Bank.Trim();
@@ -232,7 +232,7 @@ namespace SFIClient.Views
         {
             try
             {
-                bool statusUpdate = clientsServiceClient.UpdateBankAccount(bankAccount, client.Card_number);
+                bool statusUpdate = clientsServiceClient.UpdateBankAccount(bankAccount, client.CardNumber);
                 if (statusUpdate)
                 {
                     ShowBankAccountSuccessfulUpdateMessageDialog();

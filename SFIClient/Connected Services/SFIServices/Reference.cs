@@ -388,7 +388,7 @@ namespace SFIClient.SFIServices {
         private System.DateTime BirthdateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Card_numberField;
+        private string CardNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SFIClient.SFIServices.ContacMethod[] ContacMethodsField;
@@ -397,16 +397,16 @@ namespace SFIClient.SFIServices {
         private string CurpField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool Has_active_creditField;
+        private bool HasActiveCreditField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool Has_credit_applicationField;
+        private bool HasCreditApplicationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int Id_addressField;
+        private int IdAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int Id_work_centerField;
+        private int IdWorkCenterField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LastNameField;
@@ -476,14 +476,14 @@ namespace SFIClient.SFIServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Card_number {
+        public string CardNumber {
             get {
-                return this.Card_numberField;
+                return this.CardNumberField;
             }
             set {
-                if ((object.ReferenceEquals(this.Card_numberField, value) != true)) {
-                    this.Card_numberField = value;
-                    this.RaisePropertyChanged("Card_number");
+                if ((object.ReferenceEquals(this.CardNumberField, value) != true)) {
+                    this.CardNumberField = value;
+                    this.RaisePropertyChanged("CardNumber");
                 }
             }
         }
@@ -515,53 +515,53 @@ namespace SFIClient.SFIServices {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Has_active_credit {
+        public bool HasActiveCredit {
             get {
-                return this.Has_active_creditField;
+                return this.HasActiveCreditField;
             }
             set {
-                if ((this.Has_active_creditField.Equals(value) != true)) {
-                    this.Has_active_creditField = value;
-                    this.RaisePropertyChanged("Has_active_credit");
+                if ((this.HasActiveCreditField.Equals(value) != true)) {
+                    this.HasActiveCreditField = value;
+                    this.RaisePropertyChanged("HasActiveCredit");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Has_credit_application {
+        public bool HasCreditApplication {
             get {
-                return this.Has_credit_applicationField;
+                return this.HasCreditApplicationField;
             }
             set {
-                if ((this.Has_credit_applicationField.Equals(value) != true)) {
-                    this.Has_credit_applicationField = value;
-                    this.RaisePropertyChanged("Has_credit_application");
+                if ((this.HasCreditApplicationField.Equals(value) != true)) {
+                    this.HasCreditApplicationField = value;
+                    this.RaisePropertyChanged("HasCreditApplication");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id_address {
+        public int IdAddress {
             get {
-                return this.Id_addressField;
+                return this.IdAddressField;
             }
             set {
-                if ((this.Id_addressField.Equals(value) != true)) {
-                    this.Id_addressField = value;
-                    this.RaisePropertyChanged("Id_address");
+                if ((this.IdAddressField.Equals(value) != true)) {
+                    this.IdAddressField = value;
+                    this.RaisePropertyChanged("IdAddress");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id_work_center {
+        public int IdWorkCenter {
             get {
-                return this.Id_work_centerField;
+                return this.IdWorkCenterField;
             }
             set {
-                if ((this.Id_work_centerField.Equals(value) != true)) {
-                    this.Id_work_centerField = value;
-                    this.RaisePropertyChanged("Id_work_center");
+                if ((this.IdWorkCenterField.Equals(value) != true)) {
+                    this.IdWorkCenterField = value;
+                    this.RaisePropertyChanged("IdWorkCenter");
                 }
             }
         }

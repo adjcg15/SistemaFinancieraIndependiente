@@ -108,7 +108,7 @@ namespace SFIClient.Views
             SkpRegisterClientNow.Visibility = Visibility.Collapsed;
             for (int i = 0; i < clientsList.Count; i++)
             {
-                if (clientsList[i].Has_active_credit || clientsList[i].Has_credit_application)
+                if (clientsList[i].HasActiveCredit || clientsList[i].HasCreditApplication)
                 {
                     ShowClientWithAllOptionsWithoutCreditApplication(clientsList[i]);
                 }
@@ -123,7 +123,7 @@ namespace SFIClient.Views
         {
             SkpNoRegisteredClients.Visibility = Visibility.Collapsed;
             SkpRegisterClientNow.Visibility = Visibility.Collapsed;
-            if (client.Has_active_credit || client.Has_credit_application)
+            if (client.HasActiveCredit || client.HasCreditApplication)
             {
                 ShowClientWithAllOptionsWithoutCreditApplication(client);
             }
@@ -167,11 +167,11 @@ namespace SFIClient.Views
             };
             clientControll.BtnApplyForCredit.Content = image;
             clientControll.BtnApplyForCredit.IsEnabled = false;
-            if (client.Has_active_credit)
+            if (client.HasActiveCredit)
             {
                 clientControll.LblClientCreditStatus.Content = "Cliente con crédito activo";
             }
-            else if (client.Has_credit_application)
+            else if (client.HasCreditApplication)
             {
 
                 clientControll.LblClientCreditStatus.Content = "Cliente con solicitud de crédito activa";

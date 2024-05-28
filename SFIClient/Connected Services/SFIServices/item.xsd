@@ -46,13 +46,13 @@
       <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address" />
       <xs:element minOccurs="0" name="BankAccount" nillable="true" type="tns:BankAccount" />
       <xs:element minOccurs="0" name="Birthdate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Card_number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ContacMethods" nillable="true" type="tns:ArrayOfContacMethod" />
       <xs:element minOccurs="0" name="Curp" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Has_active_credit" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Has_credit_application" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Id_address" type="xs:int" />
-      <xs:element minOccurs="0" name="Id_work_center" type="xs:int" />
+      <xs:element minOccurs="0" name="HasActiveCredit" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasCreditApplication" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IdAddress" type="xs:int" />
+      <xs:element minOccurs="0" name="IdWorkCenter" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PersonalReferences" nillable="true" type="tns:ArrayOfPersonalReference" />

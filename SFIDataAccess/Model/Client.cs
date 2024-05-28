@@ -30,19 +30,19 @@ namespace SFIDataAccess.Model
         public string Surname { get; set; }
 
         [DataMember]
-        public int Id_address { get; set; }
+        public int IdAddress { get; set; }
 
         [DataMember]
-        public int Id_work_center { get; set; }
+        public int IdWorkCenter { get; set; }
 
         [DataMember]
-        public string Card_number { get; set; }
+        public string CardNumber { get; set; }
 
         [DataMember]
-        public bool Has_credit_application { get; set; }
+        public bool HasCreditApplication { get; set; }
 
         [DataMember]
-        public bool Has_active_credit { get; set; }
+        public bool HasActiveCredit { get; set; }
 
         [DataMember]
         public Address Address { get; set; }

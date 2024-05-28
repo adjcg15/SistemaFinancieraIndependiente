@@ -74,11 +74,11 @@ namespace SFIDataAccess.DataAccessObjects
                             Name = item.client.name,
                             LastName = item.client.last_name,
                             Surname = item.client.surname,
-                            Id_work_center = item.client.id_work_center,
-                            Card_number = item.client.card_number,
-                            Id_address = item.client.id_address,
-                            Has_active_credit = item.has_active_credit,
-                            Has_credit_application = item.has_credit_application,
+                            IdWorkCenter = item.client.id_work_center,
+                            CardNumber = item.client.card_number,
+                            IdAddress = item.client.id_address,
+                            HasActiveCredit = item.has_active_credit,
+                            HasCreditApplication = item.has_credit_application,
                             WorkCenter = workCenter
                         };
                         clientsList.Add(clientItem);
