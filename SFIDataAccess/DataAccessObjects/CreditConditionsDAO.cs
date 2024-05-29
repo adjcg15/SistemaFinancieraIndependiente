@@ -48,8 +48,13 @@ namespace SFIDataAccess.DataAccessObjects
             catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(
-                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde"),
-                    new FaultReason("Error")
+                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
+                );
+            }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar las condiciones de crédito, intente más tarde")
                 );
             }
 
@@ -170,7 +175,7 @@ namespace SFIDataAccess.DataAccessObjects
                     }
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
@@ -179,6 +184,10 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
             catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
@@ -212,7 +221,7 @@ namespace SFIDataAccess.DataAccessObjects
                     return result == 1;
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
@@ -240,7 +249,7 @@ namespace SFIDataAccess.DataAccessObjects
                         (ca.id_credit_application_state == 7 || ca.id_credit_application_state == 8));
                 }
             }
-            catch (System.Data.Entity.Core.EntityException)
+            catch (EntityException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
@@ -249,6 +258,10 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
             catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
@@ -304,6 +317,13 @@ namespace SFIDataAccess.DataAccessObjects
                 }
             }
             catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar la condición de crédito actual, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(
                     new ServiceFault("No fue posible recuperar la condición de crédito actual, intente más tarde"),
