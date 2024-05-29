@@ -44,6 +44,13 @@ namespace SFIDataAccess.DataAccessObjects
                     new FaultReason("Error")
                 );
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue posible recuperar los tipos de crédito, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
 
             return creditTypes;
         }
@@ -236,10 +243,15 @@ namespace SFIDataAccess.DataAccessObjects
                     );
                 }
             }
-            catch (EntityException ex)
+            catch (EntityException)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.ToString());
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("No fue guardar la información de la solicitud, intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
+            {
                 throw new FaultException<ServiceFault>(
                     new ServiceFault("No fue guardar la información de la solicitud, intente más tarde"),
                     new FaultReason("Error")
@@ -659,6 +671,10 @@ namespace SFIDataAccess.DataAccessObjects
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
             catch (DbEntityValidationException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"), new FaultReason("Error"));
             }
