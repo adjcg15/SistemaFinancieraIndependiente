@@ -111,6 +111,10 @@ namespace SFIClient.Views
         {
             NavigationService.Navigate(new LoginController());
         }
+        private void CreditListMenu()
+        {
+            NavigationService.Navigate(new CreditsListController());
+        }
 
         private void ShowPayments()
         {
@@ -295,7 +299,7 @@ namespace SFIClient.Views
         }
         private void BtnReturnCreditsListClick(object sender, RoutedEventArgs e)
         {
-            RedirectToLogIn();
+            CreditListMenu();
         }
     }
 }
