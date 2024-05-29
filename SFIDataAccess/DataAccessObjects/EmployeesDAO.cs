@@ -3,6 +3,7 @@ using SFIDataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -42,6 +43,13 @@ namespace SFIDataAccess.DataAccessObjects
                 }
             }
             catch (EntityException)
+            {
+                throw new FaultException<ServiceFault>(
+                    new ServiceFault("El sistema no se encuentra disponible, por favor intente más tarde"),
+                    new FaultReason("Error")
+                );
+            }
+            catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(
                     new ServiceFault("El sistema no se encuentra disponible, por favor intente más tarde"),
