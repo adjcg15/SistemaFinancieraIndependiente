@@ -132,10 +132,41 @@ namespace SFIClient.Views
         }
         private CreditCondition GetCurrentAssociatedCondition()
         {
-            CreditConditionsServiceClient creditConditionsService = new CreditConditionsServiceClient();
-            CreditCondition currentAssociatedCondition = creditConditionsService.GetCurrentCreditConditionByCreditInvoice(credit.Invoice);
-            Console.WriteLine($"Current associated condition: {currentAssociatedCondition?.Identifier}");
-            return currentAssociatedCondition;
+            try
+            {
+                CreditConditionsServiceClient creditConditionsService = new CreditConditionsServiceClient();
+                CreditCondition currentAssociatedCondition = creditConditionsService.GetCurrentCreditConditionByCreditInvoice(credit.Invoice);
+                Console.WriteLine($"Current associated condition: {currentAssociatedCondition?.Identifier}");
+                return currentAssociatedCondition;
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                Console.WriteLine($"Error al obtener la condición de crédito: {fault.Detail.Message}");
+                MessageBox.Show("No se pudo obtener la condición de crédito actual debido a un error en el servidor. Por favor, intente nuevamente más tarde.",
+                    "Error de servicio", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            catch (EndpointNotFoundException)
+            {
+                string errorMessage = "El servidor no se encuentra disponible, intente más tarde.";
+                Console.WriteLine(errorMessage);
+                MessageBox.Show(errorMessage, "Error de conexión", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            catch (CommunicationException)
+            {
+                string errorMessage = "No fue posible acceder a la información debido a un error de conexión.";
+                Console.WriteLine(errorMessage);
+                MessageBox.Show(errorMessage, "Error de comunicación", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            catch (Exception)
+            {
+                string errorMessage = "Ocurrió un error inesperado, intente nuevamente ";
+                Console.WriteLine(errorMessage);
+                MessageBox.Show(errorMessage, "Error al intentar cambiar la condición de crédito, intente nuevamente", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
         }
         private void ShowDiscardChangesConfirmationDialog()
         {

@@ -288,6 +288,10 @@ namespace SFIDataAccess.DataAccessObjects
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
             }
+            catch (SqlException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar los datos"));
+            }
         }
         public static CreditCondition GetCurrentCreditConditionByCreditInvoice(string creditInvoice)
         {
