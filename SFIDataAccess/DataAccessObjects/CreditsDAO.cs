@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.ServiceModel;
@@ -825,6 +826,10 @@ namespace SFIDataAccess.DataAccessObjects
             catch (SqlException)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault("No fue posible recuperar el procedimiento"), new FaultReason("Error de base de datos"));
+            }
+            catch (IOException)
+            {
+                throw new FaultException<ServiceFault>(new ServiceFault("No fue posible procesar el documento"), new FaultReason("Error de archivo"));
             }
             return interest;
         }

@@ -210,6 +210,12 @@ namespace SFIClient.Views
                     string errorMessage = "No fue posible acceder a la información debido a un error de conexión";
                     ShowErrorRecoveringEstablishedPaymentsDialog(errorMessage);
                 }
+                catch (IOException)
+                {
+                    string errorMessage = "No se pudo abrir el archivo porque ya está siendo utilizado por otro programa. " +
+                        "Por favor, cierre el archivo e inténtelo nuevamente.";
+                    ShowInvalidUploadCsvErrorDialog(errorMessage);
+                }
             }
         }
 
