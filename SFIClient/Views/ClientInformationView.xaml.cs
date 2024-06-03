@@ -155,7 +155,12 @@ namespace SFIClient.Views
 
         private void BtnGoToSearchClientByRFCViewClick(object sender, RoutedEventArgs e)
         {
-            RedirectToLoginView();
+            RedirectToSearchClientByRFC();
+        }
+
+        private void RedirectToSearchClientByRFC()
+        {
+            NavigationService.Navigate(new SearchClientByRFCController());
         }
 
         private void RedirectToLoginView()
