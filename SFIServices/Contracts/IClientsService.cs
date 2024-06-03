@@ -28,17 +28,5 @@ namespace SFIServices.Contracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         bool RegisterClient(Client client);
-
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        List<PersonalReference> RecoverPersonalReferences(string rfc);
-
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        bool UpdatePersonalReference(PersonalReference personalReference, string currentIneKey);
-
-        [OperationContract]
-        [FaultContract(typeof(ServiceFault))]
-        Client RecoverClient(string clientRfc);
     }
 }

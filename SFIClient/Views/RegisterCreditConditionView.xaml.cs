@@ -1,5 +1,4 @@
-﻿using SFIClient.Controlls;
-using SFIClient.SFIServices;
+﻿using SFIClient.SFIServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,13 +26,12 @@ namespace SFIClient.Views
         public RegisterCreditConditionView()
         {
             InitializeComponent();
-            
+            InitializeEventHandlers();
+            ApplyNumericRestrictions();
         }
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
             LoadCreditTypes();
-            InitializeEventHandlers();
-            ApplyNumericRestrictions();
         }
         private void CbCreditTypesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -395,5 +393,4 @@ namespace SFIClient.Views
             return regex.IsMatch(name);
         }
     }
-
 }

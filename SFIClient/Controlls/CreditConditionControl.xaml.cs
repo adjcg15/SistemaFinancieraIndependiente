@@ -1,5 +1,4 @@
-﻿using SFIClient.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,14 +20,9 @@ namespace SFIClient.Controlls
     /// </summary>
     public partial class CreditConditionControl : UserControl
     {
-        public event EventHandler ButtonEditCreditCondition;
         public CreditConditionControl()
         {
             InitializeComponent();
-        }
-        private void BtnEditCreditConditionClick(object sender, RoutedEventArgs e)
-        {
-            ButtonEditCreditCondition?.Invoke(this, EventArgs.Empty);
         }
     }
 }

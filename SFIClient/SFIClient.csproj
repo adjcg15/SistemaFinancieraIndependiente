@@ -64,17 +64,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Controlls\ApplicationsListCreditApplicationControl.xaml.cs">
-      <DependentUpon>ApplicationsListCreditApplicationControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controlls\ClientControll.xaml.cs">
       <DependentUpon>ClientControll.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlls\CreditApplicationCreditConditionControl.xaml.cs">
       <DependentUpon>CreditApplicationCreditConditionControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controlls\CreditAuthorizationDictumPolicyControl.xaml.cs">
-      <DependentUpon>CreditAuthorizationDictumPolicyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlls\CreditConditionControl.xaml.cs">
       <DependentUpon>CreditConditionControl.xaml</DependentUpon>
@@ -86,30 +80,19 @@
       <DependentUpon>GrantingPoliciesListPolicyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Session\SystemSession.cs" />
-    <Compile Include="Utilities\AddressToolkit.cs" />
     <Compile Include="Utilities\DateToolkit.cs" />
-    <Compile Include="Utilities\NumberFormatToolkit.cs" />
     <Compile Include="Utilities\Security.cs" />
-    <Compile Include="Views\ClientInformationView.xaml.cs">
-      <DependentUpon>ClientInformationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ClientRegisterView.xaml.cs">
       <DependentUpon>ClientRegisterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConsultConditionsCreditView.xaml.cs">
       <DependentUpon>ConsultConditionsCreditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreditApplicationsListView.xaml.cs">
-      <DependentUpon>CreditApplicationsListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CreditApplicationView.xaml.cs">
       <DependentUpon>CreditApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\FileToolkit.cs" />
     <Compile Include="Utilities\DataValidator.cs" />
-    <Compile Include="Views\CreditAuthorizationDictumView.xaml.cs">
-      <DependentUpon>CreditAuthorizationDictumView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CreditGrantingPolicyListView.xaml.cs">
       <DependentUpon>CreditGrantingPolicyListView.xaml</DependentUpon>
     </Compile>
@@ -125,12 +108,6 @@
     <Compile Include="Views\ModifyBankAccountView.xaml.cs">
       <DependentUpon>ModifyBankAccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ModifyCreditConditionView.xaml.cs">
-      <DependentUpon>ModifyCreditConditionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ModifyPersonalReferenceView.xaml.cs">
-      <DependentUpon>ModifyPersonalReferenceView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RegisterCreditConditionView.xaml.cs">
       <DependentUpon>RegisterCreditConditionView.xaml</DependentUpon>
     </Compile>
@@ -143,19 +120,11 @@
     <Compile Include="Views\SearchClientByRFCView.xaml.cs">
       <DependentUpon>SearchClientByRFCView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controlls\ApplicationsListCreditApplicationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controlls\ClientControll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlls\CreditApplicationCreditConditionControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controlls\CreditAuthorizationDictumPolicyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,10 +152,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ClientInformationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ClientRegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,15 +160,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CreditApplicationsListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\CreditApplicationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CreditAuthorizationDictumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,14 +181,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModifyBankAccountView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ModifyCreditConditionView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ModifyPersonalReferenceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,9 +255,6 @@
     <None Include="Connected Services\SFIServices\SFIClient.SFIServices.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\SFIServices\SFIClient.SFIServices.PersonalReference.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\SFIServices\SFIService.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -372,9 +318,6 @@
     <Resource Include="Assets\PersonalReferencesIcon.png" />
     <Resource Include="Assets\Plus3Icon.png" />
     <Resource Include="Assets\WorkCenterIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\DownloadIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

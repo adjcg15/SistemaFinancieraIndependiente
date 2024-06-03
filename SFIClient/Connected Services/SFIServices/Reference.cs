@@ -1013,9 +1013,6 @@ namespace SFIClient.SFIServices {
         private string CityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string InteriorNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1055,19 +1052,6 @@ namespace SFIClient.SFIServices {
                 if ((object.ReferenceEquals(this.CityField, value) != true)) {
                     this.CityField = value;
                     this.RaisePropertyChanged("City");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdAddress {
-            get {
-                return this.IdAddressField;
-            }
-            set {
-                if ((this.IdAddressField.Equals(value) != true)) {
-                    this.IdAddressField = value;
-                    this.RaisePropertyChanged("IdAddress");
                 }
             }
         }
@@ -1465,12 +1449,6 @@ namespace SFIClient.SFIServices {
         private SFIClient.SFIServices.Address AddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ClientRfcField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdPersonalReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IneKeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1510,32 +1488,6 @@ namespace SFIClient.SFIServices {
                 if ((object.ReferenceEquals(this.AddressField, value) != true)) {
                     this.AddressField = value;
                     this.RaisePropertyChanged("Address");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ClientRfc {
-            get {
-                return this.ClientRfcField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ClientRfcField, value) != true)) {
-                    this.ClientRfcField = value;
-                    this.RaisePropertyChanged("ClientRfc");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdPersonalReference {
-            get {
-                return this.IdPersonalReferenceField;
-            }
-            set {
-                if ((this.IdPersonalReferenceField.Equals(value) != true)) {
-                    this.IdPersonalReferenceField = value;
-                    this.RaisePropertyChanged("IdPersonalReference");
                 }
             }
         }
@@ -2350,27 +2302,6 @@ namespace SFIClient.SFIServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RegisterClient", ReplyAction="http://tempuri.org/IClientsService/RegisterClientResponse")]
         System.Threading.Tasks.Task<bool> RegisterClientAsync(SFIClient.SFIServices.Client client);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverPersonalReferences", ReplyAction="http://tempuri.org/IClientsService/RecoverPersonalReferencesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/RecoverPersonalReferencesServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        SFIClient.SFIServices.PersonalReference[] RecoverPersonalReferences(string rfc);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverPersonalReferences", ReplyAction="http://tempuri.org/IClientsService/RecoverPersonalReferencesResponse")]
-        System.Threading.Tasks.Task<SFIClient.SFIServices.PersonalReference[]> RecoverPersonalReferencesAsync(string rfc);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdatePersonalReference", ReplyAction="http://tempuri.org/IClientsService/UpdatePersonalReferenceResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/UpdatePersonalReferenceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        bool UpdatePersonalReference(SFIClient.SFIServices.PersonalReference personalReference, string currentIneKey);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/UpdatePersonalReference", ReplyAction="http://tempuri.org/IClientsService/UpdatePersonalReferenceResponse")]
-        System.Threading.Tasks.Task<bool> UpdatePersonalReferenceAsync(SFIClient.SFIServices.PersonalReference personalReference, string currentIneKey);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverClient", ReplyAction="http://tempuri.org/IClientsService/RecoverClientResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(SFIClient.SFIServices.ServiceFault), Action="http://tempuri.org/IClientsService/RecoverClientServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/SFIDataAccess.CustomExceptions")]
-        SFIClient.SFIServices.Client RecoverClient(string clientRfc);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientsService/RecoverClient", ReplyAction="http://tempuri.org/IClientsService/RecoverClientResponse")]
-        System.Threading.Tasks.Task<SFIClient.SFIServices.Client> RecoverClientAsync(string clientRfc);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2430,30 +2361,6 @@ namespace SFIClient.SFIServices {
         
         public System.Threading.Tasks.Task<bool> RegisterClientAsync(SFIClient.SFIServices.Client client) {
             return base.Channel.RegisterClientAsync(client);
-        }
-        
-        public SFIClient.SFIServices.PersonalReference[] RecoverPersonalReferences(string rfc) {
-            return base.Channel.RecoverPersonalReferences(rfc);
-        }
-        
-        public System.Threading.Tasks.Task<SFIClient.SFIServices.PersonalReference[]> RecoverPersonalReferencesAsync(string rfc) {
-            return base.Channel.RecoverPersonalReferencesAsync(rfc);
-        }
-        
-        public bool UpdatePersonalReference(SFIClient.SFIServices.PersonalReference personalReference, string currentIneKey) {
-            return base.Channel.UpdatePersonalReference(personalReference, currentIneKey);
-        }
-        
-        public System.Threading.Tasks.Task<bool> UpdatePersonalReferenceAsync(SFIClient.SFIServices.PersonalReference personalReference, string currentIneKey) {
-            return base.Channel.UpdatePersonalReferenceAsync(personalReference, currentIneKey);
-        }
-        
-        public SFIClient.SFIServices.Client RecoverClient(string clientRfc) {
-            return base.Channel.RecoverClient(clientRfc);
-        }
-        
-        public System.Threading.Tasks.Task<SFIClient.SFIServices.Client> RecoverClientAsync(string clientRfc) {
-            return base.Channel.RecoverClientAsync(clientRfc);
         }
     }
 }

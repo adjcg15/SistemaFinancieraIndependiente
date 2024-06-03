@@ -22,7 +22,6 @@ namespace SFIDataAccess
         public string relationship_years { get; set; }
         public int id_address { get; set; }
         public string client_rfc { get; set; }
-        public int id_personal_reference { get; set; }
         public string phone_number { get; set; }
     
         public virtual address address { get; set; }

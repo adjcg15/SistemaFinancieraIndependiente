@@ -20,7 +20,6 @@ namespace SFIDataAccess
             this.polices_apply_dictums = new HashSet<polices_apply_dictums>();
         }
     
-        public int id_credit_granting_policy { get; set; }
         public string title { get; set; }
         public System.DateTime effective_date { get; set; }
         public string description { get; set; }

@@ -118,12 +118,6 @@
     <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\PersonalReference.cs" />
     <Compile Include="Model\WorkCenter.cs" />
-    <Compile Include="payment.cs">
-      <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="payment_layouts.cs">
-      <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="personal_references.cs">
       <DependentUpon>SFIDatabaseModel.tt</DependentUpon>
     </Compile>

@@ -159,7 +159,7 @@ namespace SFIClient.Views
 
         private bool VerifyPersonalInformationTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             Style borderErrorStyle = (Style)this.FindResource("RoundedBorderError");
 
             bool correctFields = true;
@@ -203,7 +203,7 @@ namespace SFIClient.Views
 
         private bool VerifyClientAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -238,7 +238,7 @@ namespace SFIClient.Views
 
         private bool VerifyBankAccountTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -267,7 +267,7 @@ namespace SFIClient.Views
 
         private bool VerifyWorkCenterTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -306,7 +306,7 @@ namespace SFIClient.Views
 
         private bool VerifyWorkCenterAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -341,7 +341,7 @@ namespace SFIClient.Views
 
         private bool VerifyClientContactMethodsTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -389,7 +389,7 @@ namespace SFIClient.Views
 
         private bool VerifyFirstReferenceInformationTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -422,7 +422,7 @@ namespace SFIClient.Views
 
         private bool VerifyFirstReferenceAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -457,7 +457,7 @@ namespace SFIClient.Views
 
         private bool VerifySecondReferenceInformationTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -490,7 +490,7 @@ namespace SFIClient.Views
 
         private bool VerifySecondReferenceAddressTextFields()
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool correctFields = true;
 
             List<TextBox> textBoxes = new List<TextBox>
@@ -593,7 +593,7 @@ namespace SFIClient.Views
 
         private void BtnRegisterClientClick(object sender, RoutedEventArgs e)
         {
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             bool registerClient;
 
             if (VerifyTextFields() && !textFieldsSame)
@@ -819,7 +819,7 @@ namespace SFIClient.Views
         private void VerifyPhoneNumbersAreNotSame()
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textFieldsSame = false;
 
             TbClientPhoneNumberFirst.Style = textInputStyle;
@@ -861,7 +861,7 @@ namespace SFIClient.Views
         private void VerifyEmailAreNotSame()
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textFieldsSame = false;
 
             TbClientEmailFirst.Style = textInputStyle;
@@ -893,7 +893,7 @@ namespace SFIClient.Views
         private void VerifyIneKeyAreNotSame()
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             TbReferenceIneKeyFirst.Style = textInputStyle;
             TbReferenceIneKeySecond.Style = textInputStyle;
@@ -911,7 +911,7 @@ namespace SFIClient.Views
             TextBox tbPostCode = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string postCode = tbPostCode.Text.Trim();
 
@@ -930,7 +930,7 @@ namespace SFIClient.Views
             TextBox tbKey = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string key = tbKey.Text.Trim();
 
@@ -949,7 +949,7 @@ namespace SFIClient.Views
             TextBox tbKey = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string key = tbKey.Text.Trim();
 
@@ -1007,7 +1007,7 @@ namespace SFIClient.Views
             TextBox tbClientRfc = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string clientRfc = tbClientRfc.Text.Trim();
 
@@ -1066,7 +1066,7 @@ namespace SFIClient.Views
             TextBox tbCardNumber = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string cardNumber = tbCardNumber.Text.Trim();
 
@@ -1099,7 +1099,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length >= 10)
@@ -1146,7 +1146,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length >= 10)
@@ -1204,7 +1204,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1221,7 +1221,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1238,7 +1238,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             TbClientPhoneNumberThird.Style = textInputStyle;
             if (TbClientPhoneNumberThird.Text.Trim().Length > 0)
             {
@@ -1261,7 +1261,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             TbClientPhoneNumberThird.Style = textInputStyle;
             if (TbClientPhoneNumberThird.Text.Trim().Length > 0)
             {
@@ -1284,7 +1284,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length > 0)
@@ -1304,7 +1304,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             if (TbClientEmailSecond.Text.Trim().Length > 0)
             {
@@ -1327,7 +1327,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             if (TbClientEmailSecond.Text.Trim().Length > 0)
             {
@@ -1365,7 +1365,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1391,7 +1391,7 @@ namespace SFIClient.Views
         private void TbReferenceIneKeyFirstTextChanged(object sender, TextChangedEventArgs e)
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             if (TbReferenceIneKeyFirst.Text.Trim().Length < 18)
             {
@@ -1463,7 +1463,7 @@ namespace SFIClient.Views
         {
             TextBox textBox = sender as TextBox;
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
             textBox.Style = textInputStyle;
             ListenAndVerifyEmptyTextFields(sender);
             if (textBox.Text.Trim().Length == 10)
@@ -1489,7 +1489,7 @@ namespace SFIClient.Views
         private void TbReferenceIneKeySecondTextChanged(object sender, TextChangedEventArgs e)
         {
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             if (TbReferenceIneKeySecond.Text.Trim().Length < 18)
             {

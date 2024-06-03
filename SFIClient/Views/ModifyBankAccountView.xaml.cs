@@ -191,7 +191,7 @@ namespace SFIClient.Views
             TextBox tbKey = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string key = tbKey.Text.Trim();
 
@@ -210,7 +210,7 @@ namespace SFIClient.Views
             TextBox tbCardNumber = sender as TextBox;
 
             Style textInputStyle = (Style)this.FindResource("TextInput");
-            Style textInputErrorStyle = (Style)this.FindResource("SecondTextInputError");
+            Style textInputErrorStyle = (Style)this.FindResource("TextInputError2");
 
             string cardNumber = tbCardNumber.Text.Trim();
 

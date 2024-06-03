@@ -22,9 +22,6 @@ namespace SFIDataAccess
     
         public int id_dictum { get; set; }
         public string credit_application_invoice { get; set; }
-        public Nullable<bool> is_approved { get; set; }
-        public string justification { get; set; }
-        public Nullable<System.DateTime> generation_date { get; set; }
         public string employee_number { get; set; }
     
         public virtual credit_applications credit_applications { get; set; }

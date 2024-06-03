@@ -16,7 +16,7 @@ namespace SFIDataAccess
     {
         public int id_polices_apply_dictums { get; set; }
         public int id_dictum { get; set; }
-        public Nullable<int> id_credit_granting_policy { get; set; }
+        public string credit_granting_police_title { get; set; }
         public bool is_applied { get; set; }
     
         public virtual credit_granting_polices credit_granting_polices { get; set; }

@@ -94,9 +94,8 @@
         </EntityType>
         <EntityType Name="credit_granting_polices">
           <Key>
-            <PropertyRef Name="id_credit_granting_policy" />
+            <PropertyRef Name="title" />
           </Key>
-          <Property Name="id_credit_granting_policy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="effective_date" Type="date" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -128,9 +127,6 @@
           </Key>
           <Property Name="id_dictum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="credit_application_invoice" Type="char" MaxLength="18" Nullable="false" />
-          <Property Name="is_approved" Type="bit" />
-          <Property Name="justification" Type="text" />
-          <Property Name="generation_date" Type="datetime" />
           <Property Name="employee_number" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="digital_documents">
@@ -150,29 +146,9 @@
           <Property Name="id_employee_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <EntityType Name="payment_layouts">
-          <Key>
-            <PropertyRef Name="id_payment_layout" />
-          </Key>
-          <Property Name="id_payment_layout" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="capture_line" Type="char" MaxLength="20" Nullable="false" />
-          <Property Name="generation_date" Type="datetime" Nullable="false" />
-          <Property Name="id_payment" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="payments">
-          <Key>
-            <PropertyRef Name="id_payment" />
-          </Key>
-          <Property Name="id_payment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="amount" Type="money" Nullable="false" />
-          <Property Name="invoice" Type="char" MaxLength="18" Nullable="false" />
-          <Property Name="planned_date" Type="datetime" Nullable="false" />
-          <Property Name="credit_invoice" Type="char" MaxLength="18" />
-          <Property Name="reconciliation_date" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="personal_references">
           <Key>
-            <PropertyRef Name="id_personal_reference" />
+            <PropertyRef Name="ine_key" />
           </Key>
           <Property Name="ine_key" Type="char" MaxLength="18" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
@@ -182,7 +158,6 @@
           <Property Name="relationship_years" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="id_address" Type="int" Nullable="false" />
           <Property Name="client_rfc" Type="varchar" MaxLength="13" />
-          <Property Name="id_personal_reference" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="phone_number" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="polices_apply_dictums">
@@ -191,7 +166,7 @@
           </Key>
           <Property Name="id_polices_apply_dictums" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_dictum" Type="int" Nullable="false" />
-          <Property Name="id_credit_granting_policy" Type="int" />
+          <Property Name="credit_granting_police_title" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="is_applied" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="regimes">
@@ -442,30 +417,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_payment_layouts_payments">
-          <End Role="payments" Type="Self.payments" Multiplicity="1" />
-          <End Role="payment_layouts" Type="Self.payment_layouts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="payments">
-              <PropertyRef Name="id_payment" />
-            </Principal>
-            <Dependent Role="payment_layouts">
-              <PropertyRef Name="id_payment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_payments_credits">
-          <End Role="credits" Type="Self.credits" Multiplicity="0..1" />
-          <End Role="payments" Type="Self.payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="credits">
-              <PropertyRef Name="invoice" />
-            </Principal>
-            <Dependent Role="payments">
-              <PropertyRef Name="credit_invoice" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_personal_references_addresses">
           <End Role="addresses" Type="Self.addresses" Multiplicity="1" />
           <End Role="personal_references" Type="Self.personal_references" Multiplicity="*" />
@@ -491,14 +442,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_polices_apply_dictums_credit_granting_polices">
-          <End Role="credit_granting_polices" Type="Self.credit_granting_polices" Multiplicity="0..1" />
+          <End Role="credit_granting_polices" Type="Self.credit_granting_polices" Multiplicity="1" />
           <End Role="polices_apply_dictums" Type="Self.polices_apply_dictums" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="credit_granting_polices">
-              <PropertyRef Name="id_credit_granting_policy" />
+              <PropertyRef Name="title" />
             </Principal>
             <Dependent Role="polices_apply_dictums">
-              <PropertyRef Name="id_credit_granting_policy" />
+              <PropertyRef Name="credit_granting_police_title" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -707,28 +658,6 @@
           <Parameter Name="NewCardNumber" Type="varchar" Mode="In" />
           <Parameter Name="Success" Type="bit" Mode="InOut" />
         </Function>
-        <Function Name="UpdatePersonalReference" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="IdPersonalReference" Type="int" Mode="In" />
-          <Parameter Name="CurrentIneKey" Type="char" Mode="In" />
-          <Parameter Name="IneKey" Type="char" Mode="In" />
-          <Parameter Name="Name" Type="nvarchar" Mode="In" />
-          <Parameter Name="Surname" Type="nvarchar" Mode="In" />
-          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Kinship" Type="nvarchar" Mode="In" />
-          <Parameter Name="RelationshipYears" Type="int" Mode="In" />
-          <Parameter Name="IdAddress" Type="int" Mode="In" />
-          <Parameter Name="ClientRfc" Type="varchar" Mode="In" />
-          <Parameter Name="PhoneNumber" Type="char" Mode="In" />
-          <Parameter Name="Street" Type="nvarchar" Mode="In" />
-          <Parameter Name="Neighborhood" Type="nvarchar" Mode="In" />
-          <Parameter Name="InteriorNumber" Type="varchar" Mode="In" />
-          <Parameter Name="OutdoorNumber" Type="varchar" Mode="In" />
-          <Parameter Name="PostCode" Type="char" Mode="In" />
-          <Parameter Name="City" Type="nvarchar" Mode="In" />
-          <Parameter Name="Municipality" Type="nvarchar" Mode="In" />
-          <Parameter Name="State" Type="nvarchar" Mode="In" />
-          <Parameter Name="Success" Type="bit" Mode="InOut" />
-        </Function>
         <EntityContainer Name="SFIDatabaseModelStoreContainer">
           <EntitySet Name="addresses" EntityType="Self.addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" Schema="dbo" store:Type="Tables" />
@@ -744,8 +673,6 @@
           <EntitySet Name="dictums" EntityType="Self.dictums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="digital_documents" EntityType="Self.digital_documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee_roles" EntityType="Self.employee_roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="payment_layouts" EntityType="Self.payment_layouts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="personal_references" EntityType="Self.personal_references" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="polices_apply_dictums" EntityType="Self.polices_apply_dictums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="regimes" EntityType="Self.regimes" Schema="dbo" store:Type="Tables" />
@@ -819,14 +746,6 @@
           <AssociationSet Name="FK_digital_documents_credit_applications" Association="Self.FK_digital_documents_credit_applications">
             <End Role="credit_applications" EntitySet="credit_applications" />
             <End Role="digital_documents" EntitySet="digital_documents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_payment_layouts_payments" Association="Self.FK_payment_layouts_payments">
-            <End Role="payments" EntitySet="payments" />
-            <End Role="payment_layouts" EntitySet="payment_layouts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_payments_credits" Association="Self.FK_payments_credits">
-            <End Role="credits" EntitySet="credits" />
-            <End Role="payments" EntitySet="payments" />
           </AssociationSet>
           <AssociationSet Name="FK_personal_references_addresses" Association="Self.FK_personal_references_addresses">
             <End Role="addresses" EntitySet="addresses" />
@@ -980,9 +899,8 @@
         </EntityType>
         <EntityType Name="credit_granting_polices">
           <Key>
-            <PropertyRef Name="id_credit_granting_policy" />
+            <PropertyRef Name="title" />
           </Key>
-          <Property Name="id_credit_granting_policy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="effective_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1014,7 +932,6 @@
           <NavigationProperty Name="client" Relationship="Self.FK_credits_clients" FromRole="credits" ToRole="clients" />
           <NavigationProperty Name="credit_applications" Relationship="Self.FK_credits_credit_applications" FromRole="credits" ToRole="credit_applications" />
           <NavigationProperty Name="credit_types" Relationship="Self.FK_credits_credit_types" FromRole="credits" ToRole="credit_types" />
-          <NavigationProperty Name="payments" Relationship="Self.FK_payments_credits" FromRole="credits" ToRole="payments" />
           <NavigationProperty Name="regimes" Relationship="Self.FK_regimes_credits" FromRole="credits" ToRole="regimes" />
         </EntityType>
         <EntityType Name="dictum">
@@ -1023,9 +940,6 @@
           </Key>
           <Property Name="id_dictum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="credit_application_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="is_approved" Type="Boolean" />
-          <Property Name="justification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="generation_date" Type="DateTime" Precision="3" />
           <Property Name="employee_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="credit_applications" Relationship="Self.FK_dictums_credit_applications" FromRole="dictums" ToRole="credit_applications" />
           <NavigationProperty Name="system_accounts" Relationship="Self.FK_dictums_system_accounts" FromRole="dictums" ToRole="system_accounts" />
@@ -1050,32 +964,9 @@
           <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="system_accounts" Relationship="Self.FK_system_accounts_employee_roles" FromRole="employee_roles" ToRole="system_accounts" />
         </EntityType>
-        <EntityType Name="payment_layouts">
-          <Key>
-            <PropertyRef Name="id_payment_layout" />
-          </Key>
-          <Property Name="id_payment_layout" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="capture_line" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="generation_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="id_payment" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="payment" Relationship="Self.FK_payment_layouts_payments" FromRole="payment_layouts" ToRole="payments" />
-        </EntityType>
-        <EntityType Name="payment">
-          <Key>
-            <PropertyRef Name="id_payment" />
-          </Key>
-          <Property Name="id_payment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="planned_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="credit_invoice" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
-          <Property Name="reconciliation_date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="credit" Relationship="Self.FK_payments_credits" FromRole="payments" ToRole="credits" />
-          <NavigationProperty Name="payment_layouts" Relationship="Self.FK_payment_layouts_payments" FromRole="payments" ToRole="payment_layouts" />
-        </EntityType>
         <EntityType Name="personal_references">
           <Key>
-            <PropertyRef Name="id_personal_reference" />
+            <PropertyRef Name="ine_key" />
           </Key>
           <Property Name="ine_key" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1085,7 +976,6 @@
           <Property Name="relationship_years" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_address" Type="Int32" Nullable="false" />
           <Property Name="client_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="id_personal_reference" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="phone_number" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="address" Relationship="Self.FK_personal_references_addresses" FromRole="personal_references" ToRole="addresses" />
           <NavigationProperty Name="client" Relationship="Self.FK_personal_references_clients" FromRole="personal_references" ToRole="clients" />
@@ -1096,7 +986,7 @@
           </Key>
           <Property Name="id_polices_apply_dictums" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_dictum" Type="Int32" Nullable="false" />
-          <Property Name="id_credit_granting_policy" Type="Int32" />
+          <Property Name="credit_granting_police_title" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="is_applied" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="credit_granting_polices" Relationship="Self.FK_polices_apply_dictums_credit_granting_polices" FromRole="polices_apply_dictums" ToRole="credit_granting_polices" />
           <NavigationProperty Name="dictum" Relationship="Self.FK_polices_apply_dictums_dictums" FromRole="polices_apply_dictums" ToRole="dictums" />
@@ -1381,14 +1271,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_polices_apply_dictums_credit_granting_polices">
-          <End Role="credit_granting_polices" Type="Self.credit_granting_polices" Multiplicity="0..1" />
+          <End Role="credit_granting_polices" Type="Self.credit_granting_polices" Multiplicity="1" />
           <End Role="polices_apply_dictums" Type="Self.polices_apply_dictums" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="credit_granting_polices">
-              <PropertyRef Name="id_credit_granting_policy" />
+              <PropertyRef Name="title" />
             </Principal>
             <Dependent Role="polices_apply_dictums">
-              <PropertyRef Name="id_credit_granting_policy" />
+              <PropertyRef Name="credit_granting_police_title" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1401,18 +1291,6 @@
             </Principal>
             <Dependent Role="credits">
               <PropertyRef Name="id_credit_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_payments_credits">
-          <End Role="credits" Type="Self.credit" Multiplicity="0..1" />
-          <End Role="payments" Type="Self.payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="credits">
-              <PropertyRef Name="invoice" />
-            </Principal>
-            <Dependent Role="payments">
-              <PropertyRef Name="credit_invoice" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1464,18 +1342,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_payment_layouts_payments">
-          <End Role="payments" Type="Self.payment" Multiplicity="1" />
-          <End Role="payment_layouts" Type="Self.payment_layouts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="payments">
-              <PropertyRef Name="id_payment" />
-            </Principal>
-            <Dependent Role="payment_layouts">
-              <PropertyRef Name="id_payment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SFIDatabaseContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="addresses" EntityType="Self.address" />
           <EntitySet Name="bank_accounts" EntityType="Self.bank_accounts" />
@@ -1491,8 +1357,6 @@
           <EntitySet Name="dictums" EntityType="Self.dictum" />
           <EntitySet Name="digital_documents" EntityType="Self.digital_documents" />
           <EntitySet Name="employee_roles" EntityType="Self.employee_roles" />
-          <EntitySet Name="payment_layouts" EntityType="Self.payment_layouts" />
-          <EntitySet Name="payments" EntityType="Self.payment" />
           <EntitySet Name="personal_references" EntityType="Self.personal_references" />
           <EntitySet Name="polices_apply_dictums" EntityType="Self.polices_apply_dictums" />
           <EntitySet Name="regimes" EntityType="Self.regime" />
@@ -1583,10 +1447,6 @@
             <End Role="credit_types" EntitySet="credit_types" />
             <End Role="credits" EntitySet="credits" />
           </AssociationSet>
-          <AssociationSet Name="FK_payments_credits" Association="Self.FK_payments_credits">
-            <End Role="credits" EntitySet="credits" />
-            <End Role="payments" EntitySet="payments" />
-          </AssociationSet>
           <AssociationSet Name="FK_regimes_credits" Association="Self.FK_regimes_credits">
             <End Role="credits" EntitySet="credits" />
             <End Role="regimes" EntitySet="regimes" />
@@ -1602,10 +1462,6 @@
           <AssociationSet Name="FK_system_accounts_employee_roles" Association="Self.FK_system_accounts_employee_roles">
             <End Role="employee_roles" EntitySet="employee_roles" />
             <End Role="system_accounts" EntitySet="system_accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_payment_layouts_payments" Association="Self.FK_payment_layouts_payments">
-            <End Role="payments" EntitySet="payments" />
-            <End Role="payment_layouts" EntitySet="payment_layouts" />
           </AssociationSet>
           <FunctionImport Name="InsertCreditConditionProcedure">
             <Parameter Name="InterestRate" Mode="In" Type="Double" />
@@ -1751,28 +1607,6 @@
             <Parameter Name="NewCardNumber" Mode="In" Type="String" />
             <Parameter Name="Success" Mode="InOut" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="UpdatePersonalReference">
-            <Parameter Name="IdPersonalReference" Mode="In" Type="Int32" />
-            <Parameter Name="CurrentIneKey" Mode="In" Type="String" />
-            <Parameter Name="IneKey" Mode="In" Type="String" />
-            <Parameter Name="Name" Mode="In" Type="String" />
-            <Parameter Name="Surname" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="Kinship" Mode="In" Type="String" />
-            <Parameter Name="RelationshipYears" Mode="In" Type="Int32" />
-            <Parameter Name="IdAddress" Mode="In" Type="Int32" />
-            <Parameter Name="ClientRfc" Mode="In" Type="String" />
-            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
-            <Parameter Name="Street" Mode="In" Type="String" />
-            <Parameter Name="Neighborhood" Mode="In" Type="String" />
-            <Parameter Name="InteriorNumber" Mode="In" Type="String" />
-            <Parameter Name="OutdoorNumber" Mode="In" Type="String" />
-            <Parameter Name="PostCode" Mode="In" Type="String" />
-            <Parameter Name="City" Mode="In" Type="String" />
-            <Parameter Name="Municipality" Mode="In" Type="String" />
-            <Parameter Name="State" Mode="In" Type="String" />
-            <Parameter Name="Success" Mode="InOut" Type="Boolean" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1889,7 +1723,6 @@
           <EntitySetMapping Name="credit_granting_polices">
             <EntityTypeMapping TypeName="SFIDatabaseModel.credit_granting_polices">
               <MappingFragment StoreEntitySet="credit_granting_polices">
-                <ScalarProperty Name="id_credit_granting_policy" ColumnName="id_credit_granting_policy" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="effective_date" ColumnName="effective_date" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -1924,9 +1757,6 @@
               <MappingFragment StoreEntitySet="dictums">
                 <ScalarProperty Name="id_dictum" ColumnName="id_dictum" />
                 <ScalarProperty Name="credit_application_invoice" ColumnName="credit_application_invoice" />
-                <ScalarProperty Name="is_approved" ColumnName="is_approved" />
-                <ScalarProperty Name="justification" ColumnName="justification" />
-                <ScalarProperty Name="generation_date" ColumnName="generation_date" />
                 <ScalarProperty Name="employee_number" ColumnName="employee_number" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1950,28 +1780,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="payment_layouts">
-            <EntityTypeMapping TypeName="SFIDatabaseModel.payment_layouts">
-              <MappingFragment StoreEntitySet="payment_layouts">
-                <ScalarProperty Name="id_payment_layout" ColumnName="id_payment_layout" />
-                <ScalarProperty Name="capture_line" ColumnName="capture_line" />
-                <ScalarProperty Name="generation_date" ColumnName="generation_date" />
-                <ScalarProperty Name="id_payment" ColumnName="id_payment" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="payments">
-            <EntityTypeMapping TypeName="SFIDatabaseModel.payment">
-              <MappingFragment StoreEntitySet="payments">
-                <ScalarProperty Name="id_payment" ColumnName="id_payment" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="invoice" ColumnName="invoice" />
-                <ScalarProperty Name="planned_date" ColumnName="planned_date" />
-                <ScalarProperty Name="credit_invoice" ColumnName="credit_invoice" />
-                <ScalarProperty Name="reconciliation_date" ColumnName="reconciliation_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="personal_references">
             <EntityTypeMapping TypeName="SFIDatabaseModel.personal_references">
               <MappingFragment StoreEntitySet="personal_references">
@@ -1983,7 +1791,6 @@
                 <ScalarProperty Name="relationship_years" ColumnName="relationship_years" />
                 <ScalarProperty Name="id_address" ColumnName="id_address" />
                 <ScalarProperty Name="client_rfc" ColumnName="client_rfc" />
-                <ScalarProperty Name="id_personal_reference" ColumnName="id_personal_reference" />
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1993,7 +1800,7 @@
               <MappingFragment StoreEntitySet="polices_apply_dictums">
                 <ScalarProperty Name="id_polices_apply_dictums" ColumnName="id_polices_apply_dictums" />
                 <ScalarProperty Name="id_dictum" ColumnName="id_dictum" />
-                <ScalarProperty Name="id_credit_granting_policy" ColumnName="id_credit_granting_policy" />
+                <ScalarProperty Name="credit_granting_police_title" ColumnName="credit_granting_police_title" />
                 <ScalarProperty Name="is_applied" ColumnName="is_applied" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2075,7 +1882,6 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SFIDatabaseModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SFIDatabaseModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UpdateBankAccount" FunctionName="SFIDatabaseModel.Store.UpdateBankAccount" />
-          <FunctionImportMapping FunctionImportName="UpdatePersonalReference" FunctionName="SFIDatabaseModel.Store.UpdatePersonalReference" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

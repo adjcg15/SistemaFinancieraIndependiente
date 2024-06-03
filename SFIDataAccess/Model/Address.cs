@@ -11,9 +11,6 @@ namespace SFIDataAccess.Model
     public class Address
     {
         [DataMember]
-        public int IdAddress { get; set; }
-
-        [DataMember]
         public string Street { get; set; }
 
         [DataMember]

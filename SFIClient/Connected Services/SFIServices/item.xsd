@@ -64,7 +64,6 @@
   <xs:complexType name="Address">
     <xs:sequence>
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdAddress" type="xs:int" />
       <xs:element minOccurs="0" name="InteriorNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Municipality" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Neighborhod" nillable="true" type="xs:string" />
@@ -105,8 +104,6 @@
   <xs:complexType name="PersonalReference">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address" />
-      <xs:element minOccurs="0" name="ClientRfc" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdPersonalReference" type="xs:int" />
       <xs:element minOccurs="0" name="IneKey" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Kinship" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
